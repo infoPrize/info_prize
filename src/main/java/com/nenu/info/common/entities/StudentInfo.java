@@ -7,26 +7,35 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 实体类 - 指导教师
+ * 实体类 - 学生信息
  * @author: software-liuwang
- * @time: 2017/11/4 19:46
+ * @time: 2017/11/6 10:46
  * @description :
  */
+
 @Entity
-@Table(name = "t_teacher")
-public class Teacher {
+@Table(name = "t_student_info")
+public class StudentInfo {
 
     //id
     @Id
     private Integer id;
 
-    //教师姓名
-    @Column(name = "teacher_name")
-    private String teacherName;
+    //学生姓名
+    @Column(name = "name")
+    private String name;
 
-    //教师等级(0-未知; 1-助教; 2-讲师; 3-副教授; 4-教授)
-    @Column(name = "teacher_level")
-    private Integer teacherLevel;
+    //性别(0-男; 1-女)
+    @Column(name = "sex")
+    private Integer sex;
+
+    //年级
+    @Column(name = "grade")
+    private String grade;
+
+    //专业代码
+    @Column(name = "major_code")
+    private Integer majorCode;
 
     //电话号码
     @Column(name = "phone")
@@ -48,20 +57,36 @@ public class Teacher {
         this.id = id;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getName() {
+        return name;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getTeacherLevel() {
-        return teacherLevel;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setTeacherLevel(Integer teacherLevel) {
-        this.teacherLevel = teacherLevel;
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public Integer getMajorCode() {
+        return majorCode;
+    }
+
+    public void setMajorCode(Integer majorCode) {
+        this.majorCode = majorCode;
     }
 
     public String getPhone() {
