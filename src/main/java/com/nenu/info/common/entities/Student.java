@@ -14,8 +14,8 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "t_student_info")
-public class StudentInfo {
+@Table(name = "t_student")
+public class Student {
 
     //id
     @Id
@@ -28,6 +28,10 @@ public class StudentInfo {
     //性别(0-男; 1-女)
     @Column(name = "sex")
     private Integer sex;
+
+    //学号
+    @Column(name = "stu_number")
+    private String stuNumber;
 
     //年级
     @Column(name = "grade")
@@ -71,6 +75,14 @@ public class StudentInfo {
 
     public void setSex(Integer sex) {
         this.sex = sex;
+    }
+
+    public String getStuNumber() {
+        return stuNumber;
+    }
+
+    public void setStuNumber(String stuNumber) {
+        this.stuNumber = stuNumber;
     }
 
     public String getGrade() {
