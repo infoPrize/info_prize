@@ -58,7 +58,7 @@
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="type">论文级别：</label>
-														<select id="type" class="form-control">
+														<select class="form-control">
 															<option>---请选择论文级别---</option>
 															<option>第一级-T类</option>
 															<option>第二级-A类</option>
@@ -101,7 +101,7 @@
 													</div>
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="time">发表时间：</label>
-														<select id="time" class="form-control">
+														<select class="form-control">
 															<option>---请选择发表年份---</option>
 															<option>2017</option>
 															<option>2016</option>
@@ -166,7 +166,7 @@
 												</div>
 												<div class="clearfix"></div>
 												<!--第五行-->
-												<input type="button" value="提交" id="sort" />
+												<input type="button" value="提交" />
 
 											</form>
 										</div>
@@ -255,102 +255,100 @@
 									<!--国创科研添加-->
 									<div class="tab-pane" id="tab-science">
 										<div class="row feature">
-											<form class="condition_form form-inline" action="" method="post">
+											<form class="condition_form form-inline" action="${website}scientificProject/add" method="post">
 												<div class="">
 													<div class="tab-row">
 														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="name">项目名称：</label>
+															<input type="text" id="name" class="form-control" name="projectName"/>
+														</div>
+														<div class="form-group col-sm-4">
 															<label class="tab-label control-label text-right" for="type">项目类别：</label>
-															<select id="type" class="form-control">
-																<option>---请选择项目类别---</option>
-																<option value="country">国创</option>
-																<option value="key">校级重点科研立项</option>
-																<option value="common">校级一般科研立项</option>
+															<select id="type" class="form-control" name="projectType">
+																<option value="-1">---请选择项目类别---</option>
+																<option value="1">一般培育项目</option>
+																<option value="2">专项计划项目</option>
+																<option value="3">重点培育项目</option>
+																<option value="4">国家级大学生创新创业训练计划</option>
+																<option value="0">其他</option>
 															</select>
 														</div>
 														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="stime">时间：</label>
-															<select id="stime" class="form-control">
-																<option>---请选择项目时间---</option>
-																<option>2016-2017</option>
-																<option>2015-2016</option>
-																<option>2014-2015</option>
-															</select>
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="profession">专业：</label>
-															<select id="profession" class="form-control">
-																<option>---请选择专业---</option>
-																<option>计算机普班</option>
-																<option>计算机（中美）</option>
-																<option>图书情报</option>
-																<option>教技</option>
-																<option>软件工程</option>
-															</select>
+															<label class="tab-label control-label text-right" for="stime">立项时间：</label>
+															<input type="text" name="setTime" class="form-control" onClick="laydate()"/>
 														</div>
 													</div>
 													<div class="tab-row">
 														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="name">项目名称：</label>
-															<input type="text" id="name" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
 															<label class="tab-label control-label text-right" for="student_name">项目负责人：</label>
-															<input type="text" id="student_name" class="form-control" />
+															<input type="text" name="projectManName" class="form-control" />
 														</div>
 														<div class="form-group col-sm-4">
 															<label class="tab-label control-label text-right" for="student_number">负责人学号：</label>
-															<input type="text" id="student_number" class="form-control" />
-														</div>
-													</div>
-													<div class="tab-row">
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="tutor">联系方式：</label>
-															<input type="text" id="tutor" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="student_name">负责人QQ：</label>
-															<input type="text" id="student_name" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="student_number">负责人email：</label>
-															<input type="text" id="student_number" class="form-control" />
-														</div>
-													</div>
-													<div class="tab-row">
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="tutor">项目组成员：</label>
-															<input type="text" id="tutor" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="student_name">组员学号：</label>
-															<input type="text" id="student_name" class="form-control" />
+															<input type="text" name="projectManStuNumber" class="form-control" />
 														</div>
 														<div class="form-group col-sm-4">
 															<label class="tab-label control-label text-right" for="student_number">指导老师：</label>
-															<input type="text" id="student_number" class="form-control" />
+															<input type="text" name="teacherName" class="form-control" />
 														</div>
 													</div>
 													<div class="tab-row">
 														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="tutor">指导老师工作量：</label>
-															<input type="text" id="tutor" class="form-control" />
+															<label class="tab-label control-label text-right" for="student_name">组员1姓名：</label>
+															<input type="text" name="projectMemberName1" class="form-control" />
 														</div>
 														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="student_name">批复经费：</label>
-															<input type="text" id="student_name" class="form-control" />
+															<label class="tab-label control-label text-right" for="student_number">组员1学号：</label>
+															<input type="text" name="projectMemberStuNumber1" class="form-control" />
 														</div>
 														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="student_name">组员2姓名：</label>
+															<input type="text" name="projectMemberName2" class="form-control" />
+														</div>
+													</div>
+													<div class="tab-row">
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="tutor">组员2学号：</label>
+															<input type="text" name="projectMemberStuNumber2" class="form-control" />
+														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="student_name">组员3姓名：</label>
+															<input type="text" name="projectMemberName3" class="form-control" />
+														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="student_number">组员3学号：</label>
+															<input type="text" name="projectMemberStuNumber3" class="form-control" />
+														</div>
+													</div>
+													<div class="tab-row">
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="tutor">组员4姓名：</label>
+															<input type="text" name="projectMemberName4" class="form-control" />
+														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right" for="student_name">组员4学号：</label>
+															<input type="text" name="projectMemberStuNumber4" class="form-control" />
+														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right">批复经费：</label>
+															<select class="form-control" name="fundsLimit">
+																<option value="-1">---请选择项目批复经费---</option>
+																<option value="1000">1000</option>
+																<option value="2000">2000</option>
+																<option value="5000">5000</option>
+																<option value="10000">10000</option>
+															</select>
 														</div>
 													</div>
 													<div class="tab-row">
 														<div class="col-sm-12">
 															<label class="tab-label control-label text-right" for="student_number">项目详情：</label>
-															<textarea class="detailtext form-control" rows="3" style="width: 850px"></textarea>
+															<textarea name="projectIntroduce" class="detailtext form-control" rows="3" style="width: 850px"></textarea>
 														</div>
 													</div>
 													<div class="clearfix"></div>
 												</div>
-												<input type="button" value="提交" id="sort" />
+												<input type="submit" value="提交" />
 											</form>
 										</div>
 									</div>
@@ -615,6 +613,7 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/competition.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 
 	</body>
 

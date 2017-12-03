@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenu.info.Dao.ScientificProjectDao">
+
+    <insert id="addScientificProject" parameterType="com.nenu.info.common.entities.ScientificProject">
+        INSERT INTO `t_scientific_project`
+        VALUES (NULL, #{scientificProject.projectName}, #{scientificProject.projectType}, #{scientificProject.setTime},
+                #{scientificProject.projectManId}, #{scientificProject.projectMemberId1}, #{scientificProject.projectMemberId2},
+                #{scientificProject.projectMemberId3}, #{scientificProject.projectMemberId4}, #{scientificProject.teacherId},
+                #{scientificProject.fundsLimit}, #{scientificProject.projectIntroduce}, NULL, NULL)
+    </insert>
+
+</mapper>

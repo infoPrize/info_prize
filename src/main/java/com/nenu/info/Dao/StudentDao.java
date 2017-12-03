@@ -6,13 +6,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 学生信息的Dao接口
  * @author: software-liuwang
  * @time: 2017/11/7 14:10
- * @description :
+ * @description : 学生信息的Dao接口
  */
 
-public interface StudentInfoDao {
+public interface StudentDao {
 
     /**
      * 增加一个学生的信息
@@ -48,7 +47,7 @@ public interface StudentInfoDao {
      * @return 查询到的学生信息
      * @throws Exception
      */
-    public Student queryById(Integer id) throws Exception;
+    public Student selectStudentById(Integer id) throws Exception;
 
     /**
      * 根据学号查询学生
@@ -56,7 +55,7 @@ public interface StudentInfoDao {
      * @return 查询到的学生信息
      * @throws Exception
      */
-    public Student queryByStuNumber(String stuNumber) throws Exception;
+    public Student selectStudentByStuNumber(@Param("stuNumber") String stuNumber) throws Exception;
 
     /**
      * 根据学生姓名查询学生
@@ -64,7 +63,7 @@ public interface StudentInfoDao {
      * @return 查询到的学生信息
      * @throws Exception
      */
-    public Student queryByName(String name) throws Exception;
+    public Student selectStudntByName(String name) throws Exception;
 
     /**
      * 根据年级查询学生列表

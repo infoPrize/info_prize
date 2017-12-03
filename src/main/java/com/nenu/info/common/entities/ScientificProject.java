@@ -1,6 +1,8 @@
 package com.nenu.info.common.entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "t_scientific_project")
-public class ScienetificProject {
+public class ScientificProject {
 
     //id
     @Id
@@ -31,6 +33,7 @@ public class ScienetificProject {
     private Integer projectType;
 
     //立项时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "set_time")
     private Date setTime;
 

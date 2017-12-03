@@ -10,6 +10,19 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TeacherDao {
 
+    /**
+     * 查询指导教师数量
+     * @return
+     * @throws Exception
+     */
     public Integer countAll() throws Exception;
+
+    /**
+     * 根据教师姓名查找教师
+     * @param teacherName 教师姓名
+     * @return
+     * @throws Exception
+     */
+    public Teacher selectTeacherByName(@Param("teacherName") String teacherName) throws Exception;
 
 }
