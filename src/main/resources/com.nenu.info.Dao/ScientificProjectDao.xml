@@ -6,10 +6,12 @@
 
     <insert id="addScientificProject" parameterType="com.nenu.info.common.entities.ScientificProject">
         INSERT INTO `t_scientific_project`
-        VALUES (NULL, #{scientificProject.projectName}, #{scientificProject.projectType}, #{scientificProject.setYear},
+        (`project_name`, `project_type`, `set_year`, `project_man_id`, `project_member_id_1`, `project_member_id_2`, `project_member_id_3`, `project_member_id_4`,
+        `teacher_id`, `funds_limit`, `project_introduce`)
+        VALUES (#{scientificProject.projectName}, #{scientificProject.projectType}, #{scientificProject.setYear},
                 #{scientificProject.projectManId}, #{scientificProject.projectMemberId1}, #{scientificProject.projectMemberId2},
                 #{scientificProject.projectMemberId3}, #{scientificProject.projectMemberId4}, #{scientificProject.teacherId},
-                #{scientificProject.fundsLimit}, #{scientificProject.projectIntroduce}, NULL, NULL)
+                #{scientificProject.fundsLimit}, #{scientificProject.projectIntroduce})
     </insert>
 
     <select id="listScientificProjectByCondition" resultType="com.nenu.info.common.dto.ScientificProjectDto">

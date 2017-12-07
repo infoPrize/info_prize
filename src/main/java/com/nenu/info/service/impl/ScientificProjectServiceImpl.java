@@ -105,10 +105,6 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
             e.printStackTrace();
         }
 
-        for(ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
-            System.out.println(scientificProjectDto.getProjectName());
-        }
-
         return scientificProjectDtoList;
     }
 }

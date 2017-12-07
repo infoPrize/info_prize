@@ -19,6 +19,16 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <!-- 站点地址过滤器 -->
+  <filter>
+    <filter-name>constantsFilter</filter-name>
+    <filter-class>com.nenu.info.common.filter.ConstantsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>constantsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!-- 配置DispatcherServlet -->
   <servlet>
     <servlet-name>SpringMVC</servlet-name>
@@ -35,9 +45,14 @@
     <!-- 匹配所有请求，此处也可以配置成 *.do 形式 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <!-- 默认的欢迎页面 -->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index</welcome-file>
   </welcome-file-list>
 
 </web-app>
