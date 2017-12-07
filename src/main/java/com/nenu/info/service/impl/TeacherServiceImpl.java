@@ -33,4 +33,17 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher selectTeacherByName(String teacherName) throws Exception {
         return teacherDao.selectTeacherByName(teacherName);
     }
+
+    /**
+     * 根据id查询教师
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Teacher selectTeacherById(Integer id) throws Exception {
+        Teacher teacher = teacherDao.selectTeacherById(id);
+        return teacher;
+    }
 }

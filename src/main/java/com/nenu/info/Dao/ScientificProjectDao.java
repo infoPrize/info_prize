@@ -1,11 +1,14 @@
 package com.nenu.info.Dao;
 
+import com.nenu.info.common.dto.ScientificProjectDto;
 import com.nenu.info.common.entities.ScientificProject;
+import com.nenu.info.common.entities.Student;
 import org.apache.ibatis.annotations.Param;
 
 import javax.json.JsonArray;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -30,17 +33,14 @@ public interface ScientificProjectDao {
     public void updateScientificProjectByAdmin(ScientificProject scientificProject);
 
     //查询所有国创科研信息
-    public List listAllScientificProject();
+    public List<ScientificProject> listAllScientificProject();
 
-    //根据条件查询国创科研信息
-    public List listScientificProjectByCondition(@Param("projectName") String projectName,
-                                                 @Param("projectType") Integer projectType,
-                                                 @Param("beginTime") Date beginTime,
-                                                 @Param("stuMajor") Integer stuMajor,
-                                                 @Param("teacherName") String teacherName,
-                                                 @Param("studentName") String studentName,
-                                                 @Param("stuNumber") String stuNumber);
-
-
+    /**
+     * 根据条件查询国创科研信息
+     * @param params 参数Map
+     * @return
+     * @throws Exception
+     */
+    public List<ScientificProjectDto> listScientificProjectByCondition(Map<String, Object> params) throws Exception;
 
 }

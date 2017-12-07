@@ -1,17 +1,22 @@
 package com.nenu.info.controller;
 
+import com.nenu.info.common.utils.YearUtil;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
 
 /**
  * @author: software-liuwang
  * @time: 2017/11/4 19:49
- * @description : 去往首页
+ * @description : 路径Controller
  */
 
 @Controller
 @RequestMapping(value = "")
-public class IndexController {
+public class PathController {
 
     @RequestMapping(value = "index")
     public String toIndex() {
@@ -33,9 +38,11 @@ public class IndexController {
         return "patent";
     }
 
-    @RequestMapping(value = "counrty")
-    public String toCounrty() {
-        return "counrty";
+    @RequestMapping(value = "scientificProject")
+    public String toScientificProject(HttpServletRequest request) {
+        Integer year = YearUtil.getYear();
+        request.setAttribute("year", year);
+        return "scientific_project";
     }
 
     @RequestMapping(value = "ACM")
@@ -64,7 +71,9 @@ public class IndexController {
     }
 
     @RequestMapping(value = "infoAdd")
-    public String toInfoAdd() {
+    public String toInfoAdd(HttpServletRequest request) {
+        Integer year = YearUtil.getYear();
+        request.setAttribute("year", year);
         return "infoAdd";
     }
 

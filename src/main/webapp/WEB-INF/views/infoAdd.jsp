@@ -166,7 +166,7 @@
 												</div>
 												<div class="clearfix"></div>
 												<!--第五行-->
-												<input type="button" value="提交" />
+												<input type="button" value="提交" id="sort"/>
 
 											</form>
 										</div>
@@ -274,8 +274,16 @@
 															</select>
 														</div>
 														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right" for="stime">立项时间：</label>
-															<input type="text" name="setTime" class="form-control" onClick="laydate()"/>
+															<label class="tab-label control-label text-right" for="stime">立项年份：</label>
+															<select name="setYear" id="setYear" class="form-control">
+																<option value="-1">---请选择立项年份---</option>
+																<option value="${year}">${year}</option>
+																<option value="${year-1}">${year-1}</option>
+																<option value="${year-2}">${year-2}</option>
+																<option value="${year-3}">${year-3}</option>
+																<option value="${year-4}">${year-4}</option>
+															</select>
+															<%--<input type="text" name="setTime" class="form-control" onClick="laydate()"/>--%>
 														</div>
 													</div>
 													<div class="tab-row">
@@ -348,7 +356,7 @@
 													</div>
 													<div class="clearfix"></div>
 												</div>
-												<input type="submit" value="提交" />
+												<input type="submit" value="提交" id="sort"/>
 											</form>
 										</div>
 									</div>

@@ -143,7 +143,7 @@ DROP TABLE IF EXISTS `t_scientific_project`;
 CREATE TABLE `t_scientific_project` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识',
   `project_name` varchar(30) NOT NULL COMMENT '项目名',
-  `project_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '项目类型（0-未知，1-一般培育项目，2-专项计划项目，3-重点培育项目，4-国创）',
+  `project_type` tinyint(4) NOT NULL DEFAULT '5' COMMENT '项目类型（1-一般培育项目，2-专项计划项目，3-重点培育项目，4-国创，5-未知）',
   `set_time` datetime NOT NULL COMMENT '立项时间',
   `project_man_id` int(11) NOT NULL COMMENT '项目负责人id',
   `project_member_id_1` int(11) DEFAULT NULL COMMENT '项目成员1',

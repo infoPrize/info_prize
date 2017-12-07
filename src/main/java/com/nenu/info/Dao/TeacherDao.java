@@ -25,4 +25,12 @@ public interface TeacherDao {
      */
     public Teacher selectTeacherByName(@Param("teacherName") String teacherName) throws Exception;
 
+    /**
+     * 根据id查找教师
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Teacher selectTeacherById(@Param("id") Integer id) throws Exception;
+
 }

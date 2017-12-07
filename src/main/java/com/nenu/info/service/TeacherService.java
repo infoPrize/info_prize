@@ -24,4 +24,12 @@ public interface TeacherService {
      */
     public Teacher selectTeacherByName(String teacherName) throws Exception;
 
+    /**
+     * 根据id查询教师
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Teacher selectTeacherById(Integer id) throws Exception;
+
 }

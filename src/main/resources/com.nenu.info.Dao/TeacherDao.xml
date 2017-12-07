@@ -12,4 +12,9 @@
         SELECT * FROM `t_teacher`
         WHERE `teacher_name` = #{teacherName}
     </select>
+
+    <select id="selectTeacherById" resultType="com.nenu.info.common.entities.Teacher">
+        SELECT * FROM `t_teacher`
+        WHERE `id` = #{id}
+    </select>
 </mapper>

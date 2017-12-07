@@ -1,7 +1,6 @@
 package com.nenu.info.common.entities;
 
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,10 +31,9 @@ public class ScientificProject {
     @Column(name = "project_type")
     private Integer projectType;
 
-    //立项时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "set_time")
-    private Date setTime;
+    //立项年份
+    @Column(name = "set_year")
+    private String setYear;
 
     //项目负责人id
     @Column(name = "project_man_id")
@@ -101,12 +99,12 @@ public class ScientificProject {
         this.projectType = projectType;
     }
 
-    public Date getSetTime() {
-        return setTime;
+    public String getSetYear() {
+        return setYear;
     }
 
-    public void setSetTime(Date setTime) {
-        this.setTime = setTime;
+    public void setSetYear(String setYear) {
+        this.setYear = setYear;
     }
 
     public Integer getProjectManId() {

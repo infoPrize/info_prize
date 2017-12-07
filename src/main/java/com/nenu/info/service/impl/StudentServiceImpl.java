@@ -6,6 +6,8 @@ import com.nenu.info.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author: software-liuwang
  * @time: 2017/11/7 15:28
@@ -25,8 +27,32 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student selectStudentByStuNumber(String stuNumber) throws Exception {
         Student student = studentDao.selectStudentByStuNumber(stuNumber);
-
         return student;
+    }
 
+    /**
+     * 根据专业查找学生列表
+     *
+     * @param majorCode
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Student> listStudentByMajor(Integer majorCode) throws Exception {
+        List<Student> studentList = studentDao.listStudentByMajor(majorCode);
+        return studentList;
+    }
+
+    /**
+     * 根据id获取学生
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Student selectStudentById(Integer id) throws Exception {
+        Student student = studentDao.selectStudentById(id);
+        return student;
     }
 }

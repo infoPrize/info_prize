@@ -26,36 +26,42 @@
 								</div>
 								<div class="x_content">
 									<div class="clearfix"></div>
-									<form class="condition_form form-inline" action="" method="post">
+									<form class="condition_form form-inline" action="/scientificProject/selectByCondition" method="post">
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="type">项目类别：</label>
-												<select id="type" class="form-control">
-													<option>---请选择项目类别---</option>
-													<option value="country">国创</option>
-													<option value="key">校级重点科研立项</option>
-													<option value="common">校级一般科研立项</option>
+												<select id="type" class="form-control" name="projectType">
+													<option value="-1">---请选择项目类别---</option>
+													<option value="1">一般培育项目</option>
+													<option value="2">专项计划项目</option>
+													<option value="3">重点培育项目</option>
+													<option value="4">国家级大学生创新创业训练计划</option>
+													<option value="5">其他</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="stime">项目时间：</label>
-												<select id="time" class="form-control">
-													<option>---请选择项目时间---</option>
-													<option>2016-2017</option>
-													<option>2015-2016</option>
-													<option>2014-2015</option>
+												<label class="tab-label control-label text-right">立项年份：</label>
+												<select id="time" class="form-control" name="setYear">
+													<option value="">---请选择立项年份---</option>
+													<option value="${year}">${year}</option>
+													<option value="${year-1}">${year-1}</option>
+													<option value="${year-2}">${year-2}</option>
+													<option value="${year-3}">${year-3}</option>
+													<option value="${year-4}">${year-4}</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control">
-													<option>---请选择学生专业---</option>
-													<option>计算机普班</option>
-													<option>计算机（中美）</option>
-													<option>图书情报</option>
-													<option>教技</option>
-													<option>软件工程</option>
+												<select id="profession" class="form-control" name="majorCode">
+													<option value="-1">---请选择学生专业---</option>
+													<option value="1">软件工程</option>
+													<option value="2">计算机科学与技术</option>
+													<option value="3">计算机科学与技术(中美合作)</option>
+													<option value="4">教育技术</option>
+													<option value="5">图书情报与档案管理</option>
+													<option value="51">图书馆学</option>
+													<option value="52">信息资源管理</option>
 												</select>
 											</div>
 										</div>
@@ -63,19 +69,26 @@
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control" />
+												<input type="text" name="teacherName" id="tutor" class="form-control" />
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" id="student_name" class="form-control" />
+												<input type="text" name="stuName" id="student_name" class="form-control" />
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-												<input type="text" id="student_number" class="form-control" />
+												<input type="text" name="stuNumber" id="student_number" class="form-control" />
 											</div>
 										</div>
 										<!--第三行-->
-										<input type="button" value="选择" id="sort" />
+										<div class="tab-row">
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right">项目名称：</label>
+												<input type="text" name="projectName" id="project_name" class="form-control" />
+											</div>
+										</div>
+										<!--第四行-->
+										<input type="submit" value="选择" id="sort" />
 										<div class="clearfix"></div>
 									</form>
 								</div>
@@ -89,16 +102,15 @@
 											<tr>
 												<th class="text-center">项目类别</th>
 												<th class="text-center">项目名称</th>
-												<th class="text-center">项目时间</th>
+												<th class="text-center">立项年份</th>
 												<th class="text-center">项目负责人</th>
+												<th class="text-center">负责人性别</th>
 												<th class="text-center">负责人学号</th>
 												<th class="text-center">负责人联系方式</th>
-												<th class="text-center">负责人QQ</th>
-												<th class="text-center">负责人电子邮箱</th>
+												<th class="text-center">负责人专业</th>
 												<th class="text-center">项目组成员</th>
 												<th class="text-center">组员学号</th>
 												<th class="text-center">指导老师</th>
-												<th class="text-center">指导老师工作量</th>
 												<th class="text-center">批复经费</th>
 												<th class="text-center">详情信息</th>
 												<th class="text-center">操作</th>
@@ -110,12 +122,12 @@
 											<tr>
 												<td>国创</td>
 												<td>构建基于本体库的软件开发技术交流社区</td>
-												<td>2016-2017</td>
+												<td>2017</td>
 												<td>张三</td>
-												<td>2015011234</td>
-												<td>13456987546</td>
-												<td>3569874565</td>
-												<td>4569874569@qq.com</td>
+												<td>男</td>
+												<td>201501123</td>
+												<td>15919864567</td>
+												<td>软件工程</td>
 												<td class="td_table">
 													<table class="sub">
 														<tr>
@@ -149,7 +161,6 @@
 													</table>
 												</td>
 												<td>张伟</td>
-												<td>很多</td>
 												<td>5000</td>
 												<td>
 													<a href="#">详情</a>
@@ -162,14 +173,14 @@
 											<tr>
 												<td>国创</td>
 												<td>构建基于本体库的软件开发技术交流社区</td>
-												<td>2016-2017</td>
+												<td>2017</td>
 												<td>张三</td>
-												<td>2015011234</td>
-												<td>13456987546</td>
-												<td>3569874565</td>
-												<td>4569874569@qq.com</td>
-												<td class="td_table text-center">
-													<table class="sub text-center">
+												<td>男</td>
+												<td>201501123</td>
+												<td>15919864567</td>
+												<td>软件工程</td>
+												<td class="td_table">
+													<table class="sub">
 														<tr>
 															<td>张三</td>
 														</tr>
@@ -184,8 +195,8 @@
 														</tr>
 													</table>
 												</td>
-												<td class="text-center">
-													<table class="sub text-center">
+												<td>
+													<table class="sub">
 														<tr>
 															<td>2015021569</td>
 														</tr>
@@ -201,7 +212,6 @@
 													</table>
 												</td>
 												<td>张伟</td>
-												<td>很多</td>
 												<td>5000</td>
 												<td>
 													<a href="#">详情</a>
