@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenu.info.Dao.ACMDao">
+
+    <insert id="add" parameterType="com.nenu.info.common.entities.ACMPrize">
+        INSERT INTO `t_acm_prize`
+        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_time`, `teacher_id`)
+        VALUES(#{acmPrize.matchName}, #{acmPrize.matchLevel}, #{acmPrize.hostUnit}, #{acmPrize.teamName}, #{acmPrize.teammateId1}, #{acmPrize.teammateId2},
+                #{acmPrize.teammateId3}, #{acmPrize.prizeTime}, #{acmPrize.teacherId})
+    </insert>
+
+</mapper>

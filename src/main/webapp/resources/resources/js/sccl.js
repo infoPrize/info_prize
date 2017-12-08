@@ -393,8 +393,8 @@ $(function() {
 	var site = {
 
 		//本地开发配置
-		website:'http://localhost/',
-		staticWebsite:'http://localhost/resources/'
+		website:'http://infoprize.nenu.edu.cn/',
+		staticWebsite:'http://infoprize.nenu.edu.cn/resources/'
 
 		//服务器开发配置
 		// website:'http://120.78.154.246/info_prize/',

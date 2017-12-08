@@ -23,3 +23,6 @@ INSERT INTO `t_scientific_project_type` VALUES ('2', '专项计划项目');
 INSERT INTO `t_scientific_project_type` VALUES ('3', '重点科研立项');
 INSERT INTO `t_scientific_project_type` VALUES ('4', '国家级大学生创新创业训练计划');
 INSERT INTO `t_scientific_project_type` VALUES ('5', '未知');
+
+#增加ACM数据是否可见条件
+ALTER TABLE `t_acm_prize` ADD COLUMN `is_deleted` INT COMMENT '是否已删除, 0-未删除, 1-已删除' DEFAULT 0 NOT NULL;

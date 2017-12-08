@@ -65,6 +65,10 @@ public class ACMPrize {
     @Column(name = "last_modified_time")
     private Date lastModifiedTime;
 
+    //是否已删除
+    @Column(name = "is_deleted")
+    private Integer isDeleted;
+
     public Integer getId() {
         return id;
     }
@@ -159,5 +163,13 @@ public class ACMPrize {
 
     public void setLastModifiedTime(Date lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

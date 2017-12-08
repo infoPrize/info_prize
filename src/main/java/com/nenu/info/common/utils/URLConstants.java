@@ -14,4 +14,7 @@ public final class URLConstants {
     //国创科研
     public static final String SCIENTIFIC_PROJECT_URL = "scientificProject";
 
+    //ACM
+    public static final String ACM_URL = "acm";
+
 }
