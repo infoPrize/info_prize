@@ -77,4 +77,9 @@ public class PathController {
         return "infoAdd";
     }
 
+    @RequestMapping(value = "student")
+    public String toStudent() {
+        return "student";
+    }
+
 }

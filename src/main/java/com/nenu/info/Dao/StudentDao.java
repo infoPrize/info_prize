@@ -30,7 +30,7 @@ public interface StudentDao {
 
     /**
      * 根据学生姓名查询学生列表
-     * @param name 学生姓名
+     * @param stuName 学生姓名
      * @return 查询到的学生信息
      * @throws Exception
      */
