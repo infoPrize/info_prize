@@ -176,8 +176,8 @@ public class ScientificProjectController {
                                                          @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
                                                          @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
                                                          @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                                         @RequestParam(value = "stuName", required = false) String stuName,
-                                                         @RequestParam(value = "stuNumber") String stuNumber) {
+                                                         @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                                         @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber) {
 
         JSONArray jsonArray = new JSONArray();
         List<ScientificProjectDto> scientificProjectDtoList = null;

@@ -49,6 +49,11 @@ public class MathModelPrize {
     @Column(name = "teammate_id_3")
     private Integer teammateId3;
 
+    //获奖等级
+    @Column(name = "prize_level")
+    private Integer prizeLevel;
+
+
     //获奖时间
     @Column(name = "prize_time")
     private Date prizeTime;
@@ -127,6 +132,14 @@ public class MathModelPrize {
 
     public void setTeammateId3(Integer teammateId3) {
         this.teammateId3 = teammateId3;
+    }
+
+    public Integer getPrizeLevel() {
+        return prizeLevel;
+    }
+
+    public void setPrizeLevel(Integer prizeLevel) {
+        this.prizeLevel = prizeLevel;
     }
 
     public Date getPrizeTime() {

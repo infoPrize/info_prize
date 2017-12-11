@@ -17,6 +17,9 @@ public final class URLConstants {
     //ACM
     public static final String ACM_URL = "acm";
 
+    //数学建模
+    public static final String MATH_MODEL_URL = "mathModel";
+
     //导入Excel
     public static final String IMPORT_URL = "import";
 
