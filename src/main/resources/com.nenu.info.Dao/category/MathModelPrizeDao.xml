@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenu.info.Dao.category.MathModelPrizeDao">
+    
+    <insert id="add" parameterType="com.nenu.info.common.entities.MathModelPrize">
+        INSERT INTO `t_math_model_prize`
+        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_time`, `teacher_id`)
+        VALUES(#{mathModelPrize.matchName}, #{mathModelPrize.matchLevel}, #{mathModelPrize.hostUnit}, #{mathModelPrize.teamName}, #{mathModelPrize.teammateId1}, #{mathModelPrize.teammateId2},
+               #{mathModelPrize.teammateId3}, #{mathModelPrize.prizeTime}, #{mathModelPrize.teacherId})
+    </insert>
+
+    <select id="listByConditions" resultType="com.nenu.info.common.dto.MathModelPrizeDto">
+        SELECT
+        (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tmmp.`match_level`) AS matchLevel,
+        tmmp.`match_name` AS matchName,
+        tmmp.`host_unit` AS hostUnit,
+        tmmp.`prize_time` AS prizeTime,
+        (SELECT `name` FROM `t_prize_level` tpl WHERE tpl.id = tmmp.`prize_level`) AS prizeLevel,
+        tmmp.`team_name` AS teamName,
+        (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_1`) AS teammateName1,
+        (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_1) AS teammateStuNumber1,
+        (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code`AND ts.`id` = tmmp.`teammate_id_1`) AS teammateMajor1,
+        (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_2`) AS teammateName2,
+        (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_2) AS teammateStuNumber2,
+        (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tmmp.`teammate_id_2`) AS teammateMajor2,
+        (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_3`) AS teammateName3,
+        (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_3) AS teammateStuNumber3,
+        (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tmmp.`teammate_id_3`) AS teammateMajor3,
+        (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tmmp.`teacher_id`) AS  teacherName
+        FROM `t_math_model_prize` tmmp
+        WHERE
+        tmmp.`is_deleted` = 0
+        <if test="matchLevel > 0">
+            AND tmmp.`match_level` = #{matchLevel}
+        </if>
+        <if test="matchName != null and matchName != ''">
+            AND tmmp.`match_name` LIKE CONCAT('%', #{matchName}, '%')
+        </if>
+        <if test="beginTime != null and endTime != null">
+            AND tmmp.`prize_time` BETWEEN CONCAT(#{beginTime}, '00:00:00' AND CONCAT(#{endTime}, '23:59:59'))
+        </if>
+        <if test="prizeLevel > 0">
+            AND tmmp.`prize_level` = #{prizeLevel}
+        </if>
+        <if test="teacherId != null">
+            AND tmmp.`teacher_id` = #{teacherId}
+        </if>
+        <if test="hostUnit != null and hostUnit != ''">
+            AND tmmp.`host_unit` LIKE CONCAT('%', #{hostUnit}, '%')
+        </if>
+        <if test="idList != null">
+            AND
+            (
+            tmmp.`teammate_id_1` IN
+            <foreach collection="idList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tmmp.`teammate_id_2` IN
+            <foreach collection="idList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tmmp.`teammate_id_3` IN
+            <foreach collection="idList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            )
+        </if>
+    </select>
+
+
+    
+</mapper>

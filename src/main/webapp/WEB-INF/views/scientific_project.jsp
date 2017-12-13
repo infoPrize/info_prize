@@ -26,7 +26,7 @@
 								</div>
 								<div class="x_content">
 									<div class="clearfix"></div>
-									<form class="condition_form form-inline" action="${website}/scientificProject/selectByCondition" method="get">
+									<form class="condition_form form-inline" ><!--action="/scientificProject/selectByCondition" method="get"-->
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
@@ -88,7 +88,7 @@
 											</div>
 										</div>
 										<!--第四行-->
-										<input type="submit" value="选择" id="sort" />
+										<input type="button" value="选择" id="sort" />
 										<div class="clearfix"></div>
 									</form>
 								</div>
@@ -117,7 +117,7 @@
 											</tr>
 										</thead>
 
-										<tbody>
+										<tbody id="tbody-result">
 											<!--第一行-->
 											<tr>
 												<td>国创</td>
@@ -264,7 +264,7 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"
+		<script type="text/javascript" src="${staticWebsite}resources/js/country.js"></script>
 	</body>
 
 

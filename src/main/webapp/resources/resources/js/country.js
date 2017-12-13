@@ -12,23 +12,25 @@ $(document).ready(function() {
   
         $.ajax({  
             type: "get",  
-            url: "country.json",
+            url: "resources/resources/js/country.json",
             dataType: "json",  
-            data: {  
-                type: type,  
-                time: time,  
-                profession: profession,  
-                tutor: tutor,
-                student_name: student_name,
-                student_number: student_number,
-                project_name: project_name
-            },  
-            success: function (msg) {  
-                if (msg.ret) {  
+            data:"",
+//          data: {  
+//              type: type,  
+//              time: time,  
+//              profession: profession,  
+//              tutor: tutor,
+//              student_name: student_name,
+//              student_number: student_number,
+//              project_name: project_name
+//          },  
+            success: function (msg) {
+                if (msg) {  
                     var str = "";  
-                    var data = msg.data;  
+                    var data = msg;  
   
                     for (var i in data) {  
+                    	
                         str += "<tr>" +  
                         "<td>" + data[i].projectType + "</td>" +  
                         "<td>" + data[i].projectName + "</td>" +  
@@ -38,31 +40,27 @@ $(document).ready(function() {
                         "<td>" + data[i].projectManStuNumber + "</td>" +  
                         "<td>" + data[i].projectManPhone + "</td>" +  
                         "<td>" + data[i].projectManMajor + "</td>" +  
-                        "<td>" + 
-                        	"<table>"+
-                        		"<tr>"+
-                        			"<td>"+data[i].projectMemberName1+"</td>"+
-                        			"<td>"+data[i].projectMemberName2+"</td>"+
-                        			"<td>"+data[i].projectMemberName3+"</td>"+
-                        			"<td>"+data[i].projectMemberName4+"</td>"+
-                        		"</tr>"+
+                        "<td class='td_table'>" +
+                        	"<table class='sub'>"+
+                        		"<tr>"+ "<td>"+data[i].projectMemberName1+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberName2+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberName3+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberName4+"</td>"+"</tr>"+
                         	"</table>"+		
                         "</td>" +
                         "<td>" + 
-                        	"<table>"+
-                        		"<tr>"+
-                        			"<td>"+data[i].projectMemberStuNumber1+"</td>"+
-                        			"<td>"+data[i].projectMemberStuNumber2+"</td>"+
-                        			"<td>"+data[i].projectMemberStuNumber3+"</td>"+
-                        			"<td>"+data[i].projectMemberStuNumber4+"</td>"+
-                        		"</tr>"+
+                        	"<table class='sub'>"+
+                        		"<tr>"+ "<td>"+data[i].projectMemberStuNumber1+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberStuNumber2+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberStuNumber3+"</td>"+"</tr>"+
+                                "<tr>"+ "<td>"+data[i].projectMemberStuNumber4+"</td>"+"</tr>"+
                         	"</table>"+		
                         "</td>" +
                         "<td>" + data[i].teacherName + "</td>" +  
                         "<td>" + data[i].fundsLimit + "</td>" +  
                         "</tr>";  
                     }  
-                    $("#tbody-result").innerHTML = str;  
+                    $("#tbody-result").html(str);  
                 }  
             },  
             error: function () {  

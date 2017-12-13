@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenu.info.Dao.category.ScientificProjectDao">
+
+    <insert id="addScientificProject" parameterType="com.nenu.info.common.entities.ScientificProject">
+        INSERT INTO `t_scientific_project`
+        (`project_name`, `project_type`, `set_year`, `project_man_id`, `project_member_id_1`, `project_member_id_2`, `project_member_id_3`, `project_member_id_4`,
+        `teacher_id`, `funds_limit`, `project_introduce`)
+        VALUES (#{scientificProject.projectName}, #{scientificProject.projectType}, #{scientificProject.setYear},
+                #{scientificProject.projectManId}, #{scientificProject.projectMemberId1}, #{scientificProject.projectMemberId2},
+                #{scientificProject.projectMemberId3}, #{scientificProject.projectMemberId4}, #{scientificProject.teacherId},
+                #{scientificProject.fundsLimit}, #{scientificProject.projectIntroduce})
+    </insert>
+
+    <select id="listScientificProjectByCondition" resultType="com.nenu.info.common.dto.ScientificProjectDto">
+        SELECT
+            (SELECT tspt.`project_type` FROM `t_scientific_project_type` tspt WHERE tsp.`project_type` = tspt.`id`) AS projectType,
+            tsp.project_name AS projectName,
+            tsp.`set_year` AS setYear,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManName,
+            (SELECT CASE WHEN ts.`sex` = 1 THEN '男' WHEN ts.`sex` = 2 THEN '女' END FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManSex,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManStuNumber,
+            (SELECT ts.`phone` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManPhone,
+            (SELECT tmc.`major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tsp.`project_man_id`) AS projectManMajor,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_1`) AS projectMemberName1,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_1`) AS projectMemberStuNumber1,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_2`) AS projectMemberName2,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_2`) AS projectMemberStuNumber2,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_3`) AS projectMemberName3,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_3`) AS projectMemberStuNumber3,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_4`) AS projectMemberName4,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_4`) AS projectMemberStuNumber4,
+            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tsp.`teacher_id` = tt.`id`) AS teacherName,
+            tsp.funds_limit AS fundsLimit,
+            tsp.`project_introduce` AS projectIntroduce
+        FROM `t_scientific_project` tsp
+        WHERE
+          tsp.`is_deleted` = 0
+          <if test="projectName != '' and projectName != null">
+            AND tsp.`project_name` LIKE CONCAT('%', #{projectName}, '%')
+          </if>
+          <if test="projectType > 0">
+            AND tsp.`project_type` = #{projectType}
+          </if>
+          <if test="setYear != '' and setYear != null">
+            AND tsp.`set_year` = #{setYear}
+          </if>
+          <if test="teacherId != null and teacherName > 0 ">
+              AND tsp.`teacher_id` = #{teacherId}
+          </if>
+          <if test="stuId != null and stuId > 0">
+              AND (tsp.`project_man_id` = #{stuId}
+                  OR tsp.`project_member_id_1` = #{stuId}
+                  OR tsp.`project_member_id_2` = #{stuId}
+                  OR tsp.`project_member_id_3` = #{stuId}
+                  OR tsp.`project_member_id_4` = #{stuId})
+          </if>
+          <if test="idList != null">
+              AND
+              (
+              tsp.`project_man_id` IN
+                    <foreach collection="idList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                OR tsp.`project_member_id_1` IN
+                    <foreach collection="idList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                OR tsp.`project_member_id_2` IN
+                    <foreach collection="idList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                OR tsp.`project_member_id_3` IN
+                    <foreach collection="idList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                OR tsp.`project_member_id_4` IN
+                    <foreach collection="idList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+              )
+          </if>
+    </select>
+
+</mapper>
