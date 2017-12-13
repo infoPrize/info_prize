@@ -1,11 +1,12 @@
 package com.nenu.info.controller;
 
 import com.nenu.info.common.dto.ACMPrizeDto;
-import com.nenu.info.common.entities.ACMPrize;
+import com.nenu.info.common.dto.MathModelPrizeDto;
+import com.nenu.info.common.entities.MathModelPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;
 import com.nenu.info.common.utils.URLConstants;
-import com.nenu.info.service.ACMService;
+import com.nenu.info.service.MathModelPrizeService;
 import com.nenu.info.service.StudentService;
 import com.nenu.info.service.TeacherService;
 import net.sf.json.JSONArray;
@@ -22,12 +23,13 @@ import java.util.List;
 
 /**
  * @author: software-liuwang
- * @time: 2017/12/8 13:53
- * @description :
+ * @time: 2017/12/11 9:23
+ * @description : 数学建模Controller
  */
+
 @Controller
-@RequestMapping(value = URLConstants.ACM_URL)
-public class ACMController {
+@RequestMapping(value = URLConstants.MATH_MODEL_URL)
+public class MathModelPrizeController {
 
     @Autowired
     private StudentService studentService;
@@ -36,10 +38,10 @@ public class ACMController {
     private TeacherService teacherService;
 
     @Autowired
-    private ACMService acmService;
+    private MathModelPrizeService mathModelPrizeService;
 
     /**
-     * 添加ACM获奖信息
+     * 添加数学建模获奖信息
      * @param matchLevel 比赛等级
      * @param matchName 比赛名
      * @param prizeTime 获奖时间
@@ -60,7 +62,7 @@ public class ACMController {
      *                  4 - 该教师不存在
      *                  5 - 插入成功)
      */
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "add")
     @ResponseBody
     public Integer add(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                        @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
@@ -75,7 +77,6 @@ public class ACMController {
                        @RequestParam(value = "teammateName3", required = false, defaultValue = "") String teammateName3,
                        @RequestParam(value = "teammateStuNumber3", required = false, defaultValue = "") String teammateStuNumber3,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
-
         Student teammate1 = null;
         Student teammate2 = null;
         Student teammate3 = null;
@@ -110,76 +111,63 @@ public class ACMController {
             return 4;
         }
 
-        ACMPrize acmPrize = new ACMPrize();
+        MathModelPrize mathModelPrize = new MathModelPrize();
         if(matchLevel > 0) {
-            acmPrize.setMatchLevel(matchLevel);
+            mathModelPrize.setMatchLevel(matchLevel);
         } else {
-            acmPrize.setMatchLevel(8);
+            mathModelPrize.setMatchLevel(8);
         }
         if(prizeLevel > 0) {
-            acmPrize.setPrizeLevel(prizeLevel);
+            mathModelPrize.setPrizeLevel(prizeLevel);
         } else {
-            acmPrize.setPrizeLevel(5);
+            mathModelPrize.setPrizeLevel(5);
         }
-        acmPrize.setMatchName(matchName);
-        acmPrize.setHostUnit(hostUnit);
-        acmPrize.setPrizeTime(prizeTime);
-        acmPrize.setTeacherId(teacher.getId());
-        acmPrize.setTeammateId1(teammate1.getId());
-        acmPrize.setTeammateId2(teammate2.getId());
-        acmPrize.setTeammateId3(teammate3.getId());
-        acmPrize.setTeamName(teamName);
+        mathModelPrize.setMatchName(matchName);
+        mathModelPrize.setHostUnit(hostUnit);
+        mathModelPrize.setPrizeTime(prizeTime);
+        mathModelPrize.setTeacherId(teacher.getId());
+        mathModelPrize.setTeammateId1(teammate1.getId());
+        mathModelPrize.setTeammateId2(teammate2.getId());
+        mathModelPrize.setTeammateId3(teammate3.getId());
+        mathModelPrize.setTeamName(teamName);
 
-        acmService.add(acmPrize);
+        mathModelPrizeService.add(mathModelPrize);
 
         return 5;
+
     }
 
-    /**
-     * 根据条件查询ACM获奖信息
-     * @param matchLevel 比赛等级
-     * @param matchName 比赛名称
-     * @param beginTime 起始时间
-     * @param endTime 终止时间
-     * @param prizeLevel 获奖等级
-     * @param major 学生专业
-     * @param stuName 学生姓名
-     * @param teacherName 教师姓名
-     * @param hostUnit 主办单位
-     * @return
-     */
-    @RequestMapping(value = "listACMByCondition", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONArray listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                              @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                              @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                              @RequestParam(value = "endTime", required = false) Date endTime,
-                                              @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                              @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                              @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                              @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                              @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
+    @RequestMapping(value = "listByCondition", method = RequestMethod.POST)
+    public JSONArray listByCondition(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                     @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                     @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                     @RequestParam(value = "endTime", required = false) Date endTime,
+                                     @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                     @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                     @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
         JSONArray jsonArray = new JSONArray();
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
-            jsonObject.put("matchName", acmPrizeDto.getMatchName());
-            jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
-            jsonObject.put("prizeTime", acmPrizeDto.getPrizeTime());
-            jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
-            jsonObject.put("teamName", acmPrizeDto.getTeamName());
-            jsonObject.put("teammateName1", acmPrizeDto.getTeammateName1());
-            jsonObject.put("teammateStuNumber1", acmPrizeDto.getTeammateStuNumber1());
-            jsonObject.put("teammateMajor1", acmPrizeDto.getTeammateMajor1());
-            jsonObject.put("teammateName2", acmPrizeDto.getTeammateName2());
-            jsonObject.put("teammateStuNumber2", acmPrizeDto.getTeammateStuNumber2());
-            jsonObject.put("teammateMajor2", acmPrizeDto.getTeammateMajor2());
-            jsonObject.put("teammateName3", acmPrizeDto.getTeammateName3());
-            jsonObject.put("teammateStuNumber3", acmPrizeDto.getTeammateStuNumber3());
-            jsonObject.put("teammateMajor3", acmPrizeDto.getTeammateMajor3());
-            jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
+            jsonObject.put("matchLevel", mathModelPrizeDto.getMatchLevel());
+            jsonObject.put("matchName", mathModelPrizeDto.getMatchName());
+            jsonObject.put("hostUnit", mathModelPrizeDto.getHostUnit());
+            jsonObject.put("prizeTime", mathModelPrizeDto.getPrizeTime());
+            jsonObject.put("prizeLevel", mathModelPrizeDto.getPrizeLevel());
+            jsonObject.put("teamName", mathModelPrizeDto.getTeamName());
+            jsonObject.put("teammateName1", mathModelPrizeDto.getTeammateName1());
+            jsonObject.put("teammateStuNumber1", mathModelPrizeDto.getTeammateStuNumber1());
+            jsonObject.put("teammateMajor1", mathModelPrizeDto.getTeammateMajor1());
+            jsonObject.put("teammateName2", mathModelPrizeDto.getTeammateName2());
+            jsonObject.put("teammateStuNumber2", mathModelPrizeDto.getTeammateStuNumber2());
+            jsonObject.put("teammateMajor2", mathModelPrizeDto.getTeammateMajor2());
+            jsonObject.put("teammateName3", mathModelPrizeDto.getTeammateName3());
+            jsonObject.put("teammateStuNumber3", mathModelPrizeDto.getTeammateStuNumber3());
+            jsonObject.put("teammateMajor3", mathModelPrizeDto.getTeammateMajor3());
+            jsonObject.put("teacherName", mathModelPrizeDto.getTeacherName());
 
             jsonArray.add(jsonObject);
         }

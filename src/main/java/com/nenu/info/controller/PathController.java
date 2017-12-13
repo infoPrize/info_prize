@@ -1,12 +1,10 @@
 package com.nenu.info.controller;
 
 import com.nenu.info.common.utils.YearUtil;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
 
 /**
  * @author: software-liuwang
@@ -50,9 +48,9 @@ public class PathController {
         return "ACM";
     }
 
-    @RequestMapping(value = "math")
+    @RequestMapping(value = "mathModel")
     public String toMath() {
-        return "math";
+        return "math_model";
     }
 
     @RequestMapping(value = "competition")

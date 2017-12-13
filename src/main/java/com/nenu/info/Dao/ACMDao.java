@@ -25,6 +25,6 @@ public interface ACMDao {
      * @param params 参数
      * @return
      */
-    public List<ACMPrizeDto> selectByConditions(Map<String, Object> params) throws Exception;
+    public List<ACMPrizeDto> listByConditions(Map<String, Object> params) throws Exception;
 
 }

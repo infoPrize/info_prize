@@ -1,10 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>ACM</title>
+		<title>数学建模</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 	</head>
@@ -21,10 +20,10 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="${website}acm/listACMByCondition" method="post">
+									<form class="condition_form form-inline" action="${website}mathModel/listByCondition" method="post">
 										<!--第一行-->
 										<div class="tab-row">
-					    					<div class="form-group col-sm-4">
+											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="type">比赛级别：</label>
 												<select id="type" class="form-control" name="matchLevel">
 													<option value="-1">---请选择比赛级别---</option>
@@ -98,6 +97,7 @@
 										</div>
 										<!--第四行-->
 										<input type="submit" value="查询" id="sort"/>
+										
 									</form>
 					
 								</div>
@@ -108,90 +108,90 @@
 								<div class="x_content">
 									<table id="datatable" class="table-striped table-bordered text-center">
 										<thead>
-											<tr>
-												<th class="text-center">比赛类别</th>
-												<th class="text-center">比赛名称</th>
-												<th class="text-center">主办单位</th>
-												<th class="text-center">获奖时间</th>
-												<th class="text-center">获奖等级</th>
-												<th class="text-center">团队名称</th>
-												<th class="text-center">参赛人员</th>
-												<th class="text-center">学号</th>
-												<th class="text-center">专业</th>
-												<th class="text-center">指导老师</th>
-												<th class="text-center">操作</th>
-											</tr>
+										<tr>
+											<th class="text-center">比赛类别</th>
+											<th class="text-center">比赛名称</th>
+											<th class="text-center">主办单位</th>
+											<th class="text-center">获奖时间</th>
+											<th class="text-center">获奖等级</th>
+											<th class="text-center">团队名称</th>
+											<th class="text-center">参赛人员</th>
+											<th class="text-center">学号</th>
+											<th class="text-center">专业</th>
+											<th class="text-center">指导老师</th>
+											<th class="text-center">操作</th>
+										</tr>
 										</thead>
-	
+
 										<tbody>
-											<!--第一行-->
-											<tr>
-												<td>国家级</td>
-												<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-												<td>美国计算机协会</td>
-												<td>2013年8月</td>
-												<td>金奖</td>
-												<td>RNG</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>2015898758</td></tr>
-														<tr><td>2015012569</td></tr>
-														<tr><td>2015125898</td></tr>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-													</table>
-												</td>
-												<td>张伟</td>
-												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
-												</td>
-											</tr>
-											<!--第二行-->
-											<tr>
-												<td>国家级</td>
-												<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-												<td>美国计算机协会</td>
-												<td>2013年8月</td>
-												<td>金奖</td>
-												<td>RNG</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>2015898758</td></tr>
-														<tr><td>2015012569</td></tr>
-														<tr><td>2015125898</td></tr>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-													</table>
-												</td>
-												<td>张伟</td>
-												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
-												</td>
-											</tr>
+										<!--第一行-->
+										<tr>
+											<td>国家级</td>
+											<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
+											<td>美国计算机协会</td>
+											<td>2013年8月</td>
+											<td>金奖</td>
+											<td>RNG</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>张三</td></tr>
+													<tr><td>张三</td></tr>
+													<tr><td>张三</td></tr>
+												</table>
+											</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>2015898758</td></tr>
+													<tr><td>2015012569</td></tr>
+													<tr><td>2015125898</td></tr>
+												</table>
+											</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>软件工程</td></tr>
+													<tr><td>软件工程</td></tr>
+													<tr><td>软件工程</td></tr>
+												</table>
+											</td>
+											<td>张伟</td>
+											<td class="aparent">
+												<a href="" data-toggle="modal" data-target="#delete">删除</a>
+											</td>
+										</tr>
+										<!--第二行-->
+										<tr>
+											<td>国家级</td>
+											<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
+											<td>美国计算机协会</td>
+											<td>2013年8月</td>
+											<td>金奖</td>
+											<td>RNG</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>张三</td></tr>
+													<tr><td>张三</td></tr>
+													<tr><td>张三</td></tr>
+												</table>
+											</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>2015898758</td></tr>
+													<tr><td>2015012569</td></tr>
+													<tr><td>2015125898</td></tr>
+												</table>
+											</td>
+											<td class="td_table">
+												<table class="sub">
+													<tr><td>软件工程</td></tr>
+													<tr><td>软件工程</td></tr>
+													<tr><td>软件工程</td></tr>
+												</table>
+											</td>
+											<td>张伟</td>
+											<td class="aparent">
+												<a href="" data-toggle="modal" data-target="#delete">删除</a>
+											</td>
+										</tr>
 										</tbody>
 									</table>
 								</div>

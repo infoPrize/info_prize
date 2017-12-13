@@ -264,6 +264,9 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"
 	</body>
+
+
 
 </html>

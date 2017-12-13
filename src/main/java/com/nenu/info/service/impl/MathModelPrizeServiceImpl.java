@@ -1,13 +1,13 @@
 package com.nenu.info.service.impl;
 
-import com.nenu.info.Dao.ACMDao;
+import com.nenu.info.Dao.MathModelPrizeDao;
 import com.nenu.info.Dao.StudentDao;
 import com.nenu.info.Dao.TeacherDao;
-import com.nenu.info.common.dto.ACMPrizeDto;
-import com.nenu.info.common.entities.ACMPrize;
+import com.nenu.info.common.dto.MathModelPrizeDto;
+import com.nenu.info.common.entities.MathModelPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;
-import com.nenu.info.service.ACMService;
+import com.nenu.info.service.MathModelPrizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,11 @@ import java.util.*;
 
 /**
  * @author: software-liuwang
- * @time: 2017/12/8 18:26
- * @description :
+ * @time: 2017/12/11 15:05
+ * @description : 数学建模信息添加service的实现
  */
-
-@Service(value = "acmService")
-public class ACMServiceImpl implements ACMService {
-
-    @Autowired
-    private ACMDao acmDao;
+@Service(value = "mathModelPrizeService")
+public class MathModelPrizeServiceImpl implements MathModelPrizeService {
 
     @Autowired
     private StudentDao studentDao;
@@ -31,19 +27,21 @@ public class ACMServiceImpl implements ACMService {
     @Autowired
     private TeacherDao teacherDao;
 
+    @Autowired
+    private MathModelPrizeDao mathModelPrizeDao;
+
     @Override
-    public void add(ACMPrize acmPrize) {
+    public void add(MathModelPrize mathModelPrize) {
         try {
-            acmDao.add(acmPrize);
+            mathModelPrizeDao.add(mathModelPrize);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                                Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
-        List<ACMPrizeDto> acmPrizeDtoList = null;
+    public List<MathModelPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime, Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
+        List<MathModelPrizeDto> acmPrizeDtoList = null;
 
         List<Student> studentList = null;
 
@@ -84,7 +82,7 @@ public class ACMServiceImpl implements ACMService {
         params.put("idList", idList);
 
         try {
-            acmPrizeDtoList = acmDao.listByConditions(params);
+            acmPrizeDtoList = mathModelPrizeDao.listByConditions(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
