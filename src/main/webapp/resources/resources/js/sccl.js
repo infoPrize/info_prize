@@ -455,7 +455,7 @@ $(function() {
 					"id": "7",
 					"name": "数学建模",
 					"parentId": "1",
-					"url": site.website + "math",
+					"url": site.website + "mathModel",
 					"icon": "&#xe964;",
 					"order": "1",
 					"isHeader": "0",
