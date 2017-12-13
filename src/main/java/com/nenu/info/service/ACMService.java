@@ -32,7 +32,7 @@ public interface ACMService {
      * @param hostUnit 主办单位
      * @return
      */
-    public List<ACMPrizeDto> selectByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+    public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                                 Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit);
 
 }

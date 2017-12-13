@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -59,7 +60,7 @@ public class ACMController {
      *                  4 - 该教师不存在
      *                  5 - 插入成功)
      */
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Integer add(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                        @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
@@ -147,19 +148,19 @@ public class ACMController {
      * @param hostUnit 主办单位
      * @return
      */
-    @RequestMapping(value = "selectByCondition")
+    @RequestMapping(value = "listACMByCondition", method = RequestMethod.POST)
     @ResponseBody
-    public JSONArray selectACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                                @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                                @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                                @RequestParam(value = "endTime", required = false) Date endTime,
-                                                @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                                @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                                @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                                @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                                @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
+    public JSONArray listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                              @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                              @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                              @RequestParam(value = "endTime", required = false) Date endTime,
+                                              @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                              @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                              @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                              @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                              @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
         JSONArray jsonArray = new JSONArray();
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.selectByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
         for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
             JSONObject jsonObject = new JSONObject();
 

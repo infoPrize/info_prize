@@ -41,7 +41,7 @@ public class ACMServiceImpl implements ACMService {
     }
 
     @Override
-    public List<ACMPrizeDto> selectByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+    public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                                 Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
         List<ACMPrizeDto> acmPrizeDtoList = null;
 
@@ -84,7 +84,7 @@ public class ACMServiceImpl implements ACMService {
         params.put("idList", idList);
 
         try {
-            acmPrizeDtoList = acmDao.selectByConditions(params);
+            acmPrizeDtoList = acmDao.listByConditions(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
