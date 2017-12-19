@@ -41,4 +41,45 @@
         SELECT * FROM `t_student`
         WHERE `id` = #{id}
     </select>
+
+    <!--条件查询-->
+    <select id="queryByCondition" resultType="com.nenu.info.common.entities.Student">
+        SELECT
+        `name` AS name,
+        `sex` AS sex,
+        `stu_number` AS stuNumber,
+        `grade` AS grade,
+        `major_code` AS majorCode,
+        `phone` AS phone
+        FROM `t_student`
+        <where>
+            <include refid="condition" />
+        </where>
+    </select>
+
+    <sql id="condition">
+        <if test="name != '' and name != null">
+            AND `name` LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="sex != null and sex > 0">
+            AND `sex` = #{sex}
+        </if>
+        <if test="stuNumber != '' and stuNumber != null">
+            AND `stu_number` LIKE CONCAT('%', #{stuNumber}, '%')
+        </if>
+        <if test="grade != '' and grade != null">
+            AND `grade` LIKE CONCAT('%', #{grade}, '%')
+        </if>
+        <if test="majorCode != null and majorCode > 0">
+            AND `major_code` = #{majorCode}
+        </if>
+        <if test="phone != '' and phone != null">
+            AND `phone` LIKE CONCAT('%', #{phone}, '%')
+        </if>
+
+    </sql>
+
+    <delete id="deleteByStuNumber">
+        DELETE FROM `t_student` WHERE `stu_number` = #{stuNumber}
+    </delete>
 </mapper>

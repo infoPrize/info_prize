@@ -74,7 +74,13 @@ public class PathController {
 
     @RequestMapping(value = "student")
     public String toStudent() {
-        return "student";
+        return "redirect:/student/list";
     }
+
+    @RequestMapping(value = "student/add")
+    public String addStudent() {
+        return "student/add";
+    }
+
 
 }

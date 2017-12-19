@@ -15,9 +15,10 @@ public enum MajorEnum {
 
     Software(1, "软件工程"),
     CST(2, "计算机科学与技术"),
-    CSTCooperation(3, "计算机科学与技术(中美合作)"),
-    EducationalTechnology(4, "教育技术"),
-    MLIS(5, "图书情报与档案管理"),
+    CSTCooperation(3, "计算机科学与技术（中美合作）"),
+    EducationalTechnology(4, "教育技术学"),
+    EducationalTeacher(41,"教育技术学（公费师范）"),
+    LibraryAndWord(5, "图书情报与档案管理类"),
     Library(51, "图书馆学"),
     InformationResources(52, "信息资源管理");
 
@@ -49,6 +50,15 @@ public enum MajorEnum {
         for(MajorEnum majorEnum : MajorEnum.values()) {
             if(id.equals(majorEnum.getId())) {
                 return majorEnum.getValue();
+            }
+        }
+        return null;
+    }
+
+    public static Integer getIdByValue(String value) {
+        for(MajorEnum majorEnum : MajorEnum.values()) {
+            if(value.equals(majorEnum.getValue())) {
+                return majorEnum.getId();
             }
         }
         return null;

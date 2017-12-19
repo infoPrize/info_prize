@@ -7,7 +7,7 @@ package com.nenu.info.common.enums;
  */
 public enum SexEnum {
 
-    Male(0, "男"), Female(1, "女");
+    Male(1, "男"), Female(2, "女");
 
     SexEnum(Integer id, String value) {
         this.id = id;
@@ -37,6 +37,15 @@ public enum SexEnum {
         for(SexEnum sexEnum : SexEnum.values()) {
             if(id.equals(sexEnum.getId())) {
                 return sexEnum.getValue();
+            }
+        }
+        return null;
+    }
+
+    public static Integer getIdByValue(String value) {
+        for(SexEnum sexEnum : SexEnum.values()) {
+            if(value.equals(sexEnum.getValue())) {
+                return sexEnum.getId();
             }
         }
         return null;

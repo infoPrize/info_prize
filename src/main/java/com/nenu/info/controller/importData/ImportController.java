@@ -37,12 +37,11 @@ public class ImportController {
                importService.importStudent(excel);
                excel.delete();
            }
-           return "";
 
        }catch (Exception e){
            e.printStackTrace();
-           return "";
        }
+        return "redirect:student/list";
 
     }
 

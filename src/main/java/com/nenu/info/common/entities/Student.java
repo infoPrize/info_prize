@@ -25,7 +25,7 @@ public class Student {
     @Column(name = "name")
     private String name;
 
-    //性别(0-男; 1-女)
+    //性别(1-男; 2-女)
     @Column(name = "sex")
     private Integer sex;
 

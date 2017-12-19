@@ -1,5 +1,6 @@
 package com.nenu.info.Dao.common;
 
+import com.nenu.info.common.dto.StudentDto;
 import com.nenu.info.common.entities.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -61,5 +62,26 @@ public interface StudentDao {
      * @throws Exception
      */
     public Student selectStudentById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 条件查询学生列表
+     * @param name
+     * @param sex
+     * @param stuNumber
+     * @param grade
+     * @param majorCode
+     * @param phone
+     * @return
+     * @throws Exception
+     */
+    public List<Student> queryByCondition(@Param("name") String name, @Param("sex") Integer sex,
+                                          @Param("stuNumber") String stuNumber, @Param("grade") String grade,
+                                          @Param("majorCode") Integer majorCode, @Param("phone") String phone) throws Exception;
+
+    /**
+     * 根据学号删除学生
+     * @param stuNumber
+     */
+    public void deleteByStuNumber(@Param("stuNumber") String stuNumber);
 
 }

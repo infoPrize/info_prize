@@ -1,5 +1,6 @@
 package com.nenu.info.service.common;
 
+import com.nenu.info.common.dto.StudentDto;
 import com.nenu.info.common.entities.Student;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,5 +43,34 @@ public interface StudentService {
      * @throws Exception
      */
     public Student selectStudentById(Integer id) throws Exception;
+
+    /**
+     * 条件查询学生列表
+     * @param name
+     * @param sex
+     * @param stuNumber
+     * @param grade
+     * @param majorCode
+     * @param phone
+     * @return
+     * @throws Exception
+     */
+    public List<StudentDto> queryByCondition( String name,  Integer sex, String stuNumber,
+                                              String grade, Integer majorCode,  String phone) throws Exception;
+
+    /**
+     * 根据学号删除学生
+     * @param stuNumber
+     */
+    public void deleteByStuNumber(String stuNumber) throws Exception;
+
+    /**
+     * 将实体转换为dto
+     * @param studentDto
+     * @return
+     * @throws Exception
+     */
+    public Student convertDtoToEntity(StudentDto studentDto) throws Exception;
+
 
 }

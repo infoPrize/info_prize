@@ -17,10 +17,10 @@ import java.util.Collection;
 import java.util.Date;
 
 
-public class ExcelReader {
+public class ExcelReader2003 {
     private static final String ENDFLAG = "EOF";
 
-    public ExcelReader() {
+    public ExcelReader2003() {
     }
 
     public static <T> Collection<T> readExcel(Class<T> clazz, File sourceFile, int beginRow, DataType... dataTypes) throws Exception {

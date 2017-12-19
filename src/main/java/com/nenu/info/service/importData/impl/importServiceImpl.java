@@ -1,9 +1,11 @@
 package com.nenu.info.service.importData.impl;
 
 import com.nenu.info.Dao.common.StudentDao;
+import com.nenu.info.common.dto.StudentDto;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.common.DataType;
-import com.nenu.info.common.utils.ExcelReader;
+import com.nenu.info.common.utils.ExcelReader2003;
+import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.importData.ImportService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,12 +34,15 @@ public class importServiceImpl implements ImportService {
     @Autowired
     private StudentDao studentDao;
 
+    @Autowired
+    private StudentService studentService;
+
     String[] studentExcelFormat = {"姓名", "性别","学号","年级","专业","电话"};
 
     DataType[] studentExcelType = {
             new DataType("name", 0),new DataType("sex",1),
             new DataType("stuNumber",2),new DataType("grade",3),
-            new DataType("majorCode",4),new DataType("phone",5),
+            new DataType("major",4),new DataType("phone",5),
     };
 
     public boolean checkStudent(File studentExcel) throws Exception{
@@ -48,12 +53,13 @@ public class importServiceImpl implements ImportService {
     public void importStudent(File studentExcel) throws Exception{
 
        try{
-           List<Student> studentList = (List<Student>) ExcelReader.readExcel(Student.class,studentExcel,1,studentExcelType);
-           for(int i = 0; i < studentList.size(); i++){
-               Student student = studentList.get(i);
-               if(student == null ||student.equals("")){
+           List<StudentDto> studentDtoList = (List<StudentDto>) ExcelReader2003.readExcel(StudentDto.class,studentExcel,1,studentExcelType);
+           for(int i = 0; i < studentDtoList.size(); i++){
+               StudentDto studentDto = studentDtoList.get(i);
+               if(studentDto == null ||studentDto.equals("")){
                    continue;
                }
+               Student student = studentService.convertDtoToEntity(studentDto);
                studentDao.add(student);
            }
        }catch (Exception e){

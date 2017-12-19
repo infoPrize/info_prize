@@ -401,6 +401,7 @@ $(function() {
 		// staticWebsite:'http://120.78.154.246/info_prize/resources/'
 
 	}
+
 	/*菜单json*/
 	var menu = [{
 			"id": "1",
@@ -485,6 +486,26 @@ $(function() {
                     "name": "教师信息",
                     "parentId": "1",
                     "url": site.website + "teacher/toTeacher",
+                    "icon": "&#xe927;",
+                    "order": "1",
+                    "isHeader": "0",
+                    "childMenus": ""
+                },
+                {
+                    "id": "11",
+                    "name": "学生管理",
+                    "parentId": "1",
+                    "url": site.website + "student",
+                    "icon": "&#xe927;",
+                    "order": "1",
+                    "isHeader": "0",
+                    "childMenus": ""
+                },
+                {
+                    "id": "12",
+                    "name": "添加学生",
+                    "parentId": "1",
+                    "url": site.website + "student/add",
                     "icon": "&#xe927;",
                     "order": "1",
                     "isHeader": "0",
