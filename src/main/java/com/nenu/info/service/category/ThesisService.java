@@ -3,6 +3,7 @@ package com.nenu.info.service.category;
 import com.nenu.info.common.dto.category.ThesisDto;
 import com.nenu.info.common.entities.Thesis;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,5 +26,22 @@ public interface ThesisService {
      * @throws Exception
      */
     public List<ThesisDto> listAll() throws Exception;
+
+    /**
+     * 根据条件查询论文信息
+     * @param journalLevel
+     * @param journalName
+     * @param authorName
+     * @param authorStuNumber
+     * @param authorMajor
+     * @param authorGrade
+     * @param beginTime
+     * @param endTime
+     * @param teacherName
+     * @return
+     */
+    public List<ThesisDto> listByConditions(Integer journalLevel, String journalName, String authorName,
+                                            String authorStuNumber, Integer authorMajor, String authorGrade,
+                                            Date beginTime, Date endTime, String teacherName) throws Exception;
 
 }

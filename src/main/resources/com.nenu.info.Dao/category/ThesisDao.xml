@@ -23,26 +23,96 @@
           (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName1,
           tt.`author_level_1` AS authorLevel1,
           (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorStuNumber1,
-          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_1` AND tmc.`major_code` = ts.`major_code`) AS authorMajor1,
-          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName2,
+          (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_1` AND tmc.`major_code` = ts.`major_code`) AS authorMajor1,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_2`) AS authorName2,
           tt.`author_level_2` AS authorLevel2,
           (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_2`) AS authorStuNumber2,
-          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_2` AND tmc.`major_code` = ts.`major_code`) AS authorMajor2,
-          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName3,
+          (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_2` AND tmc.`major_code` = ts.`major_code`) AS authorMajor2,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_3`) AS authorName3,
           tt.`author_level_3` AS authorLevel3,
           (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_3`) AS authorStuNumber3,
-          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_3` AND tmc.`major_code` = ts.`major_code`) AS authorMajor3,
-          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName4,
+          (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_3` AND tmc.`major_code` = ts.`major_code`) AS authorMajor3,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorName4,
           tt.`author_level_4` AS authorLevel4,
           (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorStuNumber4,
-          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_4` AND tmc.`major_code` = ts.`major_code`) AS authorMajor4,
-          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorName5,
+          (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_4` AND tmc.`major_code` = ts.`major_code`) AS authorMajor4,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_5`) AS authorName5,
           tt.`author_level_5` AS authorLevel5,
           (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_5`) AS authorStuNumber5,
-          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_5` AND tmc.`major_code` = ts.`major_code`) AS authorMajor5,
+          (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_5` AND tmc.`major_code` = ts.`major_code`) AS authorMajor5,
           (SELECT tt1.`teacher_name` FROM `t_teacher` tt1 WHERE tt1.`id` = tt.`teacher_id`) AS teacherName,
           tt.`thesis_abstract` AS thesisAbstract
           FROM `t_thesis` tt
+    </select>
+
+    <select id="listByConditions" resultType="com.nenu.info.common.dto.category.ThesisDto">
+        SELECT
+            (SELECT tjl.`level` FROM `t_journal_level` tjl WHERE tjl.`id` = tt.`journal_level`) AS journalLevel,
+            tt.`journal_name` AS journalName,
+            tt.`thesis_title` AS thesisTitle,
+            tt.`publish_time` AS publishTime,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName1,
+            tt.`author_level_1` AS authorLevel1,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorStuNumber1,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_1` AND tmc.`major_code` = ts.`major_code`) AS authorMajor1,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_2`) AS authorName2,
+            tt.`author_level_2` AS authorLevel2,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_2`) AS authorStuNumber2,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_2` AND tmc.`major_code` = ts.`major_code`) AS authorMajor2,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_3`) AS authorName3,
+            tt.`author_level_3` AS authorLevel3,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_3`) AS authorStuNumber3,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_3` AND tmc.`major_code` = ts.`major_code`) AS authorMajor3,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorName4,
+            tt.`author_level_4` AS authorLevel4,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorStuNumber4,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_4` AND tmc.`major_code` = ts.`major_code`) AS authorMajor4,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_5`) AS authorName5,
+            tt.`author_level_5` AS authorLevel5,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_5`) AS authorStuNumber5,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_5` AND tmc.`major_code` = ts.`major_code`) AS authorMajor5,
+            (SELECT tt1.`teacher_name` FROM `t_teacher` tt1 WHERE tt1.`id` = tt.`teacher_id`) AS teacherName,
+            tt.`thesis_abstract` AS thesisAbstract
+        FROM `t_thesis` tt
+        WHERE
+            tt.`is_deleted` = 0
+            <if test="studentIdList != null and studentIdList.size() > 0">
+                AND
+                (
+                  tt.`author_id_1` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tt.`author_id_2` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tt.`author_id_3` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tt.`author_id_4` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tt.`author_id_5` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                )
+            </if>
+            <if test="teacherId != null and teacherId > 0">
+                AND tt.`teacher_id` = #{teacherId}
+            </if>
+            <if test="journalLevel > 0">
+                AND tt.`journal_level` = #{journalLevel}
+            </if>
+            <if test="journalName != null and journalName != ''">
+                AND tt.`journal_name` LIKE CONCAT('%', #{journalName}, '%')
+            </if>
+            <if test="beginTime != null and endTime != null">
+                AND tt.`publish_time` BETWEEN #{beginTime} AND #{endTime}
+            </if>
     </select>
 
 </mapper>

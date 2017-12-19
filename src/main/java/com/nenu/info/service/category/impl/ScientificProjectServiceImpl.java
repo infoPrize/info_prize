@@ -86,7 +86,9 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         }
 
         Integer teacherId = null;
-        if(teacher != null) {
+        if(teacher == null) {
+            return null;
+        } else {
             teacherId = teacher.getId();
         }
         List<ScientificProjectDto> scientificProjectDtoList = null;

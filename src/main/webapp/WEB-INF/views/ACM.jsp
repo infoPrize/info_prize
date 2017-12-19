@@ -55,7 +55,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
-												<select id="prizeLevel" name="prizeLevel" class="form-control">
+												<select id="prizeLevel"  name="prizeLevel" class="form-control">
 													<option value="-1">---请选择获奖等级---</option>
 													<option value="1">金奖(一等奖)</option>
 													<option value="2">银奖(二等奖)</option>

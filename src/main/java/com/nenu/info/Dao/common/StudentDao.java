@@ -74,14 +74,18 @@ public interface StudentDao {
      * @return
      * @throws Exception
      */
-    public List<Student> queryByCondition(@Param("name") String name, @Param("sex") Integer sex,
-                                          @Param("stuNumber") String stuNumber, @Param("grade") String grade,
-                                          @Param("majorCode") Integer majorCode, @Param("phone") String phone) throws Exception;
+    public List<Student> queryByCondition(@Param("name") String name,
+                                          @Param("sex") Integer sex,
+                                          @Param("stuNumber") String stuNumber,
+                                          @Param("grade") String grade,
+                                          @Param("majorCode") Integer majorCode,
+                                          @Param("phone") String phone) throws Exception;
 
     /**
      * 根据学号删除学生
      * @param stuNumber
      */
     public void deleteByStuNumber(@Param("stuNumber") String stuNumber);
+
 
 }

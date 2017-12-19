@@ -21,95 +21,73 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="" method="post">
+									<form class="condition_form form-inline" action="${website}thesis/listByCondition" method="post">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="type">论文级别：</label>
-												<select id="type" class="form-control">
-													<option>---请选择论文级别---</option>
-													<option >第一级-T类</option>
-													<option >第二级-A类</option>
-													<option >第三级-B类</option>
-													<option >第四级-C类</option>
-													<option >第五级-D类</option>
-													<option >第六级-E类</option>
-													<option >第七级-国家级内刊</option>
-													<option >第八级-省级内刊</option>
-													<option >第九级-区级内刊</option>
+												<label class="tab-label control-label text-right" for="type">期刊级别：</label>
+												<select id="type" class="form-control" name="journalLevel">
+													<option value="-1">---请选择论文级别---</option>
+													<option value="1">E类</option>
+													<option value="2">D类</option>
+													<option value="3">C类</option>
+													<option value="4">B类</option>
+													<option value="5">A类</option>
+													<option value="6">T类</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="author">作者排名：</label>
-												<select id="author" class="form-control">
-													<option>---请选择作者排名---</option>
-													<option>第一作者</option>
-													<option>第二作者</option>
-													<option>第三作者</option>
-													<option>第四作者</option>
-													<option>第五作者</option>
-													<option>第六作者</option>
-													<option>通讯作者</option>
-												</select>
+												<label class="tab-label control-label text-right">期刊名称：</label>
+												<input type="text" name="journalName" class="form-control" />
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="title">论文题目：</label>
-												<input type="text" id="title" class="form-control"/>
+												<label class="tab-label control-label text-right" for="author">作者姓名：</label>
+												<input type="text" id="author" class="form-control" name="authorName"/>
 											</div>
 										</div>
 										<!--第二行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="unit">发表单位：</label>
-												<input type="text" id="unit" class="form-control"/>
+												<label class="tab-label control-label text-right" for="unit">作者学号：</label>
+												<input type="text" id="unit" class="form-control" name="authorStuNumber"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="journal">发表刊物：</label>
-												<input type="text" id="journal" class="form-control"/>
-											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="time">发表时间：</label>
-												<select id="time" class="form-control">
-													<option>---请选择发表年份---</option>
-													<option>2017</option>
-													<option>2016</option>
-													<option>2015</option>
-													<option>2014</option>
+												<label class="tab-label control-label text-right" for="profession">作者专业：</label>
+												<select id="profession" class="form-control" name="authorMajor">
+													<option value="-1">---请选择学生专业---</option>
+													<option value="1">软件工程</option>
+													<option value="2">计算机科学与技术</option>
+													<option value="3">计算机科学与技术(中美合作)</option>
+													<option value="4">教育技术</option>
+													<option value="5">图书情报与档案管理</option>
+													<option value="51">图书馆学</option>
+													<option value="52">信息资源管理</option>
 												</select>
 											</div>
-											
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="journal">作者年级：</label>
+												<input type="text" id="journal" class="form-control" name="authorGrade"/>
+											</div>
 										</div>
-										<!--第三行-->
+										<!-- 第三行 -->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control">
-													<option>---请选择学生专业---</option>
-													<option>计算机普班</option>
-													<option>计算机（中美）</option>
-													<option>图书情报</option>
-													<option>教技</option>
-													<option>软件工程</option>
-												</select>
+												<label class="tab-label control-label text-right">起始发表时间：</label>
+												<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" id="student_name" class="form-control"/>
+												<label class="tab-label control-label text-right">截止发表时间：</label>
+												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-												<input type="text" id="student_number" class="form-control"/>
+												<label class="tab-label control-label text-right" for="journal">指导老师：</label>
+												<input type="text" id="journal" class="form-control" name="teacherName"/>
 											</div>
+
 										</div>
+
 										<!--第四行-->
-										<div class="tab-row">
-											<div class="form-group col-sm-12">
-												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control"/>
-											</div>
-										</div>
-										<!--第五行-->
-										<input type="button" value="选择" id="sort"/>
+										<input type="submit" value="选择" id="sort"/>
 										
 									</form>
 					
@@ -142,79 +120,79 @@
 											<td>${thesisDto.journalLevel}</td>
 											<td>${thesisDto.journalName}</td>
 											<td>${thesisDto.thesisTitle}</td>
-											<td>${thesisDto.publishTime}</td>
+											<td>${thesisDto.publishTimeStr}</td>
 											<td class="td_table">
 												<table class="sub">
-													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+													<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
 														<tr><td>${thesisDto.authorName1}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+													<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
 														<tr><td>${thesisDto.authorName2}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+													<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
 														<tr><td>${thesisDto.authorName3}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+													<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
 														<tr><td>${thesisDto.authorName4}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+													<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
 														<tr><td>${thesisDto.authorName5}</td></tr>
 													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+													<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
 														<tr><td>第${thesisDto.authorLevel1}作者</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+													<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
 														<tr><td>第${thesisDto.authorLevel2}作者</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+													<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
 														<tr><td>第${thesisDto.authorLevel3}作者</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+													<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
 														<tr><td>第${thesisDto.authorLevel4}作者</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+													<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
 														<tr><td>第${thesisDto.authorLevel5}作者</td></tr>
 													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+													<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
 														<tr><td>${thesisDto.authorStuNumber1}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+													<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
 														<tr><td>${thesisDto.authorStuNumber2}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+													<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
 														<tr><td>${thesisDto.authorStuNumber3}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+													<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
 														<tr><td>${thesisDto.authorStuNumber4}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+													<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
 														<tr><td>${thesisDto.authorStuNumber5}</td></tr>
 													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+													<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
 														<tr><td>${thesisDto.authorMajor1}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+													<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
 														<tr><td>${thesisDto.authorMajor2}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+													<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
 														<tr><td>${thesisDto.authorMajor3}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+													<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
 														<tr><td>${thesisDto.authorMajor4}</td></tr>
 													</c:if>
-													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+													<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
 														<tr><td>${thesisDto.authorMajor5}</td></tr>
 													</c:if>
 												</table>
@@ -270,5 +248,6 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 	</body>
 </html>

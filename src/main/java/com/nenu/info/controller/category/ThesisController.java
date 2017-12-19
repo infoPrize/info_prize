@@ -220,6 +220,7 @@ public class ThesisController {
         if(journalLevel > 0) {
             thesis.setJournalLevel(journalLevel);
         }
+        thesis.setJournalName(journameName);
         thesis.setThesisAbstract(thesisAbstract);
         thesis.setTeacherId(teacherId);
 
@@ -247,6 +248,31 @@ public class ThesisController {
 
         return "thesis";
 
+    }
+
+    @RequestMapping(value = "listByCondition")
+    public String listByConditions(@RequestParam("journalLevel") Integer journalLevel,
+                                   @RequestParam("journalName") String journalName,
+                                   @RequestParam("authorName") String authorName,
+                                   @RequestParam("authorStuNumber") String authorStuNumber,
+                                   @RequestParam("authorMajor") Integer authorMajor,
+                                   @RequestParam("authorGrade") String authorGrade,
+                                   @RequestParam("beginTime") Date beginTime,
+                                   @RequestParam("endTime") Date endTime,
+                                   @RequestParam("teacherName") String teacherName,
+                                   Model model) {
+        List<ThesisDto> thesisDtoList = null;
+
+        try {
+            thesisDtoList = thesisService.listByConditions(journalLevel, journalName, authorName, authorStuNumber, authorMajor, authorGrade,
+                                                            beginTime, endTime, teacherName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("thesisDtoList", thesisDtoList);
+
+        return "thesis";
     }
 
 }

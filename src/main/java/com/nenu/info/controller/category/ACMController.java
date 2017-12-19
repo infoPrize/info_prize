@@ -64,7 +64,7 @@ public class ACMController {
     @ResponseBody
     public Integer add(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                        @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                       @RequestParam(value = "prizeTime", required = false, defaultValue = "2018/01/01") Date prizeTime,
+                       @RequestParam(value = "prizeTime", required = false) Date prizeTime,
                        @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                        @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                        @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,

@@ -199,6 +199,14 @@ public class Thesis {
         this.publishTime = publishTime;
     }
 
+    public String getJournalName() {
+        return journalName;
+    }
+
+    public void setJournalName(String journalName) {
+        this.journalName = journalName;
+    }
+
     public Integer getJournalLevel() {
         return journalLevel;
     }

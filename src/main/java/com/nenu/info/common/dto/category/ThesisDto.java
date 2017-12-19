@@ -17,6 +17,8 @@ public class ThesisDto {
 
     private Date publishTime;
 
+    private String publishTimeStr;
+
     private String authorName1;
 
     private Integer authorLevel1;
@@ -91,6 +93,14 @@ public class ThesisDto {
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public String getPublishTimeStr() {
+        return publishTimeStr;
+    }
+
+    public void setPublishTimeStr(String publishTimeStr) {
+        this.publishTimeStr = publishTimeStr;
     }
 
     public String getAuthorName1() {

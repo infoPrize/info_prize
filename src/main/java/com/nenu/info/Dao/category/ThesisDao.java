@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.Thesis;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -26,5 +27,13 @@ public interface ThesisDao {
      * @throws Exception
      */
     public List<ThesisDto> listAll() throws Exception;
+
+    /**
+     * 根据条件查询论文信息
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public List<ThesisDto> listByConditions(Map<String, Object> params) throws Exception;
 
 }
