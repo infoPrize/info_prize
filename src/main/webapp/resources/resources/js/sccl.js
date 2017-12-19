@@ -401,7 +401,6 @@ $(function() {
 		// staticWebsite:'http://120.78.154.246/info_prize/resources/'
 
 	}
-
 	/*菜单json*/
 	var menu = [{
 			"id": "1",
@@ -415,7 +414,7 @@ $(function() {
 					"id": "3",
 					"name": "论文",
 					"parentId": "1",
-					"url": site.website + "paper",
+					"url": site.website + "thesis/toThesis",
 					"icon": "&#xe602;",
 					"order": "1",
 					"isHeader": "0",
@@ -435,7 +434,7 @@ $(function() {
 					"id": "5",
 					"name": "国创科研",
 					"parentId": "1",
-					"url": site.website + "scientificProject",
+					"url": site.website + "scientificProject/toScientificProject",
 					"icon": "&#xe91f;",
 					"order": "1",
 					"isHeader": "0",
@@ -480,7 +479,17 @@ $(function() {
 					"order": "1",
 					"isHeader": "0",
 					"childMenus": ""
-				}
+				},
+                {
+                    "id": "10",
+                    "name": "教师信息",
+                    "parentId": "1",
+                    "url": site.website + "teacher/toTeacher",
+                    "icon": "&#xe927;",
+                    "order": "1",
+                    "isHeader": "0",
+                    "childMenus": ""
+                }
 			]
 		},
 		{

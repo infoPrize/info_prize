@@ -11,7 +11,7 @@
                 #{acmPrize.teammateId3}, #{acmPrize.prizeTime}, #{acmPrize.teacherId})
     </insert>
 
-    <select id="listByConditions" resultType="com.nenu.info.common.dto.ACMPrizeDto">
+    <select id="listByConditions" resultType="com.nenu.info.common.dto.category.ACMPrizeDto">
         SELECT
           (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tap.`match_level`) AS matchLevel,
           tap.`match_name` AS matchName,

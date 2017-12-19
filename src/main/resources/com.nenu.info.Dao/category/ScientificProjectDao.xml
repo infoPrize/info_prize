@@ -14,7 +14,7 @@
                 #{scientificProject.fundsLimit}, #{scientificProject.projectIntroduce})
     </insert>
 
-    <select id="listScientificProjectByCondition" resultType="com.nenu.info.common.dto.ScientificProjectDto">
+    <select id="listScientificProjectByCondition" resultType="com.nenu.info.common.dto.category.ScientificProjectDto">
         SELECT
             (SELECT tspt.`project_type` FROM `t_scientific_project_type` tspt WHERE tsp.`project_type` = tspt.`id`) AS projectType,
             tsp.project_name AS projectName,
@@ -84,4 +84,27 @@
           </if>
     </select>
 
+    <select id="listAll" resultType="com.nenu.info.common.dto.category.ScientificProjectDto">
+        SELECT
+            (SELECT tspt.`project_type` FROM `t_scientific_project_type` tspt WHERE tsp.`project_type` = tspt.`id`) AS projectType,
+            tsp.project_name AS projectName,
+            tsp.`set_year` AS setYear,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManName,
+            (SELECT CASE WHEN ts.`sex` = 1 THEN '男' WHEN ts.`sex` = 2 THEN '女' END FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManSex,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManStuNumber,
+            (SELECT ts.`phone` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManPhone,
+            (SELECT tmc.`major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tsp.`project_man_id`) AS projectManMajor,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_1`) AS projectMemberName1,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_1`) AS projectMemberStuNumber1,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_2`) AS projectMemberName2,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_2`) AS projectMemberStuNumber2,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_3`) AS projectMemberName3,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_3`) AS projectMemberStuNumber3,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_4`) AS projectMemberName4,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_member_id_4`) AS projectMemberStuNumber4,
+            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tsp.`teacher_id` = tt.`id`) AS teacherName,
+            tsp.funds_limit AS fundsLimit,
+            tsp.`project_introduce` AS projectIntroduce
+        FROM `t_scientific_project` tsp
+    </select>
 </mapper>

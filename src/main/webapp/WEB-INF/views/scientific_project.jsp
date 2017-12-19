@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
@@ -26,7 +27,7 @@
 								</div>
 								<div class="x_content">
 									<div class="clearfix"></div>
-									<form class="condition_form form-inline" ><!--action="/scientificProject/selectByCondition" method="get"-->
+									<form class="condition_form form-inline" action="/scientificProject/selectByCondition" method="get">
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
@@ -82,13 +83,13 @@
 										</div>
 										<!--第三行-->
 										<div class="tab-row">
-											<div class="form-group col-sm-4">
+											<div class="form-group col-sm-12">
 												<label class="tab-label control-label text-right">项目名称：</label>
 												<input type="text" name="projectName" id="project_name" class="form-control" />
 											</div>
 										</div>
 										<!--第四行-->
-										<input type="button" value="选择" id="sort" />
+										<input type="submit" value="选择" id="sort" />
 										<div class="clearfix"></div>
 									</form>
 								</div>
@@ -118,50 +119,50 @@
 										</thead>
 
 										<tbody id="tbody-result">
-											<!--第一行-->
+										<c:forEach items="${scientificProjectDtoList}" var="scientificProject">
 											<tr>
-												<td>国创</td>
-												<td>构建基于本体库的软件开发技术交流社区</td>
-												<td>2017</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>201501123</td>
-												<td>15919864567</td>
-												<td>软件工程</td>
+												<td>${scientificProject.projectType}</td>
+												<td>${scientificProject.projectName}</td>
+												<td>${scientificProject.setYear}</td>
+												<td>${scientificProject.projectManName}</td>
+												<td>${scientificProject.projectManSex}</td>
+												<td>${scientificProject.projectManStuNumber}</td>
+												<td>${scientificProject.projectManPhone}</td>
+												<td>${scientificProject.projectManMajor}</td>
 												<td class="td_table">
 													<table class="sub">
 														<tr>
-															<td>张三</td>
+															<td>${scientificProject.projectMemberName1}</td>
 														</tr>
 														<tr>
-															<td>张三</td>
+															<td>${scientificProject.projectMemberName2}</td>
 														</tr>
 														<tr>
-															<td>张三</td>
+															<td>${scientificProject.projectMemberName3}</td>
 														</tr>
 														<tr>
-															<td>张三</td>
+															<td>${scientificProject.projectMemberName4}</td>
 														</tr>
 													</table>
 												</td>
 												<td>
 													<table class="sub">
 														<tr>
-															<td>2015021569</td>
+															<td>${scientificProject.projectMemberStuNumber1}</td>
 														</tr>
 														<tr>
-															<td>2015021569</td>
+															<td>${scientificProject.projectMemberStuNumber2}</td>
 														</tr>
 														<tr>
-															<td>2015021569</td>
+															<td>${scientificProject.projectMemberStuNumber3}</td>
 														</tr>
 														<tr>
-															<td>2015021569</td>
+															<td>${scientificProject.projectMemberStuNumber4}</td>
 														</tr>
 													</table>
 												</td>
-												<td>张伟</td>
-												<td>5000</td>
+												<td>${scientificProject.teacherName}</td>
+												<td>${scientificProject.fundsLimit}</td>
 												<td>
 													<a href="#">详情</a>
 												</td>
@@ -169,57 +170,7 @@
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>
 												</td>
 											</tr>
-											<!--第二行-->
-											<tr>
-												<td>国创</td>
-												<td>构建基于本体库的软件开发技术交流社区</td>
-												<td>2017</td>
-												<td>张三</td>
-												<td>男</td>
-												<td>201501123</td>
-												<td>15919864567</td>
-												<td>软件工程</td>
-												<td class="td_table">
-													<table class="sub">
-														<tr>
-															<td>张三</td>
-														</tr>
-														<tr>
-															<td>张三</td>
-														</tr>
-														<tr>
-															<td>张三</td>
-														</tr>
-														<tr>
-															<td>张三</td>
-														</tr>
-													</table>
-												</td>
-												<td>
-													<table class="sub">
-														<tr>
-															<td>2015021569</td>
-														</tr>
-														<tr>
-															<td>2015021569</td>
-														</tr>
-														<tr>
-															<td>2015021569</td>
-														</tr>
-														<tr>
-															<td>2015021569</td>
-														</tr>
-													</table>
-												</td>
-												<td>张伟</td>
-												<td>5000</td>
-												<td>
-													<a href="#">详情</a>
-												</td>
-												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
-												</td>
-											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -264,7 +215,6 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${staticWebsite}resources/js/country.js"></script>
 	</body>
 
 

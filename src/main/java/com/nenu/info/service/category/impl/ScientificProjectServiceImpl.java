@@ -3,7 +3,7 @@ package com.nenu.info.service.category.impl;
 import com.nenu.info.Dao.category.ScientificProjectDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
-import com.nenu.info.common.dto.ScientificProjectDto;
+import com.nenu.info.common.dto.category.ScientificProjectDto;
 import com.nenu.info.common.entities.ScientificProject;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;
@@ -101,6 +101,18 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
 
         try {
             scientificProjectDtoList = scientificProjectDao.listScientificProjectByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return scientificProjectDtoList;
+    }
+
+    @Override
+    public List<ScientificProjectDto> listAll() {
+        List<ScientificProjectDto> scientificProjectDtoList = null;
+        try {
+            scientificProjectDtoList = scientificProjectDao.listAll();
         } catch (Exception e) {
             e.printStackTrace();
         }

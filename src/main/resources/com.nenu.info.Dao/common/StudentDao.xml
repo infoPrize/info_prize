@@ -10,7 +10,7 @@
                 #{student.grade}, #{student.majorCode}, #{student.phone}, NULL, NULL)
     </insert>
 
-    <select id="selectStudentByStuNumber" parameterType="String" resultType="com.nenu.info.common.entities.Student">
+    <select id="selectStudentByStuNumber" resultType="com.nenu.info.common.entities.Student">
         SELECT * FROM `t_student`
         WHERE `stu_number` = #{stuNumber}
     </select>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nenu.info.Dao.category.ThesisDao">
+
+    <insert id="add">
+        INSERT INTO `t_thesis`
+        (`thesis_title`, `author_id_1`, `author_level_1`, `author_id_2`, `author_level_2`, `author_id_3`, `author_level_3`, `author_id_4`, `author_level_4`,
+        `author_id_5`, `author_level_5`, `publish_time`, `journal_name`, `journal_level`, `thesis_abstract`, `teacher_id`)
+        VALUES
+        (#{thesis.thesisTitle}, #{thesis.authorId1}, #{thesis.authorLevel1}, #{thesis.authorId2}, #{thesis.authorLevel2}, #{thesis.authorId3},
+         #{thesis.authorLevel3}, #{thesis.authorId4}, #{thesis.authorLevel4}, #{thesis.authorId5}, #{thesis.authorLevel5}, #{thesis.publishTime},
+         #{thesis.journalName}, #{thesis.journalLevel}, #{thesis.thesisAbstract}, #{thesis.teacherId})
+    </insert>
+    
+    <select id="listAll" resultType="ThesisDto">
+        SELECT
+          (SELECT tjl.`level` FROM `t_journal_level` tjl WHERE tjl.`id` = tt.`journal_level`) AS journalLevel,
+          tt.`journal_name` AS journalName,
+          tt.`thesis_title` AS thesisTitle,
+          tt.`publish_time` AS publishTime,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName1,
+          tt.`author_level_1` AS authorLevel1,
+          (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorStuNumber1,
+          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_1` AND tmc.`major_code` = ts.`major_code`) AS authorMajor1,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName2,
+          tt.`author_level_2` AS authorLevel2,
+          (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_2`) AS authorStuNumber2,
+          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_2` AND tmc.`major_code` = ts.`major_code`) AS authorMajor2,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName3,
+          tt.`author_level_3` AS authorLevel3,
+          (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_3`) AS authorStuNumber3,
+          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_3` AND tmc.`major_code` = ts.`major_code`) AS authorMajor3,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_1`) AS authorName4,
+          tt.`author_level_4` AS authorLevel4,
+          (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorStuNumber4,
+          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_4` AND tmc.`major_code` = ts.`major_code`) AS authorMajor4,
+          (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_4`) AS authorName5,
+          tt.`author_level_5` AS authorLevel5,
+          (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tt.`author_id_5`) AS authorStuNumber5,
+          (SELECT ts.`major_code` FROM `t_student` ts, `t_major_code` tmc WHERE ts.`id` = tt.`author_id_5` AND tmc.`major_code` = ts.`major_code`) AS authorMajor5,
+          (SELECT tt1.`teacher_name` FROM `t_teacher` tt1 WHERE tt1.`id` = tt.`teacher_id`) AS teacherName,
+          tt.`thesis_abstract` AS thesisAbstract
+          FROM `t_thesis` tt
+    </select>
+
+</mapper>

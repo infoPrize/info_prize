@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -121,140 +122,110 @@
 								<table id="datatable" class="table-striped table-bordered text-center">
 									<thead>
 										<tr>
-											<th class="text-center">论文级别</th>
-											<th class="text-center">论文题目</th>
-											<th class="text-center">发表单位</th>
+											<th class="text-center">期刊级别</th>
 											<th class="text-center">发表刊物</th>
+											<th class="text-center">论文题目</th>
 											<th class="text-center">发表时间</th>
-											<th class="text-center">作者排名</th>
 											<th class="text-center">作者姓名</th>
-											<th class="text-center">作者专业</th>
+											<th class="text-center">作者排名</th>
 											<th class="text-center">作者学号</th>
-											<th class="text-center">作者联系方式</th>
-											<th class="text-center">作者电子邮箱</th>
+											<th class="text-center">作者专业</th>
 											<th class="text-center">指导老师</th>
-											<th class="text-center">指导老师工作量</th>
-											<th class="text-center">稿费</th>
-											<th class="text-center">详情信息</th>
+											<th class="text-center">论文摘要</th>
 											<th class="text-center">操作</th>	
 										</tr>
 									</thead>
 
 									<tbody>
-										<!--第一行-->
+									<c:forEach items="${thesisDtoList}" var="thesisDto">
 										<tr>
-											<td >第一级-T类</td>
-											<td >构建基于本体库的软件开发技术交流社区</td>
-											<td >新华出版社</td>
-											<td >《当代科技》</td>
-											<td >2017年8月</td>
+											<td>${thesisDto.journalLevel}</td>
+											<td>${thesisDto.journalName}</td>
+											<td>${thesisDto.thesisTitle}</td>
+											<td>${thesisDto.publishTime}</td>
 											<td class="td_table">
 												<table class="sub">
-													<tr><td>第一</td></tr>
-													<tr><td>第二</td></tr>
-													<tr><td>通讯</td></tr>
+													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+														<tr><td>${thesisDto.authorName1}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+														<tr><td>${thesisDto.authorName2}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+														<tr><td>${thesisDto.authorName3}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+														<tr><td>${thesisDto.authorName4}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+														<tr><td>${thesisDto.authorName5}</td></tr>
+													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<tr><td>张三</td></tr>
-													<tr><td>李四</td></tr>
-													<tr><td>王五</td></tr>
+													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+														<tr><td>第${thesisDto.authorLevel1}作者</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+														<tr><td>第${thesisDto.authorLevel2}作者</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+														<tr><td>第${thesisDto.authorLevel3}作者</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+														<tr><td>第${thesisDto.authorLevel4}作者</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+														<tr><td>第${thesisDto.authorLevel5}作者</td></tr>
+													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<tr><td>软件工程</td></tr>
-													<tr><td>图情</td></tr>
-													<tr><td>图书管理学</td></tr>
+													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+														<tr><td>${thesisDto.authorStuNumber1}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+														<tr><td>${thesisDto.authorStuNumber2}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+														<tr><td>${thesisDto.authorStuNumber3}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+														<tr><td>${thesisDto.authorStuNumber4}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+														<tr><td>${thesisDto.authorStuNumber5}</td></tr>
+													</c:if>
 												</table>
 											</td>
 											<td class="td_table">
 												<table class="sub">
-													<tr><td>2015125487</td></tr>
-													<tr><td>2015012589</td></tr>
-													<tr><td>2015012569</td></tr>
+													<c:if test="${thesisDto.authorName1} != null and ${thesisDto.authorName1} != ''">
+														<tr><td>${thesisDto.authorMajor1}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName2} != null and ${thesisDto.authorName2} != ''">
+														<tr><td>${thesisDto.authorMajor2}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName3} != null and ${thesisDto.authorName3} != ''">
+														<tr><td>${thesisDto.authorMajor3}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName4} != null and ${thesisDto.authorName4} != ''">
+														<tr><td>${thesisDto.authorMajor4}</td></tr>
+													</c:if>
+													<c:if test="${thesisDto.authorName5} != null and ${thesisDto.authorName5} != ''">
+														<tr><td>${thesisDto.authorMajor5}</td></tr>
+													</c:if>
 												</table>
 											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>13458965897</td></tr>
-													<tr><td>13458965897</td></tr>
-													<tr><td>13458965897</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>3256987456@qq.com</td></tr>
-													<tr><td>3256987456@qq.com</td></tr>
-													<tr><td>3256987456@qq.com</td></tr>
-												</table>
-											</td>
-											<td >张伟</td>
-											<td >很多</td>
-											<td >5000</td>
+											<td >${thesisDto.teacherName}</td>
 											<td ><a href="#">详情</a></td>
 											<td class="aparent">
 												<a href="" data-toggle="modal" data-target="#delete">删除</a>
 											</td>
 										</tr>
-										<!--第二行-->
-										<tr>
-											<td >第一级-T类</td>
-											<td >构建基于本体库的软件开发技术交流社区</td>
-											<td >新华出版社</td>
-											<td >《当代科技》</td>
-											<td >2017年8月</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>第一</td></tr>
-													<tr><td>第二</td></tr>
-													<tr><td>通讯</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>张三</td></tr>
-													<tr><td>李四</td></tr>
-													<tr><td>王五</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>软件工程</td></tr>
-													<tr><td>图情</td></tr>
-													<tr><td>图书管理学</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>2015125487</td></tr>
-													<tr><td>2015012589</td></tr>
-													<tr><td>2015012569</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>13458965897</td></tr>
-													<tr><td>13458965897</td></tr>
-													<tr><td>13458965897</td></tr>
-												</table>
-											</td>
-											<td class="td_table">
-												<table class="sub">
-													<tr><td>3256987456@qq.com</td></tr>
-													<tr><td>3256987456@qq.com</td></tr>
-													<tr><td>3256987456@qq.com</td></tr>
-												</table>
-											</td>
-											<td >张伟</td>
-											<td >很多</td>
-											<td >5000</td>
-											<td ><a href="#">详情</a></td>
-											<td class="aparent">
-												<a href="" data-toggle="modal" data-target="#delete">删除</a>
-											</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>

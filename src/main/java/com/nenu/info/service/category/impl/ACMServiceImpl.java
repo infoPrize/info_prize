@@ -3,7 +3,7 @@ package com.nenu.info.service.category.impl;
 import com.nenu.info.Dao.category.ACMDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
-import com.nenu.info.common.dto.ACMPrizeDto;
+import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.ACMPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;

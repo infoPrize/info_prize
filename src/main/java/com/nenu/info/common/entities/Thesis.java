@@ -1,5 +1,7 @@
 package com.nenu.info.common.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,22 +24,58 @@ public class Thesis {
     private Integer id;
 
     //论文标题
-    @Column(name = "title")
-    private String title;
+    @Column(name = "thesis_title")
+    private String thesisTitle;
 
-    //第一作者id
+    //作者1id
     @Column(name = "author_id_1")
     private Integer authorId1;
 
-    //其他作者
-    @Column(name = "other_author")
-    private String otherAuthor;
+    //作者1的等级(1-第一作者; 2-第二作者 ...)
+    @Column(name = "author_level_1")
+    private Integer authorLevel1;
+
+    //作者2id
+    @Column(name = "author_id_2")
+    private Integer authorId2;
+
+    //作者2的等级(1-第一作者; 2-第二作者 ...)
+    @Column(name = "author_level_2")
+    private Integer authorLevel2;
+
+    //作者3id
+    @Column(name = "author_id_3")
+    private Integer authorId3;
+
+    //作者3的等级(1-第一作者; 2-第二作者 ...)
+    @Column(name = "author_level_3")
+    private Integer authorLevel3;
+
+    //作者4id
+    @Column(name = "author_id_4")
+    private Integer authorId4;
+
+    //作者4的等级(1-第一作者; 2-第二作者 ...)
+    @Column(name = "author_level_4")
+    private Integer authorLevel4;
+
+    //作者5id
+    @Column(name = "author_id_5")
+    private Integer authorId5;
+
+    //作者5的等级(1-第一作者; 2-第二作者 ...)
+    @Column(name = "author_level_5")
+    private Integer authorLevel5;
 
     //论文发表时间
     @Column(name = "publish_time")
     private Date publishTime;
 
-    //期刊等级(0-未知; 1-E; 2-D; 3-C; 4-B; 5-A; 6-T)
+    //期刊名字
+    @Column(name = "journal_name")
+    private String journalName;
+
+    //期刊等级(1-E; 2-D; 3-C; 4-B; 5-A; 6-T; 7-未知)
     @Column(name = "journal_level")
     private Integer journalLevel;
 
@@ -65,12 +103,12 @@ public class Thesis {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getThesisTitle() {
+        return thesisTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setThesisTitle(String thesisTitle) {
+        this.thesisTitle = thesisTitle;
     }
 
     public Integer getAuthorId1() {
@@ -81,12 +119,76 @@ public class Thesis {
         this.authorId1 = authorId1;
     }
 
-    public String getOtherAuthor() {
-        return otherAuthor;
+    public Integer getAuthorLevel1() {
+        return authorLevel1;
     }
 
-    public void setOtherAuthor(String otherAuthor) {
-        this.otherAuthor = otherAuthor;
+    public void setAuthorLevel1(Integer authorLevel1) {
+        this.authorLevel1 = authorLevel1;
+    }
+
+    public Integer getAuthorId2() {
+        return authorId2;
+    }
+
+    public void setAuthorId2(Integer authorId2) {
+        this.authorId2 = authorId2;
+    }
+
+    public Integer getAuthorLevel2() {
+        return authorLevel2;
+    }
+
+    public void setAuthorLevel2(Integer authorLevel2) {
+        this.authorLevel2 = authorLevel2;
+    }
+
+    public Integer getAuthorId3() {
+        return authorId3;
+    }
+
+    public void setAuthorId3(Integer authorId3) {
+        this.authorId3 = authorId3;
+    }
+
+    public Integer getAuthorLevel3() {
+        return authorLevel3;
+    }
+
+    public void setAuthorLevel3(Integer authorLevel3) {
+        this.authorLevel3 = authorLevel3;
+    }
+
+    public Integer getAuthorId4() {
+        return authorId4;
+    }
+
+    public void setAuthorId4(Integer authorId4) {
+        this.authorId4 = authorId4;
+    }
+
+    public Integer getAuthorLevel4() {
+        return authorLevel4;
+    }
+
+    public void setAuthorLevel4(Integer authorLevel4) {
+        this.authorLevel4 = authorLevel4;
+    }
+
+    public Integer getAuthorId5() {
+        return authorId5;
+    }
+
+    public void setAuthorId5(Integer authorId5) {
+        this.authorId5 = authorId5;
+    }
+
+    public Integer getAuthorLevel5() {
+        return authorLevel5;
+    }
+
+    public void setAuthorLevel5(Integer authorLevel5) {
+        this.authorLevel5 = authorLevel5;
     }
 
     public Date getPublishTime() {

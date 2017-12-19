@@ -53,121 +53,160 @@
 									<!--论文添加-->
 									<div class="tab-pane active" id="tab-article">
 										<div class="row feature">
-											<form class="condition_form form-inline" action="" method="post">
+											<form class="condition_form form-inline" action="${website}thesis/add" method="post">
 												<!--第一行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="type">论文级别：</label>
-														<select class="form-control">
-															<option>---请选择论文级别---</option>
-															<option>第一级-T类</option>
-															<option>第二级-A类</option>
-															<option>第三级-B类</option>
-															<option>第四级-C类</option>
-															<option>第五级-D类</option>
-															<option>第六级-E类</option>
-															<option>第七级-国家级内刊</option>
-															<option>第八级-省级内刊</option>
-															<option>第九级-区级内刊</option>
-														</select>
+														<label class="tab-label control-label text-right" for="journal">刊物名称：</label>
+														<input type="text" id="journal" class="form-control" name="journalName" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author">作者排名：</label>
-														<select id="author" class="form-control">
-															<option>---请选择作者排名---</option>
-															<option>第一作者</option>
-															<option>第二作者</option>
-															<option>第三作者</option>
-															<option>第四作者</option>
-															<option>第五作者</option>
-															<option>第六作者</option>
-															<option>通讯作者</option>
+														<label class="tab-label control-label text-right" for="type">刊物等级：</label>
+														<select class="form-control" name="journalLevel">
+															<option value="-1">---请选择刊物等级---</option>
+															<option value="1">E类</option>
+															<option value="2">D类</option>
+															<option value="3">C类</option>
+															<option value="4">B类</option>
+															<option value="5">A类</option>
+															<option value="6">T类</option>
+															<option value="7">未知</option>
 														</select>
 													</div>
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="title">论文题目：</label>
-														<input type="text" id="title" class="form-control" />
+														<input type="text" id="title" class="form-control" name="thesisTitle" />
 													</div>
 												</div>
 												<!--第二行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="unit">发表单位：</label>
-														<input type="text" id="unit" class="form-control" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="journal">发表刊物：</label>
-														<input type="text" id="journal" class="form-control" />
-													</div>
-													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="time">发表时间：</label>
-														<select class="form-control">
-															<option>---请选择发表年份---</option>
-															<option>2017</option>
-															<option>2016</option>
-															<option>2015</option>
-															<option>2014</option>
+														<input type="text" class="form-control" onClick="laydate()" name="publishTime"/>
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_name_1">作者姓名</label>
+														<input type="text" class="form-control" id="author_name_1" name="authorName1" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者学号</label>
+														<input type="text" class="form-control" id="author_stu_number1" name="authorStuNumber1" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者等级</label>
+														<select name="authorLevel1" class="form-control">
+															<option value="-1">---请选择作者等级---</option>
+															<option value="1">第一作者</option>
+															<option value="2">第二作者</option>
+															<option value="3">第三作者</option>
+															<option value="4">第四作者</option>
+															<option value="5">第五作者</option>
+															<option value="6">第六作者</option>
+															<option value="7">第七作者</option>
 														</select>
 													</div>
-
 												</div>
 												<!--第三行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-														<select id="profession" class="form-control">
-															<option>---请选择学生专业---</option>
-															<option>计算机普班</option>
-															<option>计算机（中美）</option>
-															<option>图书情报</option>
-															<option>教技</option>
-															<option>软件工程</option>
+														<label class="tab-label control-label text-right" for="author_name_2">作者姓名</label>
+														<input type="text" class="form-control" id="author_name_2" name="authorName2" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number2">作者学号</label>
+														<input type="text" class="form-control" id="author_stu_number2" name="authorStuNumber2" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者等级</label>
+														<select name="authorLevel2" class="form-control">
+															<option value="-1">---请选择作者等级---</option>
+															<option value="1">第一作者</option>
+															<option value="2">第二作者</option>
+															<option value="3">第三作者</option>
+															<option value="4">第四作者</option>
+															<option value="5">第五作者</option>
+															<option value="6">第六作者</option>
+															<option value="7">第七作者</option>
 														</select>
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_name">作者姓名：</label>
-														<input type="text" id="student_name" class="form-control" />
+														<label class="tab-label control-label text-right" for="author_name_3">作者姓名</label>
+														<input type="text" class="form-control" id="author_name_3" name="authorName3" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_number">作者学号：</label>
-														<input type="text" id="student_number" class="form-control" />
+														<label class="tab-label control-label text-right" for="author_stu_number3">作者学号</label>
+														<input type="text" class="form-control" id="author_stu_number3" name="authorStuNumber3" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者等级</label>
+														<select name="authorLevel3" class="form-control">
+															<option value="-1">---请选择作者等级---</option>
+															<option value="1">第一作者</option>
+															<option value="2">第二作者</option>
+															<option value="3">第三作者</option>
+															<option value="4">第四作者</option>
+															<option value="5">第五作者</option>
+															<option value="6">第六作者</option>
+															<option value="7">第七作者</option>
+														</select>
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_name_4">作者姓名</label>
+														<input type="text" class="form-control" id="author_name_4" name="authorName4" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number4">作者学号</label>
+														<input type="text" class="form-control" id="author_stu_number4" name="authorStuNumber4" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者等级</label>
+														<select name="authorLevel4" class="form-control">
+															<option value="-1">---请选择作者等级---</option>
+															<option value="1">第一作者</option>
+															<option value="2">第二作者</option>
+															<option value="3">第三作者</option>
+															<option value="4">第四作者</option>
+															<option value="5">第五作者</option>
+															<option value="6">第六作者</option>
+															<option value="7">第七作者</option>
+														</select>
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_name_5">作者姓名</label>
+														<input type="text" class="form-control" id="author_name_5" name="authorName5" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number5">作者学号</label>
+														<input type="text" class="form-control" id="author_stu_number5" name="authorStuNumber5" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="author_stu_number1">作者等级</label>
+														<select name="authorLevel5" class="form-control">
+															<option value="-1">---请选择作者等级---</option>
+															<option value="1">第一作者</option>
+															<option value="2">第二作者</option>
+															<option value="3">第三作者</option>
+															<option value="4">第四作者</option>
+															<option value="5">第五作者</option>
+															<option value="6">第六作者</option>
+															<option value="7">第七作者</option>
+														</select>
 													</div>
 												</div>
 												<!--第四行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="tutor">作者联系方式：</label>
-														<input type="text" id="tutor" class="form-control" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="tutor">作者电子邮件：</label>
-														<input type="text" id="tutor" class="form-control" />
-													</div>
-													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-														<input type="text" id="tutor" class="form-control" />
-													</div>
-												</div>
-												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="tutor">指导老师工作量：</label>
-														<input type="text" id="tutor" class="form-control" />
+														<input type="text" id="tutor" class="form-control" name="teacherName" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="tutor">稿费：</label>
-														<input type="text" id="tutor" class="form-control" />
-													</div>
-												</div>
-												<div class="tab-row">
-													<div class="col-sm-12">
-														<label class="tab-label control-label text-right" for="student_number">项目详情：</label>
-														<textarea class="detailtext form-control" rows="3" style="width: 850px"></textarea>
+														<label class="tab-label control-label text-right" for="thesis_abstract">论文摘要</label>
+														<textarea id="thesis_abstract" class="detailtext form-control" rows="3" style="width: 850px" name="thesisAbstract"></textarea>
 													</div>
 												</div>
 												<div class="clearfix"></div>
 												<!--第五行-->
-												<input type="button" value="提交" id="sort"/>
-
+												<input type="submit" value="提交" id="sort"/>
 											</form>
 										</div>
 									</div>

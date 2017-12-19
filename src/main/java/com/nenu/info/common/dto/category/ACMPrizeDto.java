@@ -1,13 +1,13 @@
-package com.nenu.info.common.dto;
+package com.nenu.info.common.dto.category;
 
 import java.util.Date;
 
 /**
  * @author: software-liuwang
- * @time: 2017/12/11 21:01
- * @description : 数学建模DTO
+ * @time: 2017/12/8 20:11
+ * @description : ACM获奖信息DTO
  */
-public class MathModelPrizeDto {
+public class ACMPrizeDto {
 
     //比赛等级
     private String matchLevel;

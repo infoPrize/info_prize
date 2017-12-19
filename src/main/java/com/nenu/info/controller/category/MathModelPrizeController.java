@@ -1,6 +1,6 @@
 package com.nenu.info.controller.category;
 
-import com.nenu.info.common.dto.MathModelPrizeDto;
+import com.nenu.info.common.dto.category.MathModelPrizeDto;
 import com.nenu.info.common.entities.MathModelPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;

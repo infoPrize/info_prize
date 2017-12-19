@@ -1,6 +1,9 @@
 package com.nenu.info.service.common;
 
+import com.nenu.info.common.dto.common.TeacherDto;
 import com.nenu.info.common.entities.Teacher;
+
+import java.util.List;
 
 /**
  * @author: software-liuwang
@@ -31,5 +34,19 @@ public interface TeacherService {
      * @throws Exception
      */
     public Teacher selectTeacherById(Integer id) throws Exception;
+
+    /**
+     * 添加教师信息
+     * @param teacher
+     * @throws Exception
+     */
+    public void add(Teacher teacher) throws Exception;
+
+    /**
+     * 查询所有教师信息
+     * @return
+     * @throws Exception
+     */
+    public List<TeacherDto> listAll() throws Exception;
 
 }

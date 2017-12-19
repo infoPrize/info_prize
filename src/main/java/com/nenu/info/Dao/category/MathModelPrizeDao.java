@@ -1,6 +1,6 @@
 package com.nenu.info.Dao.category;
 
-import com.nenu.info.common.dto.MathModelPrizeDto;
+import com.nenu.info.common.dto.category.MathModelPrizeDto;
 import com.nenu.info.common.entities.MathModelPrize;
 import org.apache.ibatis.annotations.Param;
 

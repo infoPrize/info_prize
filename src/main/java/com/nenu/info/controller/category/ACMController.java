@@ -1,6 +1,6 @@
 package com.nenu.info.controller.category;
 
-import com.nenu.info.common.dto.ACMPrizeDto;
+import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.ACMPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;

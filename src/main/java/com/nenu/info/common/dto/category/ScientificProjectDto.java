@@ -1,4 +1,4 @@
-package com.nenu.info.common.dto;
+package com.nenu.info.common.dto.category;
 
 /**
  * @author: software-liuwang

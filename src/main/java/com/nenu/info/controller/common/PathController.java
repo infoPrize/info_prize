@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "")
 public class PathController {
 
+
+
     @RequestMapping(value = "index")
     public String toIndex() {
         return "index";
@@ -28,7 +30,7 @@ public class PathController {
 
     @RequestMapping(value = "paper")
     public String toPaper() {
-        return "paper";
+        return "thesis";
     }
 
     @RequestMapping(value = "patent")
@@ -36,12 +38,7 @@ public class PathController {
         return "patent";
     }
 
-    @RequestMapping(value = "scientificProject")
-    public String toScientificProject(HttpServletRequest request) {
-        Integer year = YearUtil.getYear();
-        request.setAttribute("year", year);
-        return "scientific_project";
-    }
+
 
     @RequestMapping(value = "ACM")
     public String toACM() {

@@ -1,17 +1,17 @@
 package com.nenu.info.controller.category;
 
-import com.nenu.info.common.dto.ScientificProjectDto;
+import com.nenu.info.common.dto.category.ScientificProjectDto;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.entities.ScientificProject;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;
+import com.nenu.info.common.utils.YearUtil;
 import com.nenu.info.service.category.ScientificProjectService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +36,23 @@ public class ScientificProjectController {
 
     @Autowired
     private ScientificProjectService scientificProjectService;
+
+    /**
+     * 去往国创科研页面
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "toScientificProject")
+    public String toScientificProject(Model model) {
+        Integer year = YearUtil.getYear();
+        List<ScientificProjectDto> scientificProjectDtoList = null;
+        scientificProjectDtoList = scientificProjectService.listAll();
+
+        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
+        model.addAttribute("year", year);
+
+        return "scientific_project";
+    }
 
     /**
      * 单条插入国创/科研项目信息
@@ -167,47 +184,52 @@ public class ScientificProjectController {
      * @return
      */
     @RequestMapping(value = "selectByCondition")
-    @ResponseBody
-    public JSONArray selectScientificProjectByConditions(@RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                                         @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
-                                                         @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
-                                                         @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                                         @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                                         @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                                         @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber) {
+    public String selectScientificProjectByConditions(@RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                                      @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
+                                                      @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
+                                                      @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                                      @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                                      Model model) {
 
-        JSONArray jsonArray = new JSONArray();
+//        JSONArray jsonArray = new JSONArray();
         List<ScientificProjectDto> scientificProjectDtoList = null;
         scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
-        if (scientificProjectDtoList != null) {
-            for (ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("projectType", scientificProjectDto.getProjectType());
-                jsonObject.put("projectName", scientificProjectDto.getProjectName());
-                jsonObject.put("setYear", scientificProjectDto.getSetYear());
+        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
 
-                jsonObject.put("projectManName", scientificProjectDto.getProjectManName());
-                jsonObject.put("projectManSex", scientificProjectDto.getProjectManSex());
-                jsonObject.put("projectManStuNumber", scientificProjectDto.getProjectManStuNumber());
-                jsonObject.put("projectManPhone", scientificProjectDto.getProjectManMajor());
-                jsonObject.put("projectManMajor", scientificProjectDto.getProjectManMajor());
-                jsonObject.put("projectMemberName1", scientificProjectDto.getProjectMemberName1());
-                jsonObject.put("projectMemberStuNumber1", scientificProjectDto.getProjectMemberStuNumber1());
-                jsonObject.put("projectMemberName2", scientificProjectDto.getProjectMemberName2());
-                jsonObject.put("projectMemberStuNumber2", scientificProjectDto.getProjectMemberStuNumber2());
-                jsonObject.put("projectMemberName3", scientificProjectDto.getProjectMemberName3());
-                jsonObject.put("projectMemberStuNumber3", scientificProjectDto.getProjectMemberStuNumber3());
-                jsonObject.put("projectMemberName4", scientificProjectDto.getProjectMemberName4());
-                jsonObject.put("projectMemberStuNumber4", scientificProjectDto.getProjectMemberStuNumber4());
-                jsonObject.put("teacherName", scientificProjectDto.getTeacherName());
-                jsonObject.put("fundsLimit", scientificProjectDto.getFundsLimit());
-                jsonObject.put("projectIntroduce", scientificProjectDto.getProjectIntroduce());
+//        if (scientificProjectDtoList != null) {
+//            for (ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("projectType", scientificProjectDto.getProjectType());
+//                jsonObject.put("projectName", scientificProjectDto.getProjectName());
+//                jsonObject.put("setYear", scientificProjectDto.getSetYear());
+//
+//                jsonObject.put("projectManName", scientificProjectDto.getProjectManName());
+//                jsonObject.put("projectManSex", scientificProjectDto.getProjectManSex());
+//                jsonObject.put("projectManStuNumber", scientificProjectDto.getProjectManStuNumber());
+//                jsonObject.put("projectManPhone", scientificProjectDto.getProjectManMajor());
+//                jsonObject.put("projectManMajor", scientificProjectDto.getProjectManMajor());
+//                jsonObject.put("projectMemberName1", scientificProjectDto.getProjectMemberName1());
+//                jsonObject.put("projectMemberStuNumber1", scientificProjectDto.getProjectMemberStuNumber1());
+//                jsonObject.put("projectMemberName2", scientificProjectDto.getProjectMemberName2());
+//                jsonObject.put("projectMemberStuNumber2", scientificProjectDto.getProjectMemberStuNumber2());
+//                jsonObject.put("projectMemberName3", scientificProjectDto.getProjectMemberName3());
+//                jsonObject.put("projectMemberStuNumber3", scientificProjectDto.getProjectMemberStuNumber3());
+//                jsonObject.put("projectMemberName4", scientificProjectDto.getProjectMemberName4());
+//                jsonObject.put("projectMemberStuNumber4", scientificProjectDto.getProjectMemberStuNumber4());
+//                jsonObject.put("teacherName", scientificProjectDto.getTeacherName());
+//                jsonObject.put("fundsLimit", scientificProjectDto.getFundsLimit());
+//                jsonObject.put("projectIntroduce", scientificProjectDto.getProjectIntroduce());
+//
+//                jsonArray.add(jsonObject);
+//            }
+//        }
+//        return jsonArray;
 
-                jsonArray.add(jsonObject);
-            }
-        }
-        return jsonArray;
+
+        return "redirect:/scientificProject";
     }
 }
 

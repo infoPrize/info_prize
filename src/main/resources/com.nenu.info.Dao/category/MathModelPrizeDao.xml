@@ -11,7 +11,7 @@
                #{mathModelPrize.teammateId3}, #{mathModelPrize.prizeTime}, #{mathModelPrize.teacherId})
     </insert>
 
-    <select id="listByConditions" resultType="com.nenu.info.common.dto.MathModelPrizeDto">
+    <select id="listByConditions" resultType="com.nenu.info.common.dto.category.MathModelPrizeDto">
         SELECT
         (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tmmp.`match_level`) AS matchLevel,
         tmmp.`match_name` AS matchName,
@@ -69,6 +69,4 @@
         </if>
     </select>
 
-
-    
 </mapper>

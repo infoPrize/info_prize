@@ -24,7 +24,7 @@ public class Teacher {
     @Column(name = "teacher_name")
     private String teacherName;
 
-    //教师等级(0-未知; 1-助教; 2-讲师; 3-副教授; 4-教授)
+    //教师等级(1-助教; 2-讲师; 3-副教授; 4-教授; 5-未知)
     @Column(name = "teacher_level")
     private Integer teacherLevel;
 

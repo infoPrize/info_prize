@@ -1,10 +1,13 @@
 package com.nenu.info.service.common.impl;
 
 import com.nenu.info.Dao.common.TeacherDao;
+import com.nenu.info.common.dto.common.TeacherDto;
 import com.nenu.info.common.entities.Teacher;
 import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author: software-liuwang
@@ -45,5 +48,15 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher selectTeacherById(Integer id) throws Exception {
         Teacher teacher = teacherDao.selectTeacherById(id);
         return teacher;
+    }
+
+    @Override
+    public void add(Teacher teacher) throws Exception {
+        teacherDao.add(teacher);
+    }
+
+    @Override
+    public List<TeacherDto> listAll() throws Exception {
+        return teacherDao.listAll();
     }
 }

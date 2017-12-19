@@ -17,4 +17,19 @@
         SELECT * FROM `t_teacher`
         WHERE `id` = #{id}
     </select>
+
+    <insert id="add" parameterType="com.nenu.info.common.entities.Teacher">
+        INSERT INTO `t_teacher`
+        (`teacher_name`, `teacher_level`, `phone`)
+        VALUES
+        (#{teacher.teacherName}, #{teacher.teacherLevel}, #{teacher.phone})
+    </insert>
+
+    <select id="listAll" resultType="com.nenu.info.common.dto.common.TeacherDto">
+        SELECT
+            tt.`teacher_name` AS teacherName,
+            (SELECT ttl.`level` FROM `t_teacher_level` ttl WHERE tt.`teacher_level` = ttl.`id`) AS teacherLevel,
+            tt.`phone` AS phone
+        FROM `t_teacher` tt
+    </select>
 </mapper>

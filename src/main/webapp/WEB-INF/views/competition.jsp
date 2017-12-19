@@ -93,7 +93,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<table id="datatable" class="table table-striped table-bordered text-center">
+									<table id="datatable" class="table-striped table-bordered text-center">
 										<thead>
 											<tr>
 												<th class="text-center">比赛级别</th>

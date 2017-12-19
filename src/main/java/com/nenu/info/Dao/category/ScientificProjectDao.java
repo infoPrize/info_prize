@@ -1,6 +1,6 @@
 package com.nenu.info.Dao.category;
 
-import com.nenu.info.common.dto.ScientificProjectDto;
+import com.nenu.info.common.dto.category.ScientificProjectDto;
 import com.nenu.info.common.entities.ScientificProject;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,5 +24,12 @@ public interface ScientificProjectDao {
      * @throws Exception
      */
     public List<ScientificProjectDto> listScientificProjectByCondition(Map<String, Object> params) throws Exception;
+
+    /**
+     * 查询所有国创科研信息
+     * @return
+     * @throws Exception
+     */
+    public List<ScientificProjectDto> listAll() throws Exception;
 
 }

@@ -46,13 +46,13 @@
 												<label class="tab-label control-label text-right">起始时间：</label>
 												<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
 											</div>
+										</div>
+										<!--第二行-->
+										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">结束时间：</label>
 												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
 											</div>
-										</div>
-										<!--第二行-->
-										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
 												<select id="prizeLevel" name="prizeLevel" class="form-control">
@@ -76,20 +76,16 @@
 													<option value="52">信息资源管理</option>
 												</select>
 											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" id="student_name" class="form-control" name="stuName"/>
-											</div>
 										</div>
 										<!--第三行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
+												<input type="text" id="student_name" class="form-control" name="stuName"/>
+											</div>
+											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
 												<input type="text" id="student_number" class="form-control" name="stuNumber"/>
-											</div>
-											<div class="form-group col-sm-8">
-												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control" name="teacherName"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="student_name">主办单位：</label>
@@ -97,7 +93,15 @@
 											</div>
 										</div>
 										<!--第四行-->
-										<input type="submit" value="查询" id="sort"/>
+										<div class="tab-row">
+											<div class="form-group col-sm-12">
+												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
+												<input type="text" id="tutor" class="form-control" name="teacherName"/>
+											</div>
+										</div>
+										<!--第五行-->
+										<input type="submit" value="选择" id="sort" />
+										<div class="clearfix"></div>
 									</form>
 					
 								</div>

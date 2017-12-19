@@ -3,7 +3,7 @@ package com.nenu.info.service.category.impl;
 import com.nenu.info.Dao.category.MathModelPrizeDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
-import com.nenu.info.common.dto.MathModelPrizeDto;
+import com.nenu.info.common.dto.category.MathModelPrizeDto;
 import com.nenu.info.common.entities.MathModelPrize;
 import com.nenu.info.common.entities.Student;
 import com.nenu.info.common.entities.Teacher;

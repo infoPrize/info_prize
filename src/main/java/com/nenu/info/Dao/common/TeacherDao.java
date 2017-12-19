@@ -1,7 +1,10 @@
 package com.nenu.info.Dao.common;
 
+import com.nenu.info.common.dto.common.TeacherDto;
 import com.nenu.info.common.entities.Teacher;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author: software-liuwang
@@ -32,5 +35,20 @@ public interface TeacherDao {
      * @throws Exception
      */
     public Teacher selectTeacherById(@Param("id") Integer id) throws Exception;
+
+
+    /**
+     * 添加教师信息
+     * @param teacher
+     * @throws Exception
+     */
+    public void add(@Param("teacher") Teacher teacher) throws Exception;
+
+    /**
+     * 查询所有教师信息
+     * @return
+     * @throws Exception
+     */
+    public List<TeacherDto> listAll() throws Exception;
 
 }

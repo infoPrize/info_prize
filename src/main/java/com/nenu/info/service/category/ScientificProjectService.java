@@ -1,6 +1,6 @@
 package com.nenu.info.service.category;
 
-import com.nenu.info.common.dto.ScientificProjectDto;
+import com.nenu.info.common.dto.category.ScientificProjectDto;
 import com.nenu.info.common.entities.ScientificProject;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface ScientificProjectService {
     public void addScientificProject(ScientificProject scientificProject);
 
     /**
-     * 根据条件查询学生列表
+     * 根据条件查询国创科研列表
      * @param projectName 项目名
      * @param projectType 项目类型
      * @param setYear 立项年份
@@ -31,4 +31,10 @@ public interface ScientificProjectService {
      */
     public List<ScientificProjectDto> listScientificProjectByConditions(String projectName, Integer projectType, String setYear, Integer major,
                                                                         String teacherName, String stuName, String stuNumber);
+
+    /**
+     * 查询所有国创科研信息
+     * @return
+     */
+    public List<ScientificProjectDto> listAll();
 }
