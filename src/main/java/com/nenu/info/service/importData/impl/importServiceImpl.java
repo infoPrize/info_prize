@@ -56,15 +56,15 @@ public class importServiceImpl implements ImportService {
            List<StudentDto> studentDtoList = (List<StudentDto>) ExcelReader2003.readExcel(StudentDto.class,studentExcel,1,studentExcelType);
            for(int i = 0; i < studentDtoList.size(); i++){
                StudentDto studentDto = studentDtoList.get(i);
-               if(studentDto == null ||studentDto.equals("")){
-                   continue;
+               if(studentDto.getStuNumber() == null ){
+                   break;
                }
                Student student = studentService.convertDtoToEntity(studentDto);
                studentDao.add(student);
            }
        }catch (Exception e){
            e.printStackTrace();
-           throw new Exception("导入失败");
+           throw new Exception("导入数据存在空行或数据不完整");
        }
 
     }

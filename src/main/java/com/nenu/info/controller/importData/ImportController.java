@@ -41,7 +41,7 @@ public class ImportController {
        }catch (Exception e){
            e.printStackTrace();
        }
-        return "redirect:student/list";
+        return "redirect:/student/list";
 
     }
 
