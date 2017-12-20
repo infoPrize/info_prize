@@ -7,6 +7,15 @@ body h1, body h2, body h3, body h4, body table, body label{
 table th, table td{
 	white-space: nowrap;
 }
+#showcolumn,#hidecolumn{
+	width: 106px;
+	margin-top: 5px;
+	padding: 5px 10px;
+	border-radius: 7px;
+	background-color: #33aecc;
+	border: 1px solid #33aecc;
+	color: #fff;
+}
 
 
 /*国创科研*/
@@ -16,7 +25,7 @@ table th, table td{
 .form-inline{
 	position: relative;
 }
-#sort{
+#sort, #sort_scient, #sort_ACM, #sort_comp, #sort_math, #sort_patent, #sort_thesis{
 	position: relative;
 	left: 900px;
 	width: 80px;

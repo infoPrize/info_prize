@@ -11,6 +11,11 @@
 		<title>权限管理</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
+		<style>
+			.hidecol{
+				display: none;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -95,6 +100,8 @@
 								</div>
 								<div class="x_title title2">
 									<h3>查询结果</h3>
+									<button id="showcolumn">显示所有栏目</button>
+									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
@@ -109,8 +116,8 @@
 												<th class="text-center">负责人学号</th>
 												<th class="text-center">负责人联系方式</th>
 												<th class="text-center">负责人专业</th>
-												<th class="text-center">项目组成员</th>
-												<th class="text-center">组员学号</th>
+												<th class="text-center hidecol">项目组成员</th>
+												<th class="text-center hidecol">组员学号</th>
 												<th class="text-center">指导老师</th>
 												<th class="text-center">批复经费</th>
 												<th class="text-center">详情信息</th>
@@ -129,7 +136,7 @@
 												<td>${scientificProject.projectManStuNumber}</td>
 												<td>${scientificProject.projectManPhone}</td>
 												<td>${scientificProject.projectManMajor}</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
 														<tr>
 															<td>${scientificProject.projectMemberName1}</td>
@@ -145,7 +152,7 @@
 														</tr>
 													</table>
 												</td>
-												<td>
+												<td class="td_table hidecol">
 													<table class="sub">
 														<tr>
 															<td>${scientificProject.projectMemberStuNumber1}</td>
@@ -215,6 +222,16 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function(){
+                $("#showcolumn").click(function(){
+                    $(".hidecol").css("display","table-cell");
+                });
+                $("#hidecolumn").click(function(){
+                    $(".hidecol").css("display","none");
+                });
+            })
+		</script>
 	</body>
 
 

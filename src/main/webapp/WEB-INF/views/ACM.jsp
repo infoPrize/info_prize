@@ -7,6 +7,11 @@
 		<title>ACM</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
+        <style>
+            .hidecol{
+                display: none;
+            }
+        </style>
 	</head>
 	<body>
 		<div class="wrapper">
@@ -107,6 +112,8 @@
 								</div>
 								<div class="x_title">
 									<h3>查询结果</h3>
+									<button id="showcolumn">显示所有栏目</button>
+									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
@@ -119,9 +126,9 @@
 												<th class="text-center">获奖时间</th>
 												<th class="text-center">获奖等级</th>
 												<th class="text-center">团队名称</th>
-												<th class="text-center">参赛人员</th>
-												<th class="text-center">学号</th>
-												<th class="text-center">专业</th>
+												<th class="text-center hidecol">参赛人员</th>
+												<th class="text-center hidecol">学号</th>
+												<th class="text-center hidecol">专业</th>
 												<th class="text-center">指导老师</th>
 												<th class="text-center">操作</th>
 											</tr>
@@ -136,25 +143,25 @@
 												<td>2013年8月</td>
 												<td>金奖</td>
 												<td>RNG</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
+														<tr><td >张三</td></tr>
+														<tr><td >张三</td></tr>
+														<tr><td >张三</td></tr>
 													</table>
 												</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td>2015898758</td></tr>
-														<tr><td>2015012569</td></tr>
-														<tr><td>2015125898</td></tr>
+														<tr><td >2015898758</td></tr>
+														<tr><td >2015012569</td></tr>
+														<tr><td >2015125898</td></tr>
 													</table>
 												</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
+														<tr><td >软件工程</td></tr>
+														<tr><td >软件工程</td></tr>
+														<tr><td >软件工程</td></tr>
 													</table>
 												</td>
 												<td>张伟</td>
@@ -170,21 +177,21 @@
 												<td>2013年8月</td>
 												<td>金奖</td>
 												<td>RNG</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
 														<tr><td>张三</td></tr>
 														<tr><td>张三</td></tr>
 														<tr><td>张三</td></tr>
 													</table>
 												</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
 														<tr><td>2015898758</td></tr>
 														<tr><td>2015012569</td></tr>
 														<tr><td>2015125898</td></tr>
 													</table>
 												</td>
-												<td class="td_table">
+												<td class="td_table hidecol">
 													<table class="sub">
 														<tr><td>软件工程</td></tr>
 														<tr><td>软件工程</td></tr>
@@ -240,5 +247,16 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function(){
+                $("#showcolumn").click(function(){
+                    $(".hidecol").css("display","table-cell");
+                });
+                $("#hidecolumn").click(function(){
+                    $(".hidecol").css("display","none");
+                });
+            })
+		</script>
+
 	</body>
 </html>

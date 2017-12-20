@@ -91,7 +91,6 @@
 												<th class="text-center">申请人联系方式</th>
 												<th class="text-center">申请人电子邮箱</th>
 												<th class="text-center">指导老师</th>
-												<th class="text-center">指导老师工作量</th>
 												<th class="text-center">详情信息</th>
 												<th class="text-center">操作</th>	
 											</tr>
@@ -109,7 +108,6 @@
 												<td >13456987546</td>
 												<td >4569874569@qq.com</td>
 												<td >张伟</td>
-												<td >很多</td>
 												<td ><a href="#">详情</a></td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>
@@ -126,7 +124,6 @@
 												<td >13456987546</td>
 												<td >4569874569@qq.com</td>
 												<td >张伟</td>
-												<td >很多</td>
 												<td ><a href="#">详情</a></td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>
