@@ -1,7 +1,7 @@
 package com.nenu.info.Dao.category;
 
 import com.nenu.info.common.dto.category.ThesisDto;
-import com.nenu.info.common.entities.Thesis;
+import com.nenu.info.common.entities.category.Thesis;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

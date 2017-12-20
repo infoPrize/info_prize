@@ -1,7 +1,7 @@
 package com.nenu.info.service.category;
 
 import com.nenu.info.common.dto.category.ACMPrizeDto;
-import com.nenu.info.common.entities.ACMPrize;
+import com.nenu.info.common.entities.category.ACMPrize;
 
 import java.util.Date;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.nenu.info.service.common;
 
 import com.nenu.info.common.dto.common.TeacherDto;
-import com.nenu.info.common.entities.Teacher;
+import com.nenu.info.common.entities.common.Teacher;
 
 import java.util.List;
 

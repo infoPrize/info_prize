@@ -1,4 +1,4 @@
-package com.nenu.info.common.entities;
+package com.nenu.info.common.entities.category;
 
 
 

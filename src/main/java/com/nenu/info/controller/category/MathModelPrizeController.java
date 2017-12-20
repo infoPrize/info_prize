@@ -1,9 +1,9 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
-import com.nenu.info.common.entities.MathModelPrize;
-import com.nenu.info.common.entities.Student;
-import com.nenu.info.common.entities.Teacher;
+import com.nenu.info.common.entities.category.MathModelPrize;
+import com.nenu.info.common.entities.common.Student;
+import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.StudentService;

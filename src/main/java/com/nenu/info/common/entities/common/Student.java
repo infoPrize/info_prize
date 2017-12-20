@@ -1,4 +1,4 @@
-package com.nenu.info.common.entities;
+package com.nenu.info.common.entities.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

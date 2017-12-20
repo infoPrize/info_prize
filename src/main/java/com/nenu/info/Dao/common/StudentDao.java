@@ -1,7 +1,6 @@
 package com.nenu.info.Dao.common;
 
-import com.nenu.info.common.dto.StudentDto;
-import com.nenu.info.common.entities.Student;
+import com.nenu.info.common.entities.common.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

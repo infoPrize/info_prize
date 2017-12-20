@@ -2,7 +2,7 @@ package com.nenu.info.service.importData.impl;
 
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.common.dto.StudentDto;
-import com.nenu.info.common.entities.Student;
+import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.DataType;
 import com.nenu.info.common.utils.ExcelReader2003;
 import com.nenu.info.service.common.StudentService;

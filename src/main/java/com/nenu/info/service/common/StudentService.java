@@ -1,10 +1,8 @@
 package com.nenu.info.service.common;
 
 import com.nenu.info.common.dto.StudentDto;
-import com.nenu.info.common.entities.Student;
-import org.springframework.web.multipart.MultipartFile;
+import com.nenu.info.common.entities.common.Student;
 
-import java.io.InputStream;
 import java.util.List;
 
 /**

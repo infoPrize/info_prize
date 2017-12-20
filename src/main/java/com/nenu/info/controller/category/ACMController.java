@@ -1,9 +1,9 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ACMPrizeDto;
-import com.nenu.info.common.entities.ACMPrize;
-import com.nenu.info.common.entities.Student;
-import com.nenu.info.common.entities.Teacher;
+import com.nenu.info.common.entities.category.ACMPrize;
+import com.nenu.info.common.entities.common.Student;
+import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.service.category.ACMService;
 import com.nenu.info.service.common.StudentService;

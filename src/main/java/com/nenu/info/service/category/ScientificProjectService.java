@@ -1,7 +1,7 @@
 package com.nenu.info.service.category;
 
 import com.nenu.info.common.dto.category.ScientificProjectDto;
-import com.nenu.info.common.entities.ScientificProject;
+import com.nenu.info.common.entities.category.ScientificProject;
 
 import java.util.List;
 

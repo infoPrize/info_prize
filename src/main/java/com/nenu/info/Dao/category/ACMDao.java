@@ -1,7 +1,7 @@
 package com.nenu.info.Dao.category;
 
 import com.nenu.info.common.dto.category.ACMPrizeDto;
-import com.nenu.info.common.entities.ACMPrize;
+import com.nenu.info.common.entities.category.ACMPrize;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

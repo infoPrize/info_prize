@@ -8,17 +8,17 @@
         SELECT COUNT(*) FROM `t_teacher`
     </select>
 
-    <select id="selectTeacherByName" resultType="com.nenu.info.common.entities.Teacher">
+    <select id="selectTeacherByName" resultType="com.nenu.info.common.entities.common.Teacher">
         SELECT * FROM `t_teacher`
         WHERE `teacher_name` = #{teacherName}
     </select>
 
-    <select id="selectTeacherById" resultType="com.nenu.info.common.entities.Teacher">
+    <select id="selectTeacherById" resultType="com.nenu.info.common.entities.common.Teacher">
         SELECT * FROM `t_teacher`
         WHERE `id` = #{id}
     </select>
 
-    <insert id="add" parameterType="com.nenu.info.common.entities.Teacher">
+    <insert id="add" parameterType="com.nenu.info.common.entities.common.Teacher">
         INSERT INTO `t_teacher`
         (`teacher_name`, `teacher_level`, `phone`)
         VALUES

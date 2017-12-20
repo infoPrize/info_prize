@@ -1,7 +1,7 @@
 package com.nenu.info.service.category;
 
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
-import com.nenu.info.common.entities.MathModelPrize;
+import com.nenu.info.common.entities.category.MathModelPrize;
 
 import java.util.Date;
 import java.util.List;

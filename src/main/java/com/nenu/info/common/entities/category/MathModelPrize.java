@@ -1,4 +1,4 @@
-package com.nenu.info.common.entities;
+package com.nenu.info.common.entities.category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,15 +7,15 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 实体类 - ACM获奖
+ * 实体类 - 数学建模
  * @author: software-liuwang
- * @time: 2017/11/5 19:40
+ * @time: 2017/11/6 10:28
  * @description :
  */
 
 @Entity
-@Table(name = "t_acm_prize")
-public class ACMPrize {
+@Table(name = "t_math_model_prize")
+public class MathModelPrize {
 
     //id
     @Id
@@ -25,7 +25,7 @@ public class ACMPrize {
     @Column(name = "match_name")
     private String matchName;
 
-    //比赛等级(0-校级; 1-市级; 2-省级; 3-多省级; 4-国家级; 5-亚洲级; 6-国际级)
+    //比赛等级
     @Column(name = "match_level")
     private Integer matchLevel;
 
@@ -37,21 +37,22 @@ public class ACMPrize {
     @Column(name = "team_name")
     private String teamName;
 
-    //队员1的id
+    //参赛队员1的id
     @Column(name = "teammate_id_1")
     private Integer teammateId1;
 
-    //队员2的id
+    //参赛队员2的id
     @Column(name = "teammate_id_2")
     private Integer teammateId2;
 
-    //队员3的id
+    //参赛队员3的id
     @Column(name = "teammate_id_3")
     private Integer teammateId3;
 
-    //获奖等级(1-一等奖，2-二等奖，3-三等奖，4-优胜奖)
+    //获奖等级
     @Column(name = "prize_level")
     private Integer prizeLevel;
+
 
     //获奖时间
     @Column(name = "prize_time")
@@ -62,16 +63,12 @@ public class ACMPrize {
     private Integer teacherId;
 
     //创建时间
-    @Column(name = "create_time")
-    private Date createTime;
+    @Column(name = "created_time")
+    private Date createdTime;
 
     //最后修改时间
     @Column(name = "last_modified_time")
     private Date lastModifiedTime;
-
-    //是否已删除
-    @Column(name = "is_deleted")
-    private Integer isDeleted;
 
     public Integer getId() {
         return id;
@@ -161,12 +158,12 @@ public class ACMPrize {
         this.teacherId = teacherId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     public Date getLastModifiedTime() {
@@ -175,13 +172,5 @@ public class ACMPrize {
 
     public void setLastModifiedTime(Date lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
     }
 }

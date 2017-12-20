@@ -1,6 +1,6 @@
 //package com.nenu.info.Dao;
 //
-//import com.nenu.info.common.entities.Student;
+//import com.nenu.info.common.entities.common.Student;
 //import com.nenu.info.service.StudentService;
 //import org.junit.Test;
 //import org.springframework.beans.factory.annotation.Autowired;

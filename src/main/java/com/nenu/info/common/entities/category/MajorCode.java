@@ -1,4 +1,4 @@
-package com.nenu.info.common.entities;
+package com.nenu.info.common.entities.category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,30 +7,27 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * 实体类 - 指导教师
+ * 实体类 - 专业代码
  * @author: software-liuwang
- * @time: 2017/11/4 19:46
+ * @time: 2017/11/5 19:54
  * @description :
  */
+
 @Entity
-@Table(name = "t_teacher")
-public class Teacher {
+@Table(name = "t_major_code")
+public class MajorCode {
 
     //id
     @Id
     private Integer id;
 
-    //教师姓名
-    @Column(name = "teacher_name")
-    private String teacherName;
+    //专业代码
+    @Column(name = "major_code")
+    private Integer majorCode;
 
-    //教师等级(1-助教; 2-讲师; 3-副教授; 4-教授; 5-未知)
-    @Column(name = "teacher_level")
-    private Integer teacherLevel;
-
-    //电话号码
-    @Column(name = "phone")
-    private String phone;
+    //专业名称
+    @Column(name = "major_name")
+    private String majorName;
 
     //创建时间
     @Column(name = "create_time")
@@ -48,28 +45,20 @@ public class Teacher {
         this.id = id;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public Integer getMajorCode() {
+        return majorCode;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setMajorCode(Integer majorCode) {
+        this.majorCode = majorCode;
     }
 
-    public Integer getTeacherLevel() {
-        return teacherLevel;
+    public String getMajorName() {
+        return majorName;
     }
 
-    public void setTeacherLevel(Integer teacherLevel) {
-        this.teacherLevel = teacherLevel;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMajorName(String majorName) {
+        this.majorName = majorName;
     }
 
     public Date getCreateTime() {

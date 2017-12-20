@@ -1,7 +1,7 @@
 package com.nenu.info.Dao.category;
 
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
-import com.nenu.info.common.entities.MathModelPrize;
+import com.nenu.info.common.entities.category.MathModelPrize;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

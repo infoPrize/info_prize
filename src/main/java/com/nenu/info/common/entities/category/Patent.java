@@ -1,4 +1,4 @@
-package com.nenu.info.common.entities;
+package com.nenu.info.common.entities.category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,17 +25,29 @@ public class Patent {
     @Column(name = "patent_name")
     private String patentName;
 
-    //专利类别(0-未知; 1-发明专利; 2-实用新型专利; 3-外观设计专利)
+    //专利类别(1-发明专利; 2-实用新型专利; 3-外观设计专利; 4-未知; )
     @Column(name = "patent_type")
     private Integer patentType;
 
-    //专利申请者id
-    @Column(name = "owner_id")
-    private Integer ownerId;
+    //专利申请者1id
+    @Column(name = "owner_id_1")
+    private Integer ownerId1;
 
-    //其他专利申请者
-    @Column(name = "other_owner")
-    private String otherOwner;
+    //专利申请者2id
+    @Column(name = "owner_id_2")
+    private Integer ownerId2;
+
+    //专利申请者3id
+    @Column(name = "owner_id_3")
+    private Integer ownerId3;
+
+    //专利申请者4id
+    @Column(name = "owner_id_4")
+    private Integer ownerId4;
+
+    //专利申请者5id
+    @Column(name = "owner_id_5")
+    private Integer ownerId5;
 
     //申请时间
     @Column(name = "apply_time")
@@ -81,20 +93,44 @@ public class Patent {
         this.patentType = patentType;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
+    public Integer getOwnerId1() {
+        return ownerId1;
     }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public void setOwnerId1(Integer ownerId1) {
+        this.ownerId1 = ownerId1;
     }
 
-    public String getOtherOwner() {
-        return otherOwner;
+    public Integer getOwnerId2() {
+        return ownerId2;
     }
 
-    public void setOtherOwner(String otherOwner) {
-        this.otherOwner = otherOwner;
+    public void setOwnerId2(Integer ownerId2) {
+        this.ownerId2 = ownerId2;
+    }
+
+    public Integer getOwnerId3() {
+        return ownerId3;
+    }
+
+    public void setOwnerId3(Integer ownerId3) {
+        this.ownerId3 = ownerId3;
+    }
+
+    public Integer getOwnerId4() {
+        return ownerId4;
+    }
+
+    public void setOwnerId4(Integer ownerId4) {
+        this.ownerId4 = ownerId4;
+    }
+
+    public Integer getOwnerId5() {
+        return ownerId5;
+    }
+
+    public void setOwnerId5(Integer ownerId5) {
+        this.ownerId5 = ownerId5;
     }
 
     public Date getApplyTime() {

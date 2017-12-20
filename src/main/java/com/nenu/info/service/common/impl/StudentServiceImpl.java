@@ -2,7 +2,7 @@ package com.nenu.info.service.common.impl;
 
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.common.dto.StudentDto;
-import com.nenu.info.common.entities.Student;
+import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.enums.MajorEnum;
 import com.nenu.info.common.enums.SexEnum;
 import com.nenu.info.service.common.StudentService;

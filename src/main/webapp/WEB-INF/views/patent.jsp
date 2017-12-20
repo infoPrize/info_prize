@@ -25,47 +25,56 @@
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="type">专利类别：</label>
-												<select id="type" class="form-control">
-													<option>---请选择专利类别---</option>
-													<option >发明专利</option>
-													<option >实用新型专利</option>
-													<option >外观设计专利</option>
+												<select id="type" class="form-control" name="patentType">
+													<option value="-1">---请选择专利类别---</option>
+													<option value="1">发明专利</option>
+													<option value="2">实用新型专利</option>
+													<option value="3">外观设计专利</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="time">申请成功时间：</label>
-												<select id="time" class="form-control">
-													<option>---请选择申请成功时间---</option>
-													<option>2017年8月</option>
-													<option>2017年6月</option>
-													<option>2015年4月</option>
-												</select>
+												<label class="tab-label control-label text-right" for="tutor">专利名：</label>
+												<input type="text" class="form-control" name="patentName"/>
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right">起始申请时间：</label>
+												<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right">截止申请时间：</label>
+												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control">
-													<option>---请选择学生专业---</option>
-													<option>计算机普班</option>
-													<option>计算机（中美）</option>
-													<option>图书情报</option>
-													<option>教技</option>
-													<option>软件工程</option>
+												<select id="profession" class="form-control" name="major">
+													<option value="-1">---请选择学生专业---</option>
+													<option value="1">软件工程</option>
+													<option value="2">计算机科学与技术</option>
+													<option value="3">计算机科学与技术(中美合作)</option>
+													<option value="4">教育技术</option>
+													<option value="5">图书情报与档案管理</option>
+													<option value="51">图书馆学</option>
+													<option value="52">信息资源管理</option>
 												</select>
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="tutor">学生年级：</label>
+												<input type="text" class="form-control" name="grade" />
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="tutor">学生学号：</label>
+												<input type="text" class="form-control" name="stuNumber"/>
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="tutor">学生姓名：</label>
+												<input type="text" class="form-control" name="stuName"/>
 											</div>
 										</div>
 										<!--第二行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control"/>
-											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" id="student_name" class="form-control"/>
-											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-												<input type="text" id="student_number" class="form-control"/>
+												<input type="text" id="tutor" class="form-control" name="teacherName"/>
 											</div>
 										</div>
 										<!--第三行-->
@@ -88,8 +97,6 @@
 												<th class="text-center">申请人</th>
 												<th class="text-center">申请人专业</th>
 												<th class="text-center">申请人学号</th>
-												<th class="text-center">申请人联系方式</th>
-												<th class="text-center">申请人电子邮箱</th>
 												<th class="text-center">指导老师</th>
 												<th class="text-center">详情信息</th>
 												<th class="text-center">操作</th>	
@@ -98,37 +105,75 @@
 	
 										<tbody>
 											<!--第一行-->
+											<c:forEach items="${patentDtoList}" var="patentDto">
 											<tr>
-												<td >发明专利</td>
-												<td >构建基于本体库的软件开发技术交流社区</td>
-												<td >2017年6月</td>
-												<td >张三</td>
-												<td >软件工程</td>
-												<td >2015011234</td>
-												<td >13456987546</td>
-												<td >4569874569@qq.com</td>
+												<td>${patentDto.patentType}</td>
+												<td>${patentDto.patentName}</td>
+												<td>${patentDto.applyTimeStr}</td>
+												<td class="td_table">
+													<table class="sub">
+														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
+															<tr><td>${patentDto.applierName1}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
+															<tr><td>${patentDto.applierName2}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
+															<tr><td>${patentDto.applierName3}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
+															<tr><td>${patentDto.applierName4}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
+															<tr><td>${patentDto.applierName5}</td></tr>
+														</c:if>
+													</table>
+												</td>
+												<td class="td_table">
+													<table class="sub">
+														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
+															<tr><td>${patentDto.applierMajor1}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
+															<tr><td>${patentDto.applierMajor2}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
+															<tr><td>${patentDto.applierMajor3}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
+															<tr><td>${patentDto.applierMajor4}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
+															<tr><td>${patentDto.applierMajor5}</td></tr>
+														</c:if>
+													</table>
+												</td>
+												<td class="td_table">
+													<table class="sub">
+														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
+															<tr><td>${patentDto.applierStuNumber1}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
+															<tr><td>${patentDto.applierStuNumber2}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
+															<tr><td>${patentDto.applierStuNumber3}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
+															<tr><td>${patentDto.applierStuNumber4}</td></tr>
+														</c:if>
+														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
+															<tr><td>${patentDto.applierStuNumber5}</td></tr>
+														</c:if>
+													</table>
+												</td>
 												<td >张伟</td>
 												<td ><a href="#">详情</a></td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>
 												</td>
 											</tr>
-											<!--第二行-->
-											<tr>
-												<td >发明专利</td>
-												<td >构建基于本体库的软件开发技术交流社区</td>
-												<td >2017年6月</td>
-												<td >张三</td>
-												<td >图书管理学</td>
-												<td >2015011234</td>
-												<td >13456987546</td>
-												<td >4569874569@qq.com</td>
-												<td >张伟</td>
-												<td ><a href="#">详情</a></td>
-												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
-												</td>
-											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

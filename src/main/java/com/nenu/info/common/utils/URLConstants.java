@@ -26,4 +26,7 @@ public final class URLConstants {
     //论文
     public static final String THESIS_URL = "thesis";
 
+    //专利
+    public static final String PATENT_URL = "patent";
+
 }

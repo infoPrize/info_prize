@@ -1,7 +1,7 @@
 package com.nenu.info.service.category;
 
 import com.nenu.info.common.dto.category.ThesisDto;
-import com.nenu.info.common.entities.Thesis;
+import com.nenu.info.common.entities.category.Thesis;
 
 import java.util.Date;
 import java.util.List;

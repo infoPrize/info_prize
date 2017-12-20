@@ -2,7 +2,7 @@ package com.nenu.info.service.common.impl;
 
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.common.TeacherDto;
-import com.nenu.info.common.entities.Teacher;
+import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
