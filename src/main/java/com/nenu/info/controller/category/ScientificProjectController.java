@@ -229,7 +229,7 @@ public class ScientificProjectController {
 //        return jsonArray;
 
 
-        return "redirect:/scientificProject";
+        return "scientific_project";
     }
 }
 

@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,8 +138,8 @@ public class MathModelPrizeController {
     }
 
     @RequestMapping(value = "listByCondition", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONArray listByCondition(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+//    @ResponseBody
+    public String listByCondition(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                                      @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                                      @RequestParam(value = "beginTime", required = false) Date beginTime,
                                      @RequestParam(value = "endTime", required = false) Date endTime,
@@ -146,32 +147,44 @@ public class MathModelPrizeController {
                                      @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
-        JSONArray jsonArray = new JSONArray();
+                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                     Model model) {
+//        JSONArray jsonArray = new JSONArray();
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
-            JSONObject jsonObject = new JSONObject();
+        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+//        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+//            JSONObject jsonObject = new JSONObject();
+//
+//            jsonObject.put("matchLevel", mathModelPrizeDto.getMatchLevel());
+//            jsonObject.put("matchName", mathModelPrizeDto.getMatchName());
+//            jsonObject.put("hostUnit", mathModelPrizeDto.getHostUnit());
+//            jsonObject.put("prizeTime", mathModelPrizeDto.getPrizeTime());
+//            jsonObject.put("prizeLevel", mathModelPrizeDto.getPrizeLevel());
+//            jsonObject.put("teamName", mathModelPrizeDto.getTeamName());
+//            jsonObject.put("teammateName1", mathModelPrizeDto.getTeammateName1());
+//            jsonObject.put("teammateStuNumber1", mathModelPrizeDto.getTeammateStuNumber1());
+//            jsonObject.put("teammateMajor1", mathModelPrizeDto.getTeammateMajor1());
+//            jsonObject.put("teammateName2", mathModelPrizeDto.getTeammateName2());
+//            jsonObject.put("teammateStuNumber2", mathModelPrizeDto.getTeammateStuNumber2());
+//            jsonObject.put("teammateMajor2", mathModelPrizeDto.getTeammateMajor2());
+//            jsonObject.put("teammateName3", mathModelPrizeDto.getTeammateName3());
+//            jsonObject.put("teammateStuNumber3", mathModelPrizeDto.getTeammateStuNumber3());
+//            jsonObject.put("teammateMajor3", mathModelPrizeDto.getTeammateMajor3());
+//            jsonObject.put("teacherName", mathModelPrizeDto.getTeacherName());
+//
+//            jsonArray.add(jsonObject);
+//        }
+//        return jsonArray;
 
-            jsonObject.put("matchLevel", mathModelPrizeDto.getMatchLevel());
-            jsonObject.put("matchName", mathModelPrizeDto.getMatchName());
-            jsonObject.put("hostUnit", mathModelPrizeDto.getHostUnit());
-            jsonObject.put("prizeTime", mathModelPrizeDto.getPrizeTime());
-            jsonObject.put("prizeLevel", mathModelPrizeDto.getPrizeLevel());
-            jsonObject.put("teamName", mathModelPrizeDto.getTeamName());
-            jsonObject.put("teammateName1", mathModelPrizeDto.getTeammateName1());
-            jsonObject.put("teammateStuNumber1", mathModelPrizeDto.getTeammateStuNumber1());
-            jsonObject.put("teammateMajor1", mathModelPrizeDto.getTeammateMajor1());
-            jsonObject.put("teammateName2", mathModelPrizeDto.getTeammateName2());
-            jsonObject.put("teammateStuNumber2", mathModelPrizeDto.getTeammateStuNumber2());
-            jsonObject.put("teammateMajor2", mathModelPrizeDto.getTeammateMajor2());
-            jsonObject.put("teammateName3", mathModelPrizeDto.getTeammateName3());
-            jsonObject.put("teammateStuNumber3", mathModelPrizeDto.getTeammateStuNumber3());
-            jsonObject.put("teammateMajor3", mathModelPrizeDto.getTeammateMajor3());
-            jsonObject.put("teacherName", mathModelPrizeDto.getTeacherName());
+        return "math_model";
+    }
 
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
+    @RequestMapping(value = "toMathModel")
+    public String toMathModel(Model model) {
+        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(-1, "", null, null,-1, -1,"", "", "");
+        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+
+        return "math_model";
     }
 
 }

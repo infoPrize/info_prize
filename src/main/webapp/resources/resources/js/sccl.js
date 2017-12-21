@@ -445,7 +445,7 @@ $(function() {
 					"id": "6",
 					"name": "ACM",
 					"parentId": "1",
-					"url": site.website + "ACM",
+					"url": site.website + "acm/toACM",
 					"icon": "&#xe906;",
 					"order": "1",
 					"isHeader": "0",
@@ -455,7 +455,7 @@ $(function() {
 					"id": "7",
 					"name": "数学建模",
 					"parentId": "1",
-					"url": site.website + "mathModel",
+					"url": site.website + "mathModel/toMathModel",
 					"icon": "&#xe964;",
 					"order": "1",
 					"isHeader": "0",
@@ -480,37 +480,7 @@ $(function() {
 					"order": "1",
 					"isHeader": "0",
 					"childMenus": ""
-				},
-                {
-                    "id": "10",
-                    "name": "教师信息",
-                    "parentId": "1",
-                    "url": site.website + "teacher/toTeacher",
-                    "icon": "&#xe927;",
-                    "order": "1",
-                    "isHeader": "0",
-                    "childMenus": ""
-                },
-                {
-                    "id": "11",
-                    "name": "学生管理",
-                    "parentId": "1",
-                    "url": site.website + "student",
-                    "icon": "&#xe927;",
-                    "order": "1",
-                    "isHeader": "0",
-                    "childMenus": ""
-                },
-                {
-                    "id": "12",
-                    "name": "添加学生",
-                    "parentId": "1",
-                    "url": site.website + "student/add",
-                    "icon": "&#xe927;",
-                    "order": "1",
-                    "isHeader": "0",
-                    "childMenus": ""
-                }
+				}
 			]
 		},
 		{
@@ -523,23 +493,71 @@ $(function() {
 			"isHeader": "1",
 			"childMenus": [{
 					"id": "10",
-					"name": "权限管理",
-					"parentId": "1",
-					"url": site.website + "manage",
-					"icon": "&#xe90e;",
+					"name": "管理功能",
+					"parentId": "2",
+					"url": "",
+					"icon": "&#xe604;",
 					"order": "1",
 					"isHeader": "0",
-					"childMenus": ""
+					"childMenus": [{
+                        "id": "11",
+                        "name": "权限管理",
+                        "parentId": "10",
+                        "url": site.website + "manage",
+                        "icon": "&#xe605;",
+                        "order": "1",
+                        "isHeader": "0",
+                        "childMenus": ""
+                    },
+					{
+						"id": "12",
+						"name": "学生管理",
+						"parentId": "10",
+						"url": site.website + "student",
+						"icon": "&#xe90e;",
+						"order": "1",
+						"isHeader": "0",
+						"childMenus": ""
+					}]
 				},
 				{
-					"id": "11",
+					"id": "13",
 					"name": "信息录入",
-					"parentId": "1",
-					"url": site.website + "infoAdd",
-					"icon": "&#xe914",
+					"parentId": "2",
+					"url": "",
+					"icon": "&#xe610",
 					"order": "1",
 					"isHeader": "0",
-					"childMenus": ""
+					"childMenus": [{
+                        "id": "14",
+                        "name": "添加教师",
+                        "parentId": "13",
+                        "url": site.website + "teacher/toTeacher",
+                        "icon": "&#xe914;",
+                        "order": "1",
+                        "isHeader": "0",
+                        "childMenus": ""
+                    },
+					{
+						"id": "15",
+						"name": "添加学生",
+						"parentId": "13",
+						"url": site.website + "student/add",
+						"icon": "&#xe609;",
+						"order": "1",
+						"isHeader": "0",
+						"childMenus": ""
+					},
+					{
+                        "id": "16",
+                        "name": "奖项录入",
+                        "parentId": "13",
+                        "url": site.website + "infoAdd",
+                        "icon": "&#xe606;",
+                        "order": "1",
+                        "isHeader": "0",
+                        "childMenus": ""
+					}]
 				}
 			]
 		}

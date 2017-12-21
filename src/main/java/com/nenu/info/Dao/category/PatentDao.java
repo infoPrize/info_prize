@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.category.Patent;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -26,5 +27,12 @@ public interface PatentDao {
      * @throws Exception
      */
     public List<PatentDto> listAll() throws Exception;
+
+    /**
+     * 根据条件查询专利信息
+     * @return
+     * @throws Exception
+     */
+    public List<PatentDto> listByConditions(Map<String, Object> params) throws Exception;
 
 }

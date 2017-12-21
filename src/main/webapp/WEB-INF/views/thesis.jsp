@@ -77,7 +77,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">截止发表时间：</label>
-												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
+												<input type="text" name="endTime" class="form-control" id="end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="journal">指导老师：</label>
@@ -249,5 +249,13 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+	<script>
+        !function(){
+            laydate({
+                elem: '#end'
+            })
+        }();
+
+	</script>
 	</body>
 </html>

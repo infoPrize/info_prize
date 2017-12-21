@@ -43,11 +43,11 @@
 
                                 </div>
                                <!--第二行-->
-                                <div class="form-group col-sm-4">
-                                    <label class="tab-label control-label text-right" for="grade">年级：</label>
-                                    <input type="text" id="grade" class="form-control" name="grade"/>
-                                </div>
                                 <div class="tab-row">
+                                    <div class="form-group col-sm-4">
+                                        <label class="tab-label control-label text-right" for="grade">年级：</label>
+                                        <input type="text" id="grade" class="form-control" name="grade"/>
+                                    </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="profession">专业：</label>
                                         <select id="profession" class="form-control" name="majorCode">

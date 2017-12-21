@@ -13,7 +13,7 @@ public final class WebConstants {
     public final static String staticWebSite = "http://infoprize.nenu.edu.cn/resources/";                   //静态资源站点
 
 //    服务器开发配置
-//    public final static String website = "http://120.78.154.246/info_prize";                       //网站地址
+//    public final static String website = "http://120.78.154.246/info_prize/";                       //网站地址
 //    public final static String staticWebSite = "http://120.78.154.246/info_prize/resources/";       //静态资源站点
 
 }

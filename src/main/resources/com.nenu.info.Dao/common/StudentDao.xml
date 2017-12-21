@@ -45,6 +45,7 @@
     <!--条件查询-->
     <select id="queryByCondition" resultType="com.nenu.info.common.entities.common.Student">
         SELECT
+        `id`,
         `name` AS name,
         `sex` AS sex,
         `stu_number` AS stuNumber,

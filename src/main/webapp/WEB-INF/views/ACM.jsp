@@ -14,6 +14,8 @@
         </style>
 	</head>
 	<body>
+	<h1>heiheihei</h1>
+	<hr>
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -136,73 +138,41 @@
 	
 										<tbody>
 											<!--第一行-->
+											<c:forEach items="${acmPrizeDtoList}" var="acmPrizeDto">
 											<tr>
-												<td>国家级</td>
-												<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-												<td>美国计算机协会</td>
-												<td>2013年8月</td>
-												<td>金奖</td>
-												<td>RNG</td>
+												<td>${acmPrizeDto.matchLevel}</td>
+												<td>${acmPrizeDto.matchName}</td>
+												<td>${acmPrizeDto.hostUnit}</td>
+												<td>${acmPrizeDto.prizeTime}</td>
+												<td>${acmPrizeDto.prizeLevel}</td>
+												<td>${acmPrizeDto.teamName}</td>
 												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td >张三</td></tr>
-														<tr><td >张三</td></tr>
-														<tr><td >张三</td></tr>
+														<tr><td>${acmPrizeDto.teammateName1}</td></tr>
+														<tr><td>${acmPrizeDto.teammateName2}</td></tr>
+														<tr><td>${acmPrizeDto.teammateName3}</td></tr>
 													</table>
 												</td>
 												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td >2015898758</td></tr>
-														<tr><td >2015012569</td></tr>
-														<tr><td >2015125898</td></tr>
+														<tr><td>${acmPrizeDto.teammateStuNumber1}</td></tr>
+														<tr><td>${acmPrizeDto.teammateStuNumber2}</td></tr>
+														<tr><td>${acmPrizeDto.teammateStuNumber3}</td></tr>
 													</table>
 												</td>
 												<td class="td_table hidecol">
 													<table class="sub">
-														<tr><td >软件工程</td></tr>
-														<tr><td >软件工程</td></tr>
-														<tr><td >软件工程</td></tr>
+														<tr><td>${acmPrizeDto.teammateMajor1}</td></tr>
+														<tr><td>${acmPrizeDto.teammateMajor2}</td></tr>
+														<tr><td>${acmPrizeDto.teammateMajor3}</td></tr>
 													</table>
 												</td>
-												<td>张伟</td>
+												<td>${acmPrizeDto.teacherName}</td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>
 												</td>
 											</tr>
-											<!--第二行-->
-											<tr>
-												<td>国家级</td>
-												<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-												<td>美国计算机协会</td>
-												<td>2013年8月</td>
-												<td>金奖</td>
-												<td>RNG</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-														<tr><td>张三</td></tr>
-													</table>
-												</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>2015898758</td></tr>
-														<tr><td>2015012569</td></tr>
-														<tr><td>2015125898</td></tr>
-													</table>
-												</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-														<tr><td>软件工程</td></tr>
-													</table>
-												</td>
-												<td>张伟</td>
-												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
-												</td>
-											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

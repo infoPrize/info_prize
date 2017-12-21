@@ -2,8 +2,11 @@
  * Created by liujing on 2017/12/19.
  */
 $(function(){
-    // 网站地址
+    // 网站地址 - 本地开发
     var website = "http://infoprize.nenu.edu.cn/";
+
+    //网站地址 - 服务器开发
+    // var website = "http://120.78.154.246/info_prize/";
 
     // 添加论文信息
     $("#sort_thesis").click(function(){
@@ -22,6 +25,7 @@ $(function(){
         var authorName5 = $('#authorName5').val();
         var authorStuNumber5 = $('#authorStuNumber5').val();
         var thesisAbstract = $('#thesisAbstract').val();
+        console.log(website);
         $.ajax({
             type: 'post',
             url: website + "thesis/add",

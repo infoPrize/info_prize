@@ -36,4 +36,67 @@
         FROM `t_patent` tp
     </select>
 
+    <select id="listByConditions" resultType="com.nenu.info.common.dto.category.PatentDto">
+        SELECT
+            (SELECT tpt.`patent_type` FROM `t_patent_type` tpt WHERE tpt.`id` = tp.`patent_type`) AS patentType,
+            tp.`patent_name` AS patentName,
+            tp.`apply_time` AS applyTime,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_1`) AS applierName1,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_1` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor1,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_1`) AS applierStuNumber1,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_2`) AS applierName2,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_2` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor2,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_2`) AS applierStuNumber2,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_3`) AS applierName3,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_3` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor3,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_3`) AS applierStuNumber3,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_4`) AS applierName4,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_4` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor4,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_4`) AS applierStuNumber4,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierName5,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_5` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor5,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierStuNumber5,
+            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tp.`teacher_id`) AS teacherName
+        FROM `t_patent` tp
+        WHERE
+            tp.`is_deleted` = 0
+            <if test="studentIdList != null and studentIdList.size() > 0">
+                AND
+                (
+                  tp.`owner_id_1` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tp.`owner_id_2` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tp.`owner_id_3` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tp.`owner_id_4` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  OR tp.`owner_id_5` IN
+                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                )
+            </if>
+            <if test="teacherId != null and teacherId > 0">
+                AND tp.`teacher_id` = #{teacherId}
+            </if>
+            <if test="patentType != null and patentType > 0">
+                AND tp.`patent_type` = #{patentType}
+            </if>
+            <if test="patentName != null and patentName != ''">
+                AND tp.`patent_name` LIKE CONCAT('%', #{patentName}, '%')
+            </if>
+            <if test="beginTime != null and endTime != null">
+                AND tp.`apply_time` BETWEEN #{beginTime} AND #{endTime}
+            </if>
+    </select>
+
 </mapper>

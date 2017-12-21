@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="" method="post">
+									<form class="condition_form form-inline" action="${website}patent/listByConditions" method="post">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
@@ -33,7 +34,7 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">专利名：</label>
+												<label class="tab-label control-label text-right" for="tutor">专利名称：</label>
 												<input type="text" class="form-control" name="patentName"/>
 											</div>
 											<div class="form-group col-sm-4">
@@ -46,7 +47,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control" name="major">
+												<select id="profession" class="form-control" name="majorCode">
 													<option value="-1">---请选择学生专业---</option>
 													<option value="1">软件工程</option>
 													<option value="2">计算机科学与技术</option>
@@ -78,7 +79,7 @@
 											</div>
 										</div>
 										<!--第三行-->
-										<input type="button" value="选择" id="sort"/>
+										<input type="submit" value="选择" id="sort"/>
 										
 									</form>
 					
@@ -167,7 +168,7 @@
 														</c:if>
 													</table>
 												</td>
-												<td >张伟</td>
+												<td >${patentDto.teacherName}</td>
 												<td ><a href="#">详情</a></td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>

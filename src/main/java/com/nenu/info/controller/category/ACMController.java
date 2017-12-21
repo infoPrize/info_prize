@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -149,41 +150,54 @@ public class ACMController {
      * @return
      */
     @RequestMapping(value = "listACMByCondition", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONArray listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                              @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                              @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                              @RequestParam(value = "endTime", required = false) Date endTime,
-                                              @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                              @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                              @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                              @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                              @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
-        JSONArray jsonArray = new JSONArray();
+//    @ResponseBody
+    public String listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                           @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                           @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                           @RequestParam(value = "endTime", required = false) Date endTime,
+                                           @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                           @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                           @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                           @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                           @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                           Model model) {
+//        JSONArray jsonArray = new JSONArray();
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-            JSONObject jsonObject = new JSONObject();
+//        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+//            JSONObject jsonObject = new JSONObject();
+//
+//            jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
+//            jsonObject.put("matchName", acmPrizeDto.getMatchName());
+//            jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
+//            jsonObject.put("prizeTime", acmPrizeDto.getPrizeTime());
+//            jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
+//            jsonObject.put("teamName", acmPrizeDto.getTeamName());
+//            jsonObject.put("teammateName1", acmPrizeDto.getTeammateName1());
+//            jsonObject.put("teammateStuNumber1", acmPrizeDto.getTeammateStuNumber1());
+//            jsonObject.put("teammateMajor1", acmPrizeDto.getTeammateMajor1());
+//            jsonObject.put("teammateName2", acmPrizeDto.getTeammateName2());
+//            jsonObject.put("teammateStuNumber2", acmPrizeDto.getTeammateStuNumber2());
+//            jsonObject.put("teammateMajor2", acmPrizeDto.getTeammateMajor2());
+//            jsonObject.put("teammateName3", acmPrizeDto.getTeammateName3());
+//            jsonObject.put("teammateStuNumber3", acmPrizeDto.getTeammateStuNumber3());
+//            jsonObject.put("teammateMajor3", acmPrizeDto.getTeammateMajor3());
+//            jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
+//
+//            jsonArray.add(jsonObject);
+//        }
+//        return jsonArray;
 
-            jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
-            jsonObject.put("matchName", acmPrizeDto.getMatchName());
-            jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
-            jsonObject.put("prizeTime", acmPrizeDto.getPrizeTime());
-            jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
-            jsonObject.put("teamName", acmPrizeDto.getTeamName());
-            jsonObject.put("teammateName1", acmPrizeDto.getTeammateName1());
-            jsonObject.put("teammateStuNumber1", acmPrizeDto.getTeammateStuNumber1());
-            jsonObject.put("teammateMajor1", acmPrizeDto.getTeammateMajor1());
-            jsonObject.put("teammateName2", acmPrizeDto.getTeammateName2());
-            jsonObject.put("teammateStuNumber2", acmPrizeDto.getTeammateStuNumber2());
-            jsonObject.put("teammateMajor2", acmPrizeDto.getTeammateMajor2());
-            jsonObject.put("teammateName3", acmPrizeDto.getTeammateName3());
-            jsonObject.put("teammateStuNumber3", acmPrizeDto.getTeammateStuNumber3());
-            jsonObject.put("teammateMajor3", acmPrizeDto.getTeammateMajor3());
-            jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
+        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
 
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
+        return "ACM";
+    }
+
+    @RequestMapping(value = "toACM")
+    public String toACM(Model model) {
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "");
+        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
+        return "ACM";
     }
 
 }

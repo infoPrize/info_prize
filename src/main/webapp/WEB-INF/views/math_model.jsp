@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -135,73 +136,41 @@
 
 										<tbody>
 										<!--第一行-->
+										<c:forEach items="${mathModelPrizeDtoList}" var="mathModelPrizeDto">
 										<tr>
-											<td>国家级</td>
-											<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-											<td>美国计算机协会</td>
-											<td>2013年8月</td>
-											<td>金奖</td>
-											<td>RNG</td>
+											<td>${mathModelPrizeDto.matchLevel}</td>
+											<td>${mathModelPrizeDto.matchName}</td>
+											<td>${mathModelPrizeDto.hostUnit}</td>
+											<td>${mathModelPrizeDto.prizeTime}</td>
+											<td>${mathModelPrizeDto.prizeLevel}</td>
+											<td>${mathModelPrizeDto.teamName}</td>
 											<td class="td_table hidecol">
 												<table class="sub">
-													<tr><td>张三</td></tr>
-													<tr><td>张三</td></tr>
-													<tr><td>张三</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateName1}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateName2}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateName3}</td></tr>
 												</table>
 											</td>
 											<td class="td_table hidecol">
 												<table class="sub">
-													<tr><td>2015898758</td></tr>
-													<tr><td>2015012569</td></tr>
-													<tr><td>2015125898</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateStuNumber1}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateStuNumber2}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateStuNumber3}</td></tr>
 												</table>
 											</td>
 											<td class="td_table hidecol">
 												<table class="sub">
-													<tr><td>软件工程</td></tr>
-													<tr><td>软件工程</td></tr>
-													<tr><td>软件工程</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateMajor1}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateMajor2}</td></tr>
+													<tr><td>${mathModelPrizeDto.teammateMajor3}</td></tr>
 												</table>
 											</td>
-											<td>张伟</td>
+											<td>${mathModelPrizeDto.teacherName}</td>
 											<td class="aparent">
 												<a href="" data-toggle="modal" data-target="#delete">删除</a>
 											</td>
 										</tr>
-										<!--第二行-->
-										<tr>
-											<td>国家级</td>
-											<td>2013年ACM-ICPC中国·通化程序设计邀请赛</td>
-											<td>美国计算机协会</td>
-											<td>2013年8月</td>
-											<td>金奖</td>
-											<td>RNG</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>张三</td></tr>
-													<tr><td>张三</td></tr>
-													<tr><td>张三</td></tr>
-												</table>
-											</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>2015898758</td></tr>
-													<tr><td>2015012569</td></tr>
-													<tr><td>2015125898</td></tr>
-												</table>
-											</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>软件工程</td></tr>
-													<tr><td>软件工程</td></tr>
-													<tr><td>软件工程</td></tr>
-												</table>
-											</td>
-											<td>张伟</td>
-											<td class="aparent">
-												<a href="" data-toggle="modal" data-target="#delete">删除</a>
-											</td>
-										</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

@@ -161,7 +161,7 @@ public class PatentController {
         return 7;
     }
 
-    @RequestMapping(value = "toPatent", method = RequestMethod.POST)
+    @RequestMapping(value = "toPatent", method = RequestMethod.GET)
     public String toPatent(Model model) {
         List<PatentDto> patentDtoList = null;
         try {
@@ -173,4 +173,30 @@ public class PatentController {
 
         return "patent";
     }
+
+    @RequestMapping(value = "listByConditions", method = RequestMethod.POST)
+    public String listByConditions(@RequestParam(value = "patentType", required = false, defaultValue = "-1") Integer patentType,
+                                   @RequestParam(value = "patentName", required = false, defaultValue = "") String patentName,
+                                   @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                   @RequestParam(value = "endTime", required = false) Date endTime,
+                                   @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                   @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
+                                   @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                   @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                   @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                   Model model) {
+        List<PatentDto> patentDtoList = null;
+
+        try {
+            patentDtoList = patentService.listByConditions(patentType, patentName, beginTime, endTime, majorCode, grade, stuNumber, stuName, teacherName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("patentDtoList", patentDtoList);
+
+        return "patent";
+    }
+
+
+
 }
