@@ -134,5 +134,18 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
-
+    @Override
+    public boolean checkMatchingWithNameAndStuNumber(String name, String stuNumber) throws Exception {
+        Student student = null;
+        if(!name.equals("") || !stuNumber.equals("")) {
+            student = selectStudentByStuNumber(stuNumber);
+            if(student == null) {
+                return false;
+            }
+            if(!name.equals(student.getName())) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

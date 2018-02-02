@@ -59,4 +59,14 @@ public class TeacherServiceImpl implements TeacherService {
     public List<TeacherDto> listAll() throws Exception {
         return teacherDao.listAll();
     }
+
+    @Override
+    public boolean checkTeacherExist(String teacherName) throws Exception {
+        Teacher teacher = selectTeacherByName(teacherName);
+        if(teacher == null) {
+            return false;           //不存在
+        } else {
+            return true;            //可以查出来，该教师存在
+        }
+    }
 }

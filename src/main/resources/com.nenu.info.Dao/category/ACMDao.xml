@@ -39,7 +39,7 @@
               AND tap.`match_name` LIKE CONCAT('%', #{matchName}, '%')
             </if>
             <if test="beginTime != null and endTime != null">
-              AND tap.`prize_time` BETWEEN CONCAT(#{beginTime}, '00:00:00' AND CONCAT(#{endTime}, '23:59:59'))
+              AND tap.`prize_time` BETWEEN CONCAT(#{beginTime}, '00:00:00') AND CONCAT(#{endTime}, '23:59:59')
             </if>
             <if test="prizeLevel > 0">
               AND tap.`prize_level` = #{prizeLevel}

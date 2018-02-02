@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author: software-liuwang
  * @time: 2017/12/8 13:53
- * @description :
+ * @description : ACM获奖信息Controller
  */
 @Controller
 @RequestMapping(value = URLConstants.ACM_URL)

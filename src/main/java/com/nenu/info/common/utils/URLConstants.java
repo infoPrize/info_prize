@@ -29,4 +29,7 @@ public final class URLConstants {
     //专利
     public static final String PATENT_URL = "patent";
 
+    //互联网+
+    public static final String INTERNET_PLUS_URL = "InternetPlus";
+
 }

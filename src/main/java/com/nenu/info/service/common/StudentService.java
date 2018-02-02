@@ -70,5 +70,13 @@ public interface StudentService {
      */
     public Student convertDtoToEntity(StudentDto studentDto) throws Exception;
 
+    /**
+     * 检查学生的姓名和学号是否匹配
+     * @param name 姓名
+     * @param stuNumber 学号
+     * @return
+     * @throws Exception
+     */
+    public boolean checkMatchingWithNameAndStuNumber(String name, String stuNumber) throws Exception;
 
 }

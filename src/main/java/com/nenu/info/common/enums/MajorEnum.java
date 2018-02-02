@@ -1,11 +1,5 @@
 package com.nenu.info.common.enums;
 
-
-import org.apache.commons.lang.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author: software-liuwang
  * @time: 2017/12/4 16:28

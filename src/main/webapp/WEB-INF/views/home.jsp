@@ -15,7 +15,10 @@
   </head>
   
   <body>
-	首页
+	首页<br>
+
+	<a href="${website}internet_plus_add_test.jsp"><h4>互联网+添加</h4></a><br>
+	<a href="${website}internet_plus_listByCondition.jsp"><h4>按条件查询互联网+信息</h4></a>
 
   </body>
 </html>

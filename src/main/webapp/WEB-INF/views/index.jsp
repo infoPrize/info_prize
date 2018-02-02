@@ -66,7 +66,6 @@
 			<div class="layout-side-arrow">
 				<div class="layout-side-arrow-icon"><i class="icon-font">&#xe60d;</i></div>
 			</div>
-
 			<section class="layout-main">
 				<div class="layout-main-tab">
 					<button class="tab-btn btn-left"><i class="icon-font">&#xe60e;</i></button>
