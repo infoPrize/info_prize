@@ -32,4 +32,7 @@ public final class URLConstants {
     //互联网+
     public static final String INTERNET_PLUS_URL = "InternetPlus";
 
+    //挑战杯
+    public static final String CHALLENGE_CUP_URL = "ChallengeCup";
+
 }

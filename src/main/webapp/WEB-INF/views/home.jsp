@@ -17,8 +17,14 @@
   <body>
 	首页<br>
 
+	<h3>互联网+:</h3><br>
 	<a href="${website}internet_plus_add_test.jsp"><h4>互联网+添加</h4></a><br>
-	<a href="${website}internet_plus_listByCondition.jsp"><h4>按条件查询互联网+信息</h4></a>
+	<a href="${website}internet_plus_listByCondition_test.jsp"><h4>按条件查询互联网+信息</h4></a><br><br><br>
+
+
+  	<h3>挑战杯:</h3><br>
+	<a href="${website}challenge_cup_add_test.jsp"><h4>挑战杯添加</h4></a><br>
+	<a href="${website}challenge_cup_listByCondition_test.jsp"><h4>按条件查询挑战杯信息</h4></a>
 
   </body>
 </html>
