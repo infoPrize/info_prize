@@ -108,6 +108,11 @@
 										<input type="submit" value="选择" id="sort" />
 										<div class="clearfix"></div>
 									</form>
+
+									<form action="/import/math" enctype="multipart/form-data" method="post">
+										<input type="file" name="file">
+										<input type="submit" value="导入excel">
+									</form>
 					
 								</div>
 								<div class="x_title">

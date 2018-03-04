@@ -55,6 +55,16 @@ public class PatentDto {
 
     private String teacherName;
 
+    private String introduce;
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
     public String getPatentType() {
         return patentType;
     }

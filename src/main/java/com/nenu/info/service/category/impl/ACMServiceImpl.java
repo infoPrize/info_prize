@@ -7,10 +7,13 @@ import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.category.ACMPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.enums.MatchLevelEnum;
+import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.service.category.ACMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.nenu.info.common.utils.WebConstants.pageSize;
@@ -32,6 +35,8 @@ public class ACMServiceImpl implements ACMService {
 
     @Autowired
     private TeacherDao teacherDao;
+
+    private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public void add(ACMPrize acmPrize) {
@@ -122,5 +127,41 @@ public class ACMServiceImpl implements ACMService {
 
 
         return params;
+    }
+
+
+    /**
+     * 将dto转换为实体
+     * @param acmPrizeDto
+     * @return
+     * @throws Exception
+     */
+    public ACMPrize convertDtoToEntity(ACMPrizeDto acmPrizeDto) throws Exception{
+
+        ACMPrize acmPrize = new ACMPrize();
+        acmPrize.setMatchName(acmPrizeDto.getMatchName());
+        acmPrize.setMatchLevel(MatchLevelEnum.getIdByValue(acmPrizeDto.getMatchLevel()));
+        acmPrize.setHostUnit(acmPrizeDto.getHostUnit());
+        acmPrize.setTeamName(acmPrizeDto.getTeamName());
+        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber1()) != null){
+            acmPrize.setTeammateId1(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber1()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber2()) != null){
+            acmPrize.setTeammateId2(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber2()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber3()) != null){
+            acmPrize.setTeammateId3(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber3()).getId());
+        }
+
+        acmPrize.setPrizeLevel(PrizeLevelEnum.getIdByValue(acmPrizeDto.getPrizeLevel()));
+
+        String date = sf.format(acmPrizeDto.getPrizeTime());
+        acmPrize.setPrizeTime(sf.parse(date));
+        acmPrize.setPrizeTime(acmPrizeDto.getPrizeTime());
+        if(teacherDao.selectTeacherByName(acmPrizeDto.getTeacherName()) != null){
+            acmPrize.setTeacherId(teacherDao.selectTeacherByName(acmPrizeDto.getTeacherName()).getId());
+        }
+
+        return acmPrize;
     }
 }

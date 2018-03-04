@@ -7,10 +7,13 @@ import com.nenu.info.common.dto.category.MathModelPrizeDto;
 import com.nenu.info.common.entities.category.MathModelPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.enums.MatchLevelEnum;
+import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.service.category.MathModelPrizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -29,6 +32,8 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
 
     @Autowired
     private MathModelPrizeDao mathModelPrizeDao;
+
+    private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     public void add(MathModelPrize mathModelPrize) {
@@ -89,5 +94,38 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
 
         return acmPrizeDtoList;
 
+    }
+
+    /**
+     * 将dto转换为实体
+     * @param mathModelPrizeDto
+     * @return
+     * @throws Exception
+     */
+    public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception{
+
+        MathModelPrize mathModelPrize = new MathModelPrize();
+        mathModelPrize.setMatchName(mathModelPrizeDto.getMatchName());
+        mathModelPrize.setMatchLevel(MatchLevelEnum.getIdByValue(mathModelPrizeDto.getMatchLevel()));
+        mathModelPrize.setHostUnit(mathModelPrizeDto.getHostUnit());
+        mathModelPrize.setTeamName(mathModelPrizeDto.getTeamName());
+        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber1()) != null){
+            mathModelPrize.setTeammateId1(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber1()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber2()) != null){
+            mathModelPrize.setTeammateId2(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber2()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber3()) != null){
+            mathModelPrize.setTeammateId3(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber3()).getId());
+        }
+
+        mathModelPrize.setPrizeLevel(PrizeLevelEnum.getIdByValue(mathModelPrizeDto.getPrizeLevel()));
+        String date = sf.format(mathModelPrizeDto.getPrizeTime());
+        mathModelPrize.setPrizeTime(sf.parse(date));
+        if(teacherDao.selectTeacherByName(mathModelPrizeDto.getTeacherName()) != null){
+            mathModelPrize.setTeacherId(teacherDao.selectTeacherByName(mathModelPrizeDto.getTeacherName()).getId());
+        }
+
+        return mathModelPrize;
     }
 }

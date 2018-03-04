@@ -82,6 +82,11 @@
 										<input type="submit" value="选择" id="sort"/>
 										
 									</form>
+
+									<form action="/import/patent" enctype="multipart/form-data" method="post">
+										<input type="file" name ="file">
+										<input type="submit" value ="导入excel">
+									</form>
 					
 								</div>
 								<div class="x_title title2">

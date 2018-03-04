@@ -42,4 +42,13 @@ public enum MatchLevelEnum {
         }
         return null;
     }
+
+    public static Integer getIdByValue(String value) {
+        for(MatchLevelEnum matchLevelEnum : MatchLevelEnum.values()) {
+            if(value.equals(matchLevelEnum.getValue())) {
+                return matchLevelEnum.getId();
+            }
+        }
+        return null;
+    }
 }

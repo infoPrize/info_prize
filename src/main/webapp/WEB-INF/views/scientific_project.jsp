@@ -97,7 +97,14 @@
 										<input type="submit" value="选择" id="sort" />
 										<div class="clearfix"></div>
 									</form>
+
+
+									<form action="/import/scientificProject" enctype="multipart/form-data" method="post">
+										<input type="file" name="file">
+										<input type="submit" value="导入excel">
+									</form>
 								</div>
+
 								<div class="x_title title2">
 									<h3>查询结果</h3>
 									<button id="showcolumn">显示所有栏目</button>

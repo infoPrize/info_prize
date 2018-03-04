@@ -44,4 +44,12 @@ public interface PatentService {
     public List<PatentDto> listByConditions(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode,
                                             String grade, String stuNumber, String stuName, String teacherName) throws Exception;
 
+    /**
+     * 将dto转换为实体
+     * @param patentDto
+     * @return
+     * @throws Exception
+     */
+    public Patent convertDtoToEntity(PatentDto patentDto) throws Exception;
+
 }

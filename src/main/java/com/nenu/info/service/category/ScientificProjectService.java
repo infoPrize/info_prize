@@ -37,4 +37,12 @@ public interface ScientificProjectService {
      * @return
      */
     public List<ScientificProjectDto> listAll();
+
+    /**
+     * 将dto转换为实体
+     * @param scientificProjectDto
+     * @return
+     * @throws Exception
+     */
+    public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception;
 }

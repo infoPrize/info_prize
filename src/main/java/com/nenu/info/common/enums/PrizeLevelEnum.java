@@ -42,4 +42,13 @@ public enum PrizeLevelEnum {
         }
         return null;
     }
+
+    public static Integer getIdByValue(String value) {
+        for(PrizeLevelEnum prizeLevelEnum : PrizeLevelEnum.values()) {
+            if(value.equals(prizeLevelEnum.getValue())) {
+                return prizeLevelEnum.getId();
+            }
+        }
+        return null;
+    }
 }

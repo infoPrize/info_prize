@@ -39,4 +39,11 @@ public interface MathModelPrizeService {
     public List<MathModelPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                                     Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit);
 
+    /**
+     * 将dto转换为实体
+     * @param mathModelPrizeDto
+     * @return
+     * @throws Exception
+     */
+    public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception;
 }

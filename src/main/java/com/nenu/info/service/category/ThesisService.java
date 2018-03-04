@@ -44,4 +44,12 @@ public interface ThesisService {
                                             String authorStuNumber, Integer authorMajor, String authorGrade,
                                             Date beginTime, Date endTime, String teacherName) throws Exception;
 
+    /**
+     * 将dto转换为实体
+     * @param thesisDto
+     * @return
+     * @throws Exception
+     */
+    public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception;
+
 }

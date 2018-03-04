@@ -7,6 +7,7 @@ import com.nenu.info.common.dto.category.PatentDto;
 import com.nenu.info.common.entities.category.Patent;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.enums.PatentTypeEnum;
 import com.nenu.info.service.category.PatentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,5 +92,42 @@ public class PatentServiceImpl implements PatentService {
         }
 
         return patentDtoList;
+    }
+
+    /**
+     * dto转换为实体
+     * @param patentDto
+     * @return
+     * @throws Exception
+     */
+    public Patent convertDtoToEntity(PatentDto patentDto) throws Exception{
+
+        Patent patent = new Patent();
+        patent.setPatentName(patentDto.getPatentName());
+        patent.setPatentType(PatentTypeEnum.getIdByValue(patentDto.getPatentType()));
+        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber1()) != null){
+            patent.setOwnerId1(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber1()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber2()) != null){
+            patent.setOwnerId2(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber2()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber3()) != null){
+            patent.setOwnerId3(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber3()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber4()) != null){
+            patent.setOwnerId4(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber4()).getId());
+        }
+        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber5()) != null){
+            patent.setOwnerId5(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber5()).getId());
+        }
+
+        String date = sf.format(patentDto.getApplyTime());
+        patent.setApplyTime(sf.parse(date));
+        if(teacherDao.selectTeacherByName(patentDto.getTeacherName()) != null){
+            patent.setTeacherId(teacherDao.selectTeacherByName(patentDto.getTeacherName()).getId());
+        }
+        patent.setPatentIntroduce(patentDto.getIntroduce());
+
+        return patent;
     }
 }

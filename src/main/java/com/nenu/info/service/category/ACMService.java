@@ -36,7 +36,7 @@ public interface ACMService {
      * @param stuName 学生名
      * @param teacherName 教师名
      * @param hostUnit 主办单位
-     * @param page 页号
+     * @param curPage 页号
      */
     public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                                 Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit, Integer curPage);
@@ -48,4 +48,11 @@ public interface ACMService {
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
                                          String hostUnit, Integer curPage);
 
+    /**
+     * 将dto转换为实体
+     * @param acmPrizeDto
+     * @return
+     * @throws Exception
+     */
+    public ACMPrize convertDtoToEntity(ACMPrizeDto acmPrizeDto) throws Exception;
 }
