@@ -15,7 +15,7 @@ public class DateConverter implements Converter<String, Date> {
     @Override
     public Date convert(String source) {
 
-        if(source == "") {
+        if(source.equals("")) {
             return null;
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

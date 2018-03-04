@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static com.nenu.info.common.utils.WebConstants.pageSize;
+
 /**
  * @author: software-liuwang
  * @time: 2017/12/8 18:26
- * @description :
+ * @description : ACM获奖Service
  */
 
 @Service(value = "acmService")
@@ -41,10 +43,41 @@ public class ACMServiceImpl implements ACMService {
     }
 
     @Override
+    public Integer countByCondition(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+                                    Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
+        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, -1);
+        Integer count = null;
+
+        try {
+            count = acmDao.countByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    @Override
     public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                                Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
+                                                Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit, Integer curPage) {
         List<ACMPrizeDto> acmPrizeDtoList = null;
 
+        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage);
+
+        try {
+            acmPrizeDtoList = acmDao.listByConditions(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return acmPrizeDtoList;
+
+    }
+
+    @Override
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
+                                         String hostUnit, Integer curPage) {
         List<Student> studentList = null;
 
         try {
@@ -73,6 +106,8 @@ public class ACMServiceImpl implements ACMService {
             }
         }
 
+        Integer startNum = pageSize * (curPage - 1);
+
         Map<String, Object> params = new HashMap<>();
         params.put("matchLevel", matchLevel);
         params.put("matchName", matchName);
@@ -82,14 +117,10 @@ public class ACMServiceImpl implements ACMService {
         params.put("teacherId", teacherId);
         params.put("hostUnit", hostUnit);
         params.put("idList", idList);
+        params.put("startNum", startNum);
+        params.put("pageSize", pageSize);
 
-        try {
-            acmPrizeDtoList = acmDao.listByConditions(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return acmPrizeDtoList;
-
+        return params;
     }
 }

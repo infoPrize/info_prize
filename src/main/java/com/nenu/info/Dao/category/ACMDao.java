@@ -16,14 +16,16 @@ public interface ACMDao {
 
     /**
      * 添加ACM获奖信息
-     * @param acmPrize
      */
     public void add(@Param("acmPrize") ACMPrize acmPrize) throws Exception;
 
     /**
+     * 根据条件查询ACM获奖信息的数量
+     */
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
      * 根据条件查询ACM获奖信息
-     * @param params 参数
-     * @return
      */
     public List<ACMPrizeDto> listByConditions(Map<String, Object> params) throws Exception;
 

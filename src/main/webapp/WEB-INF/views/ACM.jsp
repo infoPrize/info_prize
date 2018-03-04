@@ -27,7 +27,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="${website}acm/listACMByCondition" method="post">
+									<form class="condition_form form-inline" action="${website}acm/listACMByCondition/0" method="post">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
@@ -142,7 +142,7 @@
 												<td>${acmPrizeDto.matchLevel}</td>
 												<td>${acmPrizeDto.matchName}</td>
 												<td>${acmPrizeDto.hostUnit}</td>
-												<td>${acmPrizeDto.prizeTime}</td>
+												<td>${acmPrizeDto.prizeTimeStr}</td>
 												<td>${acmPrizeDto.prizeLevel}</td>
 												<td>${acmPrizeDto.teamName}</td>
 												<td class="td_table hidecol">
@@ -183,10 +183,26 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pull-right">
 									<li>
+										共n页
+									</li>
+									<li>
+										第m页
+									</li>
+									<li>
 										<a href="#" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
+									<li>
+										<a href="#">上一页</a>
+									</li>
+									<li>
+										<a href="#">下一页</a>
+									</li>
+									<li>
+										去往第<input type="text" name="pageNum">页
+									</li>
+									<!--
 									<li>
 										<a href="#">1</a>
 									</li>
@@ -202,6 +218,7 @@
 									<li>
 										<a href="#">5</a>
 									</li>
+									-->
 									<li>
 										<a href="#" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>

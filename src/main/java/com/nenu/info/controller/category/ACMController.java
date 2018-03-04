@@ -5,19 +5,16 @@ import com.nenu.info.common.entities.category.ACMPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ACMService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -149,9 +146,10 @@ public class ACMController {
      * @param hostUnit 主办单位
      * @return
      */
-    @RequestMapping(value = "listACMByCondition", method = RequestMethod.POST)
+    @RequestMapping(value = "listACMByCondition/{page}", method = RequestMethod.POST)
 //    @ResponseBody
-    public String listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+    public String listACMPrizeByConditions(@PathVariable("page") Integer curPage,
+                                           @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                                            @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                                            @RequestParam(value = "beginTime", required = false) Date beginTime,
                                            @RequestParam(value = "endTime", required = false) Date endTime,
@@ -162,7 +160,22 @@ public class ACMController {
                                            @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                            Model model) {
 //        JSONArray jsonArray = new JSONArray();
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+
+        Integer count = acmService.countByCondition(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        Integer pageSize = WebConstants.pageSize;
+
+        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        } else {
+            curPage = 1;
+        }
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage);
+
 //        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
 //            JSONObject jsonObject = new JSONObject();
 //
@@ -187,15 +200,41 @@ public class ACMController {
 //        }
 //        return jsonArray;
 
+        //对日期进行处理
+        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+            Date dateStr = acmPrizeDto.getPrizeTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            String prizeTimeStr = sdf.format(dateStr);
+
+            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", curPage);
 
         return "ACM";
     }
 
-    @RequestMapping(value = "toACM")
-    public String toACM(Model model) {
+    @RequestMapping(value = "toACM/{page}")
+    public String toACM(@PathVariable("page") Integer curPage,
+                        Model model) {
 
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "");
+        Integer count = acmService.countByCondition(-1, "", null, null, -1, -1, "", "", "");
+        Integer pageSize = WebConstants.pageSize;
+
+        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        } else {
+            curPage = 1;
+        }
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "", curPage);
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         return "ACM";
     }

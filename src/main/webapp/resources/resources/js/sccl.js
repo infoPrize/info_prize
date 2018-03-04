@@ -445,7 +445,7 @@ $(function() {
 					"id": "6",
 					"name": "ACM",
 					"parentId": "1",
-					"url": site.website + "acm/toACM",
+					"url": site.website + "acm/listACMByCondition/0",
 					"icon": "&#xe906;",
 					"order": "1",
 					"isHeader": "0",
