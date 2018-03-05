@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Jarvenman
@@ -95,5 +96,63 @@
         </table>
 
     </form>
+
+    <table width="3000" border="1">
+        <tr>
+            <td>比赛级别</td>
+            <td>比赛名称</td>
+            <td>项目名</td>
+            <td>队伍名</td>
+            <td>成员1姓名</td>
+            <td>成员1学号</td>
+            <td>成员2姓名</td>
+            <td>成员2学号</td>
+            <td>成员3姓名</td>
+            <td>成员3学号</td>
+            <td>成员4姓名</td>
+            <td>成员4学号</td>
+            <td>成员5姓名</td>
+            <td>成员5学号</td>
+            <td>成员6姓名</td>
+            <td>成员6学号</td>
+            <td>成员7姓名</td>
+            <td>成员7学号</td>
+            <td>成员8姓名</td>
+            <td>成员8学号</td>
+            <td>获奖等级</td>
+            <td>获奖时间</td>
+            <td>主办单位</td>
+            <td>指导教师</td>
+            <td>操作</td>
+        </tr>
+        <c:forEach items="${internetPlusDtoList}" var="internetPlusDto">
+            <tr>
+                <td>${internetPlusDto.matchLevel}</td>
+                <td>${internetPlusDto.matchName}</td>
+                <td>${internetPlusDto.projectName}</td>
+                <td>${internetPlusDto.teamName}</td>
+                <td>${internetPlusDto.stuName1}</td>
+                <td>${internetPlusDto.stuNumber1}</td>
+                <td>${internetPlusDto.stuName2}</td>
+                <td>${internetPlusDto.stuNumber2}</td>
+                <td>${internetPlusDto.stuName3}</td>
+                <td>${internetPlusDto.stuNumber3}</td>
+                <td>${internetPlusDto.stuName4}</td>
+                <td>${internetPlusDto.stuNumber4}</td>
+                <td>${internetPlusDto.stuName5}</td>
+                <td>${internetPlusDto.stuNumber5}</td>
+                <td>${internetPlusDto.stuName6}</td>
+                <td>${internetPlusDto.stuNumber6}</td>
+                <td>${internetPlusDto.stuName7}</td>
+                <td>${internetPlusDto.stuNumber7}</td>
+                <td>${internetPlusDto.stuName8}</td>
+                <td>${internetPlusDto.stuNumber8}</td>
+                <td>${internetPlusDto.prizeLevel}</td>
+                <td>${internetPlusDto.prizeTime}</td>
+                <td>${internetPlusDto.hostUnit}</td>
+                <td>${internetPlusDto.teacherName}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
 </html>

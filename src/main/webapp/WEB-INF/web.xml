@@ -51,6 +51,12 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
 
+  <session-config>
+    <session-timeout>
+      600
+    </session-timeout>
+  </session-config>
+
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>

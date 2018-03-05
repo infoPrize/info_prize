@@ -3,6 +3,7 @@ package com.nenu.info.service.category;
 import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.category.ACMPrize;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,15 +39,14 @@ public interface ACMService {
      * @param hostUnit 主办单位
      * @param curPage 页号
      */
-    public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                                Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit, Integer curPage);
+    public List<ACMPrizeDto> listByConditions(Map<String, Object> params);
 
     /**
      * 将传过来的参数加工为去DAO层查询的参数
      */
     public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage);
+                                         String hostUnit, Integer curPage, Integer totalPage);
 
     /**
      * 将dto转换为实体

@@ -9,10 +9,14 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.MatchLevelEnum;
 import com.nenu.info.common.enums.PrizeLevelEnum;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ACMService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -50,7 +54,7 @@ public class ACMServiceImpl implements ACMService {
     @Override
     public Integer countByCondition(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                     Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
-        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, -1);
+        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, -1, -1);
         Integer count = null;
 
         try {
@@ -63,11 +67,11 @@ public class ACMServiceImpl implements ACMService {
     }
 
     @Override
-    public List<ACMPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                                Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit, Integer curPage) {
+    public List<ACMPrizeDto> listByConditions(Map<String, Object> params) {
         List<ACMPrizeDto> acmPrizeDtoList = null;
 
-        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage);
+        Integer startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
+        params.put("startNum", startNum);
 
         try {
             acmPrizeDtoList = acmDao.listByConditions(params);
@@ -82,8 +86,14 @@ public class ACMServiceImpl implements ACMService {
     @Override
     public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage) {
+                                         String hostUnit, Integer curPage, Integer totalPage) {
         List<Student> studentList = null;
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
 
         try {
             studentList = studentDao.listStudentByStuNameAndMajor(stuName, major);
@@ -124,7 +134,8 @@ public class ACMServiceImpl implements ACMService {
         params.put("idList", idList);
         params.put("startNum", startNum);
         params.put("pageSize", pageSize);
-
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
 
         return params;
     }

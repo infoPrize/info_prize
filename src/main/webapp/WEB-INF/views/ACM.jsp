@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<h1>
+	session的时间间隔为 ： <%=session.getMaxInactiveInterval()%>秒
+</h1>
+<hr>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -199,10 +204,10 @@
 										</a>
 									</li>
 									<li>
-										<a href="${website}acm/listACMByCondition/${curPage - 1}">上一页</a>
+										<a href="${website}acm/toPrevious">上一页</a>
 									</li>
 									<li>
-										<a href="${website}acm/listACMByCondition/${curPage + 1}">下一页</a>
+										<a href="${website}acm/toNext">下一页</a>
 									</li>
 									<%--<li>--%>
 										<%--去往第<input type="text" name="pageNum">页--%>

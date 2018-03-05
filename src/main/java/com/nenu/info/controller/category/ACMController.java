@@ -4,6 +4,7 @@ import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.category.ACMPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.utils.ObjectUtils;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ACMService;
@@ -14,9 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -158,7 +163,8 @@ public class ACMController {
                                            @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                            @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                            @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                           Model model) {
+                                           Model model,
+                                           HttpServletRequest request) {
 //        JSONArray jsonArray = new JSONArray();
 
         Integer count = acmService.countByCondition(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
@@ -166,13 +172,13 @@ public class ACMController {
 
         Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
 
-        if(curPage <= 0) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
+        Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
 
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage);
+        HttpSession session = request.getSession();
+        session.setAttribute("params", params);
+        session.setAttribute("totalPage", totalPage);
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
 //        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
 //            JSONObject jsonObject = new JSONObject();
@@ -210,7 +216,7 @@ public class ACMController {
 
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("totalPage", totalPage);
-        model.addAttribute("curPage", curPage);
+        model.addAttribute("curPage", params.get("curPage"));
 
         return "ACM";
     }
@@ -236,5 +242,84 @@ public class ACMController {
 //        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
 //        return "ACM";
 //    }
+
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request,
+                             Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("params");
+
+        Integer curPage = (Integer)params.get("curPage");
+        curPage -= 1;
+
+        int totalPage = (int)params.get("totalPage");
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        params.put("curPage", curPage);
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
+
+        //对日期进行处理
+        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+            Date dateStr = acmPrizeDto.getPrizeTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            String prizeTimeStr = sdf.format(dateStr);
+
+            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
+        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", session.getAttribute("totalPage"));
+
+        return "ACM";
+
+    }
+
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request,
+                             Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("params");
+
+        int curPage = (int)params.get("curPage");
+        curPage += 1;
+
+
+
+        int totalPage = (int)params.get("totalPage");
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
+        params.put("curPage", curPage);
+
+        //对日期进行处理
+        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+            Date dateStr = acmPrizeDto.getPrizeTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            String prizeTimeStr = sdf.format(dateStr);
+
+            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
+        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", session.getAttribute("totalPage"));
+
+        return "ACM";
+
+    }
 
 }

@@ -14,6 +14,7 @@ import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,9 +41,14 @@ public class InternetPlusController {
     @Autowired
     private InternetPlusService internetPlusService;
 
-    @RequestMapping(value = "toInternetPlus")
-    public String toInternetPlus() {
-        return "";
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "internet_plus/internet_plus_add_test";
+    }
+
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "internet_plus/internet_plus_listByCondition_test";
     }
 
     /**
@@ -185,21 +191,22 @@ public class InternetPlusController {
 
 
     @RequestMapping(value = "listByCondition")
-    @ResponseBody
-    public JSONArray listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                     @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                     @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                     @RequestParam(value = "startTime", required = false) Date startTime,
-                                     @RequestParam(value = "endTime", required = false) Date endTime,
-                                     @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
-                                     @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                     @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
-                                     @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+//    @ResponseBody
+    public String listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                  @RequestParam(value = "startTime", required = false) Date startTime,
+                                  @RequestParam(value = "endTime", required = false) Date endTime,
+                                  @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
+                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                  @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
+                                  @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  Model model) {
 
         List<InternetPlusDto> internetPlusDtoList = null;
-        JSONArray jsonArray = new JSONArray();
+//        JSONArray jsonArray = new JSONArray();
 
         try {
             internetPlusDtoList = internetPlusService.listByCondition(matchName, matchLevel, prizeLevel, startTime, endTime, teamName, stuName, majorCode, projectName,
@@ -208,40 +215,41 @@ public class InternetPlusController {
             e.printStackTrace();
         }
 
-        if(internetPlusDtoList != null) {
-            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("matchLevel", internetPlusDto.getMatchLevel());
-                jsonObject.put("matchName", internetPlusDto.getMatchName());
-                jsonObject.put("projectName", internetPlusDto.getProjectName());
-                jsonObject.put("teamName", internetPlusDto.getTeamName());
-                jsonObject.put("stuName1", internetPlusDto.getStuName1());
-                jsonObject.put("stuNumber1", internetPlusDto.getStuNumber1());
-                jsonObject.put("stuName2", internetPlusDto.getStuName2());
-                jsonObject.put("stuNumber2", internetPlusDto.getStuNumber2());
-                jsonObject.put("stuName3", internetPlusDto.getStuName3());
-                jsonObject.put("stuNumber3", internetPlusDto.getStuNumber3());
-                jsonObject.put("stuName4", internetPlusDto.getStuName4());
-                jsonObject.put("stuNumber4", internetPlusDto.getStuNumber4());
-                jsonObject.put("stuName5", internetPlusDto.getStuName5());
-                jsonObject.put("stuNumber5", internetPlusDto.getStuNumber5());
-                jsonObject.put("stuName6", internetPlusDto.getStuName6());
-                jsonObject.put("stuNumber6", internetPlusDto.getStuNumber6());
-                jsonObject.put("stuName7", internetPlusDto.getStuName7());
-                jsonObject.put("stuNumber7", internetPlusDto.getStuNumber7());
-                jsonObject.put("stuName8", internetPlusDto.getStuName8());
-                jsonObject.put("stuNumber8", internetPlusDto.getStuNumber8());
-                jsonObject.put("prizeLevel", internetPlusDto.getPrizeLevel());
-                jsonObject.put("prizeTime", internetPlusDto.getPrizeTime());
-                jsonObject.put("hostUnit", internetPlusDto.getHostUnit());
-                jsonObject.put("teacherName", internetPlusDto.getTeacherName());
+//        if(internetPlusDtoList != null) {
+//            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("matchLevel", internetPlusDto.getMatchLevel());
+//                jsonObject.put("matchName", internetPlusDto.getMatchName());
+//                jsonObject.put("projectName", internetPlusDto.getProjectName());
+//                jsonObject.put("teamName", internetPlusDto.getTeamName());
+//                jsonObject.put("stuName1", internetPlusDto.getStuName1());
+//                jsonObject.put("stuNumber1", internetPlusDto.getStuNumber1());
+//                jsonObject.put("stuName2", internetPlusDto.getStuName2());
+//                jsonObject.put("stuNumber2", internetPlusDto.getStuNumber2());
+//                jsonObject.put("stuName3", internetPlusDto.getStuName3());
+//                jsonObject.put("stuNumber3", internetPlusDto.getStuNumber3());
+//                jsonObject.put("stuName4", internetPlusDto.getStuName4());
+//                jsonObject.put("stuNumber4", internetPlusDto.getStuNumber4());
+//                jsonObject.put("stuName5", internetPlusDto.getStuName5());
+//                jsonObject.put("stuNumber5", internetPlusDto.getStuNumber5());
+//                jsonObject.put("stuName6", internetPlusDto.getStuName6());
+//                jsonObject.put("stuNumber6", internetPlusDto.getStuNumber6());
+//                jsonObject.put("stuName7", internetPlusDto.getStuName7());
+//                jsonObject.put("stuNumber7", internetPlusDto.getStuNumber7());
+//                jsonObject.put("stuName8", internetPlusDto.getStuName8());
+//                jsonObject.put("stuNumber8", internetPlusDto.getStuNumber8());
+//                jsonObject.put("prizeLevel", internetPlusDto.getPrizeLevel());
+//                jsonObject.put("prizeTime", internetPlusDto.getPrizeTime());
+//                jsonObject.put("hostUnit", internetPlusDto.getHostUnit());
+//                jsonObject.put("teacherName", internetPlusDto.getTeacherName());
+//
+//                jsonArray.add(jsonObject);
+//            }
+//        }
 
-                jsonArray.add(jsonObject);
-            }
-        }
+        model.addAttribute("internetPlusDtoList", internetPlusDtoList);
 
-
-        return jsonArray;
+        return "internet_plus/internet_plus_listByCondition_test";
 
     }
 
