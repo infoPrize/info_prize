@@ -17,7 +17,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>信息录入</h3>
+                            <h3>学生列表</h3>
                             <hr/>
                         </div>
                         <div class="x_content">
@@ -70,7 +70,7 @@
                                 </div>
                                 <input type="submit" value="查询">
                             </form>
-                            <form action="/import/student" enctype="multipart/form-data" method="post">
+                            <form action="${website}/import/student" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="导入excel">
                             </form>

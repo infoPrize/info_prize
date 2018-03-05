@@ -146,7 +146,7 @@ public class ACMController {
      * @param hostUnit 主办单位
      * @return
      */
-    @RequestMapping(value = "listACMByCondition/{page}", method = RequestMethod.POST)
+    @RequestMapping(value = "listACMByCondition/{page}", method = RequestMethod.GET)
 //    @ResponseBody
     public String listACMPrizeByConditions(@PathVariable("page") Integer curPage,
                                            @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
@@ -170,8 +170,6 @@ public class ACMController {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;
-        } else {
-            curPage = 1;
         }
 
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage);
@@ -217,26 +215,26 @@ public class ACMController {
         return "ACM";
     }
 
-    @RequestMapping(value = "toACM/{page}")
-    public String toACM(@PathVariable("page") Integer curPage,
-                        Model model) {
-
-        Integer count = acmService.countByCondition(-1, "", null, null, -1, -1, "", "", "");
-        Integer pageSize = WebConstants.pageSize;
-
-        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        if(curPage <= 0) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        } else {
-            curPage = 1;
-        }
-
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "", curPage);
-        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-        return "ACM";
-    }
+//    @RequestMapping(value = "toACM/{page}")
+//    public String toACM(@PathVariable("page") Integer curPage,
+//                        Model model) {
+//
+//        Integer count = acmService.countByCondition(-1, "", null, null, -1, -1, "", "", "");
+//        Integer pageSize = WebConstants.pageSize;
+//
+//        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+//
+//        if(curPage <= 0) {
+//            curPage = 1;
+//        } else if(curPage > totalPage) {
+//            curPage = totalPage;
+//        } else {
+//            curPage = 1;
+//        }
+//
+//        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "", curPage);
+//        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
+//        return "ACM";
+//    }
 
 }

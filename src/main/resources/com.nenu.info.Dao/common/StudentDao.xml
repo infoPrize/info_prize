@@ -56,6 +56,8 @@
         <where>
             <include refid="condition" />
         </where>
+        ORDER BY `id` DESC
+
     </select>
 
     <sql id="condition">

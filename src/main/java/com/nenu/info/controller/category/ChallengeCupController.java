@@ -15,6 +15,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,16 @@ public class ChallengeCupController {
 
     @Autowired
     private ChallengeCupService challengeCupService;
+
+    @RequestMapping(value = "toAdd")
+    public String toChallengeCupAdd() {
+        return "challenge_cup/challenge_cup_add_test";
+    }
+
+    @RequestMapping(value = "toList")
+    public String toChallengeCupListByCondition() {
+        return "challenge_cup/challenge_cup_listByCondition_test";
+    }
 
 
     /**
@@ -182,8 +193,8 @@ public class ChallengeCupController {
 
 
     @RequestMapping(value = "listByCondition", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONArray listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+//    @ResponseBody
+    public String listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                                      @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                                      @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                                      @RequestParam(value = "startTime", required = false) Date startTime,
@@ -193,7 +204,8 @@ public class ChallengeCupController {
                                      @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                     Model model) {
 
         List<ChallengeCupDto> challengeCupDtoList = null;
         JSONArray jsonArray = new JSONArray();
@@ -205,39 +217,44 @@ public class ChallengeCupController {
             e.printStackTrace();
         }
 
-        if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("matchLevel", challengeCupDto.getMatchLevel());
-                jsonObject.put("matchName", challengeCupDto.getMatchName());
-                jsonObject.put("projectName", challengeCupDto.getProjectName());
-                jsonObject.put("teamName", challengeCupDto.getTeamName());
-                jsonObject.put("stuName1", challengeCupDto.getStuName1());
-                jsonObject.put("stuNumber1", challengeCupDto.getStuNumber1());
-                jsonObject.put("stuName2", challengeCupDto.getStuName2());
-                jsonObject.put("stuNumber2", challengeCupDto.getStuNumber2());
-                jsonObject.put("stuName3", challengeCupDto.getStuName3());
-                jsonObject.put("stuNumber3", challengeCupDto.getStuNumber3());
-                jsonObject.put("stuName4", challengeCupDto.getStuName4());
-                jsonObject.put("stuNumber4", challengeCupDto.getStuNumber4());
-                jsonObject.put("stuName5", challengeCupDto.getStuName5());
-                jsonObject.put("stuNumber5", challengeCupDto.getStuNumber5());
-                jsonObject.put("stuName6", challengeCupDto.getStuName6());
-                jsonObject.put("stuNumber6", challengeCupDto.getStuNumber6());
-                jsonObject.put("stuName7", challengeCupDto.getStuName7());
-                jsonObject.put("stuNumber7", challengeCupDto.getStuNumber7());
-                jsonObject.put("stuName8", challengeCupDto.getStuName8());
-                jsonObject.put("stuNumber8", challengeCupDto.getStuNumber8());
-                jsonObject.put("prizeLevel", challengeCupDto.getPrizeLevel());
-                jsonObject.put("prizeTime", challengeCupDto.getPrizeTime());
-                jsonObject.put("hostUnit", challengeCupDto.getHostUnit());
-                jsonObject.put("teacherName", challengeCupDto.getTeacherName());
+        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
 
-                jsonArray.add(jsonObject);
-            }
-        }
 
-        return jsonArray;
+//        if(challengeCupDtoList != null) {
+//            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.put("matchLevel", challengeCupDto.getMatchLevel());
+//                jsonObject.put("matchName", challengeCupDto.getMatchName());
+//                jsonObject.put("projectName", challengeCupDto.getProjectName());
+//                jsonObject.put("teamName", challengeCupDto.getTeamName());
+//                jsonObject.put("stuName1", challengeCupDto.getStuName1());
+//                jsonObject.put("stuNumber1", challengeCupDto.getStuNumber1());
+//                jsonObject.put("stuName2", challengeCupDto.getStuName2());
+//                jsonObject.put("stuNumber2", challengeCupDto.getStuNumber2());
+//                jsonObject.put("stuName3", challengeCupDto.getStuName3());
+//                jsonObject.put("stuNumber3", challengeCupDto.getStuNumber3());
+//                jsonObject.put("stuName4", challengeCupDto.getStuName4());
+//                jsonObject.put("stuNumber4", challengeCupDto.getStuNumber4());
+//                jsonObject.put("stuName5", challengeCupDto.getStuName5());
+//                jsonObject.put("stuNumber5", challengeCupDto.getStuNumber5());
+//                jsonObject.put("stuName6", challengeCupDto.getStuName6());
+//                jsonObject.put("stuNumber6", challengeCupDto.getStuNumber6());
+//                jsonObject.put("stuName7", challengeCupDto.getStuName7());
+//                jsonObject.put("stuNumber7", challengeCupDto.getStuNumber7());
+//                jsonObject.put("stuName8", challengeCupDto.getStuName8());
+//                jsonObject.put("stuNumber8", challengeCupDto.getStuNumber8());
+//                jsonObject.put("prizeLevel", challengeCupDto.getPrizeLevel());
+//                jsonObject.put("prizeTime", challengeCupDto.getPrizeTime());
+//                jsonObject.put("hostUnit", challengeCupDto.getHostUnit());
+//                jsonObject.put("teacherName", challengeCupDto.getTeacherName());
+//
+//                jsonArray.add(jsonObject);
+//            }
+//        }
+
+//        return jsonArray;
+
+        return "challenge_cup/challenge_cup_listByCondition_test";
     }
 
 }
