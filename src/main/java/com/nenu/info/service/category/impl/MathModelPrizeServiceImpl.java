@@ -10,6 +10,7 @@ import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.MatchLevelEnum;
 import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.service.category.MathModelPrizeService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
 
     @Autowired
     private MathModelPrizeDao mathModelPrizeDao;
+
+    @Autowired
+    private StudentService studentService;
 
     private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -109,13 +113,15 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         mathModelPrize.setMatchLevel(MatchLevelEnum.getIdByValue(mathModelPrizeDto.getMatchLevel()));
         mathModelPrize.setHostUnit(mathModelPrizeDto.getHostUnit());
         mathModelPrize.setTeamName(mathModelPrizeDto.getTeamName());
-        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber1()) != null){
+
+        if(studentService.nameEqualOrNot(mathModelPrizeDto.getTeammateStuNumber1(),mathModelPrizeDto.getTeammateName1())){
             mathModelPrize.setTeammateId1(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber1()).getId());
+            System.out.println(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber1()).getName() + "     " + mathModelPrizeDto.getTeammateName1());
         }
-        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber2()) != null){
+        if(studentService.nameEqualOrNot(mathModelPrizeDto.getTeammateStuNumber2(),mathModelPrizeDto.getTeammateName2())){
             mathModelPrize.setTeammateId2(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber2()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber3()) != null){
+        if(studentService.nameEqualOrNot(mathModelPrizeDto.getTeammateStuNumber3(),mathModelPrizeDto.getTeammateName3()) ){
             mathModelPrize.setTeammateId3(studentDao.selectStudentByStuNumber(mathModelPrizeDto.getTeammateStuNumber3()).getId());
         }
 

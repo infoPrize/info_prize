@@ -10,6 +10,7 @@ import com.nenu.info.common.entities.category.Thesis;
 import com.nenu.info.common.enums.JournalLevelEnum;
 import com.nenu.info.common.utils.DateConverter;
 import com.nenu.info.service.category.ThesisService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class ThesisServiceImpl implements ThesisService {
 
     @Autowired
     private ThesisDao thesisDao;
+
+    @Autowired
+    private StudentService studentService;
 
     private SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
     Date date = new Date();
@@ -106,25 +110,25 @@ public class ThesisServiceImpl implements ThesisService {
 
         Thesis thesis = new Thesis();
         thesis.setThesisTitle(thesisDto.getThesisTitle());
-        if(studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber1()) != null){
+        if(studentService.nameEqualOrNot(thesisDto.getAuthorStuNumber1(),thesisDto.getAuthorName1())){
             thesis.setAuthorId1((studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber1()).getId()));
             thesis.setAuthorLevel1(thesisDto.getAuthorLevel1());
         }
-        if(studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber2()) != null){
+        if(studentService.nameEqualOrNot(thesisDto.getAuthorStuNumber2(),thesisDto.getAuthorName2()) ){
             thesis.setAuthorId2((studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber2()).getId()));
             thesis.setAuthorLevel2(thesisDto.getAuthorLevel2());
         }
-        if(studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber3()) != null){
+        if(studentService.nameEqualOrNot(thesisDto.getAuthorStuNumber3(),thesisDto.getAuthorName3())){
             thesis.setAuthorId3((studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber3()).getId()));
             thesis.setAuthorLevel3(thesisDto.getAuthorLevel3());
         }
-        if(studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber4()) != null){
+        if(studentService.nameEqualOrNot(thesisDto.getAuthorStuNumber4(),thesisDto.getAuthorName4())){
             thesis.setAuthorId4((studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber4()).getId()));
-            thesis.setAuthorLevel4(thesisDto.getAuthorLevel2());
+            thesis.setAuthorLevel4(thesisDto.getAuthorLevel4());
         }
-        if(studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber5()) != null){
+        if(studentService.nameEqualOrNot(thesisDto.getAuthorStuNumber5(),thesisDto.getAuthorName5())){
             thesis.setAuthorId5((studentDao.selectStudentByStuNumber(thesisDto.getAuthorStuNumber5()).getId()));
-            thesis.setAuthorLevel5(thesisDto.getAuthorLevel2());
+            thesis.setAuthorLevel5(thesisDto.getAuthorLevel5());
         }
 
         //AVA.UTIL.DATE的形式就是2005-05-01而JAVA.SQL.DATE的形式就是SUN MAY 01 00:00:00 CST 2005

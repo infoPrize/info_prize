@@ -4,7 +4,7 @@ import com.nenu.info.common.dto.category.ACMPrizeDto;
 import com.nenu.info.common.entities.category.ACMPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
-import com.nenu.info.common.utils.ObjectUtils;
+
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ACMService;
@@ -164,7 +164,8 @@ public class ACMController {
                                            @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                            @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                            Model model,
-                                           HttpServletRequest request) {
+                                           HttpServletRequest request,
+                                           @RequestParam(value = "message", required = false, defaultValue = "") String message) {
 //        JSONArray jsonArray = new JSONArray();
 
         Integer count = acmService.countByCondition(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
@@ -217,6 +218,7 @@ public class ACMController {
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("message",message);
 
         return "ACM";
     }

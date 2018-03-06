@@ -148,4 +148,15 @@ public class StudentServiceImpl implements StudentService {
         }
         return true;
     }
+
+    public Boolean nameEqualOrNot(String stuNumber, String name) throws Exception{
+        Boolean flag = false;
+        if(studentDao.selectStudentByStuNumber(stuNumber) != null){
+            String name1 = studentDao.selectStudentByStuNumber(stuNumber).getName();
+            if(name1.equals(name)){
+                flag = true;
+            }
+        }
+        return flag;
+    }
 }

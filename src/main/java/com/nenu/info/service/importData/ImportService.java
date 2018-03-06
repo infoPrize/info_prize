@@ -118,4 +118,38 @@ public interface ImportService {
     public void importMath(File mathExcel) throws Exception;
 
 
+
+    /**
+     *检查传入 - 互联网+ -的Excel是否符合要求
+     * @param internetPlusExcel
+     * @return
+     * @throws Exception
+     */
+    public boolean checkInternetPlus(File internetPlusExcel ) throws Exception;
+
+    /**
+     * 导入- 互联网加 -Excel
+     * @param internetPlusExcel
+     * @throws Exception
+     */
+
+    public void importInternetPlus(File internetPlusExcel ) throws Exception;
+
+
+    /**
+     *检查传入 - 挑战杯 -的Excel是否符合要求
+     * @param challengeCupExcel
+     * @return
+     * @throws Exception
+     */
+    public boolean checkChallengeCup(File challengeCupExcel ) throws Exception;
+
+    /**
+     * 导入- 挑战杯 -Excel
+     * @param challengeCupExcel
+     * @throws Exception
+     */
+
+    public void importChallengeCup(File challengeCupExcel ) throws Exception;
+
 }

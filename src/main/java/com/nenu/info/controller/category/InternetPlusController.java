@@ -203,7 +203,8 @@ public class InternetPlusController {
                                   @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                   @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                   @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                  Model model) {
+                                  Model model,
+                                  @RequestParam(value = "message", required = false, defaultValue = "") String message) {
 
         List<InternetPlusDto> internetPlusDtoList = null;
 //        JSONArray jsonArray = new JSONArray();
@@ -248,6 +249,7 @@ public class InternetPlusController {
 //        }
 
         model.addAttribute("internetPlusDtoList", internetPlusDtoList);
+        model.addAttribute("message",message);
 
         return "internet_plus/internet_plus_listByCondition_test";
 

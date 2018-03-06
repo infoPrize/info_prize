@@ -97,6 +97,12 @@
 
     </form>
 
+    <form action="/import/internetPlus" enctype="multipart/form-data" method="post">
+        <input type="file" name="file">
+        <input type="submit" value="导入excel">
+    </form>
+    <h1>${message}</h1>
+
     <table width="3000" border="1">
         <tr>
             <td>比赛级别</td>

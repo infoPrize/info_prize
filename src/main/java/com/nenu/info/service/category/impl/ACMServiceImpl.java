@@ -11,6 +11,7 @@ import com.nenu.info.common.enums.MatchLevelEnum;
 import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ACMService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,9 @@ public class ACMServiceImpl implements ACMService {
 
     @Autowired
     private TeacherDao teacherDao;
+
+    @Autowired
+    private StudentService studentService;
 
     private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -154,13 +158,13 @@ public class ACMServiceImpl implements ACMService {
         acmPrize.setMatchLevel(MatchLevelEnum.getIdByValue(acmPrizeDto.getMatchLevel()));
         acmPrize.setHostUnit(acmPrizeDto.getHostUnit());
         acmPrize.setTeamName(acmPrizeDto.getTeamName());
-        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber1()) != null){
+        if(studentService.nameEqualOrNot(acmPrizeDto.getTeammateStuNumber1(),acmPrizeDto.getTeammateName1()) ){
             acmPrize.setTeammateId1(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber1()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber2()) != null){
+        if(studentService.nameEqualOrNot(acmPrizeDto.getTeammateStuNumber2(),acmPrizeDto.getTeammateName2())){
             acmPrize.setTeammateId2(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber2()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber3()) != null){
+        if(studentService.nameEqualOrNot(acmPrizeDto.getTeammateStuNumber3(),acmPrizeDto.getTeammateName3())){
             acmPrize.setTeammateId3(studentDao.selectStudentByStuNumber(acmPrizeDto.getTeammateStuNumber3()).getId());
         }
 

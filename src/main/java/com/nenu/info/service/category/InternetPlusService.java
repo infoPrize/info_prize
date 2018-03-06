@@ -25,4 +25,12 @@ public interface InternetPlusService {
                                                  Date endTime, String teamName, String stuName, Integer majorCode, String projectName,
                                                  String hostUnit, String teacherName) throws Exception;
 
+    /**
+     * 将dto转换为实体
+     * @param internetPlusDto
+     * @return
+     * @throws Exception
+     */
+    public InternetPlus convertDtoToEntity(InternetPlusDto internetPlusDto) throws Exception;
+
 }

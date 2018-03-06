@@ -43,13 +43,14 @@ public class ScientificProjectController {
      * @return
      */
     @RequestMapping(value = "toScientificProject")
-    public String toScientificProject(Model model) {
+    public String toScientificProject(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         Integer year = YearUtil.getYear();
         List<ScientificProjectDto> scientificProjectDtoList = null;
         scientificProjectDtoList = scientificProjectService.listAll();
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
         model.addAttribute("year", year);
+        model.addAttribute("message",message);
 
         return "scientific_project";
     }

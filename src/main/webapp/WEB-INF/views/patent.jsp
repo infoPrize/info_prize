@@ -87,7 +87,9 @@
 										<input type="file" name ="file">
 										<input type="submit" value ="导入excel">
 									</form>
-					
+									<h1>${message}</h1>
+
+
 								</div>
 								<div class="x_title title2">
 									<h3>查询结果</h3>

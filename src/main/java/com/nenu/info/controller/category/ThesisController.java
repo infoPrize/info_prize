@@ -235,7 +235,7 @@ public class ThesisController {
 
 
     @RequestMapping(value = "toThesis")
-    public String toThesis(Model model) {
+    public String toThesis(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         List<ThesisDto> thesisDtoList = new ArrayList<>();
 
         try {
@@ -244,6 +244,7 @@ public class ThesisController {
             e.printStackTrace();
         }
 
+        model.addAttribute("message",message);
         model.addAttribute("thesisDtoList", thesisDtoList);
 
         return "thesis";

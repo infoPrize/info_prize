@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -180,9 +181,12 @@ public class MathModelPrizeController {
     }
 
     @RequestMapping(value = "toMathModel")
-    public String toMathModel(Model model) {
+    public String toMathModel(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
+
+
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(-1, "", null, null,-1, -1,"", "", "");
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+        model.addAttribute("message",message);
 
         return "math_model";
     }

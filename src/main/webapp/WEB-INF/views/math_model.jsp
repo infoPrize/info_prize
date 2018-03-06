@@ -14,6 +14,7 @@
 		</style>
 	</head>
 	<body>
+	<h1>${message}</h1>
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -113,7 +114,9 @@
 										<input type="file" name="file">
 										<input type="submit" value="导入excel">
 									</form>
-					
+
+
+
 								</div>
 								<div class="x_title">
 									<h3>查询结果</h3>

@@ -54,6 +54,12 @@ public class importServiceImpl implements ImportService {
     private MathModelPrizeDao mathModelPrizeDao;
 
     @Autowired
+    private InternetPlusDao internetPlusDao;
+
+    @Autowired
+    private ChallengeCupDao challengeCupDao;
+
+    @Autowired
     private StudentService studentService;
 
     @Autowired
@@ -70,6 +76,12 @@ public class importServiceImpl implements ImportService {
 
     @Autowired
     private MathModelPrizeService mathModelPrizeService;
+
+    @Autowired
+    private InternetPlusService internetPlusService;
+
+    @Autowired
+    private ChallengeCupService challengeCupService;
 
     //学生
 
@@ -163,13 +175,13 @@ public class importServiceImpl implements ImportService {
 
     //数学建模
 
-    //ACM
-    String[] MathExcelFormat = { "比赛类别","比赛名称","主办单位",
-            "获奖时间","获奖等级","团队名称",
-            "参赛人员1姓名","参赛人员1学号",
-            "参赛人员2姓名","参赛人员2学号",
-            "参赛人员3姓名","参赛人员3学号",
-            "指导老师"
+
+    String[] MathExcelFormat = {"比赛类别","比赛名称","主办单位",
+                                "获奖时间","获奖等级","团队名称",
+                                "参赛人员1姓名","参赛人员1学号",
+                                "参赛人员2姓名","参赛人员2学号",
+                                "参赛人员3姓名","参赛人员3学号",
+                                "指导老师"
     };
 
     DataType[] MathExcelType = {
@@ -179,6 +191,54 @@ public class importServiceImpl implements ImportService {
             new DataType("teammateName2",8), new DataType("teammateStuNumber2",9),
             new DataType("teammateName3",10), new DataType("teammateStuNumber3",11),
             new DataType("teacherName",12),
+    };
+
+    //互联网加
+
+    String[] InternetPlusExcelFormat = {"比赛级别","比赛名称","项目名","队伍名",
+            "成员1姓名","成员1学号","成员2姓名","成员2学号","成员3姓名","成员3学号",
+            "成员4姓名","成员4学号","成员5姓名","成员5学号","成员6姓名","成员6学号",
+            "成员7姓名","成员7学号","成员8姓名","成员8学号","获奖等级","获奖时间",
+            "主办单位","指导教师"
+    };
+
+    DataType[] InternetPlusExcelType = {
+            new DataType("matchLevel", 0),new DataType("matchName", 1), new DataType("projectName", 2), new DataType("teamName",3),
+            new DataType("stuName1",4), new DataType("stuNumber1",5),
+            new DataType("stuName2",6), new DataType("stuNumber2",7),
+            new DataType("stuName3",8), new DataType("stuNumber3",9),
+            new DataType("stuName4",10), new DataType("stuNumber4",11),
+            new DataType("stuName5",12), new DataType("stuNumber5",13),
+            new DataType("stuName6",14), new DataType("stuNumber6",15),
+            new DataType("stuName7",16), new DataType("stuNumber7",17),
+            new DataType("stuName8",18), new DataType("stuNumber8",19),
+            new DataType("prizeLevel",20), new DataType("prizeTime",21),
+            new DataType("hostUnit",22), new DataType("teacherName",23),
+    };
+
+    //挑战杯
+
+    String[] ChallengeCupExcelFormat = {
+            "比赛级别","比赛名称","项目名","队伍名",
+            "成员1姓名","成员1学号","成员2姓名","成员2学号","成员3姓名","成员3学号",
+            "成员4姓名","成员4学号","成员5姓名","成员5学号","成员6姓名","成员6学号",
+            "成员7姓名","成员7学号","成员8姓名","成员8学号","获奖等级","获奖时间",
+            "主办单位","指导教师"
+
+    };
+
+    DataType[] ChallengeCupExcelType = {
+            new DataType("matchLevel", 0),new DataType("matchName", 1), new DataType("projectName", 2), new DataType("teamName",3),
+            new DataType("stuName1",4), new DataType("stuNumber1",5),
+            new DataType("stuName2",6), new DataType("stuNumber2",7),
+            new DataType("stuName3",8), new DataType("stuNumber3",9),
+            new DataType("stuName4",10), new DataType("stuNumber4",11),
+            new DataType("stuName5",12), new DataType("stuNumber5",13),
+            new DataType("stuName6",14), new DataType("stuNumber6",15),
+            new DataType("stuName7",16), new DataType("stuNumber7",17),
+            new DataType("stuName8",18), new DataType("stuNumber8",19),
+            new DataType("prizeLevel",20), new DataType("prizeTime",21),
+            new DataType("hostUnit",22), new DataType("teacherName",23),
     };
 
 
@@ -333,6 +393,53 @@ public class importServiceImpl implements ImportService {
         }
     }
 
+    //互联网加
+
+    public boolean checkInternetPlus(File internetPlusExcel ) throws Exception{
+        return this.checkFormat(internetPlusExcel,InternetPlusExcelFormat);
+    }
+
+    public void importInternetPlus(File internetPlusExcel ) throws Exception{
+
+        try{
+            List<InternetPlusDto> internetPlusDtoList = (List<InternetPlusDto>) ExcelReader2003.readExcel(InternetPlusDto.class,internetPlusExcel,1,InternetPlusExcelType);
+            for(int i = 0; i < internetPlusDtoList.size(); i++){
+                InternetPlusDto internetPlusDto = internetPlusDtoList.get(i);
+                if(internetPlusDto.getMatchLevel() == null){
+                    break;
+                }
+                InternetPlus internetPlus = internetPlusService.convertDtoToEntity(internetPlusDto);
+                internetPlusDao.add(internetPlus);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("导入数据存在空行或数据不完整");
+        }
+    }
+
+    //挑战杯
+
+    public boolean checkChallengeCup(File challengeCupExcel ) throws Exception{
+        return this.checkFormat(challengeCupExcel,ChallengeCupExcelFormat);
+    }
+
+    public void importChallengeCup(File challengeCupExcel ) throws Exception{
+
+        try{
+            List<ChallengeCupDto> challengeCupDtoList = (List<ChallengeCupDto>) ExcelReader2003.readExcel(ChallengeCupDto.class,challengeCupExcel,1,ChallengeCupExcelType);
+            for(int i = 0; i < challengeCupDtoList.size(); i++){
+                ChallengeCupDto challengeCupDto= challengeCupDtoList.get(i);
+                if(challengeCupDto.getMatchLevel() == null){
+                    break;
+                }
+                ChallengeCup challengeCup = challengeCupService.convertDtoToEntity(challengeCupDto);
+                challengeCupDao.add(challengeCup);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("导入数据存在空行或数据不完整");
+        }
+    }
 
     /**
      * 检查是否符合要求

@@ -205,7 +205,8 @@ public class ChallengeCupController {
                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     Model model) {
+                                     Model model,
+                                  @RequestParam(value = "message", required = false, defaultValue = "") String message) {
 
         List<ChallengeCupDto> challengeCupDtoList = null;
         JSONArray jsonArray = new JSONArray();
@@ -253,6 +254,7 @@ public class ChallengeCupController {
 //        }
 
 //        return jsonArray;
+        model.addAttribute("message",message);
 
         return "challenge_cup/challenge_cup_listByCondition_test";
     }

@@ -162,13 +162,14 @@ public class PatentController {
     }
 
     @RequestMapping(value = "toPatent", method = RequestMethod.GET)
-    public String toPatent(Model model) {
+    public String toPatent(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         List<PatentDto> patentDtoList = null;
         try {
             patentDtoList = patentService.listAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        model.addAttribute("message",message);
         model.addAttribute("patentDtoList", patentDtoList);
 
         return "patent";

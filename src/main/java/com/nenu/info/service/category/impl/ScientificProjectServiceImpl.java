@@ -9,6 +9,7 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.ProjectTypeEnum;
 import com.nenu.info.service.category.ScientificProjectService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
 
     @Autowired
     private TeacherDao teacherDao;
+
+    @Autowired
+    private StudentService studentService;
 
     /**
      * 新增科研国创项目
@@ -135,19 +139,19 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         scientificProject.setProjectName(scientificProjectDto.getProjectName());
         scientificProject.setProjectType(ProjectTypeEnum.getIdByValue(scientificProjectDto.getProjectType()));
         scientificProject.setSetYear(scientificProjectDto.getSetYear());
-        if(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectManStuNumber()) != null){
+        if(studentService.nameEqualOrNot(scientificProjectDto.getProjectManStuNumber(),scientificProjectDto.getProjectManName())){
             scientificProject.setProjectManId(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectManStuNumber()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber1()) != null){
+        if(studentService.nameEqualOrNot(scientificProjectDto.getProjectMemberStuNumber1(),scientificProjectDto.getProjectMemberName1()) ){
             scientificProject.setProjectMemberId1(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber1()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber2()) != null){
+        if(studentService.nameEqualOrNot(scientificProjectDto.getProjectMemberStuNumber2(),scientificProjectDto.getProjectMemberName2())){
             scientificProject.setProjectMemberId2(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber2()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber3()) != null){
+        if(studentService.nameEqualOrNot(scientificProjectDto.getProjectMemberStuNumber3(),scientificProjectDto.getProjectMemberName3())){
             scientificProject.setProjectMemberId3(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber3()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber4()) != null){
+        if(studentService.nameEqualOrNot(scientificProjectDto.getProjectMemberStuNumber4(),scientificProjectDto.getProjectMemberName4()) ){
             scientificProject.setProjectMemberId4(studentDao.selectStudentByStuNumber(scientificProjectDto.getProjectMemberStuNumber4()).getId());
         }
         if(teacherDao.selectTeacherByName(scientificProjectDto.getTeacherName()) != null){

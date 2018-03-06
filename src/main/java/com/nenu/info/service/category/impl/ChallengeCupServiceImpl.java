@@ -4,13 +4,16 @@ import com.nenu.info.Dao.category.ChallengeCupDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.ChallengeCupDto;
-import com.nenu.info.common.dto.category.InternetPlusDto;
+
 import com.nenu.info.common.entities.category.ChallengeCup;
 import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.enums.MatchLevelEnum;
+import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.category.InternetPlusService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,9 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private StudentService studentService;
 
     @Override
     public void add(ChallengeCup challengeCup) throws Exception {
@@ -75,5 +81,52 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
 
         return challengeCupDtoList;
 
+    }
+
+    /**
+     * 将dto转换为实体
+     * @param challengeCupDto
+     * @return
+     * @throws Exception
+     */
+    public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception{
+        ChallengeCup challengeCup = new ChallengeCup();
+        challengeCup.setProjectName(challengeCupDto.getProjectName());
+        challengeCup.setTeamName(challengeCupDto.getTeamName());
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber1(),challengeCupDto.getStuName1())){
+            challengeCup.setTeammateId1(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber1()).getId());
+        }
+
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber2(),challengeCupDto.getStuName2())){
+            challengeCup.setTeammateId2(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber2()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber3(),challengeCupDto.getStuName3())){
+            challengeCup.setTeammateId3(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber3()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber4(),challengeCupDto.getStuName4())){
+            challengeCup.setTeammateId4(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber4()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber5(),challengeCupDto.getStuName5())){
+            challengeCup.setTeammateId5(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber5()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber6(),challengeCupDto.getStuName6())){
+            challengeCup.setTeammateId6(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber6()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber7(),challengeCupDto.getStuName7())){
+            challengeCup.setTeammateId7(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber7()).getId());
+        }
+        if(studentService.nameEqualOrNot(challengeCupDto.getStuNumber8(),challengeCupDto.getStuName8())){
+            challengeCup.setTeammateId8(studentDao.selectStudentByStuNumber(challengeCupDto.getStuNumber8()).getId());
+        }
+        challengeCup.setMatchName(challengeCupDto.getMatchName());
+        challengeCup.setMatchLevel(MatchLevelEnum.getIdByValue(challengeCupDto.getMatchLevel()));
+        challengeCup.setPrizeLevel(PrizeLevelEnum.getIdByValue(challengeCupDto.getPrizeLevel()));
+        challengeCup.setPrizeTime(challengeCupDto.getPrizeTime());
+        challengeCup.setHostUnit(challengeCupDto.getHostUnit());
+        if(teacherDao.selectTeacherByName(challengeCupDto.getTeacherName()) != null)
+        {
+            challengeCup.setTeacherId(teacherDao.selectTeacherByName(challengeCupDto.getTeacherName()).getId());
+        }
+        return challengeCup;
     }
 }

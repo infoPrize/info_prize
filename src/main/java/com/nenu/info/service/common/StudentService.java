@@ -79,4 +79,11 @@ public interface StudentService {
      */
     public boolean checkMatchingWithNameAndStuNumber(String name, String stuNumber) throws Exception;
 
+    /**
+     * 根据学号查询学生姓名和获取到的姓名是否相同
+     * @param stuNumber 学号
+     * @return
+     */
+    public Boolean nameEqualOrNot(String stuNumber,String name) throws Exception;
+
 }

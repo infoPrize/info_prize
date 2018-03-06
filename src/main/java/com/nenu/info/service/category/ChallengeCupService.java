@@ -22,4 +22,11 @@ public interface ChallengeCupService {
                                                  Date endTime, String teamName, String stuName, Integer majorCode, String projectName,
                                                  String hostUnit, String teacherName) throws Exception;
 
+    /**
+     * 将dto转换为实体
+     * @param challengeCupDto
+     * @return
+     * @throws Exception
+     */
+    public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception;
 }

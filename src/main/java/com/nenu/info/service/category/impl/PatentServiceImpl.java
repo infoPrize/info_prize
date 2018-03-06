@@ -9,6 +9,7 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.PatentTypeEnum;
 import com.nenu.info.service.category.PatentService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,9 @@ public class PatentServiceImpl implements PatentService {
 
     @Autowired
     private TeacherDao teacherDao;
+
+    @Autowired
+    private StudentService studentService;
 
     private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -105,19 +109,19 @@ public class PatentServiceImpl implements PatentService {
         Patent patent = new Patent();
         patent.setPatentName(patentDto.getPatentName());
         patent.setPatentType(PatentTypeEnum.getIdByValue(patentDto.getPatentType()));
-        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber1()) != null){
+        if(studentService.nameEqualOrNot(patentDto.getApplierStuNumber1(),patentDto.getApplierName1())){
             patent.setOwnerId1(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber1()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber2()) != null){
+        if(studentService.nameEqualOrNot(patentDto.getApplierStuNumber2(),patentDto.getApplierName2())){
             patent.setOwnerId2(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber2()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber3()) != null){
+        if(studentService.nameEqualOrNot(patentDto.getApplierStuNumber3(),patentDto.getApplierName3())){
             patent.setOwnerId3(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber3()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber4()) != null){
+        if(studentService.nameEqualOrNot(patentDto.getApplierStuNumber4(),patentDto.getApplierName4())){
             patent.setOwnerId4(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber4()).getId());
         }
-        if(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber5()) != null){
+        if(studentService.nameEqualOrNot(patentDto.getApplierStuNumber5(),patentDto.getApplierName5()) ){
             patent.setOwnerId5(studentDao.selectStudentByStuNumber(patentDto.getApplierStuNumber5()).getId());
         }
 
