@@ -435,7 +435,7 @@ $(function() {
 					"id": "5",
 					"name": "国创科研",
 					"parentId": "1",
-					"url": site.website + "scientificProject/toScientificProject",
+					"url": site.website + "scientificProject/listByConditions/1",
 					"icon": "&#xe91f;",
 					"order": "1",
 					"isHeader": "0",

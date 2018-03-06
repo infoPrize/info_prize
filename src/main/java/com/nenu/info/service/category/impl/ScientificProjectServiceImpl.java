@@ -89,9 +89,7 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         }
 
         Integer teacherId = null;
-        if(teacher == null) {
-            return null;
-        } else {
+        if(teacher != null) {
             teacherId = teacher.getId();
         }
 
@@ -109,9 +107,9 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
 
     @Override
     public Map<String, Object> getParams(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber, Integer curPage, Integer totalPage) {
-        Map<String, Object> params = getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
+        Map<String, Object> params = getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
-        if(curPage <=0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;
@@ -131,6 +129,9 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
     @Override
     public List<ScientificProjectDto> listScientificProjectByConditions(Map<String, Object> params) {
         List<ScientificProjectDto> scientificProjectDtoList = null;
+
+        int startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
+        params.put("startNum", startNum);
 
         try {
             scientificProjectDtoList = scientificProjectDao.listScientificProjectByCondition(params);

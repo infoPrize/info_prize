@@ -47,7 +47,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
-        <if test="curPage ne -500">
+        <if test="curPage != -500">
         LIMIT #{startNum}, #{pageSize}
         </if>
     </select>

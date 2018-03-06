@@ -205,12 +205,15 @@ public class ScientificProjectController {
         params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
 
         HttpSession session = request.getSession();
+        session.setAttribute("scientificProjectParams", params);
 
 //        JSONArray jsonArray = new JSONArray();
         List<ScientificProjectDto> scientificProjectDtoList = null;
         scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
 //        if (scientificProjectDtoList != null) {
 //            for (ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
@@ -240,6 +243,62 @@ public class ScientificProjectController {
 //            }
 //        }
 //        return jsonArray;
+
+
+        return "scientific_project";
+    }
+
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("scientificProjectParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+
+        curPage -= 1;
+
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+        params.put("curPage", curPage);
+
+        List<ScientificProjectDto> scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
+
+        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
+
+
+        return "scientific_project";
+    }
+
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("scientificProjectParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+
+        curPage += 1;
+
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+        params.put("curPage", curPage);
+
+        List<ScientificProjectDto> scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
+
+        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
 
 
         return "scientific_project";
