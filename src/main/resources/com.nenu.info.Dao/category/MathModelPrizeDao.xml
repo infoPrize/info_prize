@@ -41,7 +41,9 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        <if test="curPage != -500">
         LIMIT #{startNum}, #{pageSize}
+        </if>
     </select>
 
     <sql id="queryCondition">

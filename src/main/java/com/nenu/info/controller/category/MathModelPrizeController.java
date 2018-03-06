@@ -163,12 +163,6 @@ public class MathModelPrizeController {
         int pageSize = WebConstants.pageSize;
         int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
 
-        if(curPage <= 0) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
         params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
 
         HttpSession session = request.getSession();
@@ -233,7 +227,7 @@ public class MathModelPrizeController {
 
         int totalPage = (int)params.get("totalPage");
 
-        if(curPage <= 0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;
@@ -270,7 +264,7 @@ public class MathModelPrizeController {
 
         int totalPage = (int)params.get("totalPage");
 
-        if(curPage <= 0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;

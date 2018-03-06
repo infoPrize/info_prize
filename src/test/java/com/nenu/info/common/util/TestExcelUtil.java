@@ -10,7 +10,8 @@ import com.nenu.info.common.utils.WebConstants;
 public class TestExcelUtil {
 
     public static void main(String[] args) {
-        System.out.println("website = " + WebConstants.website);
+//        System.out.println("website = " + WebConstants.website);
+
     }
 
 }

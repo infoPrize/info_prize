@@ -103,7 +103,7 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major,
                 stuName, teacherName, hostUnit);
 
-        if(curPage <= 0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;
