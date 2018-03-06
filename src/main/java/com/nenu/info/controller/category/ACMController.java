@@ -206,14 +206,16 @@ public class ACMController {
 //        }
 //        return jsonArray;
 
-        //对日期进行处理
-        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-            Date dateStr = acmPrizeDto.getPrizeTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(acmPrizeDtoList != null) {
+            //对日期进行处理
+            for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+                Date dateStr = acmPrizeDto.getPrizeTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-            String prizeTimeStr = sdf.format(dateStr);
+                String prizeTimeStr = sdf.format(dateStr);
 
-            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+                acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+            }
         }
 
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
@@ -257,7 +259,7 @@ public class ACMController {
 
         int totalPage = (int)params.get("totalPage");
 
-        if(curPage <= 0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;
@@ -296,7 +298,7 @@ public class ACMController {
 
         int totalPage = (int)params.get("totalPage");
 
-        if(curPage <= 0) {
+        if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {
             curPage = totalPage;

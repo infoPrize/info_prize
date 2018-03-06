@@ -18,6 +18,11 @@ public interface ScientificProjectDao {
     public void addScientificProject(@Param("scientificProject") ScientificProject scientificProject);
 
     /**
+     * 根据条件查询信息的数量
+     */
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
      * 根据条件查询国创科研信息
      * @param params 参数Map
      * @return

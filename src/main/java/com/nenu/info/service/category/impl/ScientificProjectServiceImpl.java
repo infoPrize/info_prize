@@ -8,6 +8,7 @@ import com.nenu.info.common.entities.category.ScientificProject;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.ProjectTypeEnum;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ScientificProjectService;
 import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,29 +39,26 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
     @Autowired
     private StudentService studentService;
 
-    /**
-     * 新增科研国创项目
-     * @param scientificProject
-     */
     @Override
     public void addScientificProject(ScientificProject scientificProject) {
         scientificProjectDao.addScientificProject(scientificProject);
     }
 
-    /**
-     * 根据条件查询项目列表
-     *
-     * @param projectName 项目名
-     * @param projectType 项目类型
-     * @param setYear     立项年份
-     * @param majorCode   专业代码
-     * @param teacherName 教师姓名
-     * @param stuName     学生姓名
-     * @param stuNumber   学号
-     * @return
-     */
     @Override
-    public List<ScientificProjectDto> listScientificProjectByConditions(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber) {
+    public Integer countByCondition(Map<String, Object> params) {
+        Integer count = null;
+
+        try {
+            count = scientificProjectDao.countByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    @Override
+    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber) {
         List<Student> studentList = null;
         Integer stuId = null;
         Student student = null;
@@ -96,7 +94,6 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         } else {
             teacherId = teacher.getId();
         }
-        List<ScientificProjectDto> scientificProjectDtoList = null;
 
         Map<String, Object> params = new HashMap<>();
         params.put("projectName", projectName);
@@ -105,6 +102,35 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         params.put("teacherId", teacherId);
         params.put("stuId", stuId);
         params.put("idList", idList);
+
+        return params;
+
+    }
+
+    @Override
+    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber, Integer curPage, Integer totalPage) {
+        Map<String, Object> params = getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
+
+        if(curPage <=0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        int pageSize = WebConstants.pageSize;
+        int startNum = (curPage - 1) * pageSize;
+
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
+        params.put("pageSize", WebConstants.pageSize);
+        params.put("startNum", startNum);
+
+        return params;
+    }
+
+    @Override
+    public List<ScientificProjectDto> listScientificProjectByConditions(Map<String, Object> params) {
+        List<ScientificProjectDto> scientificProjectDtoList = null;
 
         try {
             scientificProjectDtoList = scientificProjectDao.listScientificProjectByCondition(params);
@@ -115,24 +141,6 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         return scientificProjectDtoList;
     }
 
-    @Override
-    public List<ScientificProjectDto> listAll() {
-        List<ScientificProjectDto> scientificProjectDtoList = null;
-        try {
-            scientificProjectDtoList = scientificProjectDao.listAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return scientificProjectDtoList;
-    }
-
-    /**
-     * 将dto转换为实体
-     * @param scientificProjectDto
-     * @return
-     * @throws Exception
-     */
     public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception{
 
         ScientificProject scientificProject = new ScientificProject();

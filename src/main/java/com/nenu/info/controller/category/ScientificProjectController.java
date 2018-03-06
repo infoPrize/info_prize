@@ -5,6 +5,7 @@ import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.entities.category.ScientificProject;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.common.utils.YearUtil;
 import com.nenu.info.service.category.ScientificProjectService;
 import com.nenu.info.service.common.StudentService;
@@ -12,12 +13,12 @@ import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -46,7 +47,6 @@ public class ScientificProjectController {
     public String toScientificProject(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         Integer year = YearUtil.getYear();
         List<ScientificProjectDto> scientificProjectDtoList = null;
-        scientificProjectDtoList = scientificProjectService.listAll();
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
         model.addAttribute("year", year);
@@ -184,19 +184,31 @@ public class ScientificProjectController {
      * @param stuNumber   学生学号
      * @return
      */
-    @RequestMapping(value = "selectByCondition")
-    public String selectScientificProjectByConditions(@RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                                      @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
-                                                      @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
-                                                      @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                                      @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                                                      Model model) {
+    @RequestMapping(value = "listByConditions/{curPage}")
+    public String listScientificProjectByConditions(@PathVariable("curPage") int curPage,
+                                                    @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                                    @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
+                                                    @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
+                                                    @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                                    @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                                    @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                                    @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                                    Model model,
+                                                    HttpServletRequest request) {
+
+        Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
+
+        int count = scientificProjectService.countByCondition(params);
+        int pageSize = WebConstants.pageSize;
+        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+
+        params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
+
+        HttpSession session = request.getSession();
 
 //        JSONArray jsonArray = new JSONArray();
         List<ScientificProjectDto> scientificProjectDtoList = null;
-        scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
+        scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
 

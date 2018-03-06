@@ -4,6 +4,7 @@ import com.nenu.info.common.dto.category.ScientificProjectDto;
 import com.nenu.info.common.entities.category.ScientificProject;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -14,35 +15,34 @@ public interface ScientificProjectService {
 
     /**
      * 新增科研国创项目
-     * @param scientificProject
      */
     public void addScientificProject(ScientificProject scientificProject);
 
     /**
-     * 根据条件查询国创科研列表
-     * @param projectName 项目名
-     * @param projectType 项目类型
-     * @param setYear 立项年份
-     * @param major 专业
-     * @param teacherName 教师姓名
-     * @param stuName 学生姓名
-     * @param stuNumber 学号
-     * @return
+     * 根据条件查询相应信息的数量
      */
-    public List<ScientificProjectDto> listScientificProjectByConditions(String projectName, Integer projectType, String setYear, Integer major,
-                                                                        String teacherName, String stuName, String stuNumber);
+    public Integer countByCondition(Map<String, Object> params);
 
     /**
-     * 查询所有国创科研信息
-     * @return
+     * 将传递的参数加工为去数据库中查询的参数(与分页有关)
      */
-    public List<ScientificProjectDto> listAll();
+    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear,
+                                         Integer majorCode, String teacherName, String stuName, String stuNumber);
+
+    /**
+     * 将传递的参数加工为去数据库中查询的参数(与分页无关)
+     */
+    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear,
+                                         Integer majorCode, String teacherName, String stuName, String stuNumber, Integer curPage, Integer totalPage);
+
+
+    /**
+     * 根据条件查询国创科研列表
+     */
+    public List<ScientificProjectDto> listScientificProjectByConditions(Map<String, Object> params);
 
     /**
      * 将dto转换为实体
-     * @param scientificProjectDto
-     * @return
-     * @throws Exception
      */
     public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception;
 }
