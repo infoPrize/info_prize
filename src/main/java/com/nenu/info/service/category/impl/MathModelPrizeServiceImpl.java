@@ -9,6 +9,7 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.MatchLevelEnum;
 import com.nenu.info.common.enums.PrizeLevelEnum;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 /**
  * @author: software-liuwang
@@ -49,9 +52,9 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
     }
 
     @Override
-    public List<MathModelPrizeDto> listByConditions(Integer matchLevel, String matchName, Date beginTime, Date endTime, Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
-        List<MathModelPrizeDto> acmPrizeDtoList = null;
-
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime,
+                                         Date endTime, Integer prizeLevel, Integer major, String stuName,
+                                         String teacherName, String hostUnit) {
         List<Student> studentList = null;
 
         try {
@@ -90,13 +93,58 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         params.put("hostUnit", hostUnit);
         params.put("idList", idList);
 
+        return params;
+    }
+
+    @Override
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
+                                         String hostUnit, Integer curPage, Integer totalPage) {
+        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major,
+                stuName, teacherName, hostUnit);
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        Integer startNum = pageSize * (curPage - 1);
+
+        params.put("startNum", startNum);
+        params.put("pageSize", pageSize);
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
+
+        return params;
+    }
+
+    @Override
+    public Integer countByConditions(Map<String, Object> params) {
+        Integer count = null;
         try {
-            acmPrizeDtoList = mathModelPrizeDao.listByConditions(params);
+            count = mathModelPrizeDao.countByConditions(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return acmPrizeDtoList;
+        return count;
+    }
+
+    @Override
+    public List<MathModelPrizeDto> listByConditions(Map<String, Object> params) {
+        List<MathModelPrizeDto> mathModelPrizeDtoList = null;
+
+        int startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
+        params.put("startNum", startNum);
+
+        try {
+            mathModelPrizeDtoList = mathModelPrizeDao.listByConditions(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mathModelPrizeDtoList;
 
     }
 

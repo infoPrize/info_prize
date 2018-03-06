@@ -11,6 +11,14 @@
                #{mathModelPrize.teammateId3}, #{mathModelPrize.prizeTime}, #{mathModelPrize.teacherId})
     </insert>
 
+    <select id="countByConditions" resultType="Integer">
+        SELECT count(*)
+        FROM `t_math_model_prize` tmmp
+        <where>
+            <include refid="queryCondition" />
+        </where>
+    </select>
+
     <select id="listByConditions" resultType="com.nenu.info.common.dto.category.MathModelPrizeDto">
         SELECT
         (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tmmp.`match_level`) AS matchLevel,
@@ -30,7 +38,13 @@
         (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tmmp.`teammate_id_3`) AS teammateMajor3,
         (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tmmp.`teacher_id`) AS  teacherName
         FROM `t_math_model_prize` tmmp
-        WHERE
+        <where>
+            <include refid="queryCondition" />
+        </where>
+        LIMIT #{startNum}, #{pageSize}
+    </select>
+
+    <sql id="queryCondition">
         tmmp.`is_deleted` = 0
         <if test="matchLevel > 0">
             AND tmmp.`match_level` = #{matchLevel}
@@ -67,6 +81,6 @@
             </foreach>
             )
         </if>
-    </select>
+    </sql>
 
 </mapper>

@@ -17,32 +17,26 @@ public interface ACMService {
 
     /**
      * 添加ACM获奖信息
-     * @param acmPrize
      */
     public void add(ACMPrize acmPrize);
 
 
-    public Integer countByCondition(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                    Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                    String hostUnit);
+    public Integer countByCondition(Map<String, Object> params);
 
     /**
      * 根据条件查询ACM获奖信息
-     * @param matchLevel 比赛等级
-     * @param matchName 比赛名
-     * @param beginTime 开始时间
-     * @param endTime 结束时间
-     * @param prizeLevel 获奖等级
-     * @param major 专业
-     * @param stuName 学生名
-     * @param teacherName 教师名
-     * @param hostUnit 主办单位
-     * @param curPage 页号
      */
     public List<ACMPrizeDto> listByConditions(Map<String, Object> params);
 
     /**
-     * 将传过来的参数加工为去DAO层查询的参数
+     * 将传过来的参数加工为去DAO层查询的参数(与分页无关)
+     */
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
+                                         String hostUnit);
+
+    /**
+     * 将传过来的参数加工为去DAO层查询的参数(与分页有关)
      */
     public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
@@ -50,9 +44,6 @@ public interface ACMService {
 
     /**
      * 将dto转换为实体
-     * @param acmPrizeDto
-     * @return
-     * @throws Exception
      */
     public ACMPrize convertDtoToEntity(ACMPrizeDto acmPrizeDto) throws Exception;
 }

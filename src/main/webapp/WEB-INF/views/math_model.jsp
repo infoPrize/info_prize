@@ -27,7 +27,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="${website}mathModel/listByCondition" method="post">
+									<form class="condition_form form-inline" action="${website}mathModel/listByCondition/1" method="get">
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
@@ -149,7 +149,7 @@
 											<td>${mathModelPrizeDto.matchLevel}</td>
 											<td>${mathModelPrizeDto.matchName}</td>
 											<td>${mathModelPrizeDto.hostUnit}</td>
-											<td>${mathModelPrizeDto.prizeTime}</td>
+											<td>${mathModelPrizeDto.prizeTimeStr}</td>
 											<td>${mathModelPrizeDto.prizeLevel}</td>
 											<td>${mathModelPrizeDto.teamName}</td>
 											<td class="td_table hidecol">
@@ -194,20 +194,32 @@
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
+									<%--<li>--%>
+										<%--<a href="#">1</a>--%>
+									<%--</li>--%>
+									<%--<li>--%>
+										<%--<a href="#">2</a>--%>
+									<%--</li>--%>
+									<%--<li>--%>
+										<%--<a href="#">3</a>--%>
+									<%--</li>--%>
+									<%--<li>--%>
+										<%--<a href="#">4</a>--%>
+									<%--</li>--%>
+									<%--<li>--%>
+										<%--<a href="#">5</a>--%>
+									<%--</li>--%>
 									<li>
-										<a href="#">1</a>
+										<a href="${website}mathModel/toPrevious">上一页</a>
 									</li>
 									<li>
-										<a href="#">2</a>
+										<a href="${website}mathModel/toNext">下一页</a>
 									</li>
 									<li>
-										<a href="#">3</a>
+										共${totalPage}页
 									</li>
 									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
+										第${curPage}页
 									</li>
 									<li>
 										<a href="#" aria-label="Next">

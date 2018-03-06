@@ -21,6 +21,9 @@ public class MathModelPrizeDto {
     //获奖时间
     private Date prizeTime;
 
+    //获奖时间(字符串)
+    private String prizeTimeStr;
+
     //获奖等级
     private String prizeLevel;
 
@@ -87,6 +90,14 @@ public class MathModelPrizeDto {
 
     public void setPrizeTime(Date prizeTime) {
         this.prizeTime = prizeTime;
+    }
+
+    public String getPrizeTimeStr() {
+        return prizeTimeStr;
+    }
+
+    public void setPrizeTimeStr(String prizeTimeStr) {
+        this.prizeTimeStr = prizeTimeStr;
     }
 
     public String getPrizeLevel() {

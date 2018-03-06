@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.category.MathModelPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
@@ -13,14 +14,16 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -138,21 +141,53 @@ public class MathModelPrizeController {
 
     }
 
-    @RequestMapping(value = "listByCondition", method = RequestMethod.POST)
+    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
 //    @ResponseBody
-    public String listByCondition(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                     @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                     @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                     @RequestParam(value = "endTime", required = false) Date endTime,
-                                     @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                     @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                     @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                     Model model) {
+    public String listByCondition(@PathVariable("curPage") Integer curPage,
+                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                  @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                  @RequestParam(value = "endTime", required = false) Date endTime,
+                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                  @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                  Model model, HttpServletRequest request) {
 //        JSONArray jsonArray = new JSONArray();
-        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+
+        Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        int count = 0;
+        count = mathModelPrizeService.countByConditions(params);
+
+        int pageSize = WebConstants.pageSize;
+        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("mathModelParams", params);
+//        session.setAttribute("mathModelTotalPage", totalPage);
+
+        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+            Date prizeTime = mathModelPrizeDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+
+            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", curPage);
 //        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
 //            JSONObject jsonObject = new JSONObject();
 //
@@ -180,15 +215,85 @@ public class MathModelPrizeController {
         return "math_model";
     }
 
-    @RequestMapping(value = "toMathModel")
-    public String toMathModel(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
+//    @RequestMapping(value = "toMathModel")
+//    public String toMathModel(Model model) {
+//        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(-1, "", null, null,-1, -1,"", "", "");
+//        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+//
+//        return "math_model";
+//    }
 
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("mathModelParams");
 
-        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(-1, "", null, null,-1, -1,"", "", "");
+        int curPage = (int)params.get("curPage");
+        curPage -= 1;
+
+        int totalPage = (int)params.get("totalPage");
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        params.put("curPage", curPage);
+
+        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+            Date prizeTime = mathModelPrizeDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+
+            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        model.addAttribute("message",message);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
 
         return "math_model";
     }
 
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("mathModelParams");
+
+        int curPage = (int)params.get("curPage");
+        curPage += 1;
+
+        int totalPage = (int)params.get("totalPage");
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        params.put("curPage", curPage);
+
+        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+            Date prizeTime = mathModelPrizeDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+
+            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
+        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
+
+        return "math_model";
+    }
 }

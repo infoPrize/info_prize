@@ -21,6 +21,14 @@ public interface MathModelPrizeDao {
     public void add(@Param("mathModelPrize") MathModelPrize mathModelPrize) throws Exception;
 
     /**
+     * 根据条件查询相应信息数量
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public Integer countByConditions(Map<String, Object> params) throws Exception;
+
+    /**
      * 根据条件查询数学建模获奖信息
      * @param params
      * @return

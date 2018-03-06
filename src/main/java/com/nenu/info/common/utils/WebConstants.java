@@ -17,7 +17,7 @@ public final class WebConstants {
 //    public final static String staticWebSite = "http://120.78.154.246/info_prize/resources/";       //静态资源站点
 
     //分页，每页显示多少条数据
-    public final static Integer pageSize = 15;
+    public final static Integer pageSize = 3;
 
 
 }

@@ -56,9 +56,7 @@ public class ACMServiceImpl implements ACMService {
     }
 
     @Override
-    public Integer countByCondition(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                    Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit) {
-        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, -1, -1);
+    public Integer countByCondition(Map<String, Object> params) {
         Integer count = null;
 
         try {
@@ -88,16 +86,10 @@ public class ACMServiceImpl implements ACMService {
     }
 
     @Override
-    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage, Integer totalPage) {
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime,
+                                         Date endTime, Integer prizeLevel, Integer major, String stuName,
+                                         String teacherName, String hostUnit) {
         List<Student> studentList = null;
-
-        if(curPage <= 0) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
 
         try {
             studentList = studentDao.listStudentByStuNameAndMajor(stuName, major);
@@ -125,8 +117,6 @@ public class ACMServiceImpl implements ACMService {
             }
         }
 
-        Integer startNum = pageSize * (curPage - 1);
-
         Map<String, Object> params = new HashMap<>();
         params.put("matchLevel", matchLevel);
         params.put("matchName", matchName);
@@ -136,6 +126,25 @@ public class ACMServiceImpl implements ACMService {
         params.put("teacherId", teacherId);
         params.put("hostUnit", hostUnit);
         params.put("idList", idList);
+
+        return params;
+    }
+
+    @Override
+    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
+                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
+                                         String hostUnit, Integer curPage, Integer totalPage) {
+        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major,
+                                                stuName, teacherName, hostUnit);
+
+        if(curPage <= 0) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        Integer startNum = pageSize * (curPage - 1);
+
         params.put("startNum", startNum);
         params.put("pageSize", pageSize);
         params.put("curPage", curPage);

@@ -168,16 +168,17 @@ public class ACMController {
                                            @RequestParam(value = "message", required = false, defaultValue = "") String message) {
 //        JSONArray jsonArray = new JSONArray();
 
-        Integer count = acmService.countByCondition(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
+        Integer count = acmService.countByCondition(params);
         Integer pageSize = WebConstants.pageSize;
 
         Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
 
-        Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
+        params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
 
         HttpSession session = request.getSession();
-        session.setAttribute("params", params);
-        session.setAttribute("totalPage", totalPage);
+        session.setAttribute("ACMParams", params);
+        session.setAttribute("ACMTotalPage", totalPage);
 
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
@@ -249,7 +250,7 @@ public class ACMController {
     public String toPrevious(HttpServletRequest request,
                              Model model) {
         HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("params");
+        Map<String, Object> params = (Map)session.getAttribute("ACMParams");
 
         Integer curPage = (Integer)params.get("curPage");
         curPage -= 1;
@@ -278,7 +279,7 @@ public class ACMController {
 
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", session.getAttribute("totalPage"));
+        model.addAttribute("totalPage", totalPage);
 
         return "ACM";
 
@@ -288,12 +289,10 @@ public class ACMController {
     public String toNext(HttpServletRequest request,
                              Model model) {
         HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("params");
+        Map<String, Object> params = (Map)session.getAttribute("ACMParams");
 
         int curPage = (int)params.get("curPage");
         curPage += 1;
-
-
 
         int totalPage = (int)params.get("totalPage");
 
@@ -303,8 +302,10 @@ public class ACMController {
             curPage = totalPage;
         }
 
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
         params.put("curPage", curPage);
+
+        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
+
 
         //对日期进行处理
         for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
@@ -318,7 +319,7 @@ public class ACMController {
 
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", session.getAttribute("totalPage"));
+        model.addAttribute("totalPage", totalPage);
 
         return "ACM";
 
