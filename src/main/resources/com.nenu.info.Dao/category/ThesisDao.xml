@@ -45,7 +45,15 @@
           FROM `t_thesis` tt
     </select>
 
-    <select id="listByConditions" resultType="com.nenu.info.common.dto.category.ThesisDto">
+    <select id="countByCondition" resultType="Integer">
+        SELECT count(*)
+        FROM `t_thesis` tt
+        <where>
+            <include refid="queryCondition" />
+        </where>
+    </select>
+
+    <select id="listByCondition" resultType="com.nenu.info.common.dto.category.ThesisDto">
         SELECT
             (SELECT tjl.`level` FROM `t_journal_level` tjl WHERE tjl.`id` = tt.`journal_level`) AS journalLevel,
             tt.`journal_name` AS journalName,
@@ -74,45 +82,53 @@
             (SELECT tt1.`teacher_name` FROM `t_teacher` tt1 WHERE tt1.`id` = tt.`teacher_id`) AS teacherName,
             tt.`thesis_abstract` AS thesisAbstract
         FROM `t_thesis` tt
-        WHERE
-            tt.`is_deleted` = 0
-            <if test="studentIdList != null and studentIdList.size() > 0">
-                AND
-                (
-                  tt.`author_id_1` IN
-                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
-                        #{item}
-                    </foreach>
-                  OR tt.`author_id_2` IN
-                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
-                        #{item}
-                    </foreach>
-                  OR tt.`author_id_3` IN
-                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
-                        #{item}
-                    </foreach>
-                  OR tt.`author_id_4` IN
-                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
-                        #{item}
-                    </foreach>
-                  OR tt.`author_id_5` IN
-                    <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
-                        #{item}
-                    </foreach>
-                )
-            </if>
-            <if test="teacherId != null and teacherId > 0">
-                AND tt.`teacher_id` = #{teacherId}
-            </if>
-            <if test="journalLevel > 0">
-                AND tt.`journal_level` = #{journalLevel}
-            </if>
-            <if test="journalName != null and journalName != ''">
-                AND tt.`journal_name` LIKE CONCAT('%', #{journalName}, '%')
-            </if>
-            <if test="beginTime != null and endTime != null">
-                AND tt.`publish_time` BETWEEN #{beginTime} AND #{endTime}
-            </if>
+        <where>
+            <include refid="queryCondition" />
+        </where>
+        <if test="curPage != -500">
+            LIMIT #{startNum}, #{pageSize}
+        </if>
     </select>
+
+    <sql id="queryCondition">
+        tt.`is_deleted` = 0
+        <if test="studentIdList != null and studentIdList.size() > 0">
+            AND
+            (
+            tt.`author_id_1` IN
+            <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tt.`author_id_2` IN
+            <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tt.`author_id_3` IN
+            <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tt.`author_id_4` IN
+            <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            OR tt.`author_id_5` IN
+            <foreach collection="studentIdList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            )
+        </if>
+        <if test="teacherId != null and teacherId > 0">
+            AND tt.`teacher_id` = #{teacherId}
+        </if>
+        <if test="journalLevel > 0">
+            AND tt.`journal_level` = #{journalLevel}
+        </if>
+        <if test="journalName != null and journalName != ''">
+            AND tt.`journal_name` LIKE CONCAT('%', #{journalName}, '%')
+        </if>
+        <if test="beginTime != null and endTime != null">
+            AND tt.`publish_time` BETWEEN #{beginTime} AND #{endTime}
+        </if>
+    </sql>
 
 </mapper>

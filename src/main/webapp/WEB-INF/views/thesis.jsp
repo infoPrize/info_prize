@@ -21,7 +21,7 @@
 							<hr/>
 						</div>
 						<div class="x_content">
-							<form class="condition_form form-inline" action="${website}thesis/listByCondition" method="post">
+							<form class="condition_form form-inline" action="${website}thesis/listByCondition/1" method="post">
 								<!--第一行-->
 								<div class="tab-row">
 									<div class="form-group col-sm-4">
@@ -225,20 +225,32 @@
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
+							<%--<li>--%>
+								<%--<a href="#">1</a>--%>
+							<%--</li>--%>
+							<%--<li>--%>
+								<%--<a href="#">2</a>--%>
+							<%--</li>--%>
+							<%--<li>--%>
+								<%--<a href="#">3</a>--%>
+							<%--</li>--%>
+							<%--<li>--%>
+								<%--<a href="#">4</a>--%>
+							<%--</li>--%>
+							<%--<li>--%>
+								<%--<a href="#">5</a>--%>
+							<%--</li>--%>
 							<li>
-								<a href="#">1</a>
+								共${totalPage}页
 							</li>
 							<li>
-								<a href="#">2</a>
+								第${curPage}页
 							</li>
 							<li>
-								<a href="#">3</a>
+								<a href="${website}thesis/toPrevious">上一页</a>
 							</li>
 							<li>
-								<a href="#">4</a>
-							</li>
-							<li>
-								<a href="#">5</a>
+								<a href="${website}thesis/toNext">下一页</a>
 							</li>
 							<li>
 								<a href="#" aria-label="Next">

@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.nenu.info.common.utils.WebConstants.pageSize;
+
 /**
  * @author: software-liuwang
  * @time: 2017/12/15 20:12
@@ -37,7 +39,7 @@ public class ThesisServiceImpl implements ThesisService {
     @Autowired
     private StudentService studentService;
 
-    private SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
+    private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
 
 
@@ -47,21 +49,7 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public List<ThesisDto> listAll() throws Exception {
-
-        List<ThesisDto> thesisDtoList =  thesisDao.listAll();
-
-        for(ThesisDto thesisDto : thesisDtoList) {
-            thesisDto.setPublishTimeStr(sf.format(thesisDto.getPublishTime()));
-        }
-
-        return thesisDtoList;
-    }
-
-    @Override
-    public List<ThesisDto> listByConditions(Integer journalLevel, String journalName, String authorName, String authorStuNumber,
-                                            Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception {
-
+    public Map<String, Object> getParams(Integer journalLevel, String journalName, String authorName, String authorStuNumber, Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception {
         List<Student> studentList = null;
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
@@ -79,9 +67,7 @@ public class ThesisServiceImpl implements ThesisService {
         Map<String, Object> params = new HashMap<>();
         if(!teacherName.equals("")) {
             Teacher teacher = teacherDao.selectTeacherByName(teacherName);
-            if (teacher == null) {
-                return null;
-            } else {
+            if(teacher != null) {
                 teacherId = teacher.getId();
             }
         }
@@ -92,7 +78,39 @@ public class ThesisServiceImpl implements ThesisService {
         params.put("beginTime", beginTime);
         params.put("endTime", endTime);
 
-        List<ThesisDto> thesisDtoList =  thesisDao.listByConditions(params);
+        return params;
+    }
+
+    @Override
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        int startNum = (curPage - 1) * pageSize;
+
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
+        params.put("pageSize", pageSize);
+        params.put("startNum", startNum);
+
+        return params;
+    }
+
+    @Override
+    public Integer countByCondition(Map<String, Object> params) throws Exception {
+        Integer count = 0;
+        count = thesisDao.countByCondition(params);
+        return count;
+    }
+
+    @Override
+    public List<ThesisDto> listAll() throws Exception {
+
+        List<ThesisDto> thesisDtoList =  thesisDao.listAll();
+
         for(ThesisDto thesisDto : thesisDtoList) {
             thesisDto.setPublishTimeStr(sf.format(thesisDto.getPublishTime()));
         }
@@ -100,12 +118,19 @@ public class ThesisServiceImpl implements ThesisService {
         return thesisDtoList;
     }
 
-    /**
-     * dto转换为实体
-     * @param thesisDto
-     * @return
-     * @throws Exception
-     */
+    @Override
+    public List<ThesisDto> listByCondition(Map<String, Object> params) throws Exception {
+
+        List<ThesisDto> thesisDtoList = null;
+
+        thesisDtoList =  thesisDao.listByCondition(params);
+        for(ThesisDto thesisDto : thesisDtoList) {
+            thesisDto.setPublishTimeStr(sf.format(thesisDto.getPublishTime()));
+        }
+
+        return thesisDtoList;
+    }
+
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception{
 
         Thesis thesis = new Thesis();

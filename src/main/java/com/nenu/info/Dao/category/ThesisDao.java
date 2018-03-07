@@ -16,24 +16,22 @@ public interface ThesisDao {
 
     /**
      * 添加论文信息
-     * @param thesis
-     * @throws Exception
      */
     public void add(@Param("thesis") Thesis thesis) throws Exception;
 
     /**
      * 查询所有论文信息
-     * @return
-     * @throws Exception
      */
     public List<ThesisDto> listAll() throws Exception;
 
     /**
-     * 根据条件查询论文信息
-     * @param params
-     * @return
-     * @throws Exception
+     * 根据条件查询论文信息的数量
      */
-    public List<ThesisDto> listByConditions(Map<String, Object> params) throws Exception;
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
+     * 根据条件查询论文信息
+     */
+    public List<ThesisDto> listByCondition(Map<String, Object> params) throws Exception;
 
 }

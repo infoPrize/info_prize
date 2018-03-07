@@ -11,14 +11,16 @@ import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 /**
  * @author: software-liuwang
@@ -251,27 +253,110 @@ public class ThesisController {
 
     }
 
-    @RequestMapping(value = "listByCondition")
-    public String listByConditions(@RequestParam("journalLevel") Integer journalLevel,
-                                   @RequestParam("journalName") String journalName,
-                                   @RequestParam("authorName") String authorName,
-                                   @RequestParam("authorStuNumber") String authorStuNumber,
-                                   @RequestParam("authorMajor") Integer authorMajor,
-                                   @RequestParam("authorGrade") String authorGrade,
-                                   @RequestParam("beginTime") Date beginTime,
-                                   @RequestParam("endTime") Date endTime,
-                                   @RequestParam("teacherName") String teacherName,
-                                   Model model) {
-        List<ThesisDto> thesisDtoList = null;
-
+    @RequestMapping(value = "listByCondition/{curPage}")
+    public String listByCondition(@PathVariable("curPage") Integer curPage,
+                                  @RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
+                                  @RequestParam(value = "journalName", required = false, defaultValue = "") String journalName,
+                                  @RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
+                                  @RequestParam(value = "authorStuNumber", required = false, defaultValue = "") String authorStuNumber,
+                                  @RequestParam(value = "authorMajor", required = false, defaultValue = "-1") Integer authorMajor,
+                                  @RequestParam(value = "authorGrade", required = false, defaultValue = "") String authorGrade,
+                                  @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                  @RequestParam(value = "endTime", required = false) Date endTime,
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  HttpServletRequest request,
+                                  Model model) {
+        Map<String, Object> params = null;
         try {
-            thesisDtoList = thesisService.listByConditions(journalLevel, journalName, authorName, authorStuNumber, authorMajor, authorGrade,
-                                                            beginTime, endTime, teacherName);
+            params = thesisService.getParams(journalLevel, journalName, authorName, authorStuNumber, authorMajor, authorGrade,
+                                            beginTime, endTime, teacherName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int count = 0;
+        try {
+            count = thesisService.countByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+        try {
+            params = thesisService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("thesisParams", params);
+
+        List<ThesisDto> thesisDtoList = null;
+        try {
+            thesisDtoList = thesisService.listByCondition(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         model.addAttribute("thesisDtoList", thesisDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
+
+        return "thesis";
+    }
+
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("thesisParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+        curPage -= 1;
+
+        try {
+            params = thesisService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<ThesisDto> thesisDtoList = null;
+        try {
+            thesisDtoList = thesisService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("thesisDtoList", thesisDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
+
+        return "thesis";
+    }
+
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("thesisParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+        curPage += 1;
+
+        try {
+            params = thesisService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<ThesisDto> thesisDtoList = null;
+        try {
+            thesisDtoList = thesisService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("thesisDtoList", thesisDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "thesis";
     }

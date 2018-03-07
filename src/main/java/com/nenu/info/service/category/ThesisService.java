@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.category.Thesis;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -15,40 +16,37 @@ public interface ThesisService {
 
     /**
      * 添加论文信息
-     * @param thesis
-     * @throws Exception
      */
     public void add(Thesis thesis) throws Exception;
 
     /**
+     * 将传递过来的参数加工为去数据库传递的参数(与分页无关)
+     */
+    public Map<String, Object> getParams(Integer journalLevel, String journalName, String authorName, String authorStuNumber,
+                                         Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception;
+
+    /**
+     * 将传递过来的参数加工为去数据库传递的参数(与分页有关)
+     */
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
+
+    /**
+     * 根据条件查询论文信息的数量
+     */
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
      * 查询所有论文信息
-     * @return
-     * @throws Exception
      */
     public List<ThesisDto> listAll() throws Exception;
 
     /**
      * 根据条件查询论文信息
-     * @param journalLevel
-     * @param journalName
-     * @param authorName
-     * @param authorStuNumber
-     * @param authorMajor
-     * @param authorGrade
-     * @param beginTime
-     * @param endTime
-     * @param teacherName
-     * @return
      */
-    public List<ThesisDto> listByConditions(Integer journalLevel, String journalName, String authorName,
-                                            String authorStuNumber, Integer authorMajor, String authorGrade,
-                                            Date beginTime, Date endTime, String teacherName) throws Exception;
+    public List<ThesisDto> listByCondition(Map<String, Object> params) throws Exception;
 
     /**
      * 将dto转换为实体
-     * @param thesisDto
-     * @return
-     * @throws Exception
      */
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception;
 
