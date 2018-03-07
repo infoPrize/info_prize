@@ -11,6 +11,7 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.enums.MatchLevelEnum;
 import com.nenu.info.common.enums.PrizeLevelEnum;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.StudentService;
@@ -44,15 +45,11 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
         challengeCupDao.add(challengeCup);
     }
 
-
-
     @Override
-    public List<ChallengeCupDto> listByCondition(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String teamName, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) throws Exception {
-
+    public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String teamName, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) throws Exception {
         Integer teacherId = null;
         List<Student> studentList = null;
         List<Integer> idList = new ArrayList<>();
-        List<ChallengeCupDto> challengeCupDtoList = null;
 
         if(!teacherName.equals("")) {
             Teacher teacher = teacherDao.selectTeacherByName(teacherName);
@@ -77,18 +74,47 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
         params.put("hostUnit", hostUnit);
         params.put("teacherId", teacherId);
 
+        return params;
+    }
+
+    @Override
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
+
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        int pageSize = WebConstants.pageSize;
+        int startNum = (curPage - 1) * pageSize;
+
+        params.put("curPage", curPage);
+        params.put("pageSize", pageSize);
+        params.put("startNum", startNum);
+        params.put("totalPage", totalPage);
+
+        return params;
+    }
+
+    @Override
+    public Integer countByCondition(Map<String, Object> params) throws Exception {
+        Integer count = null;
+        count = challengeCupDao.countByCondition(params);
+        return count;
+    }
+
+    @Override
+    public List<ChallengeCupDto> listByCondition(Map<String, Object> params) throws Exception {
+
+        List<ChallengeCupDto> challengeCupDtoList = null;
+
         challengeCupDtoList = challengeCupDao.listByCondition(params);
 
         return challengeCupDtoList;
 
     }
 
-    /**
-     * 将dto转换为实体
-     * @param challengeCupDto
-     * @return
-     * @throws Exception
-     */
     public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception{
         ChallengeCup challengeCup = new ChallengeCup();
         challengeCup.setProjectName(challengeCupDto.getProjectName());
