@@ -24,7 +24,11 @@
 
   	<h3>挑战杯:</h3><br>
 	<a href="${website}ChallengeCup/toAdd"><h4>挑战杯添加</h4></a><br>
-	<a href="${website}ChallengeCup/listByCondition/1"><h4>按条件查询挑战杯信息</h4></a>
+	<a href="${website}ChallengeCup/listByCondition/1"><h4>按条件查询挑战杯信息</h4></a><br><br><br>
+
+  	<h3>其他比赛:</h3>
+  	<a href="${website}other_match.jsp"><h4>其他比赛添加</h4></a><br>
+  	<a href="${website}other_match_list.jsp"><h4>按条件查找其他比赛</h4></a>
 
   </body>
 </html>
