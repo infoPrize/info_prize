@@ -1,19 +1,14 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ChallengeCupDto;
-import com.nenu.info.common.dto.category.InternetPlusDto;
 import com.nenu.info.common.entities.category.ChallengeCup;
-import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ChallengeCupService;
-import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

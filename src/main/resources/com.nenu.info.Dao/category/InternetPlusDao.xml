@@ -19,6 +19,14 @@
         #{internetPlus.teacherId})
     </insert>
 
+    <select id="countByCondition" resultType="Integer">
+        SELECT count(*)
+        FROM `t_internet_plus` tip
+        <where>
+            <include refid="queryCondition" />
+        </where>
+    </select>
+
     <select id="listByCondition" resultType="com.nenu.info.common.dto.category.InternetPlusDto">
         SELECT
           (SELECT tml.`name` FROM `t_match_level` tml WHERE tml.`id` = tip.`match_level`) AS matchLevel,
@@ -49,6 +57,9 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        <if test="curPage != -500">
+            LIMIT #{startNum}, #{pageSize}
+        </if>
     </select>
 
     <sql id="queryCondition">

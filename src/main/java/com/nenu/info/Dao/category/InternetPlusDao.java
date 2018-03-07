@@ -16,6 +16,8 @@ public interface InternetPlusDao {
 
     public void add(@Param("internetPlus") InternetPlus internetPlus) throws Exception;
 
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
     public List<InternetPlusDto> listByCondition(Map<String, Object> params) throws Exception;
 
 }

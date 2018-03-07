@@ -19,7 +19,7 @@
 
 	<h3>互联网+:</h3><br>
 	<a href="${website}InternetPlus/toAdd"><h4>互联网+添加</h4></a><br>
-	<a href="${website}InternetPlus/toList"><h4>按条件查询互联网+信息</h4></a><br><br><br>
+	<a href="${website}InternetPlus/listByCondition/1"><h4>按条件查询互联网+信息</h4></a><br><br><br>
 
 
   	<h3>挑战杯:</h3><br>

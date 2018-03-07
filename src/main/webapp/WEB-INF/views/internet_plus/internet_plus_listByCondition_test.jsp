@@ -14,7 +14,7 @@
 <body>
     <h1>根据条件筛选互联网+比赛信息</h1>
     <hr>
-    <form action="${website}InternetPlus/listByCondition" method="post">
+    <form action="${website}InternetPlus/listByCondition/1" method="post">
         <table>
             <tr>
                 <td>比赛名:</td>
@@ -160,5 +160,18 @@
             </tr>
         </c:forEach>
     </table>
+
+    <li>
+        共${totalPage}页
+    </li>
+    <li>
+        第${curPage}页
+    </li>
+    <li>
+        <a href="${website}InternetPlus/toPrevious">上一页</a>
+    </li>
+    <li>
+        <a href="${website}InternetPlus/toNext">下一页</a>
+    </li>
 </body>
 </html>

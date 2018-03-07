@@ -32,19 +32,19 @@ public final class ExcelUtil {
     public static Map<String,String> exportFieldDesc = new HashMap<>();
     static{
         //ACM和数学建模信息
-//        exportFieldDesc.put("matchLevel","比赛类别");
-//        exportFieldDesc.put("matchName", "比赛名称");
-//        exportFieldDesc.put("hostUnit","主办单位");
-//        exportFieldDesc.put("prizeTimeStr","获奖时间");
-//        exportFieldDesc.put("prizeLevel","获奖等级");
-//        exportFieldDesc.put("teamName", "团队名称");
-//        exportFieldDesc.put("teammateName1","参赛人员1姓名");
-//        exportFieldDesc.put("teammateStuNumber1","参赛人员1学号");
-//        exportFieldDesc.put("teammateName2","参赛人员2姓名");
-//        exportFieldDesc.put("teammateStuNumber2", "参赛人员2学号");
-//        exportFieldDesc.put("teammateName3","参赛人员3姓名");
-//        exportFieldDesc.put("teammateStuNumber3","参赛人员3学号");
-//        exportFieldDesc.put("teacherName","指导老师");
+        exportFieldDesc.put("matchLevel","比赛类别");
+        exportFieldDesc.put("matchName", "比赛名称");
+        exportFieldDesc.put("hostUnit","主办单位");
+        exportFieldDesc.put("prizeTimeStr","获奖时间");
+        exportFieldDesc.put("prizeLevel","获奖等级");
+        exportFieldDesc.put("teamName", "团队名称");
+        exportFieldDesc.put("teammateName1","参赛人员1姓名");
+        exportFieldDesc.put("teammateStuNumber1","参赛人员1学号");
+        exportFieldDesc.put("teammateName2","参赛人员2姓名");
+        exportFieldDesc.put("teammateStuNumber2", "参赛人员2学号");
+        exportFieldDesc.put("teammateName3","参赛人员3姓名");
+        exportFieldDesc.put("teammateStuNumber3","参赛人员3学号");
+        exportFieldDesc.put("teacherName","指导老师");
 
         //国创科研
         exportFieldDesc.put("projectType","项目类别");

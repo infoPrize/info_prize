@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static com.nenu.info.common.utils.WebConstants.pageSize;
+
 /**
  * @author: software-liuwang
  * @time: 2018/1/27 19:04
@@ -42,12 +44,10 @@ public class InternetPlusServiceImpl implements InternetPlusService {
     }
 
     @Override
-    public List<InternetPlusDto> listByCondition(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String teamName, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) throws Exception {
-
+    public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String teamName, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) throws Exception {
         Integer teacherId = null;
         List<Student> studentList = null;
         List<Integer> idList = new ArrayList<>();
-        List<InternetPlusDto> internetPlusDtoList = null;
 
         if(!teacherName.equals("")) {
             Teacher teacher = teacherDao.selectTeacherByName(teacherName);
@@ -72,18 +72,41 @@ public class InternetPlusServiceImpl implements InternetPlusService {
         params.put("hostUnit", hostUnit);
         params.put("teacherId", teacherId);
 
-        internetPlusDtoList = internetPlusDao.listByCondition(params);
-
-        return internetPlusDtoList;
-
+        return params;
     }
 
-    /**
-     * 将dto转换为实体
-     * @param internetPlusDto
-     * @return
-     * @throws Exception
-     */
+    @Override
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        int startNum = (curPage - 1) * pageSize;
+
+        params.put("curPage", curPage);
+        params.put("startNum", startNum);
+        params.put("totalPage", totalPage);
+        params.put("pageSize", pageSize);
+
+        return params;
+    }
+
+    @Override
+    public Integer countByCondition(Map<String, Object> params) throws Exception {
+        Integer count = null;
+        count = internetPlusDao.countByCondition(params);
+        return count;
+    }
+
+    @Override
+    public List<InternetPlusDto> listByCondition(Map<String, Object> params) throws Exception {
+        List<InternetPlusDto> internetPlusDtoList = null;
+        internetPlusDtoList = internetPlusDao.listByCondition(params);
+        return internetPlusDtoList;
+    }
+
     public InternetPlus convertDtoToEntity(InternetPlusDto internetPlusDto) throws Exception{
 
         InternetPlus internetPlus = new InternetPlus();
