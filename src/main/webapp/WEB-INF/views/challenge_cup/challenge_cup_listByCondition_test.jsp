@@ -91,7 +91,8 @@
                 <td><input type="text" name="teacherName"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="提交"></td>
+                <input type="button" value="选择" type="submit" onclick="form.action='${website}ChallengeCup/listByCondition/1';form.submit();"/>
+                <input type="button" value="导出Excel" type="submit" onclick="form.action='/export/challengeCup';form.submit();"/>
             </tr>
         </table>
 

@@ -87,7 +87,8 @@
 								</div>
 
 								<!--第四行-->
-								<input type="submit" value="选择" id="sort"/>
+								<input type="button" value="选择" type="submit" onclick="form.action='${website}thesis/listByCondition/1';form.submit();"/>
+								<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
 
 							</form>
 

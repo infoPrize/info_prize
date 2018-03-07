@@ -69,7 +69,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/thesis/toThesis";
+        return "redirect:/thesis/listByCondition/1";
 
     }
 
@@ -91,7 +91,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/patent/toPatent";
+        return "redirect:/patent/listByCondition/1";
 
     }
 
@@ -113,7 +113,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/scientificProject/toScientificProject";
+        return "redirect:/scientificProject/listByConditions/1";
     }
 
     @RequestMapping(value = "ACMPrize",method = RequestMethod.POST)
@@ -134,7 +134,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/acm/listACMByCondition/0";
+        return "redirect:/acm/listACMByCondition/1";
     }
 
     @RequestMapping(value = "math",method = RequestMethod.POST)
@@ -155,7 +155,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/mathModel/toMathModel";
+        return "redirect:/mathModel/listByCondition/1";
     }
 
     @RequestMapping(value = "internetPlus",method = RequestMethod.POST)
@@ -176,7 +176,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/InternetPlus/listByCondition";
+        return "redirect:/InternetPlus/listByCondition/1";
     }
 
     @RequestMapping(value = "challengeCup",method = RequestMethod.POST)
@@ -197,7 +197,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/ChallengeCup/listByCondition";
+        return "redirect:/ChallengeCup/listByCondition/1";
     }
 
 }
