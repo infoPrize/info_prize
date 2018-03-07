@@ -7,6 +7,7 @@ import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.StudentService;
@@ -16,13 +17,14 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -192,33 +194,74 @@ public class ChallengeCupController {
     }
 
 
-    @RequestMapping(value = "listByCondition", method = RequestMethod.POST)
+    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
 //    @ResponseBody
-    public String listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                     @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                     @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                     @RequestParam(value = "startTime", required = false) Date startTime,
-                                     @RequestParam(value = "endTime", required = false) Date endTime,
-                                     @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
-                                     @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                     @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
-                                     @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                     @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     Model model,
-                                  @RequestParam(value = "message", required = false, defaultValue = "") String message) {
+    public String listByCondition(@PathVariable("curPage") Integer curPage,
+                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                  @RequestParam(value = "startTime", required = false) Date startTime,
+                                  @RequestParam(value = "endTime", required = false) Date endTime,
+                                  @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
+                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                  @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
+                                  @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  @RequestParam(value = "message", required = false, defaultValue = "") String message,
+                                  Model model,
+                                  HttpServletRequest request ) {
 
         List<ChallengeCupDto> challengeCupDtoList = null;
-        JSONArray jsonArray = new JSONArray();
+//        JSONArray jsonArray = new JSONArray();
 
+        Map<String, Object> params = null;
         try {
-            challengeCupDtoList = challengeCupService.listByCondition(matchName, matchLevel, prizeLevel, startTime, endTime, teamName, stuName, majorCode, projectName,
-                    hostUnit, teacherName);
+            params = challengeCupService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, teamName, stuName,
+                    majorCode, projectName, hostUnit, teacherName);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        int count = 0;
+
+        try {
+            count = challengeCupService.countByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int pageSize = WebConstants.pageSize;
+        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+
+        try {
+            params = challengeCupService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("challengeCupParams", params);
+
+        try {
+            challengeCupDtoList = challengeCupService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(challengeCupDtoList != null) {
+            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
+                Date prizeTime = challengCupDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+                challengCupDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
         model.addAttribute("challengeCupDtoList", challengeCupDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
 
 
 //        if(challengeCupDtoList != null) {
@@ -255,6 +298,86 @@ public class ChallengeCupController {
 
 //        return jsonArray;
         model.addAttribute("message",message);
+
+        return "challenge_cup/challenge_cup_listByCondition_test";
+    }
+
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+
+        Map<String, Object> params = (Map)session.getAttribute("challengeCupParams");
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+
+        curPage -= 1;
+
+        try {
+            params = challengeCupService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<ChallengeCupDto> challengeCupDtoList = null;
+        try {
+            challengeCupDtoList = challengeCupService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(challengeCupDtoList != null) {
+            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
+                Date prizeTime = challengCupDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+                challengCupDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
+        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
+
+        return "challenge_cup/challenge_cup_listByCondition_test";
+    }
+
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+
+        Map<String, Object> params = (Map)session.getAttribute("challengeCupParams");
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+
+        curPage += 1;
+
+        try {
+            params = challengeCupService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<ChallengeCupDto> challengeCupDtoList = null;
+        try {
+            challengeCupDtoList = challengeCupService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(challengeCupDtoList != null) {
+            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
+                Date prizeTime = challengCupDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+                challengCupDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
+        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "challenge_cup/challenge_cup_listByCondition_test";
     }

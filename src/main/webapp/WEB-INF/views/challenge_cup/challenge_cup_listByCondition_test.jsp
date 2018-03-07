@@ -14,7 +14,7 @@
 <body>
     <h1>根据条件筛选挑戰杯比赛信息</h1>
     <hr>
-    <form action="${website}ChallengeCup/listByCondition" method="post">
+    <form action="${website}ChallengeCup/listByCondition/1" method="get">
         <table>
             <tr>
                 <td>比赛名:</td>
@@ -154,11 +154,24 @@
             <td>${challengeCupDto.stuName8}</td>
             <td>${challengeCupDto.stuNumber8}</td>
             <td>${challengeCupDto.prizeLevel}</td>
-            <td>${challengeCupDto.prizeTime}</td>
+            <td>${challengeCupDto.prizeTimeStr}</td>
             <td>${challengeCupDto.hostUnit}</td>
             <td>${challengeCupDto.teacherName}</td>
         </tr>
         </c:forEach>
     </table>
+
+    <li>
+        共${totalPage}页
+    </li>
+    <li>
+        第${curPage}页
+    </li>
+    <li>
+        <a href="${website}ChallengeCup/toPrevious">上一页</a>
+    </li>
+    <li>
+        <a href="${website}ChallengeCup/toNext">下一页</a>
+    </li>
 </body>
 </html>

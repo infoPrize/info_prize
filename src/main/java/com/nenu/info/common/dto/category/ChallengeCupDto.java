@@ -75,6 +75,9 @@ public class ChallengeCupDto {
     //获奖时间
     private Date prizeTime;
 
+    //获奖时间(字符串形式)
+    private String prizeTimeStr;
+
     //主办单位
     private String hostUnit;
 
@@ -255,6 +258,14 @@ public class ChallengeCupDto {
 
     public void setPrizeTime(Date prizeTime) {
         this.prizeTime = prizeTime;
+    }
+
+    public String getPrizeTimeStr() {
+        return prizeTimeStr;
+    }
+
+    public void setPrizeTimeStr(String prizeTimeStr) {
+        this.prizeTimeStr = prizeTimeStr;
     }
 
     public String getHostUnit() {

@@ -24,7 +24,7 @@
 
   	<h3>挑战杯:</h3><br>
 	<a href="${website}ChallengeCup/toAdd"><h4>挑战杯添加</h4></a><br>
-	<a href="${website}ChallengeCup/toList"><h4>按条件查询挑战杯信息</h4></a>
+	<a href="${website}ChallengeCup/listByCondition/1"><h4>按条件查询挑战杯信息</h4></a>
 
   </body>
 </html>

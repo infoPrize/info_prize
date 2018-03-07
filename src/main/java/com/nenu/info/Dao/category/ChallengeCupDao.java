@@ -14,8 +14,19 @@ import java.util.Map;
  */
 public interface ChallengeCupDao {
 
+    /**
+     * 添加挑战杯获奖信息
+     */
     public void add(@Param("challengeCup")ChallengeCup challengeCup) throws Exception;
 
+    /**
+     * 根据条件查询相应信息的数量
+     */
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
+     * 根据条件查询相应信息
+     */
     public List<ChallengeCupDto> listByCondition(Map<String, Object> params) throws Exception;
 
 }
