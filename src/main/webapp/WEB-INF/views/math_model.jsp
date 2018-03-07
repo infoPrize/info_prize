@@ -106,7 +106,8 @@
 											</div>
 										</div>
 										<!--第五行-->
-										<input type="submit" value="选择" id="sort" />
+										<input type="button" value="选择" type="submit" onclick="form.action='${website}mathModel/listByCondition/1';form.submit();"/>
+										<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/math';form.submit();"/>
 										<div class="clearfix"></div>
 									</form>
 

@@ -23,6 +23,9 @@ public final class URLConstants {
     //导入Excel
     public static final String IMPORT_URL = "import";
 
+    //导出Excel
+    public static final String EXPORT_URL = "export";
+
     //论文
     public static final String THESIS_URL = "thesis";
 

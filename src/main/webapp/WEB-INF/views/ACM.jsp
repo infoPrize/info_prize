@@ -32,7 +32,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="${website}acm/listACMByCondition/0" method="get">
+									<form class="condition_form form-inline" action="" method="get">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
@@ -111,14 +111,19 @@
 											</div>
 										</div>
 										<!--第五行-->
-										<input type="submit" value="选择" id="sort" />
+										<%--<input type="submit" value="" id="sort" />--%>
+										<input type="button" value="选择" type="submit" onclick="form.action='${website}acm/listACMByCondition/0';form.submit();"/>
+										<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/acm';form.submit();"/>
 										<div class="clearfix"></div>
 									</form>
+
 
 									<form action="/import/ACMPrize" enctype="multipart/form-data" method="post">
 										<input type="file" name="file">
 										<input type="submit" value="导入excel">
 									</form>
+
+
 									<h1>${message}</h1>
 
 

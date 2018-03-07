@@ -181,7 +181,6 @@ public class ACMServiceImpl implements ACMService {
 
         String date = sf.format(acmPrizeDto.getPrizeTime());
         acmPrize.setPrizeTime(sf.parse(date));
-        acmPrize.setPrizeTime(acmPrizeDto.getPrizeTime());
         if(teacherDao.selectTeacherByName(acmPrizeDto.getTeacherName()) != null){
             acmPrize.setTeacherId(teacherDao.selectTeacherByName(acmPrizeDto.getTeacherName()).getId());
         }
