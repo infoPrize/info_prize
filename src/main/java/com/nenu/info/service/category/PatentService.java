@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.category.Patent;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: software-liuwang
@@ -15,40 +16,28 @@ public interface PatentService {
 
     /**
      * 新增专利信息
-     * @param patent
-     * @throws Exception
      */
     public void add(Patent patent) throws Exception;
 
+    public Map<String, Object> getParams(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode,
+                                         String grade, String stuNumber, String stuName, String teacherName) throws Exception;
+
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
+
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
     /**
      * 查询所有专利信息
-     * @return
-     * @throws Exception
      */
     public List<PatentDto> listAll() throws Exception;
 
     /**
      * 根据条件查询专利信息
-     * @param patentType
-     * @param patentName
-     * @param beginTime
-     * @param endTime
-     * @param majorCode
-     * @param grade
-     * @param stuNumber
-     * @param stuName
-     * @param teacherName
-     * @return
-     * @throws Exception
      */
-    public List<PatentDto> listByConditions(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode,
-                                            String grade, String stuNumber, String stuName, String teacherName) throws Exception;
+    public List<PatentDto> listByCondition(Map<String, Object> params) throws Exception;
 
     /**
      * 将dto转换为实体
-     * @param patentDto
-     * @return
-     * @throws Exception
      */
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception;
 

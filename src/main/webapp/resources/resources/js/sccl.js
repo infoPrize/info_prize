@@ -425,7 +425,7 @@ $(function() {
 					"id": "4",
 					"name": "专利",
 					"parentId": "1",
-					"url": site.website + "patent/toPatent",
+					"url": site.website + "patent/listByCondition/1",
 					"icon": "&#xea99;",
 					"order": "1",
 					"isHeader": "0",

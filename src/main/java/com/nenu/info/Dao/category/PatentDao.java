@@ -16,23 +16,22 @@ public interface PatentDao {
 
     /**
      * 新增专利信息
-     * @param patent
-     * @throws Exception
      */
     public void add(@Param("patent")Patent patent) throws Exception;
 
     /**
+     * 根据条件查询专利信息的数量
+     */
+    public Integer countByCondition(Map<String, Object> params) throws Exception;
+
+    /**
      * 查询所有专利信息
-     * @return
-     * @throws Exception
      */
     public List<PatentDto> listAll() throws Exception;
 
     /**
      * 根据条件查询专利信息
-     * @return
-     * @throws Exception
      */
-    public List<PatentDto> listByConditions(Map<String, Object> params) throws Exception;
+    public List<PatentDto> listByCondition(Map<String, Object> params) throws Exception;
 
 }

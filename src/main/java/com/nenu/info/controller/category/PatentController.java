@@ -11,13 +11,15 @@ import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 /**
  * @author: software-liuwang
@@ -175,29 +177,118 @@ public class PatentController {
         return "patent";
     }
 
-    @RequestMapping(value = "listByConditions", method = RequestMethod.POST)
-    public String listByConditions(@RequestParam(value = "patentType", required = false, defaultValue = "-1") Integer patentType,
-                                   @RequestParam(value = "patentName", required = false, defaultValue = "") String patentName,
-                                   @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                   @RequestParam(value = "endTime", required = false) Date endTime,
-                                   @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                   @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
-                                   @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                                   @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                   @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                   Model model) {
-        List<PatentDto> patentDtoList = null;
+    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
+    public String listByCondition(@PathVariable("curPage") Integer curPage,
+                                  @RequestParam(value = "patentType", required = false, defaultValue = "-1") Integer patentType,
+                                  @RequestParam(value = "patentName", required = false, defaultValue = "") String patentName,
+                                  @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                  @RequestParam(value = "endTime", required = false) Date endTime,
+                                  @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                  @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
+                                  @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  Model model,
+                                  HttpServletRequest request) {
 
+        Map<String, Object> params = null;
         try {
-            patentDtoList = patentService.listByConditions(patentType, patentName, beginTime, endTime, majorCode, grade, stuNumber, stuName, teacherName);
+            params = patentService.getParams(patentType, patentName, beginTime, endTime, majorCode, grade, stuNumber, stuName, teacherName);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        int count = 0;
+        try {
+            count = patentService.countByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+        try {
+            params = patentService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("patentParams", params);
+
+        List<PatentDto> patentDtoList = null;
+
+        try {
+            patentDtoList = patentService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         model.addAttribute("patentDtoList", patentDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
 
         return "patent";
     }
 
+    @RequestMapping(value = "toPrevious")
+    public String toPrevious(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("patentParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+        curPage -= 1;
+
+        try {
+            params = patentService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<PatentDto> patentDtoList = null;
+
+        try {
+            patentDtoList = patentService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("patentDtoList", patentDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
+
+        return "patent";
+    }
+
+    @RequestMapping(value = "toNext")
+    public String toNext(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Map<String, Object> params = (Map)session.getAttribute("patentParams");
+
+        int curPage = (int)params.get("curPage");
+        int totalPage = (int)params.get("totalPage");
+        curPage += 1;
+
+        try {
+            params = patentService.getParams(params, curPage, totalPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<PatentDto> patentDtoList = null;
+
+        try {
+            patentDtoList = patentService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("patentDtoList", patentDtoList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("totalPage", totalPage);
+
+        return "patent";
+
+
+    }
 
 
 }

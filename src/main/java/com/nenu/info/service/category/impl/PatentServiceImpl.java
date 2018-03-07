@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.nenu.info.common.utils.WebConstants.pageSize;
+
 /**
  * @author: software-liuwang
  * @time: 2017/12/20 12:06
@@ -44,20 +46,7 @@ public class PatentServiceImpl implements PatentService {
     }
 
     @Override
-    public List<PatentDto> listAll() throws Exception {
-        List<PatentDto> patentDtoList = patentDao.listAll();
-
-        for(PatentDto patentDto : patentDtoList) {
-            String applyTimeStr = sf.format(patentDto.getApplyTime());
-            patentDto.setApplyTimeStr(applyTimeStr);
-        }
-
-        return patentDtoList;
-    }
-
-    @Override
-    public List<PatentDto> listByConditions(Integer patentType, String patentName, Date beginTime, Date endTime,
-                                            Integer majorCode, String grade, String stuNumber, String stuName, String teacherName) throws Exception {
+    public Map<String, Object> getParams(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode, String grade, String stuNumber, String stuName, String teacherName) throws Exception {
         List<Student> studentList = null;
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
@@ -89,7 +78,51 @@ public class PatentServiceImpl implements PatentService {
         params.put("beginTime", beginTime);
         params.put("endTime", endTime);
 
-        List<PatentDto> patentDtoList = patentDao.listByConditions(params);
+        return params;
+    }
+
+    @Override
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        int startNum = (curPage - 1) * pageSize;
+
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
+        params.put("startNum", startNum);
+        params.put("pageSize", pageSize);
+
+        return params;
+    }
+
+    @Override
+    public List<PatentDto> listAll() throws Exception {
+        List<PatentDto> patentDtoList = patentDao.listAll();
+
+        for(PatentDto patentDto : patentDtoList) {
+            String applyTimeStr = sf.format(patentDto.getApplyTime());
+            patentDto.setApplyTimeStr(applyTimeStr);
+        }
+
+        return patentDtoList;
+    }
+
+    @Override
+    public Integer countByCondition(Map<String, Object> params) throws Exception {
+        Integer count = 0;
+        count = patentDao.countByCondition(params);
+        return count;
+    }
+
+    @Override
+    public List<PatentDto> listByCondition(Map<String, Object> params) throws Exception {
+
+
+        List<PatentDto> patentDtoList = patentDao.listByCondition(params);
 
         for(PatentDto patentDto : patentDtoList) {
             patentDto.setApplyTimeStr(sf.format(patentDto.getApplyTime()));
@@ -98,12 +131,6 @@ public class PatentServiceImpl implements PatentService {
         return patentDtoList;
     }
 
-    /**
-     * dto转换为实体
-     * @param patentDto
-     * @return
-     * @throws Exception
-     */
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception{
 
         Patent patent = new Patent();
