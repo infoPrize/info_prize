@@ -37,6 +37,11 @@ public interface MathModelPrizeService {
     public List<MathModelPrizeDto> listByConditions(Map<String, Object> params);
 
     /**
+     * 根据id查询数学建模获奖信息
+     */
+    public MathModelPrizeDto selectById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception;

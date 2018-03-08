@@ -169,7 +169,8 @@
 											</td>
 											<td>${mathModelPrizeDto.teacherName}</td>
 											<td class="aparent">
-												<a href="" data-toggle="modal" data-target="#delete">删除</a>
+												<a href="" data-toggle="modal" data-target="#delete">删除</a><br>
+												<a href="${website}mathModel/toDetail/${mathModelPrizeDto.id}">去往详情页</a>
 											</td>
 										</tr>
 										</c:forEach>

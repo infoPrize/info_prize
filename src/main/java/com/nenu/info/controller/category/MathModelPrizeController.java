@@ -9,19 +9,15 @@ import com.nenu.info.common.utils.WebConstants;
 import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -206,7 +202,7 @@ public class MathModelPrizeController {
 //        }
 //        return jsonArray;
 
-        return "math_model";
+        return "math_model/math_model";
     }
 
 //    @RequestMapping(value = "toMathModel")
@@ -216,6 +212,16 @@ public class MathModelPrizeController {
 //
 //        return "math_model";
 //    }
+
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id,
+                           Model model) {
+        MathModelPrizeDto mathModelPrizeDto = null;
+        mathModelPrizeDto = mathModelPrizeService.selectById(id);
+
+        model.addAttribute("mathModelPrizeDto", mathModelPrizeDto);
+        return "math_model/detail";
+    }
 
     @RequestMapping(value = "toPrevious")
     public String toPrevious(HttpServletRequest request, Model model) {
@@ -251,7 +257,7 @@ public class MathModelPrizeController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "math_model";
+        return "math_model/math_model";
     }
 
     @RequestMapping(value = "toNext")
@@ -288,6 +294,6 @@ public class MathModelPrizeController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "math_model";
+        return "math_model/math_model";
     }
 }

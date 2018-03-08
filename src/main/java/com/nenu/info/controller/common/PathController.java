@@ -47,7 +47,7 @@ public class PathController {
 
     @RequestMapping(value = "mathModel")
     public String toMath() {
-        return "math_model";
+        return "math_model/math_model";
     }
 
     @RequestMapping(value = "competition")

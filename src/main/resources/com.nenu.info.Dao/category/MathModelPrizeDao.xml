@@ -21,6 +21,7 @@
 
     <select id="listByConditions" resultType="com.nenu.info.common.dto.category.MathModelPrizeDto">
         SELECT
+        tmmp.`id` AS id,
         (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tmmp.`match_level`) AS matchLevel,
         tmmp.`match_name` AS matchName,
         tmmp.`host_unit` AS hostUnit,
@@ -44,6 +45,30 @@
         <if test="curPage != -500">
         LIMIT #{startNum}, #{pageSize}
         </if>
+    </select>
+
+    <select id="selectById" resultType="com.nenu.info.common.dto.category.MathModelPrizeDto">
+        SELECT
+            tmmp.`id` AS id,
+            (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tmmp.`match_level`) AS matchLevel,
+            tmmp.`match_name` AS matchName,
+            tmmp.`host_unit` AS hostUnit,
+            tmmp.`prize_time` AS prizeTime,
+            (SELECT `name` FROM `t_prize_level` tpl WHERE tpl.id = tmmp.`prize_level`) AS prizeLevel,
+            tmmp.`team_name` AS teamName,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_1`) AS teammateName1,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_1) AS teammateStuNumber1,
+            (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code`AND ts.`id` = tmmp.`teammate_id_1`) AS teammateMajor1,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_2`) AS teammateName2,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_2) AS teammateStuNumber2,
+            (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tmmp.`teammate_id_2`) AS teammateMajor2,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tmmp.`teammate_id_3`) AS teammateName3,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tmmp.teammate_id_3) AS teammateStuNumber3,
+            (SELECT `major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tmmp.`teammate_id_3`) AS teammateMajor3,
+            (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tmmp.`teacher_id`) AS  teacherName
+        FROM `t_math_model_prize` tmmp
+        WHERE
+            tmmp.`id` = #{id}
     </select>
 
     <sql id="queryCondition">

@@ -47,7 +47,7 @@
         </if>
     </select>
 
-    <select id="selectById" resultType="ACMPrizeDto">
+    <select id="selectById" resultType="com.nenu.info.common.dto.category.ACMPrizeDto">
         SELECT
             tap.`id` AS id,
             (SELECT `name` FROM `t_match_level` tml WHERE tml.`id` = tap.`match_level`) AS matchLevel,

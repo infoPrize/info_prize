@@ -148,12 +148,17 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
 
     }
 
-    /**
-     * 将dto转换为实体
-     * @param mathModelPrizeDto
-     * @return
-     * @throws Exception
-     */
+    @Override
+    public MathModelPrizeDto selectById(Integer id) {
+        MathModelPrizeDto mathModelPrizeDto = null;
+        try {
+            mathModelPrizeDto = mathModelPrizeDao.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mathModelPrizeDto;
+    }
+
     public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception{
 
         MathModelPrize mathModelPrize = new MathModelPrize();

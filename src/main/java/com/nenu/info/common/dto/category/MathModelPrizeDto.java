@@ -9,6 +9,9 @@ import java.util.Date;
  */
 public class MathModelPrizeDto {
 
+    //id
+    private Integer id;
+
     //比赛等级
     private String matchLevel;
 
@@ -59,6 +62,14 @@ public class MathModelPrizeDto {
 
     //指导老师
     private String teacherName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getMatchLevel() {
         return matchLevel;

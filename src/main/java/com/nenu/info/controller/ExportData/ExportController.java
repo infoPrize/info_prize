@@ -194,7 +194,7 @@ public class ExportController {
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("curPage", curPage);
-        return "math_model";
+        return "math_model/math_model";
 
     }
 
