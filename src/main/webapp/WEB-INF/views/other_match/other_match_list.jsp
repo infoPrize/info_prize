@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Join
-  Date: 2018/3/7
-  Time: 21:21
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -119,6 +112,7 @@
             <td>获奖时间</td>
             <td>获奖等级</td>
             <td>指导教师</td>
+            <td>操作</td>
         </tr>
         <c:forEach items="${otherMatchDtoList}" var="otherMatchDto">
         <tr>
@@ -145,6 +139,10 @@
             <td>${otherMatchDto.prizeTimeStr}</td>
             <td>${otherMatchDto.prizeLevel}</td>
             <td>${otherMatchDto.teacherName}</td>
+            <td>
+                <a href="#">删除</a><br>
+                <a href="${website}otherMatch/toDetail/${otherMatchDto.id}">去往详情页</a>
+            </td>
         </tr>
         </c:forEach>
     </table>

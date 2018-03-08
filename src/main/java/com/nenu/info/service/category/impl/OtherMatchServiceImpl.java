@@ -137,4 +137,15 @@ public class OtherMatchServiceImpl implements OtherMatchService {
 
         return otherMatchDtoList;
     }
+
+    @Override
+    public OtherMatchDto selectById(Integer id) {
+        OtherMatchDto otherMatchDto = null;
+        try {
+            otherMatchDto = otherMatchDao.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return otherMatchDto;
+    }
 }

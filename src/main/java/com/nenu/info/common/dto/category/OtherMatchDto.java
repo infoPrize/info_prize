@@ -9,6 +9,9 @@ import java.util.Date;
  */
 public class OtherMatchDto {
 
+    //id
+    private Integer id;
+
     //比赛等级
     private String matchLevel;
 
@@ -80,6 +83,14 @@ public class OtherMatchDto {
 
     //指导教师
     private String teacherName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getMatchLevel() {
         return matchLevel;

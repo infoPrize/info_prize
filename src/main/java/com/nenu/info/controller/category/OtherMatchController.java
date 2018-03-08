@@ -240,6 +240,15 @@ public class OtherMatchController {
         return "other_match/other_match_list";
     }
 
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id, Model model) {
+        OtherMatchDto otherMatchDto = null;
+        otherMatchDto = otherMatchService.selectById(id);
+
+        model.addAttribute("otherMatchDto", otherMatchDto);
+        return "other_match/detail";
+    }
+
     @RequestMapping(value = "toPrevious")
     public String toPrevious(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();

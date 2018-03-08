@@ -40,6 +40,8 @@ public interface OtherMatchService {
      */
     public List<OtherMatchDto> listByCondition(Map<String, Object> params);
 
-
-
+    /**
+     * 根绝id查询信息
+     */
+    public OtherMatchDto selectById(Integer id);
 }

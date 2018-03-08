@@ -29,4 +29,9 @@ public interface OtherMatchDao {
      */
     public List<OtherMatchDto> listByCondition(Map<String, Object> params) throws Exception;
 
+    /**
+     * 根据id查询获奖信息
+     */
+    public OtherMatchDto selectById(@Param("id") Integer id) throws Exception;
+
 }
