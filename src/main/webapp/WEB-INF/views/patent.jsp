@@ -43,7 +43,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">截止申请时间：</label>
-												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
+												<input type="text" name="endTime" class="form-control" id="end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
@@ -79,26 +79,18 @@
 											</div>
 										</div>
 										<!--第三行-->
-										<input type="button" value="选择" type="submit" onclick="form.action='${website}patent/listByCondition/1';form.submit();"/>
-										<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/patent';form.submit();"/>
+										<input type="button" id="sort" value="选择" type="submit" onclick="form.action='${website}patent/listByCondition/1';form.submit();"/>
+										<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/patent';form.submit();"/>
 
 										
 									</form>
-
-									<form action="/import/patent" enctype="multipart/form-data" method="post">
-										<input type="file" name ="file">
-										<input type="submit" value ="导入excel">
-									</form>
-									<h1>${message}</h1>
-
-
 								</div>
 								<div class="x_title title2">
 									<h3>查询结果</h3>
 									<hr/>
 								</div>
 								<div class="x_content">
-									<table id="datatable" class="table-striped table-bordered text-center">
+									<table id="datatable" class="table table-striped table-bordered text-center">
 										<thead>
 											<tr>
 												<th class="text-center">专利类别</th>
@@ -195,41 +187,16 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pull-right">
 									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<%--<li>--%>
-										<%--<a href="#">1</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">2</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">3</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">4</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">5</a>--%>
-									<%--</li>--%>
-									<li>
-										共${totalPage}页
-									</li>
-									<li>
-										第${curPage}页
-									</li>
-									<li>
 										<a href="${website}patent/toPrevious">上一页</a>
 									</li>
 									<li>
 										<a href="${website}patent/toNext">下一页</a>
 									</li>
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
+									<li class="total">
+										共${totalPage}页
+									</li>
+									<li class="total">
+										第${curPage}页
 									</li>
 								</ul>
 							</nav>
@@ -240,5 +207,14 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+		<script>
+            !function(){
+                laydate({
+                    elem: '#end'
+                })
+            }();
+
+		</script>
 	</body>
 </html>

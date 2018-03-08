@@ -168,7 +168,7 @@ $(function(){
         var teammateStuNumber2 = $('#teammateStuNumber2').val();
         var teammateName3 = $('#teammateName3').val();
         var teammateStuNumber3 = $('#teammateStuNumber3').val();
-        var teacherName = $('#teacherName').val();
+        var teacherName = $('#teacherNameACM').val();
         $.ajax({
             type: 'post',
             url: website + "acm/add",

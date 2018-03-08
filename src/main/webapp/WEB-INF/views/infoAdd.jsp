@@ -43,7 +43,10 @@
 										<a href="#tab-math" role="tab" data-toggle="tab">数学建模</a>
 									</li>
 									<li>
-										<a href="#tab-profession" role="tab" data-toggle="tab">专业竞赛</a>
+										<a href="#tab-challenge" role="tab" data-toggle="tab">挑战杯</a>
+									</li>
+									<li>
+										<a href="#tab-internet" role="tab" data-toggle="tab">互联网+</a>
 									</li>
 									<li>
 										<a href="#tab-more" role="tab" data-toggle="tab">其他比赛</a>
@@ -79,11 +82,8 @@
 													</div>
 												</div>
 												<!--第二行-->
-												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="time">发表时间：</label>
-														<input type="text" class="form-control" onClick="laydate()" id="publishTime"/>
-													</div>
+												<div class="tab-row" id="thesis">
+
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right">作者姓名：</label>
 														<input type="text" class="form-control" id="authorName1" />
@@ -92,9 +92,6 @@
 														<label class="tab-label control-label text-right">作者学号：</label>
 														<input type="text" class="form-control" id="authorStuNumber1"/>
 													</div>
-												</div>
-												<!--第三行-->
-												<div class="tab-row">
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right">作者等级：</label>
 														<select id="authorLevel1" class="form-control">
@@ -108,106 +105,22 @@
 															<option value="7">第七作者</option>
 														</select>
 													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者姓名：</label>
-														<input type="text" class="form-control" id="authorName2"/>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者学号：</label>
-														<input type="text" class="form-control" id="authorStuNumber2" />
-													</div>
 												</div>
-												<!--第四行-->
+												<!--第三行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者等级：</label>
-														<select id="authorLevel2" class="form-control">
-															<option value="-1">---请选择作者等级---</option>
-															<option value="1">第一作者</option>
-															<option value="2">第二作者</option>
-															<option value="3">第三作者</option>
-															<option value="4">第四作者</option>
-															<option value="5">第五作者</option>
-															<option value="6">第六作者</option>
-															<option value="7">第七作者</option>
-														</select>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者姓名：</label>
-														<input type="text" class="form-control" id="authorName3" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者学号：</label>
-														<input type="text" class="form-control" id="authorStuNumber3" />
-													</div>
-												</div>
-												<!--第五行-->
-												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者等级：</label>
-														<select id="authorLevel3" class="form-control">
-															<option value="-1">---请选择作者等级---</option>
-															<option value="1">第一作者</option>
-															<option value="2">第二作者</option>
-															<option value="3">第三作者</option>
-															<option value="4">第四作者</option>
-															<option value="5">第五作者</option>
-															<option value="6">第六作者</option>
-															<option value="7">第七作者</option>
-														</select>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者姓名：</label>
-														<input type="text" class="form-control" id="authorName4"/>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者学号：</label>
-														<input type="text" class="form-control" id="authorStuNumber4" />
-													</div>
-												</div>
-												<!--第六行-->
-												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者等级：</label>
-														<select id="authorLevel4" class="form-control">
-															<option value="-1">---请选择作者等级---</option>
-															<option value="1">第一作者</option>
-															<option value="2">第二作者</option>
-															<option value="3">第三作者</option>
-															<option value="4">第四作者</option>
-															<option value="5">第五作者</option>
-															<option value="6">第六作者</option>
-															<option value="7">第七作者</option>
-														</select>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者姓名：</label>
-														<input type="text" class="form-control" id="authorName5" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者学号：</label>
-														<input type="text" class="form-control" id="authorStuNumber5" />
-													</div>
-												</div>
-												<div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right">作者等级：</label>
-														<select id="authorLevel5" class="form-control">
-															<option value="-1">---请选择作者等级---</option>
-															<option value="1">第一作者</option>
-															<option value="2">第二作者</option>
-															<option value="3">第三作者</option>
-															<option value="4">第四作者</option>
-															<option value="5">第五作者</option>
-															<option value="6">第六作者</option>
-															<option value="7">第七作者</option>
-														</select>
+														<label class="tab-label control-label text-right" for="time">发表时间：</label>
+														<input type="text" class="form-control" onClick="laydate()" id="publishTime"/>
 													</div>
 													<div class="form-group col-sm-8">
 														<label class="tab-label control-label text-right">指导老师：</label>
 														<input type="text" class="form-control" id="teacherName" />
 													</div>
+
+
 												</div>
+
+
 												<!--第四行-->
 												<div class="tab-row">
 													<div class="col-sm-12">
@@ -217,8 +130,14 @@
 													<div class="clearfix"></div>
 												</div>
 												<!--第五行-->
+												<input type="button" value="添加" id="addthesis">
 												<input type="button" value="提交" id="sort_thesis"/>
 											</form>
+											<form action="/import/thesis" enctype="multipart/form-data" method="post">
+												<input type="file" name="file">
+												<input type="submit" value="导入excel">
+											</form>
+											<h1>${message}</h1>
 										</div>
 									</div>
 									<!--专利添加-->
@@ -248,7 +167,11 @@
 
 												</div>
 												<!--第二行-->
-												<div class="tab-row">
+												<div class="tab-row" id="patent">
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
+														<input type="text" id="tutor" class="form-control" name="teacherName" />
+													</div>
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
 														<input type="text" class="form-control" id="author_name_2" name="applierName1" />
@@ -257,46 +180,10 @@
 														<label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
 														<input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber1" />
 													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
-														<input type="text" class="form-control" id="author_name_2" name="applierName2" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
-														<input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber2" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
-														<input type="text" class="form-control" id="author_name_2" name="applierName3" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
-														<input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber3" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
-														<input type="text" class="form-control" id="author_name_2" name="applierName4" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
-														<input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber4" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
-														<input type="text" class="form-control" id="author_name_2" name="applierName5" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
-														<input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber5" />
-													</div>
+
 												</div>
 												<!--第三行-->
-												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-														<input type="text" id="tutor" class="form-control" name="teacherName" />
-													</div>
-												</div>
+
 												<div class="tab-row">
 													<div class="col-sm-12">
 														<label class="tab-label control-label text-right" for="student_number">专利介绍：</label>
@@ -305,10 +192,16 @@
 												</div>
 												<div class="clearfix"></div>
 												<!--第五行-->
+												<input type="button" value="添加" id="addpatent">
 												<input type="submit" value="提交" id="sort" />
 
 											</form>
 											</form>
+											<form action="/import/patent" enctype="multipart/form-data" method="post">
+												<input type="file" name ="file">
+												<input type="submit" value ="导入excel">
+											</form>
+											<h1>${message}</h1>
 										</div>
 
 									</div>
@@ -352,43 +245,7 @@
 															<input type="text" id="teacherName" class="form-control" />
 														</div>
 													</div>
-													<div class="tab-row">
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员1姓名：</label>
-															<input type="text" id="projectMemberName1" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员1学号：</label>
-															<input type="text" id="projectMemberStuNumber1" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员2姓名：</label>
-															<input type="text" id="projectMemberName2" class="form-control" />
-														</div>
-													</div>
-													<div class="tab-row">
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员2学号：</label>
-															<input type="text" id="projectMemberStuNumber2" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员3姓名：</label>
-															<input type="text" id="projectMemberName3" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员3学号：</label>
-															<input type="text" id="projectMemberStuNumber3" class="form-control" />
-														</div>
-													</div>
-													<div class="tab-row">
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员4姓名：</label>
-															<input type="text" id="projectMemberName4" class="form-control" />
-														</div>
-														<div class="form-group col-sm-4">
-															<label class="tab-label control-label text-right">组员4学号：</label>
-															<input type="text" id="projectMemberStuNumber4" class="form-control" />
-														</div>
+													<div class="tab-row" id="scientific_project">
 														<div class="form-group col-sm-4">
 															<label class="tab-label control-label text-right">批复经费：</label>
 															<select class="form-control" id="fundsLimit">
@@ -399,7 +256,17 @@
 																<option value="10000">10000</option>
 															</select>
 														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right">组员1姓名：</label>
+															<input type="text" id="projectMemberName1" class="form-control" />
+														</div>
+														<div class="form-group col-sm-4">
+															<label class="tab-label control-label text-right">组员1学号：</label>
+															<input type="text" id="projectMemberStuNumber1" class="form-control" />
+														</div>
+
 													</div>
+
 													<div class="tab-row">
 														<div class="col-sm-12">
 															<label class="tab-label control-label text-right" for="student_number">项目详情：</label>
@@ -408,8 +275,14 @@
 													</div>
 													<div class="clearfix"></div>
 												</div>
+												<input type="button" value="添加" id="addscientific_project">
 												<input type="button" value="提交" id="sort_scient"/>
 											</form>
+											<form action="/import/scientificProject" enctype="multipart/form-data" method="post">
+												<input type="file" name="file">
+												<input type="submit" value="导入excel">
+											</form>
+											<h1>${message}</h1>
 										</div>
 									</div>
 									<!--ACM添加-->
@@ -496,12 +369,17 @@
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-														<input type="text" class="form-control" id="teacherName" />
+														<input type="text" class="form-control" id="teacherNameACM" />
 													</div>
 												</div>
 												<div class="clearfix"></div>
 												<input type="button" value="提交" id="sort_ACM"/>
 											</form>
+											<form action="/import/ACMPrize" enctype="multipart/form-data" method="post">
+												<input type="file" name="file">
+												<input type="submit" value="导入excel">
+											</form>
+											<h1>${message}</h1>
 										</div>
 									</div>
 									<!--数学建模添加-->
@@ -525,7 +403,7 @@
 														</select>
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="competition">比赛名称：</label>
+														<label class="tab-label control-label text-right">比赛名称：</label>
 														<input type="text" id="matchName" class="form-control"/>
 													</div>
 													<div class="form-group col-sm-4">
@@ -595,71 +473,81 @@
 												<input type="button" value="提交" id="sort_math"/>
 
 											</form>
+											<form action="/import/math" enctype="multipart/form-data" method="post">
+												<input type="file" name="file">
+												<input type="submit" value="导入excel">
+											</form>
+											<h1>${message}</h1>
 										</div>
 									</div>
-									<!--专业比赛添加-->
-									<div class="tab-pane" id="tab-profession">
+									<!--挑战杯添加-->
+									<div class="tab-pane" id="tab-challenge">
 										<div class="row feature">
-											<form class="condition_form form-inline" action="" method="post">
+											<form class="condition_form form-inline" action="${website}ChallengeCup/add" method="post">
 												<!--第一行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="level">比赛级别：</label>
-														<select id="level" class="form-control">
-															<option class="level_option">---请选择比赛级别---</option>
+														<label class="tab-label control-label text-right">比赛名称：</label>
+														<input type="text" name="matchName" class="form-control" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right">主办单位：</label>
+														<input type="text" name="hostUnit" class="form-control" />
+													</div>
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right">比赛等级：</label>
+														<select class="form-control" name="matchLevel">
+															<option class="level_option" value="-1">---请选择比赛等级---</option>
+															<option value="1">校级</option>
+															<option value="2">市级</option>
+															<option value="3">省级</option>
+															<option value="4">多省级</option>
+															<option value="5">国家级</option>
+															<option value="6">亚洲级</option>
+															<option value="7">国际级</option>
+														</select>
+													</div>
+												</div>
+												<div class="tab-row">
+													<div class="form-group col-sm-4">
+														<label class="tab-label control-label text-right">获奖等级：</label>
+														<select class="form-control" name="prizeLevel">
+															<option class="level_option" value="-1">---请选择获奖等级---</option>
+															<option value="1">一等奖(金奖)</option>
+															<option value="2">二等奖(银奖)</option>
+															<option value="3">三等奖(铜奖)</option>
+															<option value="4">成功参赛奖(优胜奖)</option>
 														</select>
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="type">比赛类别：</label>
-														<select id="type" class="form-control">
-															<option class="level_option">---请选择比赛类别---</option>
-														</select>
+														<label class="tab-label control-label text-right" for="time">获奖时间：</label>
+														<input type="date" id="prizeTime" name="prizeTime" class="form-control" onClick="laydate()"/>
 													</div>
 													<div class="form-group col-sm-4">
 														<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-														<input type="text" id="tutor" class="form-control" />
+														<input type="text" class="form-control" name="prizeTime"/>
 													</div>
 												</div>
 												<!--第二行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="competition">比赛名称：</label>
-														<input type="text" id="competition" class="form-control" />
+														<label class="tab-label control-label text-right">团队名：</label>
+														<input type="text" name="teamName" class="form-control" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="time">比赛时间：</label>
-														<select id="time" class="form-control">
-															<option>---请选择比赛时间---</option>
-															<option>2017年</option>
-															<option>2016年</option>
-															<option>2015年</option>
-														</select>
+														<label class="tab-label control-label text-right">项目名：</label>
+														<input type="text" name="projectName" class="form-control" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="prize">获奖等级：</label>
-														<input type="text" id="prize" class="form-control" />
+														<label class="tab-label control-label text-right" for="student_name">团队成员1姓名：</label>
+														<input type="text" id="student_name" class="form-control" name="teammateName1"/>
 													</div>
 												</div>
 												<!--第三行-->
 												<div class="tab-row">
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-														<select id="profession" class="form-control">
-															<option>---请选择学生专业---</option>
-															<option>计算机普班</option>
-															<option>计算机（中美）</option>
-															<option>图书情报</option>
-															<option>教技</option>
-															<option>软件工程</option>
-														</select>
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-														<input type="text" id="student_name" class="form-control" />
-													</div>
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-														<input type="text" id="student_number" class="form-control" />
+														<label class="tab-label control-label text-right" for="student_number">团队成员1学号：</label>
+														<input type="text" id="student_number" class="form-control" name="teammateStuNumber1"/>
 													</div>
 												</div>
 												<!--第五行-->
@@ -684,6 +572,7 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/competition.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/addmember.js"></script>
 	</body>
 
 </html>

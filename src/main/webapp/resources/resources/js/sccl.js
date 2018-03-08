@@ -463,16 +463,26 @@ $(function() {
 				},
 				{
 					"id": "8",
-					"name": "专业竞赛",
+					"name": "挑战杯",
 					"parentId": "1",
-					"url": site.website + "competition",
+					"url": site.website + "ChallengeCup/listByCondition/1",
 					"icon": "&#xe91f;",
 					"order": "1",
 					"isHeader": "0",
 					"childMenus": ""
 				},
+                {
+                    "id": "9",
+                    "name": "互联网+",
+                    "parentId": "1",
+                    "url": site.website + "InternetPlus/toList",
+                    "icon": "&#xe91f;",
+                    "order": "1",
+                    "isHeader": "0",
+                    "childMenus": ""
+                },
 				{
-					"id": "9",
+					"id": "10",
 					"name": "其他比赛",
 					"parentId": "1",
 					"url": site.website + "other",
@@ -492,7 +502,7 @@ $(function() {
 			"order": "2",
 			"isHeader": "1",
 			"childMenus": [{
-					"id": "10",
+					"id": "11",
 					"name": "管理功能",
 					"parentId": "2",
 					"url": "",
@@ -500,9 +510,9 @@ $(function() {
 					"order": "1",
 					"isHeader": "0",
 					"childMenus": [{
-                        "id": "11",
+                        "id": "12",
                         "name": "权限管理",
-                        "parentId": "10",
+                        "parentId": "11",
                         "url": site.website + "manage",
                         "icon": "&#xe605;",
                         "order": "1",
@@ -510,9 +520,9 @@ $(function() {
                         "childMenus": ""
                     },
 					{
-						"id": "12",
+						"id": "13",
 						"name": "学生管理",
-						"parentId": "10",
+						"parentId": "11",
 						"url": site.website + "student",
 						"icon": "&#xe90e;",
 						"order": "1",
@@ -521,7 +531,7 @@ $(function() {
 					}]
 				},
 				{
-					"id": "13",
+					"id": "14",
 					"name": "信息录入",
 					"parentId": "2",
 					"url": "",
@@ -529,9 +539,9 @@ $(function() {
 					"order": "1",
 					"isHeader": "0",
 					"childMenus": [{
-                        "id": "14",
+                        "id": "15",
                         "name": "添加教师",
-                        "parentId": "13",
+                        "parentId": "14",
                         "url": site.website + "teacher/toTeacher",
                         "icon": "&#xe914;",
                         "order": "1",
@@ -539,9 +549,9 @@ $(function() {
                         "childMenus": ""
                     },
 					{
-						"id": "15",
+						"id": "16",
 						"name": "添加学生",
-						"parentId": "13",
+						"parentId": "14",
 						"url": site.website + "student/add",
 						"icon": "&#xe609;",
 						"order": "1",
@@ -549,9 +559,9 @@ $(function() {
 						"childMenus": ""
 					},
 					{
-                        "id": "16",
+                        "id": "17",
                         "name": "奖项录入",
-                        "parentId": "13",
+                        "parentId": "14",
                         "url": site.website + "infoAdd",
                         "icon": "&#xe606;",
                         "order": "1",

@@ -46,7 +46,7 @@ public class ChallengeCupController {
 
     @RequestMapping(value = "toList")
     public String toChallengeCupListByCondition() {
-        return "challenge_cup/challenge_cup_listByCondition_test";
+        return "challenge_cup_listByCondition_test";
     }
 
 
@@ -296,7 +296,7 @@ public class ChallengeCupController {
 //        return jsonArray;
         model.addAttribute("message",message);
 
-        return "challenge_cup/challenge_cup_listByCondition_test";
+        return "challenge_cup_listByCondition_test";
     }
 
     @RequestMapping(value = "toPrevious")
@@ -336,7 +336,7 @@ public class ChallengeCupController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "challenge_cup/challenge_cup_listByCondition_test";
+        return "challenge_cup_listByCondition_test";
     }
 
     @RequestMapping(value = "toNext")
@@ -376,7 +376,7 @@ public class ChallengeCupController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "challenge_cup/challenge_cup_listByCondition_test";
+        return "challenge_cup_listByCondition_test";
     }
 
 }

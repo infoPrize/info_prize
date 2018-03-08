@@ -57,7 +57,7 @@
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">结束时间：</label>
-												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
+												<input type="text" name="endTime" class="form-control" id="end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
@@ -100,33 +100,26 @@
 										</div>
 										<!--第四行-->
 										<div class="tab-row">
-											<div class="form-group col-sm-12">
+											<div class="form-group col-sm-8">
 												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
 												<input type="text" id="tutor" class="form-control" name="teacherName"/>
 											</div>
+											<div class="form-group col-sm-4">
+												<input type="button" class="inlibut" value="选择" type="submit" onclick="form.action='${website}mathModel/listByCondition/1';form.submit();"/>
+												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/math';form.submit();"/>
+											</div>
 										</div>
-										<!--第五行-->
-										<input type="button" value="选择" type="submit" onclick="form.action='${website}mathModel/listByCondition/1';form.submit();"/>
-										<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/math';form.submit();"/>
 										<div class="clearfix"></div>
 									</form>
-
-									<form action="/import/math" enctype="multipart/form-data" method="post">
-										<input type="file" name="file">
-										<input type="submit" value="导入excel">
-									</form>
-
-
-
 								</div>
 								<div class="x_title">
-									<h3>查询结果</h3>
+									<h3 class="dinline">查询结果</h3>
 									<button id="showcolumn">显示所有栏目</button>
 									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
-									<table id="datatable" class="table-striped table-bordered text-center">
+									<table id="datatable" class="table table-striped table-bordered text-center">
 										<thead>
 										<tr>
 											<th class="text-center">比赛类别</th>
@@ -191,41 +184,16 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pull-right">
 									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<%--<li>--%>
-										<%--<a href="#">1</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">2</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">3</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">4</a>--%>
-									<%--</li>--%>
-									<%--<li>--%>
-										<%--<a href="#">5</a>--%>
-									<%--</li>--%>
-									<li>
 										<a href="${website}mathModel/toPrevious">上一页</a>
 									</li>
 									<li>
 										<a href="${website}mathModel/toNext">下一页</a>
 									</li>
-									<li>
+									<li class="total">
 										共${totalPage}页
 									</li>
-									<li>
+									<li class="total">
 										第${curPage}页
-									</li>
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
 									</li>
 								</ul>
 							</nav>
@@ -236,6 +204,7 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){
                 $("#showcolumn").click(function(){
@@ -245,6 +214,11 @@
                     $(".hidecol").css("display","none");
                 });
             })
-		</script>
+            !function(){
+                laydate({
+                    elem: '#end'
+                })
+            }();
+	</script>
 	</body>
 </html>

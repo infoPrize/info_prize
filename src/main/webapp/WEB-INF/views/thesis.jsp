@@ -87,42 +87,35 @@
 								</div>
 
 								<!--第四行-->
-								<input type="button" value="选择" type="submit" onclick="form.action='${website}thesis/listByCondition/1';form.submit();"/>
-								<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
+								<input type="button" id="sort" value="选择" type="submit" onclick="form.action='${website}thesis/listByCondition/1';form.submit();"/>
+								<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
 
 							</form>
-
-							<form action="/import/thesis" enctype="multipart/form-data" method="post">
-								<input type="file" name="file">
-								<input type="submit" value="导入excel">
-							</form>
-							<h1>${message}</h1>
-
 						</div>
 						<div class="x_title title2">
 							<h3>查询结果</h3>
 							<hr/>
 						</div>
 						<div class="x_content">
-							<table id="datatable" class="table-striped table-bordered text-center">
+							<table id="datatable" class="table table-striped table-bordered text-center">
 								<thead>
-								<tr>
-									<th class="text-center">期刊级别</th>
-									<th class="text-center">发表刊物</th>
-									<th class="text-center">论文题目</th>
-									<th class="text-center">发表时间</th>
-									<th class="text-center">作者姓名</th>
-									<th class="text-center">作者排名</th>
-									<th class="text-center">作者学号</th>
-									<th class="text-center">作者专业</th>
-									<th class="text-center">指导老师</th>
-									<th class="text-center">论文摘要</th>
-									<th class="text-center">操作</th>
-								</tr>
+									<tr>
+										<th class="text-center">期刊级别</th>
+										<th class="text-center">发表刊物</th>
+										<th class="text-center">论文题目</th>
+										<th class="text-center">发表时间</th>
+										<th class="text-center">作者姓名</th>
+										<th class="text-center">作者排名</th>
+										<th class="text-center">作者学号</th>
+										<th class="text-center">作者专业</th>
+										<th class="text-center">指导老师</th>
+										<th class="text-center">论文摘要</th>
+										<th class="text-center">操作</th>
+									</tr>
 								</thead>
 
 								<tbody>
-								<c:forEach items="${thesisDtoList}" var="thesisDto">
+									<c:forEach items="${thesisDtoList}" var="thesisDto">
 									<tr>
 										<td>${thesisDto.journalLevel}</td>
 										<td>${thesisDto.journalName}</td>
@@ -210,7 +203,7 @@
 											<a href="" data-toggle="modal" data-target="#delete">删除</a>
 										</td>
 									</tr>
-								</c:forEach>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -222,41 +215,16 @@
 					<nav aria-label="Page navigation">
 						<ul class="pagination pull-right">
 							<li>
-								<a href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
+								<a href="${website}thesis/toPrevious" aria-label="Previous">上一页</a>
 							</li>
-							<%--<li>--%>
-								<%--<a href="#">1</a>--%>
-							<%--</li>--%>
-							<%--<li>--%>
-								<%--<a href="#">2</a>--%>
-							<%--</li>--%>
-							<%--<li>--%>
-								<%--<a href="#">3</a>--%>
-							<%--</li>--%>
-							<%--<li>--%>
-								<%--<a href="#">4</a>--%>
-							<%--</li>--%>
-							<%--<li>--%>
-								<%--<a href="#">5</a>--%>
-							<%--</li>--%>
 							<li>
+								<a href="${website}thesis/toNext" aria-label="Next">下一页</a>
+							</li>
+							<li class="total">
 								共${totalPage}页
 							</li>
-							<li>
+							<li class="total">
 								第${curPage}页
-							</li>
-							<li>
-								<a href="${website}thesis/toPrevious">上一页</a>
-							</li>
-							<li>
-								<a href="${website}thesis/toNext">下一页</a>
-							</li>
-							<li>
-								<a href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
 							</li>
 						</ul>
 					</nav>

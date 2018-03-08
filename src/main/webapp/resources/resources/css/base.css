@@ -7,20 +7,28 @@ body h1, body h2, body h3, body h4, body table, body label{
 table th, table td{
 	white-space: nowrap;
 }
-#showcolumn,#hidecolumn{
+#showcolumn, #hidecolumn{
+	float: right;
+	position: relative;
+	right: 17px;
 	width: 106px;
-	margin-top: 5px;
+	margin: 17px 2px;
 	padding: 5px 10px;
 	border-radius: 7px;
 	background-color: #33aecc;
 	border: 1px solid #33aecc;
 	color: #fff;
 }
-
+.total{
+	vertical-align: middle;
+	line-height: 33px;
+	color: #666;
+	padding-left: 10px;
+}
 
 /*国创科研*/
 .tab-row{
-	line-height: 60px;
+	line-height: 50px;
 }
 .form-inline{
 	position: relative;
@@ -36,26 +44,43 @@ table th, table td{
 	border: 1px solid #33aecc;
 	color: #fff;
 }
+.inlibut{
+	position: relative;
+	left: 130px;
+	width: 80px;
+	height: 32px;
+	line-height: 32px;
+	margin-top: 5px;
+	padding: 0 10px;
+	border-radius: 7px;
+	background-color: #33aecc;
+	border: 1px solid #33aecc;
+	color: #fff;
+}
 .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
     border: 1px solid #ddd;
     padding: 10px;
     vertical-align: middle;
 }
-.td_table{
-	padding: 0 5px;
+.sub, .sub > tbody, .sub > tbody > tr, .sub > tbody > tr > td{
+	display:block;
+	width:100%;
 }
-.td_table>table{
-	width: 50px;
-}
-.sub td{
+.sub > tbody > tr {
+	text-align: center;
 	border-bottom: 1px solid #ddd;
-	line-height: 20px;
 }
-
+.sub > tbody > tr:nth-last-child(1){
+	border-bottom: none;
+}
 /*信息录入*/
 .tab-content{
 	margin-top: 10px;
 }
 .detailtext{
 	margin: 10px 0;
+}
+.dinline{
+	display: inline-block;
+	margin-bottom: 0;
 }

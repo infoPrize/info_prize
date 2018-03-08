@@ -1,14 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<h1>
-	session的时间间隔为 ： <%=session.getMaxInactiveInterval()%>秒
-</h1>
-<hr>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
 		<title>ACM</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
@@ -19,7 +18,6 @@
         </style>
 	</head>
 	<body>
-	<hr>
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -62,7 +60,7 @@
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">结束时间：</label>
-												<input type="text" name="endTime" class="form-control" onClick="laydate()"/>
+												<input type="text" name="endTime" class="form-control" id="end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
@@ -105,37 +103,26 @@
 										</div>
 										<!--第四行-->
 										<div class="tab-row">
-											<div class="form-group col-sm-12">
+											<div class="form-group col-sm-8">
 												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
 												<input type="text" id="tutor" class="form-control" name="teacherName"/>
 											</div>
+											<div class="form-group col-sm-4">
+												<input type="button" class="inlibut" value="选择" type="submit" onclick="form.action='${website}acm/listACMByCondition/0';form.submit();"/>
+												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/acm';form.submit();"/>
+											</div>
 										</div>
-										<!--第五行-->
-										<%--<input type="submit" value="" id="sort" />--%>
-										<input type="button" value="选择" type="submit" onclick="form.action='${website}acm/listACMByCondition/0';form.submit();"/>
-										<input type="button" value="导出Excel" type="submit" onclick="form.action='/export/acm';form.submit();"/>
 										<div class="clearfix"></div>
 									</form>
-
-
-									<form action="/import/ACMPrize" enctype="multipart/form-data" method="post">
-										<input type="file" name="file">
-										<input type="submit" value="导入excel">
-									</form>
-
-
-									<h1>${message}</h1>
-
-
 								</div>
 								<div class="x_title">
-									<h3>查询结果</h3>
+									<h3 class="dinline">查询结果</h3>
 									<button id="showcolumn">显示所有栏目</button>
 									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
-									<table id="datatable" class="table-striped table-bordered text-center">
+									<table id="datatable" class="table table-striped table-bordered text-center">
 										<thead>
 											<tr>
 												<th class="text-center">比赛类别</th>
@@ -200,46 +187,16 @@
 							<nav aria-label="Page navigation">
 								<ul class="pagination pull-right">
 									<li>
-										共${totalPage}页
-									</li>
-									<li>
-										第${curPage}页
-									</li>
-									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li>
 										<a href="${website}acm/toPrevious">上一页</a>
 									</li>
 									<li>
 										<a href="${website}acm/toNext">下一页</a>
 									</li>
-									<%--<li>--%>
-										<%--去往第<input type="text" name="pageNum">页--%>
-									<%--</li>--%>
-									<!--
-									<li>
-										<a href="#">1</a>
+									<li class="total">
+										共${totalPage}页
 									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									-->
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
+									<li class="total">
+										第${curPage}页
 									</li>
 								</ul>
 							</nav>
@@ -250,6 +207,7 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){
                 $("#showcolumn").click(function(){
@@ -259,6 +217,11 @@
                     $(".hidecol").css("display","none");
                 });
             })
+            !function(){
+                laydate({
+                    elem: '#end'
+                })
+            }();
 		</script>
 
 	</body>
