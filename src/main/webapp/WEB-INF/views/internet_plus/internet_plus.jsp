@@ -147,7 +147,7 @@
                 <td>${internetPlusDto.stuName8}</td>
                 <td>${internetPlusDto.stuNumber8}</td>
                 <td>${internetPlusDto.prizeLevel}</td>
-                <td>${internetPlusDto.prizeTime}</td>
+                <td>${internetPlusDto.prizeTimeStr}</td>
                 <td>${internetPlusDto.hostUnit}</td>
                 <td>${internetPlusDto.teacherName}</td>
                 <td>

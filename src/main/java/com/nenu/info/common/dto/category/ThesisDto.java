@@ -9,6 +9,8 @@ import java.util.Date;
  */
 public class ThesisDto {
 
+    private Integer id;
+
     private String journalLevel;
 
     private String journalName;
@@ -62,6 +64,14 @@ public class ThesisDto {
     private String teacherName;
 
     private String thesisAbstract;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getJournalLevel() {
         return journalLevel;

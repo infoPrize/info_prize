@@ -46,6 +46,11 @@ public interface ThesisService {
     public List<ThesisDto> listByCondition(Map<String, Object> params) throws Exception;
 
     /**
+     * 根据id查询论文信息
+     */
+    public ThesisDto selectById(Integer id) throws Exception;
+
+    /**
      * 将dto转换为实体
      */
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception;

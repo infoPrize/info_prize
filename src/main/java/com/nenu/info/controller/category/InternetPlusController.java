@@ -243,16 +243,6 @@ public class InternetPlusController {
             e.printStackTrace();
         }
 
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(internetPlusDtoList != null) {
-            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-                Date prizeTime = internetPlusDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                internetPlusDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
 //        if(internetPlusDtoList != null) {
 //            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
 //                JSONObject jsonObject = new JSONObject();

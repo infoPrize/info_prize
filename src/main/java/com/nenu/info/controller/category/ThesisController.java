@@ -249,7 +249,7 @@ public class ThesisController {
         model.addAttribute("message",message);
         model.addAttribute("thesisDtoList", thesisDtoList);
 
-        return "thesis";
+        return "thesis/thesis";
 
     }
 
@@ -302,7 +302,22 @@ public class ThesisController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "thesis";
+        return "thesis/thesis";
+    }
+
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id, Model model) {
+
+        ThesisDto thesisDto = null;
+        try {
+            thesisDto = thesisService.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("thesisDto", thesisDto);
+        return "thesis/detail";
+
     }
 
     @RequestMapping(value = "toPrevious")
@@ -330,7 +345,7 @@ public class ThesisController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "thesis";
+        return "thesis/thesis";
     }
 
     @RequestMapping(value = "toNext")
@@ -358,7 +373,7 @@ public class ThesisController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "thesis";
+        return "thesis/thesis";
     }
 
 }

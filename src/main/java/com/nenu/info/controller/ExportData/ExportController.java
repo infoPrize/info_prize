@@ -402,7 +402,7 @@ public class ExportController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "thesis";
+        return "thesis/thesis";
 
     }
 

@@ -14,6 +14,7 @@ import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.nenu.info.common.utils.WebConstants.pageSize;
@@ -104,6 +105,17 @@ public class InternetPlusServiceImpl implements InternetPlusService {
     public List<InternetPlusDto> listByCondition(Map<String, Object> params) throws Exception {
         List<InternetPlusDto> internetPlusDtoList = null;
         internetPlusDtoList = internetPlusDao.listByCondition(params);
+
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(internetPlusDtoList != null) {
+            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
+                Date prizeTime = internetPlusDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+                internetPlusDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
         return internetPlusDtoList;
     }
 

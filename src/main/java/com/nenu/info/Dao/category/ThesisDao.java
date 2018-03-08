@@ -34,4 +34,9 @@ public interface ThesisDao {
      */
     public List<ThesisDto> listByCondition(Map<String, Object> params) throws Exception;
 
+    /**
+     * 根据id查询论文信息
+     */
+    public ThesisDto selectById(@Param("id") Integer id) throws Exception;
+
 }

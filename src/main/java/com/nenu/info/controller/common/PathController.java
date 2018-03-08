@@ -30,7 +30,7 @@ public class PathController {
 
     @RequestMapping(value = "paper")
     public String toPaper() {
-        return "thesis";
+        return "thesis/thesis";
     }
 
     @RequestMapping(value = "patent")

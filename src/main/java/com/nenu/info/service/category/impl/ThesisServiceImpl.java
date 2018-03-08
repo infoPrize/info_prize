@@ -131,6 +131,13 @@ public class ThesisServiceImpl implements ThesisService {
         return thesisDtoList;
     }
 
+    @Override
+    public ThesisDto selectById(Integer id) throws Exception {
+        ThesisDto thesisDto = null;
+        thesisDto = thesisDao.selectById(id);
+        return thesisDto;
+    }
+
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception{
 
         Thesis thesis = new Thesis();
