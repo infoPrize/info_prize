@@ -1,18 +1,13 @@
 package com.nenu.info.controller.category;
 
-import com.nenu.info.common.dto.category.ChallengeCupDto;
 import com.nenu.info.common.dto.category.InternetPlusDto;
 import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.URLConstants;
-import com.nenu.info.controller.common.StudentController;
 import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.Table;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -56,7 +50,7 @@ public class InternetPlusController {
 
     @RequestMapping(value = "toList")
     public String toList() {
-        return "internet_plus/internet_plus_listByCondition_test";
+        return "internet_plus/internet_plus";
     }
 
     /**
@@ -296,8 +290,20 @@ public class InternetPlusController {
         model.addAttribute("totalPage", params.get("totalPage"));
         model.addAttribute("message",message);
 
-        return "internet_plus/internet_plus_listByCondition_test";
+        return "internet_plus/internet_plus";
+    }
 
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id, Model model) {
+        InternetPlusDto internetPlusDto = null;
+        try {
+            internetPlusDto = internetPlusService.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("internetPlusDto", internetPlusDto);
+        return "internet_plus/detail";
     }
 
     @RequestMapping(value = "toPrevious")
@@ -337,7 +343,7 @@ public class InternetPlusController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "internet_plus/internet_plus_listByCondition_test";
+        return "internet_plus/internet_plus";
     }
 
     @RequestMapping(value = "toNext")
@@ -377,7 +383,7 @@ public class InternetPlusController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "internet_plus/internet_plus_listByCondition_test";
+        return "internet_plus/internet_plus";
     }
 
 }

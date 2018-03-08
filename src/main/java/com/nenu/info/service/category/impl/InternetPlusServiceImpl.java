@@ -107,6 +107,13 @@ public class InternetPlusServiceImpl implements InternetPlusService {
         return internetPlusDtoList;
     }
 
+    @Override
+    public InternetPlusDto selectById(Integer id) throws Exception {
+        InternetPlusDto internetPlusDto = null;
+        internetPlusDto = internetPlusDao.selectById(id);
+        return internetPlusDto;
+    }
+
     public InternetPlus convertDtoToEntity(InternetPlusDto internetPlusDto) throws Exception{
 
         InternetPlus internetPlus = new InternetPlus();

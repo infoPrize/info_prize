@@ -17,8 +17,6 @@ public interface InternetPlusService {
 
     /**
      * 新增互联网+获奖信息
-     * @param internetPlus
-     * @throws Exception
      */
     public void add(InternetPlus internetPlus) throws Exception;
 
@@ -43,6 +41,11 @@ public interface InternetPlusService {
      * 根据条件查询获奖信息
      */
     public List<InternetPlusDto> listByCondition(Map<String, Object> params) throws Exception;
+
+    /**
+     * 根据id查询互联网+信息
+     */
+    public InternetPlusDto selectById(Integer id) throws Exception;
 
     /**
      * 将dto转换为实体

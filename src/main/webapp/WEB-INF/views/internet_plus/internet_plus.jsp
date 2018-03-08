@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Jarvenman
-  Date: 2018/1/29
-  Time: 17:46
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,7 +7,7 @@
 <body>
     <h1>根据条件筛选互联网+比赛信息</h1>
     <hr>
-    <form action="${website}InternetPlus/listByCondition" method="post">
+    <form action="${website}InternetPlus/listByCondition/1" method="post">
         <table>
             <tr>
                 <td>比赛名:</td>
@@ -157,8 +150,25 @@
                 <td>${internetPlusDto.prizeTime}</td>
                 <td>${internetPlusDto.hostUnit}</td>
                 <td>${internetPlusDto.teacherName}</td>
+                <td>
+                    <a href="#">删除</a><br>
+                    <a href="${website}InternetPlus/toDetail/${internetPlusDto.id}">去往详情页</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
+
+    <li>
+        共${totalPage}页
+    </li>
+    <li>
+        第${curPage}页
+    </li>
+    <li>
+        <a href="${website}InternetPlus/toPrevious">上一页</a>
+    </li>
+    <li>
+        <a href="${website}InternetPlus/toNext">下一页</a>
+    </li>
 </body>
 </html>

@@ -342,7 +342,7 @@ public class ExportController {
 
         ExcelUtil.writeExcel(internetPlusDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
-        return "internet_plus/internet_plus_listByCondition_test";
+        return "internet_plus/internet_plus";
 
 
     }

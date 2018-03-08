@@ -475,7 +475,7 @@ $(function() {
                     "id": "9",
                     "name": "互联网+",
                     "parentId": "1",
-                    "url": site.website + "InternetPlus/toList",
+                    "url": site.website + "InternetPlus/listByCondition/1",
                     "icon": "&#xe91f;",
                     "order": "1",
                     "isHeader": "0",
