@@ -253,8 +253,8 @@ public class PatentController {
         }
 
         model.addAttribute("patentDtoList", patentDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "patent";
     }
@@ -282,8 +282,8 @@ public class PatentController {
         }
 
         model.addAttribute("patentDtoList", patentDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "patent";
 

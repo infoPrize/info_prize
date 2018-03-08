@@ -255,8 +255,8 @@ public class OtherMatchController {
         otherMatchDtoList = otherMatchService.listByCondition(params);
 
         model.addAttribute("otherMatchDtoList", otherMatchDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "other_match/other_match_list";
 
@@ -277,8 +277,8 @@ public class OtherMatchController {
         otherMatchDtoList = otherMatchService.listByCondition(params);
 
         model.addAttribute("otherMatchDtoList", otherMatchDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("curPage", params.get("curPage"));
+        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "other_match/other_match_list";
 
