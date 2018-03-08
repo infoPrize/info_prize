@@ -153,6 +153,18 @@ public class ACMServiceImpl implements ACMService {
         return params;
     }
 
+    @Override
+    public ACMPrizeDto selectById(Integer id) {
+        ACMPrizeDto acmPrizeDto = null;
+
+        try {
+            acmPrizeDto = acmDao.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return acmPrizeDto;
+    }
 
     /**
      * 将dto转换为实体

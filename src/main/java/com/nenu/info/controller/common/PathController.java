@@ -42,7 +42,7 @@ public class PathController {
 
     @RequestMapping(value = "ACM")
     public String toACM() {
-        return "ACM";
+        return "ACM/ACM";
     }
 
     @RequestMapping(value = "mathModel")

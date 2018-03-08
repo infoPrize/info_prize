@@ -42,6 +42,8 @@ public interface ACMService {
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
                                          String hostUnit, Integer curPage, Integer totalPage);
 
+    public ACMPrizeDto selectById(Integer id);
+
     /**
      * 将dto转换为实体
      */

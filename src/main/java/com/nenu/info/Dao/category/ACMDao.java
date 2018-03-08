@@ -29,4 +29,9 @@ public interface ACMDao {
      */
     public List<ACMPrizeDto> listByConditions(Map<String, Object> params) throws Exception;
 
+    /**
+     * 根据id查询ACM获奖信息
+     */
+    public ACMPrizeDto selectById(@Param("id") Integer id) throws Exception;
+
 }

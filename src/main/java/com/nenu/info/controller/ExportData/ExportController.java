@@ -4,12 +4,10 @@ import com.nenu.info.common.dto.category.*;
 import com.nenu.info.common.utils.ExcelUtil;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.WebConstants;
-import com.nenu.info.controller.category.ACMController;
 import com.nenu.info.service.category.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,7 +111,7 @@ public class ExportController {
         } catch (Exception e){
             e.printStackTrace();
         }
-        return "ACM";
+        return "ACM/ACM";
     }
 
 

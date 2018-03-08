@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -223,7 +222,7 @@ public class ACMController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("message",message);
 
-        return "ACM";
+        return "ACM/ACM";
     }
 
 //    @RequestMapping(value = "toACM/{page}")
@@ -283,7 +282,7 @@ public class ACMController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "ACM";
+        return "ACM/ACM";
 
     }
 
@@ -323,8 +322,19 @@ public class ACMController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "ACM";
+        return "ACM/ACM";
 
+    }
+
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id,
+                           Model model) {
+
+        ACMPrizeDto acmPrizeDto = null;
+        acmPrizeDto = acmService.selectById(id);
+
+        model.addAttribute("acmPrizeDto", acmPrizeDto);
+        return "ACM/detail";
     }
 
 }
