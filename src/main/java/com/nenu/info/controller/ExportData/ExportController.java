@@ -463,7 +463,7 @@ public class ExportController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "patent";
+        return "patent/patent";
 
     }
 }

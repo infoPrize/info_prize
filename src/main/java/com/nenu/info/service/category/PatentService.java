@@ -37,6 +37,11 @@ public interface PatentService {
     public List<PatentDto> listByCondition(Map<String, Object> params) throws Exception;
 
     /**
+     * 根据id查询专利信息
+     */
+    public PatentDto selectById(Integer id) throws Exception;
+
+    /**
      * 将dto转换为实体
      */
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception;

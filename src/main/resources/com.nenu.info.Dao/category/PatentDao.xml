@@ -46,6 +46,7 @@
 
     <select id="listByCondition" resultType="com.nenu.info.common.dto.category.PatentDto">
         SELECT
+            tp.`id` AS id,
             (SELECT tpt.`patent_type` FROM `t_patent_type` tpt WHERE tpt.`id` = tp.`patent_type`) AS patentType,
             tp.`patent_name` AS patentName,
             tp.`apply_time` AS applyTime,
@@ -72,6 +73,32 @@
         <if test="curPage != -500">
             LIMIT #{startNum}, #{pageSize}
         </if>
+    </select>
+
+    <select id="selectById" resultType="com.nenu.info.common.dto.category.PatentDto">
+        SELECT
+            tp.`id` AS id,
+            (SELECT tpt.`patent_type` FROM `t_patent_type` tpt WHERE tpt.`id` = tp.`patent_type`) AS patentType,
+            tp.`patent_name` AS patentName,
+            tp.`apply_time` AS applyTime,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_1`) AS applierName1,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_1` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor1,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_1`) AS applierStuNumber1,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_2`) AS applierName2,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_2` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor2,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_2`) AS applierStuNumber2,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_3`) AS applierName3,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_3` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor3,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_3`) AS applierStuNumber3,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_4`) AS applierName4,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_4` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor4,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_4`) AS applierStuNumber4,
+            (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierName5,
+            (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_5` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor5,
+            (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierStuNumber5,
+            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tp.`teacher_id`) AS teacherName
+        FROM `t_patent` tp
+        WHERE tp.`id` = #{id}
     </select>
 
     <sql id="queryCondition">

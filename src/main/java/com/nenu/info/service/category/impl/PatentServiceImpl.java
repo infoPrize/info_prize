@@ -131,6 +131,13 @@ public class PatentServiceImpl implements PatentService {
         return patentDtoList;
     }
 
+    @Override
+    public PatentDto selectById(Integer id) throws Exception {
+        PatentDto patentDto = null;
+        patentDto = patentDao.selectById(id);
+        return patentDto;
+    }
+
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception{
 
         Patent patent = new Patent();

@@ -174,7 +174,7 @@ public class PatentController {
         model.addAttribute("message",message);
         model.addAttribute("patentDtoList", patentDtoList);
 
-        return "patent";
+        return "patent/patent";
     }
 
     @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
@@ -227,7 +227,21 @@ public class PatentController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "patent";
+        return "patent/patent";
+    }
+
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id, Model model) {
+        PatentDto patentDto = null;
+        try {
+            patentDto = patentService.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("patentDto", patentDto);
+        return "patent/detail";
+
     }
 
     @RequestMapping(value = "toPrevious")
@@ -256,7 +270,7 @@ public class PatentController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "patent";
+        return "patent/patent";
     }
 
     @RequestMapping(value = "toNext")
@@ -285,7 +299,7 @@ public class PatentController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "patent";
+        return "patent/patent";
 
 
     }

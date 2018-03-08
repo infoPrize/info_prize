@@ -9,6 +9,9 @@ import java.util.Date;
  */
 public class PatentDto {
 
+    //id
+    private Integer id;
+
     //专利类别
     private String patentType;
 
@@ -56,6 +59,14 @@ public class PatentDto {
     private String teacherName;
 
     private String introduce;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getIntroduce() {
         return introduce;

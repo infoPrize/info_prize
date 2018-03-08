@@ -35,7 +35,7 @@ public class PathController {
 
     @RequestMapping(value = "patent")
     public String toPatent() {
-        return "patent";
+        return "patent/patent";
     }
 
 

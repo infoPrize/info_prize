@@ -34,4 +34,9 @@ public interface PatentDao {
      */
     public List<PatentDto> listByCondition(Map<String, Object> params) throws Exception;
 
+    /**
+     * 根据id查询专利信息
+     */
+    public PatentDto selectById(@Param("id") Integer id) throws Exception;
+
 }
