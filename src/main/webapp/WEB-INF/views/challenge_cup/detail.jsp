@@ -2,11 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>国创科研</title>
+    <title>挑战杯详情页</title>
 </head>
 <body>
-<hr>
-<h1>这是国创科研信息中id为${scientificProject.id}的信息详情页</h1>
-<hr>
+    <hr>
+    <h1>这是挑战杯信息中id为${challengeCupDto.id}的详情页</h1>
+    <hr>
 </body>
 </html>

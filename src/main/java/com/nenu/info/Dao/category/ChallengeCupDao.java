@@ -29,4 +29,9 @@ public interface ChallengeCupDao {
      */
     public List<ChallengeCupDto> listByCondition(Map<String, Object> params) throws Exception;
 
+    /**
+     * 根据id查询挑战杯信息
+     */
+    public ChallengeCupDto selectById(@Param("id") Integer id) throws Exception;
+
 }

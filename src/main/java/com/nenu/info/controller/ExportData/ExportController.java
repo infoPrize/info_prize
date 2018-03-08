@@ -273,7 +273,7 @@ public class ExportController {
 
         model.addAttribute("message",message);
 
-        return "challenge_cup/challenge_cup_listByCondition_test";
+        return "challenge_cup/challenge_cup";
     }
 
     @RequestMapping(value = "internetPlus")

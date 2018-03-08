@@ -42,6 +42,11 @@ public interface ChallengeCupService {
     public List<ChallengeCupDto> listByCondition(Map<String, Object> params) throws Exception;
 
     /**
+     * 根据id查询挑战杯信息
+     */
+    public ChallengeCupDto selectById(Integer id) throws Exception;
+
+    /**
      * 将dto转换为实体
      */
     public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception;

@@ -5,9 +5,12 @@ import java.util.Date;
 /**
  * @author: software-liuwang
  * @time: 2018/1/30 14:50
- * @description: 互联网+查询增强表
+ * @description: 挑战杯查询增强表
  */
 public class ChallengeCupDto {
+
+    //id
+    private Integer id;
 
     //比赛等级
     private String matchLevel;
@@ -83,6 +86,14 @@ public class ChallengeCupDto {
 
     //指导教师
     private String teacherName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getMatchLevel() {
         return matchLevel;

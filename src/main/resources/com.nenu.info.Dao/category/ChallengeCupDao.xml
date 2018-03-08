@@ -29,6 +29,7 @@
 
     <select id="listByCondition" resultType="com.nenu.info.common.dto.category.ChallengeCupDto">
         SELECT
+          tcc.`id` AS id,
           (SELECT tml.`name` FROM `t_match_level` tml WHERE tml.`id` = tcc.`match_level`) AS matchLevel,
           tcc.`match_name`  AS matchName,
           tcc.`project_name` AS projectName,
@@ -60,6 +61,37 @@
         <if test="curPage != -500">
             LIMIT #{startNum}, #{pageSize}
         </if>
+    </select>
+
+    <select id="selectById" resultType="com.nenu.info.common.dto.category.ChallengeCupDto">
+        SELECT
+            tcc.`id` AS id,
+            (SELECT tml.`name` FROM `t_match_level` tml WHERE tml.`id` = tcc.`match_level`) AS matchLevel,
+            tcc.`match_name`  AS matchName,
+            tcc.`project_name` AS projectName,
+            tcc.`team_name` AS teamName,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_1`) AS stuName1,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_1`) AS stuNumber1,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_2`) AS stuName2,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_2`) AS stuNumber2,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_3`) AS stuName3,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_3`) AS stuNumber3,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_4`) AS stuName4,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_4`) AS stuNumber4,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_5`) AS stuName5,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_5`) AS stuNumber5,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_6`) AS stuName6,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_6`) AS stuNumber6,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_7`) AS stuName7,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_7`) AS stuNumber7,
+            (SELECT `name` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_8`) AS stuName8,
+            (SELECT `stu_number` FROM `t_student` ts WHERE ts.`id` = tcc.`teammate_id_8`) AS stuNumber8,
+            (SELECT `name` FROM `t_prize_level` tpl WHERE tpl.`id` = tcc.`prize_level`) AS prizeLevel,
+            tcc.`prize_time` AS prizeTime,
+            tcc.`host_unit` AS hostUnit,
+            (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tcc.`teacher_id`) AS teacherName
+        FROM `t_challenge_cup` tcc
+        WHERE tcc.`id` = #{id}
     </select>
 
     <sql id="queryCondition">

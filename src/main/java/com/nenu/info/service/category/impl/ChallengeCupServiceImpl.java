@@ -115,6 +115,13 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
 
     }
 
+    @Override
+    public ChallengeCupDto selectById(Integer id) throws Exception {
+        ChallengeCupDto challengeCupDto = null;
+        challengeCupDto = challengeCupDao.selectById(id);
+        return challengeCupDto;
+    }
+
     public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception{
         ChallengeCup challengeCup = new ChallengeCup();
         challengeCup.setProjectName(challengeCupDto.getProjectName());
