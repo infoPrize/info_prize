@@ -173,7 +173,9 @@ public class ChallengeCupController {
         if(student8 != null) {
             challengeCup.setTeammateId8(student8.getId());
         }
-        challengeCup.setTeacherId(teacher.getId());
+        if(teacher != null) {
+            challengeCup.setTeacherId(teacher.getId());
+        }
         challengeCup.setMatchName(matchName);
         challengeCup.setMatchLevel(matchLevel);
         challengeCup.setPrizeLevel(prizeLevel);
@@ -247,10 +249,10 @@ public class ChallengeCupController {
         //对日期进行处理
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
-                Date prizeTime = challengCupDto.getPrizeTime();
+            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
+                Date prizeTime = challengeCupDto.getPrizeTime();
                 String prizeTimeStr = sdf.format(prizeTime);
-                challengCupDto.setPrizeTimeStr(prizeTimeStr);
+                challengeCupDto.setPrizeTimeStr(prizeTimeStr);
             }
         }
 

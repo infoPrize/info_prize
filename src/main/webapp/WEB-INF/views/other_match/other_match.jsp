@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Join
@@ -13,6 +14,8 @@
 <body>
     <h1>其他比赛添加</h1>
     <hr>
+
+    <form action="${website}otherMatch/add" method="get">
     <table>
         <tr>
             <td>比赛名称</td>
@@ -131,5 +134,6 @@
             <td colspan="2"><input type="submit" value="提交"></td>
         </tr>
     </table>
+    </form>
 </body>
 </html>

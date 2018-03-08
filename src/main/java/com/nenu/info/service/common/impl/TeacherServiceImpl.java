@@ -62,6 +62,11 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public boolean checkTeacherExist(String teacherName) throws Exception {
+
+        if(teacherName.equals("")) {
+            return true;
+        }
+
         Teacher teacher = selectTeacherByName(teacherName);
         if(teacher == null) {
             return false;           //不存在

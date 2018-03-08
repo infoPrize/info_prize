@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Join
@@ -13,6 +14,7 @@
 <body>
     <h1>根据条件筛选其他比赛信息</h1>
     <hr>
+    <form action="${website}otherMatch/listByCondition/1" method="get">
     <table>
         <tr>
             <td>比赛名:</td>
@@ -90,6 +92,7 @@
             </td>
         </tr>
     </table>
+    </form>
 
     <table width="3000" border="1">
         <tr>
@@ -117,56 +120,48 @@
             <td>获奖等级</td>
             <td>指导教师</td>
         </tr>
+        <c:forEach items="${otherMatchDtoList}" var="otherMatchDto">
         <tr>
-            <td>第九届蓝桥杯大赛</td>
-            <td>省级</td>
-            <td>吉林省教育厅</td>
-            <td>刘旺</td>
-            <td>2015011969</td>
-            <td>刘晶</td>
-            <td>2015011959</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>基于嵌入式的图形引擎开发</td>
-            <td>2016-01-04</td>
-            <td>一等奖(金奖)</td>
-            <td>李勍</td>
+            <td>${otherMatchDto.matchName}</td>
+            <td>${otherMatchDto.matchLevel}</td>
+            <td>${otherMatchDto.hostUnit}</td>
+            <td>${otherMatchDto.stuName1}</td>
+            <td>${otherMatchDto.stuNumber1}</td>
+            <td>${otherMatchDto.stuName2}</td>
+            <td>${otherMatchDto.stuNumber2}</td>
+            <td>${otherMatchDto.stuName3}</td>
+            <td>${otherMatchDto.stuNumber3}</td>
+            <td>${otherMatchDto.stuName4}</td>
+            <td>${otherMatchDto.stuNumber4}</td>
+            <td>${otherMatchDto.stuName5}</td>
+            <td>${otherMatchDto.stuNumber5}</td>
+            <td>${otherMatchDto.stuName6}</td>
+            <td>${otherMatchDto.stuNumber6}</td>
+            <td>${otherMatchDto.stuName7}</td>
+            <td>${otherMatchDto.stuNumber7}</td>
+            <td>${otherMatchDto.stuName8}</td>
+            <td>${otherMatchDto.stuNumber8}</td>
+            <td>${otherMatchDto.projectName}</td>
+            <td>${otherMatchDto.prizeTimeStr}</td>
+            <td>${otherMatchDto.prizeLevel}</td>
+            <td>${otherMatchDto.teacherName}</td>
         </tr>
-        <tr>
-            <td>第九届蓝桥杯大赛</td>
-            <td>省级</td>
-            <td>吉林省教育厅</td>
-            <td>刘旺</td>
-            <td>2015011969</td>
-            <td>刘晶</td>
-            <td>2015011959</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>基于嵌入式的图形引擎开发</td>
-            <td>2016-01-04</td>
-            <td>一等奖(金奖)</td>
-            <td>李勍</td>
-        </tr>
+        </c:forEach>
     </table>
+
+    <ur>
+        <li>
+            共${totalPage}页
+        </li>
+        <li>
+            第${curPage}页
+        </li>
+        <li>
+            <a href="${website}otherMatch/toPrevious">上一页</a>
+        </li>
+        <li>
+            <a href="${website}otherMatch/toNext">下一页</a>
+        </li>
+    </ur>
 </body>
 </html>

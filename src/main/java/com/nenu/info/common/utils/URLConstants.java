@@ -38,4 +38,7 @@ public final class URLConstants {
     //挑战杯
     public static final String CHALLENGE_CUP_URL = "ChallengeCup";
 
+    //其他比赛
+    public static final String OTHER_MATCH_URL = "otherMatch";
+
 }

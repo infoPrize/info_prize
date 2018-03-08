@@ -8,13 +8,12 @@ import java.util.Date;
 
 /**
  * @author: software-liuwang
- * @time: 2017/11/5 19:40
- * @description : 实体类 - ACM获奖
+ * @time: 2018/3/8 12:27
+ * @description : 其他比赛实体类
  */
-
 @Entity
-@Table(name = "t_acm_prize")
-public class ACMPrize {
+@Table(name = "t_other_match")
+public class OtherMatch {
 
     //id
     @Id
@@ -24,7 +23,7 @@ public class ACMPrize {
     @Column(name = "match_name")
     private String matchName;
 
-    //比赛等级(0-校级; 1-市级; 2-省级; 3-多省级; 4-国家级; 5-亚洲级; 6-国际级)
+    //比赛等级
     @Column(name = "match_level")
     private Integer matchLevel;
 
@@ -32,31 +31,51 @@ public class ACMPrize {
     @Column(name = "host_unit")
     private String hostUnit;
 
-    //队伍名
-    @Column(name = "team_name")
-    private String teamName;
-
-    //队员1的id
+    //队伍成员1的id
     @Column(name = "teammate_id_1")
     private Integer teammateId1;
 
-    //队员2的id
+    //队伍成员2的id
     @Column(name = "teammate_id_2")
     private Integer teammateId2;
 
-    //队员3的id
+    //队伍成员3的id
     @Column(name = "teammate_id_3")
     private Integer teammateId3;
 
-    //获奖等级(1-一等奖，2-二等奖，3-三等奖，4-优胜奖)
-    @Column(name = "prize_level")
-    private Integer prizeLevel;
+    //队伍成员4的id
+    @Column(name = "teammate_id_4")
+    private Integer teammateId4;
+
+    //队伍成员5的id
+    @Column(name = "teammate_id_5")
+    private Integer teammateId5;
+
+    //队伍成员6的id
+    @Column(name = "teammate_id_6")
+    private Integer teammateId6;
+
+    //队伍成员7的id
+    @Column(name = "teammate_id_7")
+    private Integer teammateId7;
+
+    //队伍成员8的id
+    @Column(name = "teammate_id_8")
+    private Integer teammateId8;
+
+    //项目名
+    @Column(name = "project_name")
+    private String projectName;
 
     //获奖时间
     @Column(name = "prize_time")
     private Date prizeTime;
 
-    //指导教师id
+    //获奖等级
+    @Column(name = "prize_level")
+    private Integer prizeLevel;
+
+    //教师id
     @Column(name = "teacher_id")
     private Integer teacherId;
 
@@ -104,14 +123,6 @@ public class ACMPrize {
         this.hostUnit = hostUnit;
     }
 
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
     public Integer getTeammateId1() {
         return teammateId1;
     }
@@ -136,12 +147,52 @@ public class ACMPrize {
         this.teammateId3 = teammateId3;
     }
 
-    public Integer getPrizeLevel() {
-        return prizeLevel;
+    public Integer getTeammateId4() {
+        return teammateId4;
     }
 
-    public void setPrizeLevel(Integer prizeLevel) {
-        this.prizeLevel = prizeLevel;
+    public void setTeammateId4(Integer teammateId4) {
+        this.teammateId4 = teammateId4;
+    }
+
+    public Integer getTeammateId5() {
+        return teammateId5;
+    }
+
+    public void setTeammateId5(Integer teammateId5) {
+        this.teammateId5 = teammateId5;
+    }
+
+    public Integer getTeammateId6() {
+        return teammateId6;
+    }
+
+    public void setTeammateId6(Integer teammateId6) {
+        this.teammateId6 = teammateId6;
+    }
+
+    public Integer getTeammateId7() {
+        return teammateId7;
+    }
+
+    public void setTeammateId7(Integer teammateId7) {
+        this.teammateId7 = teammateId7;
+    }
+
+    public Integer getTeammateId8() {
+        return teammateId8;
+    }
+
+    public void setTeammateId8(Integer teammateId8) {
+        this.teammateId8 = teammateId8;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public Date getPrizeTime() {
@@ -150,6 +201,14 @@ public class ACMPrize {
 
     public void setPrizeTime(Date prizeTime) {
         this.prizeTime = prizeTime;
+    }
+
+    public Integer getPrizeLevel() {
+        return prizeLevel;
+    }
+
+    public void setPrizeLevel(Integer prizeLevel) {
+        this.prizeLevel = prizeLevel;
     }
 
     public Integer getTeacherId() {
