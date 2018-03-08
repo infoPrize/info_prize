@@ -142,6 +142,18 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         return scientificProjectDtoList;
     }
 
+    @Override
+    public ScientificProjectDto selectById(Integer id) {
+        ScientificProjectDto scientificProjectDto = null;
+        try {
+            scientificProjectDto = scientificProjectDao.selectById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return scientificProjectDto;
+    }
+
     public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception{
 
         ScientificProject scientificProject = new ScientificProject();

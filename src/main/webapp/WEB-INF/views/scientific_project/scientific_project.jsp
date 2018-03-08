@@ -175,7 +175,7 @@
 												<td>${scientificProject.teacherName}</td>
 												<td>${scientificProject.fundsLimit}</td>
 												<td>
-													<a href="#">详情</a>
+													<a href="${website}scientificProject/toDetail/${scientificProject.id}">去往详情页</a>
 												</td>
 												<td class="aparent">
 													<a href="" data-toggle="modal" data-target="#delete">删除</a>

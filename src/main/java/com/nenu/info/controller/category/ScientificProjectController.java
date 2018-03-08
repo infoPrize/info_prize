@@ -52,7 +52,7 @@ public class ScientificProjectController {
         model.addAttribute("year", year);
         model.addAttribute("message",message);
 
-        return "scientific_project";
+        return "scientific_project/scientific_project";
     }
 
     /**
@@ -245,7 +245,17 @@ public class ScientificProjectController {
 //        return jsonArray;
 
 
-        return "scientific_project";
+        return "scientific_project/scientific_project";
+    }
+
+    @RequestMapping(value = "toDetail/{id}")
+    public String toDetail(@PathVariable("id") Integer id, Model model) {
+        ScientificProjectDto scientificProjectDto = null;
+        scientificProjectDto = scientificProjectService.selectById(id);
+
+        model.addAttribute("scientificProject", scientificProjectDto);
+
+        return "scientific_project/detail";
     }
 
     @RequestMapping(value = "toPrevious")
@@ -273,7 +283,7 @@ public class ScientificProjectController {
         model.addAttribute("totalPage", totalPage);
 
 
-        return "scientific_project";
+        return "scientific_project/scientific_project";
     }
 
     @RequestMapping(value = "toNext")
@@ -301,7 +311,7 @@ public class ScientificProjectController {
         model.addAttribute("totalPage", totalPage);
 
 
-        return "scientific_project";
+        return "scientific_project/scientific_project";
     }
 }
 

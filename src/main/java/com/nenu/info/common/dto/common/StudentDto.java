@@ -1,4 +1,4 @@
-package com.nenu.info.common.dto;
+package com.nenu.info.common.dto.common;
 
 /**
  * StudentDto
@@ -8,7 +8,6 @@ package com.nenu.info.common.dto;
  * @time: 2017/12/19 10:38.
  */
 public class StudentDto {
-
 
     //学生姓名
     private String name;

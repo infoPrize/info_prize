@@ -2,7 +2,7 @@ package com.nenu.info.service.importData.impl;
 
 import com.nenu.info.Dao.category.*;
 import com.nenu.info.Dao.common.StudentDao;
-import com.nenu.info.common.dto.StudentDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.dto.category.*;
 import com.nenu.info.common.entities.category.*;
 import com.nenu.info.common.entities.common.Student;

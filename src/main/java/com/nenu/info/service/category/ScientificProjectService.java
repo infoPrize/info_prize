@@ -42,6 +42,11 @@ public interface ScientificProjectService {
     public List<ScientificProjectDto> listScientificProjectByConditions(Map<String, Object> params);
 
     /**
+     * 根据id查询国创科研信息
+     */
+    public ScientificProjectDto selectById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception;

@@ -7,6 +7,9 @@ package com.nenu.info.common.dto.category;
  */
 public class ScientificProjectDto {
 
+    //id
+    private Integer id;
+
     //项目类别
     private String projectType;
 
@@ -63,6 +66,14 @@ public class ScientificProjectDto {
 
     //项目介绍
     private String projectIntroduce;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getProjectType() {
         return projectType;

@@ -1,6 +1,6 @@
 package com.nenu.info.controller.common;
 
-import com.nenu.info.common.dto.StudentDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

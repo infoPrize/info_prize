@@ -14,7 +14,9 @@ import java.util.Map;
  */
 public interface ScientificProjectDao {
 
-    //新增科研国创项目
+    /**
+     * 新增国创科研信息
+     */
     public void addScientificProject(@Param("scientificProject") ScientificProject scientificProject);
 
     /**
@@ -24,17 +26,17 @@ public interface ScientificProjectDao {
 
     /**
      * 根据条件查询国创科研信息
-     * @param params 参数Map
-     * @return
-     * @throws Exception
      */
     public List<ScientificProjectDto> listScientificProjectByCondition(Map<String, Object> params) throws Exception;
 
     /**
      * 查询所有国创科研信息
-     * @return
-     * @throws Exception
      */
     public List<ScientificProjectDto> listAll() throws Exception;
+
+    /**
+     * 根据id查询相应国创科研信息
+     */
+    public ScientificProjectDto selectById(@Param("id") Integer id) throws Exception;
 
 }

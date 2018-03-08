@@ -154,7 +154,7 @@ public class ExportController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "scientific_project";
+        return "scientific_project/scientific_project";
     }
 
     @RequestMapping(value = "math")
