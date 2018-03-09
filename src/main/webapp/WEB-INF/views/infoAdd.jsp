@@ -520,7 +520,7 @@
 														</select>
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="time">获奖时间：</label>
+														<label class="tab-label control-label text-right" for="prizeTime">获奖时间：</label>
 														<input type="date" id="prizeTime" name="prizeTime" class="form-control" onClick="laydate()"/>
 													</div>
 													<div class="form-group col-sm-4">
@@ -539,14 +539,14 @@
 														<input type="text" name="projectName" class="form-control" />
 													</div>
 													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_name">团队成员1姓名：</label>
+														<label class="tab-label control-label text-right" for="student_name">团队成员姓名：</label>
 														<input type="text" id="student_name" class="form-control" name="teammateName1"/>
 													</div>
 												</div>
 												<!--第三行-->
 												<div class="tab-row">
-													<div class="form-group col-sm-4">
-														<label class="tab-label control-label text-right" for="student_number">团队成员1学号：</label>
+													<div class="form-group col-sm-12">
+														<label class="tab-label control-label text-right" for="student_number">团队成员学号：</label>
 														<input type="text" id="student_number" class="form-control" name="teammateStuNumber1"/>
 													</div>
 												</div>
