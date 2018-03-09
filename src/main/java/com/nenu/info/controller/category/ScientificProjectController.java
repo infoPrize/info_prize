@@ -39,20 +39,11 @@ public class ScientificProjectController {
     private ScientificProjectService scientificProjectService;
 
     /**
-     * 去往国创科研页面
-     * @param model
-     * @return
+     * 去往国创科研添加页面
      */
-    @RequestMapping(value = "toScientificProject")
-    public String toScientificProject(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
-        Integer year = YearUtil.getYear();
-        List<ScientificProjectDto> scientificProjectDtoList = null;
-
-        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
-        model.addAttribute("year", year);
-        model.addAttribute("message",message);
-
-        return "scientific_project/scientific_project";
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "scientific_project/scientific_project_add";
     }
 
     /**
@@ -193,6 +184,7 @@ public class ScientificProjectController {
                                                     @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                                     @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                                     @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                                    @RequestParam(value = "message", required = false, defaultValue = "") String message,
                                                     Model model,
                                                     HttpServletRequest request) {
 
@@ -214,6 +206,7 @@ public class ScientificProjectController {
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
+        model.addAttribute("message", message);
 
 //        if (scientificProjectDtoList != null) {
 //            for (ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
@@ -313,5 +306,22 @@ public class ScientificProjectController {
 
         return "scientific_project/scientific_project";
     }
+
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = scientificProjectService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = scientificProjectService.deleteById(id);
+        return code;
+    }
+
 }
 

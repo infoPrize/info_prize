@@ -47,6 +47,16 @@ public interface ScientificProjectService {
     public ScientificProjectDto selectById(Integer id);
 
     /**
+     * 根据id对国创科研信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除国创科研信息
+     */
+    public Integer deleteById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public ScientificProject convertDtoToEntity(ScientificProjectDto scientificProjectDto) throws Exception;

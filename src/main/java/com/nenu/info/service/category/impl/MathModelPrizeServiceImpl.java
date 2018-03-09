@@ -159,6 +159,29 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         return mathModelPrizeDto;
     }
 
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            mathModelPrizeDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            mathModelPrizeDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
     public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception{
 
         MathModelPrize mathModelPrize = new MathModelPrize();

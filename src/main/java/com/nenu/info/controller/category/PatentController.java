@@ -40,6 +40,14 @@ public class PatentController {
     private PatentService patentService;
 
     /**
+     * 去往专利添加页面
+     */
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "patent/patent_add";
+    }
+
+    /**
      * 添加专利信息
      * @param patentType
      * @param patentName

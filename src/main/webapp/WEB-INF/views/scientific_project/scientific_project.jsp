@@ -178,7 +178,7 @@
 													<a href="${website}scientificProject/toDetail/${scientificProject.id}">去往详情页</a>
 												</td>
 												<td class="aparent">
-													<a href="" data-toggle="modal" data-target="#delete">删除</a>
+													<a href="${website}scientificProject/falseDeleteById/${scientificProject.id}">删除</a>
 												</td>
 											</tr>
 										</c:forEach>

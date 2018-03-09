@@ -42,6 +42,14 @@ public class ThesisController {
     private ThesisService thesisService;
 
     /**
+     * 去往论文添加页面
+     */
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "thesis/thesis_add";
+    }
+
+    /**
      * 添加论文信息
      * @param journameName
      * @param journalLevel

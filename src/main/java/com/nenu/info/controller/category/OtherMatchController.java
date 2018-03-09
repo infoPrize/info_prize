@@ -41,7 +41,7 @@ public class OtherMatchController {
 
     @RequestMapping(value = "toAdd")
     public String toAdd() {
-        return "other_match/other_match";
+        return "other_match/other_match_add";
     }
 
     /**
@@ -237,7 +237,7 @@ public class OtherMatchController {
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
 
-        return "other_match/other_match_list";
+        return "other_match/other_match";
     }
 
     @RequestMapping(value = "toDetail/{id}")
@@ -267,7 +267,7 @@ public class OtherMatchController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "other_match/other_match_list";
+        return "other_match/other_match";
 
     }
 
@@ -289,7 +289,7 @@ public class OtherMatchController {
         model.addAttribute("curPage", params.get("curPage"));
         model.addAttribute("totalPage", params.get("totalPage"));
 
-        return "other_match/other_match_list";
+        return "other_match/other_match";
 
     }
 

@@ -39,4 +39,14 @@ public interface ScientificProjectDao {
      */
     public ScientificProjectDto selectById(@Param("id") Integer id) throws Exception;
 
+    /**
+     * 根据id对国创科研信息进行假删操作
+     */
+    public void falseDeleteById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 根据id删除国创科研信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

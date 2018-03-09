@@ -42,6 +42,16 @@ public interface MathModelPrizeService {
     public MathModelPrizeDto selectById(Integer id);
 
     /**
+     * 根据id对数学建模获奖信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除数学建模获奖信息
+     */
+    public Integer deleteById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public MathModelPrize convertDtoToEntity(MathModelPrizeDto mathModelPrizeDto) throws Exception;

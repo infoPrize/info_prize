@@ -43,14 +43,12 @@ public class InternetPlusController {
     @Autowired
     private InternetPlusService internetPlusService;
 
+    /**
+     * 去往互联网+添加页面
+     */
     @RequestMapping(value = "toAdd")
     public String toAdd() {
-        return "internet_plus/internet_plus_add_test";
-    }
-
-    @RequestMapping(value = "toList")
-    public String toList() {
-        return "internet_plus/internet_plus";
+        return "internet_plus/internet_plus_add";
     }
 
     /**

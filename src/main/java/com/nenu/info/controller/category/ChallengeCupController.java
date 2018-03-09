@@ -39,16 +39,13 @@ public class ChallengeCupController {
     @Autowired
     private ChallengeCupService challengeCupService;
 
+    /**
+     * 去往挑战杯添加页面
+     */
     @RequestMapping(value = "toAdd")
-    public String toChallengeCupAdd() {
-        return "challenge_cup/challenge_cup_add_test";
+    public String toAdd() {
+        return "challenge_cup/challenge_cup_add";
     }
-
-    @RequestMapping(value = "toList")
-    public String toChallengeCupListByCondition() {
-        return "challenge_cup/challenge_cup";
-    }
-
 
     /**
      * 添加挑战杯获奖信息

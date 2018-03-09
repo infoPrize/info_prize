@@ -41,6 +41,14 @@ public class MathModelPrizeController {
     private MathModelPrizeService mathModelPrizeService;
 
     /**
+     * 去往数学建模添加页面
+     */
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "math_model/math_model_add";
+    }
+
+    /**
      * 添加数学建模获奖信息
      * @param matchLevel 比赛等级
      * @param matchName 比赛名
@@ -295,5 +303,31 @@ public class MathModelPrizeController {
         model.addAttribute("totalPage", totalPage);
 
         return "math_model/math_model";
+    }
+
+    /**
+     * 根据id对数学建模获奖信息进行假删操作
+     * @return -1 - 删除失败
+     *          1 - 删除成功
+     */
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = mathModelPrizeService.falseDeleteById(id);
+        return code;
+    }
+
+    /**
+     * 根据id删除数学建模获奖信息
+     * @return -1 - 删除失败
+     *          1 - 删除成功
+     */
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = mathModelPrizeService.deleteById(id);
+        return code;
     }
 }

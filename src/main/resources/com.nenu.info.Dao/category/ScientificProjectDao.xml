@@ -150,4 +150,15 @@
             tsp.`project_introduce` AS projectIntroduce
         FROM `t_scientific_project` tsp
     </select>
+
+    <update id="falseDeleteById">
+        UPDATE `t_scientific_project`
+        SET `is_deleted` = 1
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_scientific_project`
+        WHERE `id` = #{id}
+    </delete>
 </mapper>
