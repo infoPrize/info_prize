@@ -6,9 +6,9 @@
     
     <insert id="add" parameterType="com.nenu.info.common.entities.category.MathModelPrize">
         INSERT INTO `t_math_model_prize`
-        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_time`, `teacher_id`)
+        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_level`, `prize_time`, `teacher_id`)
         VALUES(#{mathModelPrize.matchName}, #{mathModelPrize.matchLevel}, #{mathModelPrize.hostUnit}, #{mathModelPrize.teamName}, #{mathModelPrize.teammateId1}, #{mathModelPrize.teammateId2},
-               #{mathModelPrize.teammateId3}, #{mathModelPrize.prizeTime}, #{mathModelPrize.teacherId})
+               #{mathModelPrize.teammateId3}, #{mathModelPrize.prizeLevel}, #{mathModelPrize.prizeTime}, #{mathModelPrize.teacherId})
     </insert>
 
     <select id="countByConditions" resultType="Integer">

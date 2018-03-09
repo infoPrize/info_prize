@@ -485,7 +485,7 @@ $(function() {
 					"id": "10",
 					"name": "其他比赛",
 					"parentId": "1",
-					"url": site.website + "other",
+					"url": site.website + "otherMatch/listByCondition/1",
 					"icon": "&#xe927;",
 					"order": "1",
 					"isHeader": "0",

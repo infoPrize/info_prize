@@ -34,4 +34,14 @@ public interface ACMDao {
      */
     public ACMPrizeDto selectById(@Param("id") Integer id) throws Exception;
 
+    /**
+     * 根据id对ACM获奖信息假删
+     */
+    public void falseDeleteById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 根据id删除ACM获奖信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

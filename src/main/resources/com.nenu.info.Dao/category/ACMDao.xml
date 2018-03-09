@@ -6,9 +6,9 @@
 
     <insert id="add" parameterType="com.nenu.info.common.entities.category.ACMPrize">
         INSERT INTO `t_acm_prize`
-        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_time`, `teacher_id`)
+        (`match_name`, `match_level`, `host_unit`, `team_name`, `teammate_id_1`, `teammate_id_2`, `teammate_id_3`, `prize_level`, `prize_time`, `teacher_id`)
         VALUES(#{acmPrize.matchName}, #{acmPrize.matchLevel}, #{acmPrize.hostUnit}, #{acmPrize.teamName}, #{acmPrize.teammateId1}, #{acmPrize.teammateId2},
-                #{acmPrize.teammateId3}, #{acmPrize.prizeTime}, #{acmPrize.teacherId})
+                #{acmPrize.teammateId3}, #{acmPrize.prizeLevel}, #{acmPrize.prizeTime}, #{acmPrize.teacherId})
     </insert>
 
     <select id="countByCondition" resultType="Integer">
@@ -110,4 +110,14 @@
         </if>
     </sql>
 
+    <update id="falseDeleteById">
+        UPDATE `t_acm_prize`
+        SET `is_deleted` = 1
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_acm_prize`
+        WHERE `id` = #{id}
+    </delete>
 </mapper>

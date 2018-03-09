@@ -81,6 +81,18 @@ public class ACMServiceImpl implements ACMService {
             e.printStackTrace();
         }
 
+        if(acmPrizeDtoList != null) {
+            //对日期进行处理
+            for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+                Date dateStr = acmPrizeDto.getPrizeTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                String prizeTimeStr = sdf.format(dateStr);
+
+                acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
         return acmPrizeDtoList;
 
     }
@@ -166,12 +178,30 @@ public class ACMServiceImpl implements ACMService {
         return acmPrizeDto;
     }
 
-    /**
-     * 将dto转换为实体
-     * @param acmPrizeDto
-     * @return
-     * @throws Exception
-     */
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            acmDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            acmDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return 1;
+    }
+
     public ACMPrize convertDtoToEntity(ACMPrizeDto acmPrizeDto) throws Exception{
 
         ACMPrize acmPrize = new ACMPrize();

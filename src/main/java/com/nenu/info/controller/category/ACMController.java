@@ -205,18 +205,6 @@ public class ACMController {
 //        }
 //        return jsonArray;
 
-        if(acmPrizeDtoList != null) {
-            //对日期进行处理
-            for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-                Date dateStr = acmPrizeDto.getPrizeTime();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-                String prizeTimeStr = sdf.format(dateStr);
-
-                acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("curPage", params.get("curPage"));
@@ -268,16 +256,6 @@ public class ACMController {
 
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
-        //对日期进行处理
-        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-            Date dateStr = acmPrizeDto.getPrizeTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            String prizeTimeStr = sdf.format(dateStr);
-
-            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
-        }
-
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
@@ -307,17 +285,6 @@ public class ACMController {
 
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
-
-        //对日期进行处理
-        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-            Date dateStr = acmPrizeDto.getPrizeTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-            String prizeTimeStr = sdf.format(dateStr);
-
-            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
-        }
-
         model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
         model.addAttribute("curPage", curPage);
         model.addAttribute("totalPage", totalPage);
@@ -335,6 +302,33 @@ public class ACMController {
 
         model.addAttribute("acmPrizeDto", acmPrizeDto);
         return "ACM/detail";
+    }
+
+
+    /**
+     * 根据id对ACM获奖信息进行假删操作
+     * @return -1 - 删除操作失败
+     *          1 - 删除操作成功
+     */
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = acmService.falseDeleteById(id);
+        return code;
+    }
+
+    /**
+     * 根据id删除ACM获奖信息
+     * @return -1 - 删除操作失败
+     *          1 - 删除操作成功
+     */
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = acmService.deleteById(id);
+        return code;
     }
 
 }

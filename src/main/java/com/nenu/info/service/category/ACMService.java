@@ -42,7 +42,20 @@ public interface ACMService {
                                          Integer prizeLevel, Integer major, String stuName, String teacherName,
                                          String hostUnit, Integer curPage, Integer totalPage);
 
+    /**
+     * 根据id查询ACM获奖信息
+     */
     public ACMPrizeDto selectById(Integer id);
+
+    /**
+     * 根据id对ACM获奖信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除ACM获奖信息
+     */
+    public Integer deleteById(Integer id);
 
     /**
      * 将dto转换为实体
