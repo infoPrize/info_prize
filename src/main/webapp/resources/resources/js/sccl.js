@@ -405,12 +405,12 @@ $(function() {
 	/*菜单json*/
 	var menu = [{
 			"id": "1",
-			"name": "类别",
+			"name": "查询奖项",
 			"parentId": "0",
 			"url": "",
-			"icon": "",
+			"icon": "&#xe602;",
 			"order": "1",
-			"isHeader": "1",
+			"isHeader": "0",
 			"childMenus": [{
 					"id": "3",
 					"name": "论文",
@@ -495,81 +495,161 @@ $(function() {
 		},
 		{
 			"id": "2",
-			"name": "功能选项",
-			"parentId": "0",
-			"url": "",
-			"icon": "",
-			"order": "2",
-			"isHeader": "1",
-			"childMenus": [{
-					"id": "11",
-					"name": "管理功能",
-					"parentId": "2",
-					"url": "",
-					"icon": "&#xe604;",
+				"name": "奖项添加",
+				"parentId": "0",
+				"url": "",
+				"icon": "&#xe602;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": [{
+					"id": "3",
+					"name": "论文",
+					"parentId": "1",
+					"url": site.website + "thesis/listByCondition/1",
+					"icon": "&#xe602;",
 					"order": "1",
 					"isHeader": "0",
-					"childMenus": [{
-                        "id": "12",
-                        "name": "权限管理",
-                        "parentId": "11",
-                        "url": site.website + "manage",
-                        "icon": "&#xe605;",
-                        "order": "1",
-                        "isHeader": "0",
-                        "childMenus": ""
-                    },
-					{
-						"id": "13",
-						"name": "学生管理",
-						"parentId": "11",
-						"url": site.website + "student",
-						"icon": "&#xe90e;",
-						"order": "1",
-						"isHeader": "0",
-						"childMenus": ""
-					}]
+					"childMenus": ""
 				},
 				{
-					"id": "14",
-					"name": "信息录入",
-					"parentId": "2",
-					"url": "",
-					"icon": "&#xe610",
+					"id": "4",
+					"name": "专利",
+					"parentId": "1",
+					"url": site.website + "patent/listByCondition/1",
+					"icon": "&#xea99;",
 					"order": "1",
 					"isHeader": "0",
-					"childMenus": [{
-                        "id": "15",
-                        "name": "添加教师",
-                        "parentId": "14",
-                        "url": site.website + "teacher/toTeacher",
-                        "icon": "&#xe914;",
-                        "order": "1",
-                        "isHeader": "0",
-                        "childMenus": ""
-                    },
-					{
-						"id": "16",
-						"name": "添加学生",
-						"parentId": "14",
-						"url": site.website + "student/add",
-						"icon": "&#xe609;",
-						"order": "1",
-						"isHeader": "0",
-						"childMenus": ""
-					},
-					{
-                        "id": "17",
-                        "name": "奖项录入",
-                        "parentId": "14",
-                        "url": site.website + "infoAdd",
-                        "icon": "&#xe606;",
-                        "order": "1",
-                        "isHeader": "0",
-                        "childMenus": ""
-					}]
+					"childMenus": ""
+				},
+				{
+					"id": "5",
+					"name": "国创科研",
+					"parentId": "1",
+					"url": site.website + "scientificProject/listByConditions/1",
+					"icon": "&#xe91f;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
+				},
+				{
+					"id": "6",
+					"name": "ACM",
+					"parentId": "1",
+					"url": site.website + "acm/toAdd",
+					"icon": "&#xe906;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
+				},
+				{
+					"id": "7",
+					"name": "数学建模",
+					"parentId": "1",
+					"url": site.website + "mathModel/listByCondition/1",
+					"icon": "&#xe964;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
+				},
+				{
+					"id": "8",
+					"name": "挑战杯",
+					"parentId": "1",
+					"url": site.website + "ChallengeCup/listByCondition/1",
+					"icon": "&#xe91f;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
+				},
+				{
+					"id": "9",
+					"name": "互联网+",
+					"parentId": "1",
+					"url": site.website + "InternetPlus/listByCondition/1",
+					"icon": "&#xe91f;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
+				},
+				{
+					"id": "10",
+					"name": "其他比赛",
+					"parentId": "1",
+					"url": site.website + "otherMatch/listByCondition/1",
+					"icon": "&#xe927;",
+					"order": "1",
+					"isHeader": "0",
+					"childMenus": ""
 				}
 			]
+		},
+		{
+			"id": "3",
+			"name": "管理功能",
+			"parentId": "2",
+			"url": "",
+			"icon": "&#xe604;",
+			"order": "1",
+			"isHeader": "0",
+			"childMenus": [{
+				"id": "12",
+				"name": "权限管理",
+				"parentId": "11",
+				"url": site.website + "manage",
+				"icon": "&#xe605;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": ""
+			},
+			{
+				"id": "13",
+				"name": "学生管理",
+				"parentId": "11",
+				"url": site.website + "student",
+				"icon": "&#xe90e;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": ""
+			}]
+		},
+		{
+			"id": "4",
+			"name": "信息录入",
+			"parentId": "2",
+			"url": "",
+			"icon": "&#xe610",
+			"order": "1",
+			"isHeader": "0",
+			"childMenus": [{
+				"id": "15",
+				"name": "添加教师",
+				"parentId": "14",
+				"url": site.website + "teacher/toTeacher",
+				"icon": "&#xe914;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": ""
+			},
+			{
+				"id": "16",
+				"name": "添加学生",
+				"parentId": "14",
+				"url": site.website + "student/add",
+				"icon": "&#xe609;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": ""
+			},
+			{
+				"id": "17",
+				"name": "奖项录入",
+				"parentId": "14",
+				"url": site.website + "infoAdd",
+				"icon": "&#xe606;",
+				"order": "1",
+				"isHeader": "0",
+				"childMenus": ""
+			}]
 		}
 	];
 	initMenu(menu, $(".side-menu"));

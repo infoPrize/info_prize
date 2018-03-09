@@ -41,6 +41,14 @@ public class ACMController {
     private ACMService acmService;
 
     /**
+     * 去往添加ACM信息的页面
+     */
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "ACM/ACM_add";
+    }
+
+    /**
      * 添加ACM获奖信息
      * @param matchLevel 比赛等级
      * @param matchName 比赛名
