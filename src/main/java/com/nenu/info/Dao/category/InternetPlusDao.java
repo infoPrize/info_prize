@@ -34,4 +34,14 @@ public interface InternetPlusDao {
      */
     public InternetPlusDto selectById(@Param("id") Integer id) throws Exception;
 
+    /**
+     * 根据id对互联网+信息进行假删操作
+     */
+    public void falseDeleteById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 根据id删除互联网+信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

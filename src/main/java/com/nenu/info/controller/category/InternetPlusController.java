@@ -374,4 +374,20 @@ public class InternetPlusController {
         return "internet_plus/internet_plus";
     }
 
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = internetPlusService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = internetPlusService.deleteById(id);
+        return code;
+    }
+
 }

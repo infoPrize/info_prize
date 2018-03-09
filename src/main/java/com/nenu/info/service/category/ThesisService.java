@@ -51,6 +51,16 @@ public interface ThesisService {
     public ThesisDto selectById(Integer id) throws Exception;
 
     /**
+     * 根据id对论文信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除论文获奖信息
+     */
+    public Integer deleteById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception;

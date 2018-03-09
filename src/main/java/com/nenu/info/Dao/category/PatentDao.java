@@ -39,4 +39,14 @@ public interface PatentDao {
      */
     public PatentDto selectById(@Param("id") Integer id) throws Exception;
 
+    /**
+     * 根据id对专利信息进行假删操作
+     */
+    public void falseDeleteById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 根据id删除专利信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

@@ -140,7 +140,7 @@
             <td>${otherMatchDto.prizeLevel}</td>
             <td>${otherMatchDto.teacherName}</td>
             <td>
-                <a href="#">删除</a><br>
+                <a href="${website}otherMatch/falseDeleteById/${otherMatchDto.id}">删除</a><br>
                 <a href="${website}otherMatch/toDetail/${otherMatchDto.id}">去往详情页</a>
             </td>
         </tr>

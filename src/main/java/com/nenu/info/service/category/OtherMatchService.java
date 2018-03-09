@@ -41,7 +41,17 @@ public interface OtherMatchService {
     public List<OtherMatchDto> listByCondition(Map<String, Object> params);
 
     /**
-     * 根绝id查询信息
+     * 根据id查询信息
      */
     public OtherMatchDto selectById(Integer id);
+
+    /**
+     * 根据id对获奖信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除获奖信息
+     */
+    public Integer deleteById(Integer id);
 }

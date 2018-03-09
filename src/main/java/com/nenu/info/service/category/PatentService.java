@@ -42,6 +42,16 @@ public interface PatentService {
     public PatentDto selectById(Integer id) throws Exception;
 
     /**
+     * 根据id对专利信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除专利信息
+     */
+    public Integer deleteById(Integer id);
+
+    /**
      * 将dto转换为实体
      */
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception;

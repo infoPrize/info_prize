@@ -293,4 +293,20 @@ public class OtherMatchController {
 
     }
 
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = otherMatchService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = otherMatchService.deleteById(id);
+        return code;
+    }
+
 }

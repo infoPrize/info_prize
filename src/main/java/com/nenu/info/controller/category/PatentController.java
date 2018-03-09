@@ -308,9 +308,22 @@ public class PatentController {
         model.addAttribute("totalPage", params.get("totalPage"));
 
         return "patent/patent";
-
-
     }
 
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = patentService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = patentService.deleteById(id);
+        return code;
+    }
 
 }

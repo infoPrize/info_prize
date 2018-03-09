@@ -390,4 +390,20 @@ public class ChallengeCupController {
         return "challenge_cup/challenge_cup";
     }
 
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = challengeCupService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = challengeCupService.deleteById(id);
+        return code;
+    }
+
 }

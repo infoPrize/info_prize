@@ -122,6 +122,28 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
         return challengeCupDto;
     }
 
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            challengeCupDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            challengeCupDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
     public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception{
         ChallengeCup challengeCup = new ChallengeCup();
         challengeCup.setProjectName(challengeCupDto.getProjectName());

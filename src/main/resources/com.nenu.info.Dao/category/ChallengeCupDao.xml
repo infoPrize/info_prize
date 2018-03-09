@@ -159,4 +159,15 @@
         </if>
     </sql>
 
+    <update id="falseDeleteById">
+        UPDATE `t_challenge_cup`
+        SET `is_deleted` = 1
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_challenge_cup`
+        WHERE `id` = #{id}
+    </delete>
+
 </mapper>

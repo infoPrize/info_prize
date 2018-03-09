@@ -200,7 +200,7 @@
 										<td >${thesisDto.teacherName}</td>
 										<td ><a href="${website}thesis/toDetail/${thesisDto.id}">去往详情页</a></td>
 										<td class="aparent">
-											<a href="" data-toggle="modal" data-target="#delete">删除</a>
+											<a href="${website}thesis/falseDeleteById/${thesisDto.id}">删除</a>
 										</td>
 									</tr>
 									</c:forEach>

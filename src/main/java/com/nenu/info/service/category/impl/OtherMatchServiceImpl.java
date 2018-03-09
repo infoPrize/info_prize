@@ -148,4 +148,26 @@ public class OtherMatchServiceImpl implements OtherMatchService {
         }
         return otherMatchDto;
     }
+
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            otherMatchDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            otherMatchDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
 }

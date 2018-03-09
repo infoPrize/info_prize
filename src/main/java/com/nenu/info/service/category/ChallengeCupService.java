@@ -47,6 +47,17 @@ public interface ChallengeCupService {
     public ChallengeCupDto selectById(Integer id) throws Exception;
 
     /**
+     * 根据id对挑战杯获奖信息进行假删操作
+     */
+    public Integer falseDeleteById(Integer id);
+
+    /**
+     * 根据id删除挑战杯获奖信息
+     */
+    public Integer deleteById(Integer id);
+
+
+    /**
      * 将dto转换为实体
      */
     public ChallengeCup convertDtoToEntity(ChallengeCupDto challengeCupDto) throws Exception;

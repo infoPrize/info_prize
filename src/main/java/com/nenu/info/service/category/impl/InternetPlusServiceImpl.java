@@ -126,6 +126,28 @@ public class InternetPlusServiceImpl implements InternetPlusService {
         return internetPlusDto;
     }
 
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            internetPlusDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            internetPlusDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
     public InternetPlus convertDtoToEntity(InternetPlusDto internetPlusDto) throws Exception{
 
         InternetPlus internetPlus = new InternetPlus();

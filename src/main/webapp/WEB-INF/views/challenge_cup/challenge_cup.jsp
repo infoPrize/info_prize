@@ -158,7 +158,7 @@
             <td>${challengeCupDto.hostUnit}</td>
             <td>${challengeCupDto.teacherName}</td>
             <td>
-                <a href="#">删除</a><br>
+                <a href="${website}ChallengeCup/falseDeleteById/${challengeCupDto.id}">删除</a><br>
                 <a href="${website}ChallengeCup/toDetail/${challengeCupDto.id}">去往详情页</a>
             </td>
         </tr>

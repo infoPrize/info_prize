@@ -384,4 +384,20 @@ public class ThesisController {
         return "thesis/thesis";
     }
 
+    @RequestMapping(value = "falseDeleteById/{id}")
+    @ResponseBody
+    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = thesisService.falseDeleteById(id);
+        return code;
+    }
+
+    @RequestMapping(value = "deleteById/{id}")
+    @ResponseBody
+    public Integer deleteById(@PathVariable("id") Integer id) {
+        Integer code = null;
+        code = thesisService.deleteById(id);
+        return code;
+    }
+
 }

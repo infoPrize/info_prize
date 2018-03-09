@@ -34,4 +34,14 @@ public interface ChallengeCupDao {
      */
     public ChallengeCupDto selectById(@Param("id") Integer id) throws Exception;
 
+    /**
+     * 根据id对挑战杯信息进行假删操作
+     */
+    public void falseDeleteById(@Param("id") Integer id) throws Exception;
+
+    /**
+     * 根据id删除挑战杯信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

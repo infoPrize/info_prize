@@ -165,4 +165,15 @@
         </if>
     </sql>
 
+    <update id="falseDeleteById">
+        UPDATE `t_thesis`
+        SET `is_deleted` = 1
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_thesis`
+        WHERE `id` = #{id}
+    </delete>
+
 </mapper>

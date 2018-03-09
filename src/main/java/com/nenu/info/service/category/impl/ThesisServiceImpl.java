@@ -138,6 +138,28 @@ public class ThesisServiceImpl implements ThesisService {
         return thesisDto;
     }
 
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            thesisDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            thesisDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
     public Thesis convertDtoToEntity(ThesisDto thesisDto) throws Exception{
 
         Thesis thesis = new Thesis();

@@ -151,7 +151,7 @@
                 <td>${internetPlusDto.hostUnit}</td>
                 <td>${internetPlusDto.teacherName}</td>
                 <td>
-                    <a href="#">删除</a><br>
+                    <a href="${website}InternetPlus/falseDeleteById/${internetPlusDto.id}">删除</a><br>
                     <a href="${website}InternetPlus/toDetail/${internetPlusDto.id}">去往详情页</a>
                 </td>
             </tr>

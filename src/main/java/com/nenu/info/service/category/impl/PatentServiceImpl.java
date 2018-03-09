@@ -138,6 +138,28 @@ public class PatentServiceImpl implements PatentService {
         return patentDto;
     }
 
+    @Override
+    public Integer falseDeleteById(Integer id) {
+        try {
+            patentDao.falseDeleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    public Integer deleteById(Integer id) {
+        try {
+            patentDao.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
+    }
+
     public Patent convertDtoToEntity(PatentDto patentDto) throws Exception{
 
         Patent patent = new Patent();
