@@ -7,6 +7,7 @@ import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.entities.category.Thesis;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.utils.ZipUtil;
 import com.nenu.info.service.category.ThesisService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
@@ -426,15 +427,14 @@ public class ThesisController {
 
     @RequestMapping(value="/upload/{thesisId}",method = RequestMethod.POST)
     public String upload(@PathVariable("thesisId") Integer thesisId, MultipartFile file, HttpServletRequest request) throws Exception {
-        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis");
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisId);
         String fileName = file.getOriginalFilename();
 
         Material material = new Material();
         material.setThesisId(thesisId);
         material.setMaterialName(fileName);
-        material.setMaterialUrl("resources/upload/thesis/"+fileName);
+        material.setMaterialUrl("resources/upload/thesis/"+thesisId+"/"+fileName);
         materialService.addThesis(material);
-
         File dir = new File(path,fileName);
         if(!dir.exists()){
             dir.mkdirs();
@@ -446,29 +446,29 @@ public class ThesisController {
     @RequestMapping("/down/{thesisId}")
     public void down(HttpServletRequest request,HttpServletResponse response,@PathVariable("thesisId") Integer thesisId) throws Exception{
 
-        List<Material> materialList = materialService.listByThesisId(thesisId);
 
         BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-        for(Material material:materialList){
-            String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
-            //获取输入流
-            InputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
-            //假如以中文名下载的话
-            String filename = material.getMaterialName();
-            //转码，免得文件名中文乱码
-            filename = URLEncoder.encode(filename,"UTF-8");
-            //设置文件下载头
-            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-            //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-            response.setContentType("multipart/form-data");
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisId);
+        ZipUtil.toZip(path,out,true);
+        //获取输入流
+//        InputStream bis = new BufferedInputStream(new FileInputStream(new File(path+"")));
+////        //假如以中文名下载的话
+//        String filename = "论文材料";
+////        //转码，免得文件名中文乱码
+//        filename = URLEncoder.encode(filename,"UTF-8");
+//        //设置文件下载头
+//        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+//        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+//        response.setContentType("multipart/form-data");
+//
+//        int len = 0;
+//        while((len = bis.read()) != -1){
+//            out.write(len);
+//            out.flush();
+//        }
+//
+//        out.close();
 
-            int len = 0;
-            while((len = bis.read()) != -1){
-                out.write(len);
-                out.flush();
-            }
-        }
-        out.close();
 
     }
 }
