@@ -20,12 +20,6 @@ public final class URLConstants {
     //数学建模
     public static final String MATH_MODEL_URL = "mathModel";
 
-    //导入Excel
-    public static final String IMPORT_URL = "import";
-
-    //导出Excel
-    public static final String EXPORT_URL = "export";
-
     //论文
     public static final String THESIS_URL = "thesis";
 
@@ -37,6 +31,15 @@ public final class URLConstants {
 
     //挑战杯
     public static final String CHALLENGE_CUP_URL = "ChallengeCup";
+
+    //导入Excel
+    public static final String IMPORT_URL = "import";
+
+    //导出Excel
+    public static final String EXPORT_URL = "export";
+
+    //文件上传
+    public static final String UPLOAD_URL = "upload";
 
     //其他比赛
     public static final String OTHER_MATCH_URL = "otherMatch";

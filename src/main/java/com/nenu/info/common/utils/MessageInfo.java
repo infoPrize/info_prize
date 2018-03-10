@@ -15,4 +15,8 @@ public class MessageInfo {
 
     public static final String IMPORT_STUDENT_IMFORMATION = "表格数据信息有误";
 
+    public static final String DELETE_SUCCESS = "删除成功";
+
+    public static final String DELETE_FAIL = "删除失败";
+
 }

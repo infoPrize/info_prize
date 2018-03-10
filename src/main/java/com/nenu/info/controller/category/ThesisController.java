@@ -1,20 +1,26 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ThesisDto;
+import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.entities.category.Thesis;
+import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.service.category.ThesisService;
+import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +46,9 @@ public class ThesisController {
 
     @Autowired
     private ThesisService thesisService;
+
+    @Autowired
+    private MaterialService materialService;
 
     /**
      * 去往论文添加页面
@@ -317,15 +326,29 @@ public class ThesisController {
     public String toDetail(@PathVariable("id") Integer id, Model model) {
 
         ThesisDto thesisDto = null;
+        List<Material> materialList = null;
         try {
             thesisDto = thesisService.selectById(id);
+            materialList = materialService.listByThesisId(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         model.addAttribute("thesisDto", thesisDto);
+        model.addAttribute("list", materialList);
         return "thesis/detail";
 
+    }
+
+    @RequestMapping(value = "delete/material/{id}/{thesisId}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id,@PathVariable("thesisId") Integer thesisId, Model model) throws Exception{
+        Integer code = materialService.falseDeleteById(id);
+        if(code == 1){
+            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
+        }else {
+            model.addAttribute("message", MessageInfo.DELETE_FAIL);
+        }
+        return "redirect:/thesis/toDetail/"+thesisId;
     }
 
     @RequestMapping(value = "toPrevious")
@@ -398,6 +421,25 @@ public class ThesisController {
         Integer code = null;
         code = thesisService.deleteById(id);
         return code;
+    }
+
+    @RequestMapping(value="/upload/{thesisId}",method = RequestMethod.POST)
+    public String upload(@PathVariable("thesisId") Integer thesisId, MultipartFile file, HttpServletRequest request) throws Exception {
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis");
+        String fileName = file.getOriginalFilename();
+
+        Material material = new Material();
+        material.setThesisId(thesisId);
+        material.setMaterialName(fileName);
+        material.setMaterialUrl("resources/upload/thesis/"+fileName);
+        materialService.addThesis(material);
+
+        File dir = new File(path,fileName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        file.transferTo(dir);
+        return "redirect:/thesis/toDetail/"+thesisId;
     }
 
 }
