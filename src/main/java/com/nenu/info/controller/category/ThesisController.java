@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -442,4 +443,32 @@ public class ThesisController {
         return "redirect:/thesis/toDetail/"+thesisId;
     }
 
+    @RequestMapping("/down/{thesisId}")
+    public void down(HttpServletRequest request,HttpServletResponse response,@PathVariable("thesisId") Integer thesisId) throws Exception{
+
+        List<Material> materialList = materialService.listByThesisId(thesisId);
+
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        for(Material material:materialList){
+            String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
+            //获取输入流
+            InputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
+            //假如以中文名下载的话
+            String filename = material.getMaterialName();
+            //转码，免得文件名中文乱码
+            filename = URLEncoder.encode(filename,"UTF-8");
+            //设置文件下载头
+            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+            //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+            response.setContentType("multipart/form-data");
+
+            int len = 0;
+            while((len = bis.read()) != -1){
+                out.write(len);
+                out.flush();
+            }
+        }
+        out.close();
+
+    }
 }

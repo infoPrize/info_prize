@@ -33,7 +33,7 @@
     <input type="file" name="file">
     <input type="submit" value="上传材料">
 </form>
-
+<a href="/thesis/down/${thesisDto.id}">下载</a>
 ${message}
 
 
