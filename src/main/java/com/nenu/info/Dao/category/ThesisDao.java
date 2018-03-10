@@ -49,4 +49,6 @@ public interface ThesisDao {
      */
     public void deleteById(@Param("id") Integer id) throws Exception;
 
+
+
 }
