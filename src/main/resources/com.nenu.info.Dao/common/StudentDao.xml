@@ -6,8 +6,9 @@
     
     <insert id="add" parameterType="com.nenu.info.common.entities.common.Student">
         INSERT INTO `t_student`
-        VALUES (NULL, #{student.name}, #{student.sex}, #{student.stuNumber},
-                #{student.grade}, #{student.majorCode}, #{student.phone}, NULL, NULL)
+        (`name`, `sex`, `stu_number`, `grade`, `major_code`, `phone`)
+        VALUES (#{student.name}, #{student.sex}, #{student.stuNumber},
+                #{student.grade}, #{student.majorCode}, #{student.phone})
     </insert>
 
     <select id="selectStudentByStuNumber" resultType="com.nenu.info.common.entities.common.Student">
@@ -57,7 +58,17 @@
             <include refid="condition" />
         </where>
         ORDER BY `id` DESC
+        <if test="curPage != -500">
+        LIMIT #{startNum}, #{pageSize}
+        </if>
+    </select>
 
+    <select id="countByCondition" resultType="Integer">
+        SELECT count(*)
+        FROM `t_student`
+        <where>
+            <include refid="condition" />
+        </where>
     </select>
 
     <sql id="condition">

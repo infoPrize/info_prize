@@ -51,7 +51,10 @@ public class PatentServiceImpl implements PatentService {
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
         if((stuName != null && !stuName.equals("")) || (stuNumber != null && !stuNumber.equals("")) || ( majorCode != null && majorCode > 0) || (grade != null && !grade.equals(""))) {
-            studentList = studentDao.queryByCondition(stuName, -1, stuNumber, grade, majorCode, null);
+            Map<String, Object> stuParams = null;
+            stuParams = studentService.getParams(stuName, -1, stuNumber, grade, majorCode, "");
+            stuParams = studentService.getParams(stuParams, -500, 0);
+            studentList = studentDao.queryByCondition(stuParams);
             if(studentList == null) {
                 return null;
             } else {

@@ -605,7 +605,7 @@ $(function() {
 				"id": "13",
 				"name": "学生管理",
 				"parentId": "11",
-				"url": site.website + "student",
+				"url": site.website + "student/query/by/condition/1",
 				"icon": "&#xe90e;",
 				"order": "1",
 				"isHeader": "0",

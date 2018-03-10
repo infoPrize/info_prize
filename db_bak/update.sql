@@ -40,7 +40,7 @@ CREATE TABLE `t_material` (
   `challenge_id` int(11) DEFAULT NULL COMMENT '挑战杯的id',
   `material_name` varchar(50) DEFAULT NULL COMMENT '材料名称',
   `material_url` varchar(255) DEFAULT NULL COMMENT '材料路径',
-  `is_deteled` tinyint(4) NULL DEFAULT 0 COMMENT '是否已经删除,0-否,1-是',
+  `is_deleted` tinyint(4) NULL DEFAULT 0 COMMENT '是否已经删除,0-否,1-是',
   `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `last_modified_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
   PRIMARY KEY (`id`)

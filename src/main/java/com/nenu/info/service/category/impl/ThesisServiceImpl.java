@@ -54,7 +54,11 @@ public class ThesisServiceImpl implements ThesisService {
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
         if((authorName != null && authorName != "") || (authorStuNumber != null && authorStuNumber != "") || (authorMajor != null && authorMajor > 0 ) || (authorGrade != null && authorGrade != "")) {
-            studentList = studentDao.queryByCondition(authorName, -1, authorStuNumber, authorGrade, authorMajor, null);
+            Map<String, Object> stuParams = null;
+            stuParams = studentService.getParams(authorName, -1, authorStuNumber, authorGrade, authorMajor, "");
+            stuParams = studentService.getParams(stuParams, -500, 0);
+
+            studentList = studentDao.queryByCondition(stuParams);
             if(studentList == null) {
                 return null;
             } else {

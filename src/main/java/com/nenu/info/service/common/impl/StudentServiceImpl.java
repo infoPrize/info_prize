@@ -10,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 /**
  * @author: software-liuwang
  * @time: 2017/11/7 15:28
- * @description :
+ * @description : 学生管理Service
  */
 @Service(value = "studentService")
 public class StudentServiceImpl implements StudentService {
@@ -34,68 +38,67 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
-    /**
-     * 根据专业查找学生列表
-     *
-     * @param majorCode
-     * @return
-     * @throws Exception
-     */
     @Override
     public List<Student> listStudentByMajor(Integer majorCode) throws Exception {
         List<Student> studentList = studentDao.listStudentByMajor(majorCode);
         return studentList;
     }
 
-    /**
-     * 根据id获取学生
-     *
-     * @param id
-     * @return
-     * @throws Exception
-     */
     @Override
     public Student selectStudentById(Integer id) throws Exception {
         Student student = studentDao.selectStudentById(id);
         return student;
     }
 
-    /**
-     * 条件查询学生列表
-     * @param name
-     * @param sex
-     * @param stuNumber
-     * @param grade
-     * @param majorCode
-     * @param phone
-     * @return
-     * @throws Exception
-     */
-    public List<StudentDto> queryByCondition(String name, Integer sex, String stuNumber,
-                                             String grade, Integer majorCode, String phone) throws Exception{
+    @Override
+    public Map<String, Object> getParams(String name, Integer sex, String stuNumber, String grade, Integer majorCode, String phone) {
+        Map<String, Object> params  = new HashMap<>();
+        params.put("name", name);
+        params.put("sex", sex);
+        params.put("stuNumber", stuNumber);
+        params.put("grade", grade);
+        params.put("majorCode", majorCode);
+        params.put("phone", phone);
 
+        return params;
+    }
 
-        List<Student> studentList = studentDao.queryByCondition(name,sex,stuNumber,grade,majorCode,phone);
+    @Override
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) {
+        if(curPage <= 0 && curPage != -500) {
+            curPage = 1;
+        } else if(curPage > totalPage) {
+            curPage = totalPage;
+        }
+
+        Integer startNum = (curPage - 1) * pageSize;
+        params.put("curPage", curPage);
+        params.put("totalPage", totalPage);
+        params.put("startNum", startNum);
+        params.put("pageSize", pageSize);
+
+        return params;
+    }
+
+    public List<StudentDto> queryByCondition(Map<String, Object> params) throws Exception{
+
+        List<Student> studentList = studentDao.queryByCondition(params);
         List<StudentDto> studentDtoList = convertEntityListToDto(studentList);
         return studentDtoList;
 
     }
 
-    /**
-     * 根据学号删除学生
-     * @param stuNumber
-     * @throws Exception
-     */
+    @Override
+    public Integer countByCondition(Map<String, Object> params) throws Exception {
+        Integer count = 0;
+        count = studentDao.countByCondition(params);
+        return count;
+    }
+
     public void deleteByStuNumber(String stuNumber) throws Exception{
         studentDao.deleteByStuNumber(stuNumber);
     }
 
-    /**
-     * 实体转换为dto
-     * @param studentList
-     * @return
-     * @throws Exception
-     */
     private static List<StudentDto> convertEntityListToDto(List<Student> studentList) throws Exception{
 
         List<StudentDto> studentDtoList = new ArrayList<>();
@@ -115,12 +118,6 @@ public class StudentServiceImpl implements StudentService {
         return studentDtoList;
     }
 
-    /**
-     * dto转换为实体
-     * @param studentDto
-     * @return
-     * @throws Exception
-     */
     public Student convertDtoToEntity(StudentDto studentDto) throws Exception{
 
         Student student = new Student();
