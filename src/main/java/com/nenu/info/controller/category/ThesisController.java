@@ -89,7 +89,7 @@ public class ThesisController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Integer add(@RequestParam(value = "journalName", required = false, defaultValue = "") String journameName,
+    public Integer add(@RequestParam(value = "thesisTitle", required = false, defaultValue = "") String journameName,
                        @RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
                        @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
                        @RequestParam(value = "publishTime", required = false) Date publishTime,
@@ -275,7 +275,7 @@ public class ThesisController {
     @RequestMapping(value = "listByCondition/{curPage}")
     public String listByCondition(@PathVariable("curPage") Integer curPage,
                                   @RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
-                                  @RequestParam(value = "journalName", required = false, defaultValue = "") String journalName,
+                                  @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
                                   @RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
                                   @RequestParam(value = "authorStuNumber", required = false, defaultValue = "") String authorStuNumber,
                                   @RequestParam(value = "authorMajor", required = false, defaultValue = "-1") Integer authorMajor,
@@ -287,7 +287,7 @@ public class ThesisController {
                                   Model model) {
         Map<String, Object> params = null;
         try {
-            params = thesisService.getParams(journalLevel, journalName, authorName, authorStuNumber, authorMajor, authorGrade,
+            params = thesisService.getParams(journalLevel, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
                                             beginTime, endTime, teacherName);
         } catch (Exception e) {
             e.printStackTrace();
@@ -342,16 +342,7 @@ public class ThesisController {
 
     }
 
-    @RequestMapping(value = "delete/material/{id}/{thesisId}",method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,@PathVariable("thesisId") Integer thesisId, Model model) throws Exception{
-        Integer code = materialService.falseDeleteById(id);
-        if(code == 1){
-            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
-        }else {
-            model.addAttribute("message", MessageInfo.DELETE_FAIL);
-        }
-        return "redirect:/thesis/toDetail/"+thesisId;
-    }
+
 
     @RequestMapping(value = "toPrevious")
     public String toPrevious(HttpServletRequest request, Model model) {
@@ -425,15 +416,16 @@ public class ThesisController {
         return code;
     }
 
-    @RequestMapping(value="/upload/{thesisId}",method = RequestMethod.POST)
-    public String upload(@PathVariable("thesisId") Integer thesisId, MultipartFile file, HttpServletRequest request) throws Exception {
-        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisId);
-        String fileName = file.getOriginalFilename();
+    @RequestMapping(value="/upload/{thesisId}/{thesisTitle}",method = RequestMethod.POST)
+    public String upload(@PathVariable("thesisId") Integer thesisId, MultipartFile file,
+                         HttpServletRequest request , @PathVariable("thesisTitle") String thesisTitle) throws Exception {
 
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisTitle);
+        String fileName = file.getOriginalFilename();
         Material material = new Material();
         material.setThesisId(thesisId);
         material.setMaterialName(fileName);
-        material.setMaterialUrl("resources/upload/thesis/"+thesisId+"/"+fileName);
+        material.setMaterialUrl("resources/upload/thesis/"+thesisTitle+"/"+fileName);
         materialService.addThesis(material);
         File dir = new File(path,fileName);
         if(!dir.exists()){
@@ -443,32 +435,24 @@ public class ThesisController {
         return "redirect:/thesis/toDetail/"+thesisId;
     }
 
-    @RequestMapping("/down/{thesisId}")
-    public void down(HttpServletRequest request,HttpServletResponse response,@PathVariable("thesisId") Integer thesisId) throws Exception{
-
+    @RequestMapping("/down/{thesisId}/{thesisTitle}")
+    public void down(HttpServletRequest request,HttpServletResponse response,@PathVariable("thesisId") Integer thesisId,
+                     @PathVariable("thesisTitle") String thesisTitle) throws Exception{
 
         BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisId);
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisTitle);
         ZipUtil.toZip(path,out,true);
-        //获取输入流
-//        InputStream bis = new BufferedInputStream(new FileInputStream(new File(path+"")));
-////        //假如以中文名下载的话
-//        String filename = "论文材料";
-////        //转码，免得文件名中文乱码
-//        filename = URLEncoder.encode(filename,"UTF-8");
-//        //设置文件下载头
-//        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-//        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
-//        response.setContentType("multipart/form-data");
-//
-//        int len = 0;
-//        while((len = bis.read()) != -1){
-//            out.write(len);
-//            out.flush();
-//        }
-//
-//        out.close();
 
+    }
 
+    @RequestMapping(value = "delete/material/{id}/{thesisId}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id,@PathVariable("thesisId") Integer thesisId, Model model) throws Exception{
+        Integer code = materialService.falseDeleteById(id);
+        if(code == 1){
+            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
+        }else {
+            model.addAttribute("message", MessageInfo.DELETE_FAIL);
+        }
+        return "redirect:/thesis/toDetail/"+thesisId;
     }
 }

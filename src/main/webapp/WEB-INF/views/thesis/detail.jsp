@@ -29,11 +29,11 @@
 <hr>
 
 
-<form action="/thesis/upload/${thesisDto.id}" enctype="multipart/form-data" method="post">
+<form action="/thesis/upload/${thesisDto.id}/${thesisDto.thesisTitle}" enctype="multipart/form-data" method="post">
     <input type="file" name="file">
     <input type="submit" value="上传材料">
 </form>
-<a href="/thesis/down/${thesisDto.id}">下载</a>
+<a href="/thesis/down/${thesisDto.id}/${thesisDto.thesisTitle}">下载</a>
 ${message}
 
 
