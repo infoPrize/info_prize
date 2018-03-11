@@ -83,7 +83,6 @@
 										<label class="tab-label control-label text-right" for="journal">指导老师：</label>
 										<input type="text" id="journal" class="form-control" name="teacherName"/>
 									</div>
-
 								</div>
 
 								<!--第四行-->

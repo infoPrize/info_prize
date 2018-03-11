@@ -10,6 +10,7 @@
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
 		<title>ACM</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+		<link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
         <style>
             .hidecol{
@@ -30,12 +31,12 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="" method="get">
+									<form class="condition_form form-inline">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="type">比赛级别：</label>
-												<select id="type" class="form-control" name="matchLevel">
+												<label class="tab-label control-label text-right">比赛级别：</label>
+												<select id="matchLevel" class="form-control" name="matchLevel">
 													<option value="-1">---请选择比赛级别---</option>
 													<option value="1">校级</option>
 													<option value="2">市级</option>
@@ -48,19 +49,19 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="competition">比赛名称：</label>
-												<input type="text" id="competition" class="form-control" name="matchName" />
+												<label class="tab-label control-label text-right" for="matchName">比赛名称：</label>
+												<input type="text" id="matchName" class="form-control" name="matchName" />
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">起始时间：</label>
-												<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
+												<input type="text" id="beginTime" name="beginTime" class="form-control" onClick="laydate()"/>
 											</div>
 										</div>
 										<!--第二行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">结束时间：</label>
-												<input type="text" name="endTime" class="form-control" id="end"/>
+												<input type="text" id="endTime" name="endTime" class="form-control" id="end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
@@ -73,8 +74,8 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control" name="major">
+												<label class="tab-label control-label text-right" for="major">学生专业：</label>
+												<select id="major" class="form-control" name="major">
 													<option value="-1">---请选择学生专业---</option>
 													<option value="1">软件工程</option>
 													<option value="2">计算机科学与技术</option>
@@ -89,26 +90,26 @@
 										<!--第三行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" id="student_name" class="form-control" name="stuName"/>
+												<label class="tab-label control-label text-right" for="stuName">学生姓名：</label>
+												<input type="text" id="stuName" class="form-control" name="stuName"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-												<input type="text" id="student_number" class="form-control" name="stuNumber"/>
+												<label class="tab-label control-label text-right" for="stuNumber">学生学号：</label>
+												<input type="text" id="stuNumber" class="form-control" name="stuNumber"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">主办单位：</label>
+												<label class="tab-label control-label text-right" for="hostUnit">主办单位：</label>
 												<input type="text" id="hostUnit" class="form-control" name="hostUnit"/>
 											</div>
 										</div>
 										<!--第四行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-8">
-												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control" name="teacherName"/>
+												<label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+												<input type="text" id="teacherName" class="form-control" name="teacherName"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<input type="button" class="inlibut" value="选择" type="submit" onclick="form.action='${website}acm/listACMByCondition/0';form.submit();"/>
+												<input type="button" class="inlibut" value="选择" type="" onclick="initdataAcm()"/>
 												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/acm';form.submit();"/>
 											</div>
 										</div>
@@ -140,46 +141,18 @@
 											</tr>
 										</thead>
 	
-										<tbody>
+										<tbody class="grid-body">
 											<!--第一行-->
-											<c:forEach items="${acmPrizeDtoList}" var="acmPrizeDto">
-											<tr>
-												<td>${acmPrizeDto.matchLevel}</td>
-												<td>${acmPrizeDto.matchName}</td>
-												<td>${acmPrizeDto.hostUnit}</td>
-												<td>${acmPrizeDto.prizeTimeStr}</td>
-												<td>${acmPrizeDto.prizeLevel}</td>
-												<td>${acmPrizeDto.teamName}</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>${acmPrizeDto.teammateName1}</td></tr>
-														<tr><td>${acmPrizeDto.teammateName2}</td></tr>
-														<tr><td>${acmPrizeDto.teammateName3}</td></tr>
-													</table>
-												</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>${acmPrizeDto.teammateStuNumber1}</td></tr>
-														<tr><td>${acmPrizeDto.teammateStuNumber2}</td></tr>
-														<tr><td>${acmPrizeDto.teammateStuNumber3}</td></tr>
-													</table>
-												</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr><td>${acmPrizeDto.teammateMajor1}</td></tr>
-														<tr><td>${acmPrizeDto.teammateMajor2}</td></tr>
-														<tr><td>${acmPrizeDto.teammateMajor3}</td></tr>
-													</table>
-												</td>
-												<td>${acmPrizeDto.teacherName}</td>
-												<td class="aparent">
-													<a href="${website}acm/toDetail/${acmPrizeDto.id}">去往详情页</a>
-												</td>
-												<td>
-													<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a>
-												</td>
-											</tr>
-											</c:forEach>
+											<%--<c:forEach items="${acmPrizeDtoList}" var="acmPrizeDto">--%>
+											<%--<tr>--%>
+												<%--<td class="aparent">--%>
+													<%--<a href="${website}acm/toDetail/${acmPrizeDto.id}">去往详情页</a>--%>
+												<%--</td>--%>
+												<%--<td>--%>
+													<%--<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a>--%>
+												<%--</td>--%>
+											<%--</tr>--%>
+											<%--</c:forEach>--%>
 										</tbody>
 									</table>
 								</div>
@@ -188,22 +161,8 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<nav aria-label="Page navigation">
-								<ul class="pagination pull-right">
-									<li>
-										<a href="${website}acm/toPrevious">上一页</a>
-									</li>
-									<li>
-										<a href="${website}acm/toNext">下一页</a>
-									</li>
-									<li class="total">
-										共${totalPage}页
-									</li>
-									<li class="total">
-										第${curPage}页
-									</li>
-								</ul>
-							</nav>
+							<!--分页-->
+							<div class="page" id="page"></div>
 						</div>
 					</div>
 				</div>
@@ -212,6 +171,8 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){
                 $("#showcolumn").click(function(){

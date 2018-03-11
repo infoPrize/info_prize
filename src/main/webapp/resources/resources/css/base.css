@@ -99,22 +99,37 @@ table th, table td{
 
 #file_name{
 	width: 400px;
-	height: 30px;
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .input {
 	width: 80px;
-	height: 32px;
-	line-height: 32px;
+	height: 33px;
+	line-height: 33px;
 	text-align:center;
 	display:inline-block;/*具有行内元素的视觉，块级元素的属性 宽高*/
 	overflow:hidden;/*去掉的话，输入框也可以点击*/
 	position:relative;/*相对定位，为 #file 的绝对定位准备*/
-	top:10px;
 	padding: 0 10px;
 	border-radius: 7px;
 	background-color: #33aecc;
 	border: 1px solid #33aecc;
 	color: #fff;
+}
+.top {
+	top: 11px
 }
 a{
 	text-decoration:none;

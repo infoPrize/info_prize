@@ -57,12 +57,12 @@
                                             <input type="text" id="tutor" class="form-control" name="teacherName" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="author_name_2">申请人姓名</label>
-                                            <input type="text" class="form-control" id="author_name_2" name="applierName1" />
+                                            <label class="tab-label control-label text-right" for="author_name_1">申请人姓名</label>
+                                            <input type="text" class="form-control" id="author_name_1" name="applierName1" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="author_stu_number2">申请人学号</label>
-                                            <input type="text" class="form-control" id="author_stu_number2" name="applierStuNumber1" />
+                                            <label class="tab-label control-label text-right" for="author_stu_number1">申请人学号</label>
+                                            <input type="text" class="form-control" id="author_stu_number1" name="applierStuNumber1" />
                                         </div>
 
                                     </div>

@@ -114,14 +114,20 @@
                                     <div class="clearfix"></div>
                                     <input type="button" value="提交" id="sort_ACM"/>
                                 </form>
-                                <form action="/import/ACMPrize" enctype="multipart/form-data" method="post">
-                                    <input type="file" name="file">
-                                    <input type="submit" value="导入excel">
-                                </form>
-                                <h1>${message}</h1>
                             </div>
                         </div>
                     </div>
+                    <hr/>
+                    <form action="/import/ACMPrize" enctype="multipart/form-data" method="post" class="dinline">
+                        <label class="tab-label control-label text-right">导入excel：</label>
+                        <input type="text" id="file_name" readonly="readonly" value=""/>
+                        <a href="javascript:void(0);" class="input top">
+                            浏览
+                            <input type="file" id="file" name="file">
+                        </a>
+                        <input type="submit" class="input" value="确定"/>
+                    </form>
+                    <%--<h1>${message}</h1>--%>
                 </div>
             </div>
         </div>

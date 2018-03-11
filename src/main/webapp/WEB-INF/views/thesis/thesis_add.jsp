@@ -21,12 +21,13 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h3>论文信息录入</h3>
+                        <h3 class="dinline">论文信息录入</h3>
                         <hr/>
                     </div>
                     <div class="x_content">
                         <div class="tab-pane active" id="tab-article">
                             <div class="row feature">
+                                <%--<h1>${message}</h1>--%>
                                 <form class="condition_form form-inline" action="${website}thesis/add" method="post">
                                     <!--第一行-->
                                     <div class="tab-row">
@@ -87,8 +88,6 @@
                                             <label class="tab-label control-label text-right">指导老师：</label>
                                             <input type="text" class="form-control" id="teacherName" />
                                         </div>
-
-
                                     </div>
                                     <!--第四行-->
                                     <div class="tab-row">
@@ -102,24 +101,19 @@
                                     <input type="button" value="提交" id="sort_thesis"/>
                                     <input type="button" value="添加作者" id="addthesis">
                                 </form>
-                                <form action="/import/thesis" enctype="multipart/form-data" method="post">
-                                    <%--<input type="file" name="file">--%>
-                                    <%--<input type="submit" value="导入excel">--%>
-                                    <div class="tab-row">
-                                        <input type="text" id="file_name" readonly="readonly" value="" class="form-control"/>
-                                        <a href="javascript:void(0);" class="btn">
-                                            浏览
-                                            <input type="file" id="file" name="file">
-                                        </a>
-                                        <input type="submit" class="btn" value="导入excel"/>
-                                    </div>
-
-                                </form>
-                                <h1>${message}</h1>
                             </div>
                         </div>
-
                     </div>
+                    <hr/>
+                    <form action="/import/thesis" enctype="multipart/form-data" method="post" class="dinline">
+                        <label class="tab-label control-label text-right">导入excel：</label>
+                        <input type="text" id="file_name" readonly="readonly" value=""/>
+                        <a href="javascript:void(0);" class="input top">
+                            浏览
+                            <input type="file" id="file" name="file">
+                        </a>
+                        <input type="submit" class="input" value="确定"/>
+                    </form>
                 </div>
             </div>
         </div>
