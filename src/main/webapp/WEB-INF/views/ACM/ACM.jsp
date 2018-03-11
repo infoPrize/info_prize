@@ -15,6 +15,7 @@
             .hidecol{
                 display: none;
             }
+
         </style>
 	</head>
 	<body>
@@ -172,7 +173,7 @@
 												</td>
 												<td>${acmPrizeDto.teacherName}</td>
 												<td class="aparent">
-													<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}">删除</a><br>
+													<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a><br>
 													<a href="${website}acm/toDetail/${acmPrizeDto.id}">去往详情页</a>
 												</td>
 											</tr>
@@ -217,6 +218,17 @@
                 $("#hidecolumn").click(function(){
                     $(".hidecol").css("display","none");
                 });
+
+                $(".delete").click(function () {
+//                    e.preventDefault();
+					alert("删除成功！");
+//					return false;
+					<%--if(${website}acm/falseDeleteById/${acmPrizeDto.id}==1)--%>
+						<%--alert("删除成功！");--%>
+					<%--else--%>
+					    <%--alert("删除失败！");--%>
+
+                })
             })
             !function(){
                 laydate({

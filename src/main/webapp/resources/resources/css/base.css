@@ -84,3 +84,31 @@ table th, table td{
 	display: inline-block;
 	margin-bottom: 0;
 }
+/*详情页*/
+.detail_title{
+	text-align: center;
+}
+.detail_p{
+	text-indent: 2em;
+    white-space: normal;
+    text-align: left;
+}
+.image{
+	text-align: center;
+}
+.detail_img{
+	margin: 2px;
+    max-width: 600px;
+    max-height: 300px;
+}
+#upload,#download{
+    position: relative;
+    left: 1000px;
+    width: 80px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    background-color: #33aecc;
+    border: 1px solid #33aecc;
+    color: #fff;
+}
