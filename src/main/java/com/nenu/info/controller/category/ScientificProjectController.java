@@ -201,7 +201,7 @@ public class ScientificProjectController {
         int pageSize = WebConstants.pageSize;
         int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
 
-        params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
+        params = scientificProjectService.getParams(params, curPage, totalPage);
 
         HttpSession session = request.getSession();
         session.setAttribute("scientificProjectParams", params);

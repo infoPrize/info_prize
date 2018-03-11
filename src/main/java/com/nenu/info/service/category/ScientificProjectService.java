@@ -32,8 +32,7 @@ public interface ScientificProjectService {
     /**
      * 将传递的参数加工为去数据库中查询的参数(与分页无关)
      */
-    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear,
-                                         Integer majorCode, String teacherName, String stuName, String stuNumber, Integer curPage, Integer totalPage);
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage);
 
 
     /**

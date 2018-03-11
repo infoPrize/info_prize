@@ -402,7 +402,9 @@ public class ThesisController {
 
     @RequestMapping(value = "falseDeleteById/{id}")
     @ResponseBody
-    public Integer falseDeleteById(@PathVariable("id") Integer id) {
+    public Integer falseDeleteById(@PathVariable("id") Integer id, HttpServletResponse response) {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Integer code = null;
         code = thesisService.falseDeleteById(id);
         return code;

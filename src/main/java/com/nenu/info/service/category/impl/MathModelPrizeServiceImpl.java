@@ -97,29 +97,6 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
     }
 
     @Override
-    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage, Integer totalPage) {
-        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major,
-                stuName, teacherName, hostUnit);
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        Integer startNum = pageSize * (curPage - 1);
-
-        params.put("startNum", startNum);
-        params.put("pageSize", pageSize);
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-
-        return params;
-    }
-
-    @Override
     public Integer countByConditions(Map<String, Object> params) {
         Integer count = null;
         try {
@@ -135,15 +112,22 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
     public List<MathModelPrizeDto> listByConditions(Map<String, Object> params) {
         List<MathModelPrizeDto> mathModelPrizeDtoList = null;
 
-        int startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
-        params.put("startNum", startNum);
-
         try {
             mathModelPrizeDtoList = mathModelPrizeDao.listByConditions(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(mathModelPrizeDtoList != null) {
+            for (MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+                Date prizeTime = mathModelPrizeDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+
+                mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
         return mathModelPrizeDtoList;
 
     }

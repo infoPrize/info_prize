@@ -29,6 +29,16 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <!--&lt;!&ndash; 登录过滤器 &ndash;&gt;-->
+  <!--<filter>-->
+    <!--<filter-name>loginFilter</filter-name>-->
+    <!--<filter-class>com.nenu.info.common.filter.LoginFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>loginFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
   <!-- 配置DispatcherServlet -->
   <servlet>
     <servlet-name>SpringMVC</servlet-name>

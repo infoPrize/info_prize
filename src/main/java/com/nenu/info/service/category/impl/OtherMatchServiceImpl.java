@@ -88,24 +88,6 @@ public class OtherMatchServiceImpl implements OtherMatchService {
     }
 
     @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-        params.put("startNum", startNum);
-        params.put("pageSize", pageSize);
-
-        return params;
-    }
-
-    @Override
     public Integer countByCondition(Map<String, Object> params) {
         Integer count = 0;
         try {

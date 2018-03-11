@@ -14,6 +14,7 @@ import com.nenu.info.service.category.ACMService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,14 @@ public class ACMController {
     @RequestMapping(value = "toAdd")
     public String toAdd() {
         return "ACM/ACM_add";
+    }
+
+    /**
+     * 去往ACM列表页
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "ACM/ACM";
     }
 
     /**
@@ -169,147 +178,33 @@ public class ACMController {
      * @param hostUnit 主办单位
      * @return
      */
-    @RequestMapping(value = "listACMByCondition/{page}", method = RequestMethod.GET)
-//    @ResponseBody
-    public String listACMPrizeByConditions(@PathVariable("page") Integer curPage,
-                                           @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                           @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                           @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                           @RequestParam(value = "endTime", required = false) Date endTime,
-                                           @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                           @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                           @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                           @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                           @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                           Model model,
-                                           HttpServletRequest request,
-                                           @RequestParam(value = "message", required = false, defaultValue = "") String message) {
-//        JSONArray jsonArray = new JSONArray();
+    @RequestMapping(value = "listByCondition", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject listACMPrizeByConditions(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                               @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                               @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                               @RequestParam(value = "endTime", required = false) Date endTime,
+                                               @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                               @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                               @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                               @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                               @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                               @RequestParam(value = "message", required = false, defaultValue = "") String message,
+                                               HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        Integer count = acmService.countByCondition(params);
-        Integer pageSize = WebConstants.pageSize;
 
-        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("ACMParams", params);
-        session.setAttribute("ACMTotalPage", totalPage);
 
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
-//        for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-//            JSONObject jsonObject = new JSONObject();
-//
-//            jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
-//            jsonObject.put("matchName", acmPrizeDto.getMatchName());
-//            jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
-//            jsonObject.put("prizeTime", acmPrizeDto.getPrizeTime());
-//            jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
-//            jsonObject.put("teamName", acmPrizeDto.getTeamName());
-//            jsonObject.put("teammateName1", acmPrizeDto.getTeammateName1());
-//            jsonObject.put("teammateStuNumber1", acmPrizeDto.getTeammateStuNumber1());
-//            jsonObject.put("teammateMajor1", acmPrizeDto.getTeammateMajor1());
-//            jsonObject.put("teammateName2", acmPrizeDto.getTeammateName2());
-//            jsonObject.put("teammateStuNumber2", acmPrizeDto.getTeammateStuNumber2());
-//            jsonObject.put("teammateMajor2", acmPrizeDto.getTeammateMajor2());
-//            jsonObject.put("teammateName3", acmPrizeDto.getTeammateName3());
-//            jsonObject.put("teammateStuNumber3", acmPrizeDto.getTeammateStuNumber3());
-//            jsonObject.put("teammateMajor3", acmPrizeDto.getTeammateMajor3());
-//            jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
-//
-//            jsonArray.add(jsonObject);
-//        }
-//        return jsonArray;
+        jsonObject.put("acmPrizeDtoList", acmPrizeDtoList);
 
-        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("message",message);
+        jsonObject.put("message", message);
 
-        return "ACM/ACM";
-    }
-
-//    @RequestMapping(value = "toACM/{page}")
-//    public String toACM(@PathVariable("page") Integer curPage,
-//                        Model model) {
-//
-//        Integer count = acmService.countByCondition(-1, "", null, null, -1, -1, "", "", "");
-//        Integer pageSize = WebConstants.pageSize;
-//
-//        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-//
-//        if(curPage <= 0) {
-//            curPage = 1;
-//        } else if(curPage > totalPage) {
-//            curPage = totalPage;
-//        } else {
-//            curPage = 1;
-//        }
-//
-//        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(-1, "", null, null, -1, -1, "", "", "", curPage);
-//        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-//        return "ACM";
-//    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request,
-                             Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("ACMParams");
-
-        Integer curPage = (Integer)params.get("curPage");
-        curPage -= 1;
-
-        int totalPage = (int)params.get("totalPage");
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        params.put("curPage", curPage);
-
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
-
-        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-        return "ACM/ACM";
-
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request,
-                             Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("ACMParams");
-
-        int curPage = (int)params.get("curPage");
-        curPage += 1;
-
-        int totalPage = (int)params.get("totalPage");
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        params.put("curPage", curPage);
-
-        List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
-
-        model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-        return "ACM/ACM";
-
+        return jsonObject;
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

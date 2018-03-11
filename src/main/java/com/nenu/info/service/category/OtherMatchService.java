@@ -20,15 +20,10 @@ public interface OtherMatchService {
     public void add(OtherMatch otherMatch);
 
     /**
-     * 将传递来的参数加工为去数据库查询的参数(与分页无关)
+     * 将传递来的参数加工为去数据库查询的参数
      */
     public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String stuName,
                                          Integer majorCode, String projectName, String hostUnit, String teacherName);
-
-    /**
-     * 将传递来的参数加工为去数据库查询的参数(与分页有关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage);
 
     /**
      * 根据条件查询相应信息的数量

@@ -1,6 +1,9 @@
 /*Created by liujing on 2018/3/10.*/
 //跨域地址
-var website = "http://125.222.219.220/";
+// var website = "http://125.222.219.220/";
+
+//本地地址
+var website = "http://infoprize.nenu.edu.cn/";
 
 var max = 5;
 var pagelistc = 6;

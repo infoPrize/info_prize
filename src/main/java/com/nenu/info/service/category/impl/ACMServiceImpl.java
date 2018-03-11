@@ -72,9 +72,6 @@ public class ACMServiceImpl implements ACMService {
     public List<ACMPrizeDto> listByConditions(Map<String, Object> params) {
         List<ACMPrizeDto> acmPrizeDtoList = null;
 
-        Integer startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
-        params.put("startNum", startNum);
-
         try {
             acmPrizeDtoList = acmDao.listByConditions(params);
         } catch (Exception e) {
@@ -138,29 +135,6 @@ public class ACMServiceImpl implements ACMService {
         params.put("teacherId", teacherId);
         params.put("hostUnit", hostUnit);
         params.put("idList", idList);
-
-        return params;
-    }
-
-    @Override
-    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage, Integer totalPage) {
-        Map<String, Object> params = getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major,
-                                                stuName, teacherName, hostUnit);
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        Integer startNum = pageSize * (curPage - 1);
-
-        params.put("startNum", startNum);
-        params.put("pageSize", pageSize);
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
 
         return params;
     }

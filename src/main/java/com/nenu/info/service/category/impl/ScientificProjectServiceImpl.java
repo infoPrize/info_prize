@@ -106,9 +106,7 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
     }
 
     @Override
-    public Map<String, Object> getParams(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber, Integer curPage, Integer totalPage) {
-        Map<String, Object> params = getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
-
+    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) {
         if(curPage <= 0 && curPage != -500) {
             curPage = 1;
         } else if(curPage > totalPage) {

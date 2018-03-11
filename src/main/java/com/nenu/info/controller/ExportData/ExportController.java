@@ -73,29 +73,29 @@ public class ExportController {
 
             Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
 
-            Integer count = acmService.countByCondition(params);
-
-            Integer pageSize = WebConstants.pageSize;
-
-            Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-            params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("ACMParams", params);
-            session.setAttribute("ACMTotalPage", totalPage);
+//            Integer count = acmService.countByCondition(params);
+//
+//            Integer pageSize = WebConstants.pageSize;
+//
+//            Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+//
+//            params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
+//
+//            HttpSession session = request.getSession();
+//            session.setAttribute("ACMParams", params);
+//            session.setAttribute("ACMTotalPage", totalPage);
 
             List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
 
-            if(acmPrizeDtoList != null) {
-                //对日期进行处理
-                for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-                    Date dateStr = acmPrizeDto.getPrizeTime();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String prizeTimeStr = sdf.format(dateStr);
-                    acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
-                }
-            }
+//            if(acmPrizeDtoList != null) {
+//                //对日期进行处理
+//                for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+//                    Date dateStr = acmPrizeDto.getPrizeTime();
+//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                    String prizeTimeStr = sdf.format(dateStr);
+//                    acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+//                }
+//            }
 
             String filename = "acm.xls";//设置下载时Excel的名称
 
@@ -104,8 +104,8 @@ public class ExportController {
             ExcelUtil.writeExcel(acmPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
             model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-            model.addAttribute("totalPage", totalPage);
-            model.addAttribute("curPage", params.get("curPage"));
+//            model.addAttribute("totalPage", totalPage);
+//            model.addAttribute("curPage", params.get("curPage"));
             model.addAttribute("message",message);
 
         } catch (Exception e){
@@ -117,15 +117,15 @@ public class ExportController {
 
     @RequestMapping(value = "scientificProject")
     public String ExportScientificProject(@RequestParam(value = "curPage", required = false, defaultValue = "-500") Integer curPage,
-                             @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                             @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
-                             @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
-                             @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                             @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                             @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                             @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                             Model model,
-                             HttpServletRequest request , HttpServletResponse response) {
+                                          @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                          @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
+                                          @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
+                                          @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                          @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                          @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                          @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                          Model model,
+                                          HttpServletRequest request , HttpServletResponse response) {
 
         Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
@@ -135,7 +135,7 @@ public class ExportController {
 
         int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
 
-        params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber, curPage, totalPage);
+        params = scientificProjectService.getParams(params, curPage, totalPage);
 
         HttpSession session = request.getSession();
         session.setAttribute("scientificProjectParams", params);
@@ -171,16 +171,16 @@ public class ExportController {
                              Model model, HttpServletRequest request ,HttpServletResponse response){
 
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        int count = 0;
-        count = mathModelPrizeService.countByConditions(params);
-
-        int pageSize = WebConstants.pageSize;
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("mathModelParams", params);
+//        int count = 0;
+//        count = mathModelPrizeService.countByConditions(params);
+//
+//        int pageSize = WebConstants.pageSize;
+//        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
+//
+//        params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
+//
+//        HttpSession session = request.getSession();
+//        session.setAttribute("mathModelParams", params);
 
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
 
@@ -192,8 +192,8 @@ public class ExportController {
         ExcelUtil.writeExcel(mathModelPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("curPage", curPage);
+//        model.addAttribute("totalPage", totalPage);
+//        model.addAttribute("curPage", curPage);
         return "math_model/math_model";
 
     }

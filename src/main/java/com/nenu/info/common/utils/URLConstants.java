@@ -44,4 +44,7 @@ public final class URLConstants {
     //其他比赛
     public static final String OTHER_MATCH_URL = "otherMatch";
 
+    //登录
+    public static final String LOGIN_URL = "login";
+
 }

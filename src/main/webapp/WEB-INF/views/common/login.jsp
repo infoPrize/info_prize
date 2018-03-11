@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -24,10 +25,10 @@
 					<h1>信息科学与技术学院奖项查询系统</h1>
 				</header>
 				<div class="login-main">
-					<form action="/manage/login" class="layui-form" method="post">
+					<form action="${website}login/checkLogin" class="layui-form" method="post">
 						<input name="__RequestVerificationToken" type="hidden" value="">
 						<div class="layui-form-item">
-							<input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入学号" class="layui-input">
+							<input type="text" name="username" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
 						</div>
 						<div class="layui-form-item">
 							<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">

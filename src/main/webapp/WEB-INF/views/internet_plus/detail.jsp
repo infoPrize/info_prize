@@ -30,7 +30,7 @@
                                     <th class="text-center">比赛名称</th>
                                     <td >第十五届互联网+1</td>
                                     <th class="text-center">项目名称</th>
-                                    <td >Test</td>
+                                    <td >${internetPlusDto.projectName}</td>
                                     <th class="text-center">团队名称</th>
                                     <td >HelloWorld</td>
                                 </tr>
@@ -118,5 +118,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

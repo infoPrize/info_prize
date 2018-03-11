@@ -36,13 +36,6 @@ public interface ACMService {
                                          String hostUnit);
 
     /**
-     * 将传过来的参数加工为去DAO层查询的参数(与分页有关)
-     */
-    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                         Integer prizeLevel, Integer major, String stuName, String teacherName,
-                                         String hostUnit, Integer curPage, Integer totalPage);
-
-    /**
      * 根据id查询ACM获奖信息
      */
     public ACMPrizeDto selectById(Integer id);

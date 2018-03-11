@@ -27,7 +27,7 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline">
+									<form class="condition_form form-inline" action="${website}mathModel/listByCondition" method="get">
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">

@@ -22,10 +22,6 @@ public interface MathModelPrizeService {
     public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
                                          Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit);
 
-    public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime, Date endTime,
-                                         Integer prizeLevel, Integer major, String stuName, String teacherName, String hostUnit,
-                                         Integer curPage, Integer totalPage);
-
     /**
      * 根绝条件查询信息的数量
      */

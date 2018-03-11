@@ -13,6 +13,7 @@ import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -156,81 +157,27 @@ public class MathModelPrizeController {
 
     }
 
-    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
-//    @ResponseBody
-    public String listByCondition(@PathVariable("curPage") Integer curPage,
-                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                  @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                  @RequestParam(value = "endTime", required = false) Date endTime,
-                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                  @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
-                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                  Model model, HttpServletRequest request) {
-//        JSONArray jsonArray = new JSONArray();
+    @RequestMapping(value = "listByCondition", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject listByCondition(@RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                      @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                      @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                      @RequestParam(value = "endTime", required = false) Date endTime,
+                                      @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                      @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
+                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
 
+        JSONObject jsonObject = new JSONObject();
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-        int count = 0;
-        count = mathModelPrizeService.countByConditions(params);
-
-        int pageSize = WebConstants.pageSize;
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("mathModelParams", params);
-//        session.setAttribute("mathModelTotalPage", totalPage);
-
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
-            Date prizeTime = mathModelPrizeDto.getPrizeTime();
-            String prizeTimeStr = sdf.format(prizeTime);
-
-            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
-        }
-
-        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("curPage", curPage);
-//        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
-//            JSONObject jsonObject = new JSONObject();
-//
-//            jsonObject.put("matchLevel", mathModelPrizeDto.getMatchLevel());
-//            jsonObject.put("matchName", mathModelPrizeDto.getMatchName());
-//            jsonObject.put("hostUnit", mathModelPrizeDto.getHostUnit());
-//            jsonObject.put("prizeTime", mathModelPrizeDto.getPrizeTime());
-//            jsonObject.put("prizeLevel", mathModelPrizeDto.getPrizeLevel());
-//            jsonObject.put("teamName", mathModelPrizeDto.getTeamName());
-//            jsonObject.put("teammateName1", mathModelPrizeDto.getTeammateName1());
-//            jsonObject.put("teammateStuNumber1", mathModelPrizeDto.getTeammateStuNumber1());
-//            jsonObject.put("teammateMajor1", mathModelPrizeDto.getTeammateMajor1());
-//            jsonObject.put("teammateName2", mathModelPrizeDto.getTeammateName2());
-//            jsonObject.put("teammateStuNumber2", mathModelPrizeDto.getTeammateStuNumber2());
-//            jsonObject.put("teammateMajor2", mathModelPrizeDto.getTeammateMajor2());
-//            jsonObject.put("teammateName3", mathModelPrizeDto.getTeammateName3());
-//            jsonObject.put("teammateStuNumber3", mathModelPrizeDto.getTeammateStuNumber3());
-//            jsonObject.put("teammateMajor3", mathModelPrizeDto.getTeammateMajor3());
-//            jsonObject.put("teacherName", mathModelPrizeDto.getTeacherName());
-//
-//            jsonArray.add(jsonObject);
-//        }
-//        return jsonArray;
-
-        return "math_model/math_model";
+        jsonObject.put("mathModelPrizeDtoList", mathModelPrizeDtoList);
+        return jsonObject;
     }
-
-//    @RequestMapping(value = "toMathModel")
-//    public String toMathModel(Model model) {
-//        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(-1, "", null, null,-1, -1,"", "", "");
-//        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-//
-//        return "math_model";
-//    }
 
     @RequestMapping(value = "toDetail/{materialId}")
     public String toDetail(@PathVariable("materialId") Integer materialId,
@@ -243,80 +190,6 @@ public class MathModelPrizeController {
         model.addAttribute("mathModelPrizeDto", mathModelPrizeDto);
         model.addAttribute("list", materialList);
         return "math_model/detail";
-    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("mathModelParams");
-
-        int curPage = (int)params.get("curPage");
-        curPage -= 1;
-
-        int totalPage = (int)params.get("totalPage");
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        params.put("curPage", curPage);
-
-        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
-            Date prizeTime = mathModelPrizeDto.getPrizeTime();
-            String prizeTimeStr = sdf.format(prizeTime);
-
-            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
-        }
-
-        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-        return "math_model/math_model";
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("mathModelParams");
-
-        int curPage = (int)params.get("curPage");
-        curPage += 1;
-
-        int totalPage = (int)params.get("totalPage");
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        params.put("curPage", curPage);
-
-        List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
-            Date prizeTime = mathModelPrizeDto.getPrizeTime();
-            String prizeTimeStr = sdf.format(prizeTime);
-
-            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
-        }
-
-        model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-        return "math_model/math_model";
     }
 
     /**

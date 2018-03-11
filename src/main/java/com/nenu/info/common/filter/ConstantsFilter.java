@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @author: software-liuwang
  * @time: 2017/11/8 19:16
- * @description :
+ * @description : 字符过滤器
  */
 public class ConstantsFilter implements Filter {
     @Override

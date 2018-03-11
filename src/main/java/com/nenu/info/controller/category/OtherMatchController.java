@@ -8,12 +8,14 @@ import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.service.category.OtherMatchService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -204,40 +206,32 @@ public class OtherMatchController {
     }
 
 
-    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
-    public String listByCondition(@PathVariable("curPage") Integer curPage,
-                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                  @RequestParam(value = "startTime", required = false) Date startTime,
-                                  @RequestParam(value = "endTime", required = false) Date endTime,
-                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                  @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                  @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                  HttpServletRequest request,
-                                  Model model) {
+    @RequestMapping(value = "listByCondition", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                      @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                      @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                      @RequestParam(value = "startTime", required = false) Date startTime,
+                                      @RequestParam(value = "endTime", required = false) Date endTime,
+                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                      @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      HttpServletResponse response) {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONObject jsonObject = new JSONObject();
+
         Map<String, Object> params = null;
         params = otherMatchService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, stuName, majorCode, projectName, hostUnit, teacherName);
-
-        int count = otherMatchService.countByCondition(params);
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = otherMatchService.getParams(params, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("otherMatchParams", params);
 
         List<OtherMatchDto> otherMatchDtoList = null;
         otherMatchDtoList = otherMatchService.listByCondition(params);
 
+        jsonObject.put("otherMatchDtoList", otherMatchDtoList);
 
-        model.addAttribute("otherMatchDtoList", otherMatchDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-        return "other_match/other_match";
+        return jsonObject;
     }
 
     @RequestMapping(value = "toDetail/{id}")
@@ -247,50 +241,6 @@ public class OtherMatchController {
 
         model.addAttribute("otherMatchDto", otherMatchDto);
         return "other_match/detail";
-    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = null;
-        params = (Map)session.getAttribute("otherMatchParams");
-        int totalPage = (int)params.get("totalPage");
-        int curPage = (int)params.get("curPage");
-        curPage -= 1;
-
-        params = otherMatchService.getParams(params, curPage, totalPage);
-
-        List<OtherMatchDto> otherMatchDtoList = null;
-        otherMatchDtoList = otherMatchService.listByCondition(params);
-
-        model.addAttribute("otherMatchDtoList", otherMatchDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "other_match/other_match";
-
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = null;
-        params = (Map)session.getAttribute("otherMatchParams");
-        int totalPage = (int)params.get("totalPage");
-        int curPage = (int)params.get("curPage");
-        curPage += 1;
-
-        params = otherMatchService.getParams(params, curPage, totalPage);
-
-        List<OtherMatchDto> otherMatchDtoList = null;
-        otherMatchDtoList = otherMatchService.listByCondition(params);
-
-        model.addAttribute("otherMatchDtoList", otherMatchDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "other_match/other_match";
-
     }
 
     @RequestMapping(value = "falseDeleteById/{id}")

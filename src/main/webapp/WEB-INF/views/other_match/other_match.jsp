@@ -29,7 +29,7 @@
                             <hr/>
                         </div>
                         <div class="x_content">
-                            <form class="condition_form form-inline" action="${website}otherMatch/listByCondition/1" method="get">
+                            <form class="condition_form form-inline" action="${website}otherMatch/listByCondition" method="get">
                                 <!--第一行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
@@ -145,32 +145,32 @@
                                         <td>${otherMatchDto.hostUnit}</td>
                                         <td class="td_table">
                                             <table class="sub">
-                                                <tr><td>${challengeCupDto.stuName1}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName2}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName3}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName4}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName5}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName6}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName7}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName8}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName1}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName2}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName3}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName4}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName5}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName6}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName7}</td></tr>
+                                                <tr><td>${otherMatchDto.stuName8}</td></tr>
                                             </table>
                                         </td>
                                         <td class="td_table">
                                             <table class="sub">
-                                                <tr><td>${challengeCupDto.stuNumber1}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber2}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber3}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber4}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber5}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber6}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber7}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber8}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber1}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber2}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber3}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber4}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber5}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber6}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber7}</td></tr>
+                                                <tr><td>${otherMatchDto.stuNumber8}</td></tr>
                                             </table>
                                         </td>
-                                        <td>${challengeCupDto.prizeLevel}</td>
-                                        <td>${challengeCupDto.prizeTimeStr}</td>
                                         <td>${otherMatchDto.prizeLevel}</td>
-                                        <td>${challengeCupDto.teacherName}</td>
+                                        <td>${otherMatchDto.prizeTimeStr}</td>
+                                        <td>${otherMatchDto.prizeLevel}</td>
+                                        <td>${otherMatchDto.teacherName}</td>
                                         <td ><a href="${website}otherMatch/toDetail/${otherMatchDto.id}">详情</a></td>
                                         <td class="aparent">
                                             <a href="${website}otherMatch/falseDeleteById/${otherMatchDto.id}" data-toggle="modal" data-target="#delete">删除</a>

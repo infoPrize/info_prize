@@ -42,9 +42,6 @@
         <where>
             <include refid="queryCondition" />
         </where>
-        <if test="curPage != -500">
-        LIMIT #{startNum}, #{pageSize}
-        </if>
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.MathModelPrizeDto">
