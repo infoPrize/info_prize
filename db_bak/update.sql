@@ -45,3 +45,15 @@ CREATE TABLE `t_material` (
   `last_modified_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后一次修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='材料信息表';
+
+#修改 t_material 材料表中的字段
+ALTER TABLE `t_material`
+DROP COLUMN `thesis_id`,
+DROP COLUMN `patent_id`,
+DROP COLUMN `scientific_id`,
+DROP COLUMN `acm_id`,
+DROP COLUMN `math_id`,
+DROP COLUMN `internet_id`,
+CHANGE COLUMN `challenge_id` `match_id`  int(11)  COMMENT '各种比赛的id（对应相应比赛表的id）' AFTER `id`,
+ADD COLUMN `match_type`  tinyint(4)  COMMENT '比赛类别：1-论文，2-专利，3-国创科研，4-acm，5-数学建模，6-挑战杯，7-互联网＋' AFTER `id`;
+

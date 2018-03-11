@@ -1,22 +1,26 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ScientificProjectDto;
-import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.entities.common.Material;
+import com.nenu.info.common.utils.*;
 import com.nenu.info.common.entities.category.ScientificProject;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
-import com.nenu.info.common.utils.WebConstants;
-import com.nenu.info.common.utils.YearUtil;
 import com.nenu.info.service.category.ScientificProjectService;
+import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +41,9 @@ public class ScientificProjectController {
 
     @Autowired
     private ScientificProjectService scientificProjectService;
+
+    @Autowired
+    private MaterialService materialService;
 
     /**
      * 去往国创科研添加页面
@@ -241,12 +248,16 @@ public class ScientificProjectController {
         return "scientific_project/scientific_project";
     }
 
-    @RequestMapping(value = "toDetail/{id}")
-    public String toDetail(@PathVariable("id") Integer id, Model model) {
+    @RequestMapping(value = "toDetail/{materialId}")
+    public String toDetail(@PathVariable("materialId") Integer materialId, Model model) throws Exception {
+        
         ScientificProjectDto scientificProjectDto = null;
-        scientificProjectDto = scientificProjectService.selectById(id);
+        List<Material> materialList = null;
+        scientificProjectDto = scientificProjectService.selectById(materialId);
+        materialList = materialService.listByTypeAndId(materialId,3);
 
         model.addAttribute("scientificProject", scientificProjectDto);
+        model.addAttribute("list", materialList);
 
         return "scientific_project/detail";
     }
@@ -321,6 +332,47 @@ public class ScientificProjectController {
         Integer code = null;
         code = scientificProjectService.deleteById(id);
         return code;
+    }
+    
+    @RequestMapping(value="/upload/{materialId}/{projectName}",method = RequestMethod.POST)
+    public String upload(@PathVariable("materialId") Integer materialId, MultipartFile file,
+                         HttpServletRequest request , @PathVariable("projectName") String projectName) throws Exception {
+
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/scientificProject/"+projectName);
+        String fileName = file.getOriginalFilename();
+        Material material = new Material();
+        material.setMatchType(3);
+        material.setMatchId(materialId);
+        material.setMaterialName(fileName);
+        material.setMaterialUrl("resources/upload/scientificProject/"+projectName+"/"+fileName);
+        materialService.add(material);
+        File dir = new File(path,fileName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        file.transferTo(dir);
+        return "redirect:/scientificProject/toDetail/"+materialId;
+    }
+
+    @RequestMapping("/down/{projectName}")
+    public void down(HttpServletRequest request,HttpServletResponse response,
+                     @PathVariable("projectName") String projectName) throws Exception{
+
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/scientificProject/"+projectName);
+        ZipUtil.toZip(path,out,true);
+
+    }
+
+    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
+        Integer code = materialService.falseDeleteById(id);
+        if(code == 1){
+            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
+        }else {
+            model.addAttribute("message", MessageInfo.DELETE_FAIL);
+        }
+        return "redirect:/scientificProject/toDetail/"+materialId;
     }
 
 }

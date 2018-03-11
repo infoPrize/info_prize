@@ -97,7 +97,7 @@
                                     <td colspan="5"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
                                         文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
                                         文章内容文章内容文章内容文章内容文章内容
-                                       </p></td>
+                                    </p></td>
                                 </tr>
                                 <!--第八行-->
                                 <tr>
@@ -107,26 +107,30 @@
                                 </tr>
                                 <!--第九行-->
                                 <c:forEach items="${list}" var="list">
-                                <tr>
-                                    <td>${list.materialName}</td>
-                                    <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                    <td><a href="/thesis/delete/material/${list.id}/${thesisDto.id}">删除</a></td>
-                                </tr>
+                                    <tr>
+                                        <td>${list.materialName}</td>
+                                        <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
+                                        <td><a href="/thesis/delete/material/${list.id}/${thesisDto.id}">删除</a></td>
+                                    </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/thesis/upload/${thesisDto.id}" enctype="multipart/form-data" method="post">
+
+                            <form action="/thesis/upload/${thesisDto.id}/${thesisDto.thesisTitle}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
-                                <input type="submit" value="上传材料" id="upload">
+                                <input type="submit" value="上传材料">
                             </form>
                             <br>
-                            <a href="/thesis/down/${thesisDto.id}" id="download">下载</a>
+                            <a href="/thesis/down/${thesisDto.thesisTitle}" id="download">下载</a>
                             ${message}
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </body>
 </html>

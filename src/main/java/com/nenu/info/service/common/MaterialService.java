@@ -13,12 +13,12 @@ import java.util.List;
 public interface MaterialService {
 
     /**
-     * 根据论文id查询未删除的材料信息
-     * @param thesisId
+     * 根据id和type查询未删除的材料信息
+     * @param matchId,matchType
      * @return
      * @throws Exception
      */
-    public List<Material> listByThesisId(Integer thesisId)  throws Exception;
+    public List<Material> listByTypeAndId(Integer matchId , Integer matchType)  throws Exception;
 
 
     /**
@@ -30,10 +30,10 @@ public interface MaterialService {
     public Integer falseDeleteById(Integer id) throws Exception;
 
     /**
-     * 添加论文材料信息
+     * 添加材料信息
      * @param material
      * @return
      * @throws Exception
      */
-    public Boolean addThesis( Material material) throws Exception;
+    public Boolean add( Material material) throws Exception;
 }

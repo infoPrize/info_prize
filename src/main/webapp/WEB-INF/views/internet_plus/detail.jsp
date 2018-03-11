@@ -100,17 +100,17 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/thesis/delete/material/${list.id}/${internetPlusDto.id}">删除</a></td>
+                                        <td><a href="/InternetPlus/delete/material/${list.id}/${internetPlusDto.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/thesis/upload/${internetPlusDto.id}" enctype="multipart/form-data" method="post">
+                            <form action="/InternetPlus/upload/${internetPlusDto.id}/${internetPlusDto.projectName}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="上传材料" id="upload">
                             </form>
                             <br>
-                            <a href="/thesis/down/${internetPlusDto.id}" id="download">下载</a>
+                            <a href="/InternetPlus/down/${internetPlusDto.projectName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

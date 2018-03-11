@@ -2,20 +2,28 @@ package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
 import com.nenu.info.common.entities.category.MathModelPrize;
+import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.WebConstants;
+import com.nenu.info.common.utils.ZipUtil;
 import com.nenu.info.service.category.MathModelPrizeService;
+import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +47,9 @@ public class MathModelPrizeController {
 
     @Autowired
     private MathModelPrizeService mathModelPrizeService;
+
+    @Autowired
+    private MaterialService materialService;
 
     /**
      * 去往数学建模添加页面
@@ -221,13 +232,16 @@ public class MathModelPrizeController {
 //        return "math_model";
 //    }
 
-    @RequestMapping(value = "toDetail/{id}")
-    public String toDetail(@PathVariable("id") Integer id,
-                           Model model) {
+    @RequestMapping(value = "toDetail/{materialId}")
+    public String toDetail(@PathVariable("materialId") Integer materialId,
+                           Model model) throws Exception {
         MathModelPrizeDto mathModelPrizeDto = null;
-        mathModelPrizeDto = mathModelPrizeService.selectById(id);
+        List<Material> materialList = null;
+        mathModelPrizeDto = mathModelPrizeService.selectById(materialId);
+        materialList = materialService.listByTypeAndId(materialId,5);
 
         model.addAttribute("mathModelPrizeDto", mathModelPrizeDto);
+        model.addAttribute("list", materialList);
         return "math_model/detail";
     }
 
@@ -329,5 +343,46 @@ public class MathModelPrizeController {
         Integer code = null;
         code = mathModelPrizeService.deleteById(id);
         return code;
+    }
+
+    @RequestMapping(value="/upload/{materialId}/{mathModel}",method = RequestMethod.POST)
+    public String upload(@PathVariable("materialId") Integer materialId, MultipartFile file,
+                         HttpServletRequest request , @PathVariable("mathModel") String mathModel) throws Exception {
+
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/mathModel/"+mathModel);
+        String fileName = file.getOriginalFilename();
+        Material material = new Material();
+        material.setMatchType(5);
+        material.setMatchId(materialId);
+        material.setMaterialName(fileName);
+        material.setMaterialUrl("resources/upload/mathModel/"+mathModel+"/"+fileName);
+        materialService.add(material);
+        File dir = new File(path,fileName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        file.transferTo(dir);
+        return "redirect:/mathModel/toDetail/"+materialId;
+    }
+
+    @RequestMapping("/down/{mathModel}")
+    public void down(HttpServletRequest request,HttpServletResponse response,
+                     @PathVariable("mathModel") String mathModel) throws Exception{
+
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/mathModel/"+mathModel);
+        ZipUtil.toZip(path,out,true);
+
+    }
+
+    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
+        Integer code = materialService.falseDeleteById(id);
+        if(code == 1){
+            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
+        }else {
+            model.addAttribute("message", MessageInfo.DELETE_FAIL);
+        }
+        return "redirect:/mathModel/toDetail/"+materialId;
     }
 }

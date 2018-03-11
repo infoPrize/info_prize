@@ -324,14 +324,14 @@ public class ThesisController {
         return "thesis/thesis";
     }
 
-    @RequestMapping(value = "toDetail/{id}")
-    public String toDetail(@PathVariable("id") Integer id, Model model) {
+    @RequestMapping(value = "toDetail/{materialId}")
+    public String toDetail(@PathVariable("materialId") Integer materialId , Model model) {
 
         ThesisDto thesisDto = null;
         List<Material> materialList = null;
         try {
-            thesisDto = thesisService.selectById(id);
-            materialList = materialService.listByThesisId(id);
+            thesisDto = thesisService.selectById(materialId);
+            materialList = materialService.listByTypeAndId(materialId,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -416,27 +416,28 @@ public class ThesisController {
         return code;
     }
 
-    @RequestMapping(value="/upload/{thesisId}/{thesisTitle}",method = RequestMethod.POST)
-    public String upload(@PathVariable("thesisId") Integer thesisId, MultipartFile file,
+    @RequestMapping(value="/upload/{materialId}/{thesisTitle}",method = RequestMethod.POST)
+    public String upload(@PathVariable("materialId") Integer materialId, MultipartFile file,
                          HttpServletRequest request , @PathVariable("thesisTitle") String thesisTitle) throws Exception {
 
         String path = request.getSession().getServletContext().getRealPath("resources/upload/thesis/"+thesisTitle);
         String fileName = file.getOriginalFilename();
         Material material = new Material();
-        material.setThesisId(thesisId);
+        material.setMatchType(1);
+        material.setMatchId(materialId);
         material.setMaterialName(fileName);
         material.setMaterialUrl("resources/upload/thesis/"+thesisTitle+"/"+fileName);
-        materialService.addThesis(material);
+        materialService.add(material);
         File dir = new File(path,fileName);
         if(!dir.exists()){
             dir.mkdirs();
         }
         file.transferTo(dir);
-        return "redirect:/thesis/toDetail/"+thesisId;
+        return "redirect:/thesis/toDetail/"+materialId;
     }
 
-    @RequestMapping("/down/{thesisId}/{thesisTitle}")
-    public void down(HttpServletRequest request,HttpServletResponse response,@PathVariable("thesisId") Integer thesisId,
+    @RequestMapping("/down/{thesisTitle}")
+    public void down(HttpServletRequest request,HttpServletResponse response,
                      @PathVariable("thesisTitle") String thesisTitle) throws Exception{
 
         BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
@@ -445,14 +446,14 @@ public class ThesisController {
 
     }
 
-    @RequestMapping(value = "delete/material/{id}/{thesisId}",method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,@PathVariable("thesisId") Integer thesisId, Model model) throws Exception{
+    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
         Integer code = materialService.falseDeleteById(id);
         if(code == 1){
             model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
         }else {
             model.addAttribute("message", MessageInfo.DELETE_FAIL);
         }
-        return "redirect:/thesis/toDetail/"+thesisId;
+        return "redirect:/thesis/toDetail/"+materialId;
     }
 }

@@ -130,58 +130,58 @@
 										</thead>
 
 										<tbody id="tbody-result">
-										<%--<c:forEach items="${scientificProjectDtoList}" var="scientificProject">--%>
-											<%--<tr>--%>
-												<%--<td>${scientificProject.projectType}</td>--%>
-												<%--<td>${scientificProject.projectName}</td>--%>
-												<%--<td>${scientificProject.setYear}</td>--%>
-												<%--<td>${scientificProject.projectManName}</td>--%>
-												<%--<td>${scientificProject.projectManSex}</td>--%>
-												<%--<td>${scientificProject.projectManStuNumber}</td>--%>
-												<%--<td>${scientificProject.projectManPhone}</td>--%>
-												<%--<td>${scientificProject.projectManMajor}</td>--%>
-												<%--<td class="td_table hidecol">--%>
-													<%--<table class="sub">--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberName1}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberName2}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberName3}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberName4}</td>--%>
-														<%--</tr>--%>
-													<%--</table>--%>
-												<%--</td>--%>
-												<%--<td class="td_table hidecol">--%>
-													<%--<table class="sub">--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberStuNumber1}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberStuNumber2}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberStuNumber3}</td>--%>
-														<%--</tr>--%>
-														<%--<tr>--%>
-															<%--<td>${scientificProject.projectMemberStuNumber4}</td>--%>
-														<%--</tr>--%>
-													<%--</table>--%>
-												<%--</td>--%>
-												<%--<td>${scientificProject.teacherName}</td>--%>
-												<%--<td>${scientificProject.fundsLimit}</td>--%>
-												<%--<td>--%>
-													<%--<a href="${website}scientificProject/toDetail/${scientificProject.id}">去往详情页</a>--%>
-												<%--</td>--%>
-												<%--<td class="aparent">--%>
-													<%--<a href="${website}scientificProject/falseDeleteById/${scientificProject.id}">删除</a>--%>
-												<%--</td>--%>
-											<%--</tr>--%>
-										<%--</c:forEach>--%>
+										<c:forEach items="${scientificProjectDtoList}" var="scientificProject">
+											<tr>
+												<td>${scientificProject.projectType}</td>
+												<td>${scientificProject.projectName}</td>
+												<td>${scientificProject.setYear}</td>
+												<td>${scientificProject.projectManName}</td>
+												<td>${scientificProject.projectManSex}</td>
+												<td>${scientificProject.projectManStuNumber}</td>
+												<td>${scientificProject.projectManPhone}</td>
+												<td>${scientificProject.projectManMajor}</td>
+												<td class="td_table hidecol">
+													<table class="sub">
+														<tr>
+															<td>${scientificProject.projectMemberName1}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberName2}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberName3}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberName4}</td>
+														</tr>
+													</table>
+												</td>
+												<td class="td_table hidecol">
+													<table class="sub">
+														<tr>
+															<td>${scientificProject.projectMemberStuNumber1}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberStuNumber2}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberStuNumber3}</td>
+														</tr>
+														<tr>
+															<td>${scientificProject.projectMemberStuNumber4}</td>
+														</tr>
+													</table>
+												</td>
+												<td>${scientificProject.teacherName}</td>
+												<td>${scientificProject.fundsLimit}</td>
+												<td>
+													<a href="${website}scientificProject/toDetail/${scientificProject.id}">去往详情页</a>
+												</td>
+												<td class="aparent">
+													<a href="${website}scientificProject/falseDeleteById/${scientificProject.id}">删除</a>
+												</td>
+											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

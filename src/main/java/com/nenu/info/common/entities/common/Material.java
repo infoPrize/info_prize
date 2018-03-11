@@ -20,33 +20,13 @@ public class Material {
     @Id
     private Integer id;
 
-    //论文的id
-    @Column(name = "thesis_id")
-    private Integer thesisId;
+    //比赛类别：1-论文，2-专利，3-国创科研，4-acm，5-数学建模，6-挑战杯，7-互联网＋
+    @Column(name = "match_type")
+    private Integer matchType;
 
-    //专利的id
-    @Column(name = "patent_id")
-    private Integer patentId;
-
-    //国创科研的id
-    @Column(name = "scientific_id")
-    private Integer scientificId;
-
-    //acm的id
-    @Column(name = "acm_id")
-    private Integer acmId;
-
-    //数学建模的id
-    @Column(name = "math_id")
-    private Integer mathId;
-
-    //互联网加的id
-    @Column(name = "internet_id")
-    private Integer internetId;
-
-    //挑战杯的id
-    @Column(name = "challenge_id")
-    private Integer challengeId;
+    //比赛id（对应相应比赛表的id）
+    @Column(name = "match_id")
+    private Integer matchId;
 
     //材料名称
     @Column(name = "material_name")
@@ -76,60 +56,20 @@ public class Material {
         this.id = id;
     }
 
-    public Integer getThesisId() {
-        return thesisId;
+    public Integer getMatchType() {
+        return matchType;
     }
 
-    public void setThesisId(Integer thesisId) {
-        this.thesisId = thesisId;
+    public void setMatchType(Integer matchType) {
+        this.matchType = matchType;
     }
 
-    public Integer getPatentId() {
-        return patentId;
+    public Integer getMatchId() {
+        return matchId;
     }
 
-    public void setPatentId(Integer patentId) {
-        this.patentId = patentId;
-    }
-
-    public Integer getScientificId() {
-        return scientificId;
-    }
-
-    public void setScientificId(Integer scientificId) {
-        this.scientificId = scientificId;
-    }
-
-    public Integer getAcmId() {
-        return acmId;
-    }
-
-    public void setAcmId(Integer acmId) {
-        this.acmId = acmId;
-    }
-
-    public Integer getMathId() {
-        return mathId;
-    }
-
-    public void setMathId(Integer mathId) {
-        this.mathId = mathId;
-    }
-
-    public Integer getInternetId() {
-        return internetId;
-    }
-
-    public void setInternetId(Integer internetId) {
-        this.internetId = internetId;
-    }
-
-    public Integer getChallengeId() {
-        return challengeId;
-    }
-
-    public void setChallengeId(Integer challengeId) {
-        this.challengeId = challengeId;
+    public void setMatchId(Integer matchId) {
+        this.matchId = matchId;
     }
 
     public String getMaterialName() {

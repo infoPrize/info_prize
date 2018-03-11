@@ -89,17 +89,17 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="4"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/thesis/delete/material/${list.id}/${mathModelPrizeDto.id}">删除</a></td>
+                                        <td><a href="/mathModel/delete/material/${list.id}/${mathModelPrizeDto.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/thesis/upload/${mathModelPrizeDto.id}" enctype="multipart/form-data" method="post">
+                            <form action="/mathModel/upload/${mathModelPrizeDto.id}/${mathModelPrizeDto.teamName}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="上传材料" id="upload">
                             </form>
                             <br>
-                            <a href="/thesis/down/${mathModelPrizeDto.id}" id="download">下载</a>
+                            <a href="/mathModel/down/${mathModelPrizeDto.teamName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

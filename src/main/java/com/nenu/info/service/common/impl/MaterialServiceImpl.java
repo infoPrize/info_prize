@@ -20,9 +20,9 @@ public class MaterialServiceImpl implements MaterialService{
     @Autowired
     private MaterialDao materialDao;
 
-    public List<Material> listByThesisId(Integer thesisId)  throws Exception{
+    public List<Material> listByTypeAndId(Integer matchId , Integer matchType)  throws Exception{
 
-        List<Material> list = materialDao.listByThesisId(thesisId);
+        List<Material> list = materialDao.listByTypeAndId(matchId,matchType);
         return list;
     }
 
@@ -36,9 +36,9 @@ public class MaterialServiceImpl implements MaterialService{
         return 1;
     }
 
-    public Boolean addThesis( Material material) throws Exception{
+    public Boolean add( Material material) throws Exception{
         try{
-            materialDao.addThesis(material);
+            materialDao.add(material);
         } catch (Exception e){
             e.printStackTrace();
             return false;
