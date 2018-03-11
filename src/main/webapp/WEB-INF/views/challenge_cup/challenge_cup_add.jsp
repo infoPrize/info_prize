@@ -1,144 +1,123 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Jarvenman
-  Date: 2018/1/24
-  Time: 9:02
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
 <html>
+
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>信息录入</title>
+    <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+    <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
+
 <body>
+<div class="container">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h3>挑站杯信息录入</h3>
+                        <hr/>
+                    </div>
+                    <div class="x_content">
+                        <div class="tab-pane" id="tab-challenge">
+                            <div class="row feature">
+                                <form class="condition_form form-inline" action="${website}ChallengeCup/add" method="post">
+                                    <!--第一行-->
+                                    <div class="tab-row">
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">比赛名称：</label>
+                                            <input type="text" name="matchName" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">主办单位：</label>
+                                            <input type="text" name="hostUnit" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">比赛等级：</label>
+                                            <select class="form-control" name="matchLevel">
+                                                <option class="level_option" value="-1">---请选择比赛等级---</option>
+                                                <option value="1">校级</option>
+                                                <option value="2">市级</option>
+                                                <option value="3">省级</option>
+                                                <option value="4">多省级</option>
+                                                <option value="5">国家级</option>
+                                                <option value="6">亚洲级</option>
+                                                <option value="7">国际级</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="tab-row">
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">获奖等级：</label>
+                                            <select class="form-control" name="prizeLevel">
+                                                <option class="level_option" value="-1">---请选择获奖等级---</option>
+                                                <option value="1">一等奖(金奖)</option>
+                                                <option value="2">二等奖(银奖)</option>
+                                                <option value="3">三等奖(铜奖)</option>
+                                                <option value="4">成功参赛奖(优胜奖)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right" for="prizeTime">获奖时间：</label>
+                                            <input type="text" id="prizeTime" name="prizeTime" class="form-control" onClick="laydate()"/>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right" for="tutor">指导老师：</label>
+                                            <input type="text" class="form-control" name="prizeTime"/>
+                                        </div>
+                                    </div>
+                                    <!--第二行-->
+                                    <div class="tab-row">
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">团队名：</label>
+                                            <input type="text" name="teamName" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">项目名：</label>
+                                            <input type="text" name="projectName" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right" for="student_name">团队成员姓名：</label>
+                                            <input type="text" id="student_name" class="form-control" name="teammateName1"/>
+                                        </div>
+                                    </div>
+                                    <!--第三行-->
+                                    <div class="tab-row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="tab-label control-label text-right" for="student_number">团队成员学号：</label>
+                                            <input type="text" id="student_number" class="form-control" name="teammateStuNumber1"/>
+                                        </div>
 
-    <h1>挑戰杯添加</h1>
-    <hr>
-    <form action="${website}ChallengeCup/add" method="post">
-        <table>
-            <tr>
-                <td>比赛名称:</td>
-                <td><input type="text" name="matchName"></td>
-            </tr>
-            <tr>
-                <td>主办单位:</td>
-                <td><input type="text" name="hostUnit"></td>
-            </tr>
-            <tr>
-                <td>团队名:</td>
-                <td><input type="text" name="teamName"></td>
-            </tr>
-            <tr>
-                <td>团队成员1姓名:</td>
-                <td><input type="text" name="teammateName1"></td>
-            </tr>
-            <tr>
-                <td>团队成员1学号:</td>
-                <td><input type="text" name="teammateStuNumber1"></td>
-            </tr>
-            <tr>
-                <td>团队成员2姓名:</td>
-                <td><input type="text" name="teammateName2"></td>
-            </tr>
-            <tr>
-                <td>团队成员2学号:</td>
-                <td><input type="text" name="teammateStuNumber2"></td>
-            </tr>
-            <tr>
-                <td>团队成员3姓名:</td>
-                <td><input type="text" name="teammateName3"></td>
-            </tr>
-            <tr>
-                <td>团队成员3学号:</td>
-                <td><input type="text" name="teammateStuNumber3"></td>
-            </tr>
-            <tr>
-                <td>团队成员4姓名:</td>
-                <td><input type="text" name="teammateName4"></td>
-            </tr>
-            <tr>
-                <td>团队成员4学号:</td>
-                <td><input type="text" name="teammateStuNumber4"></td>
-            </tr>
-            <tr>
-                <td>团队成员5姓名:</td>
-                <td><input type="text" name="teammateName5"></td>
-            </tr>
-            <tr>
-                <td>团队成员5学号:</td>
-                <td><input type="text" name="teammateStuNumber5"></td>
-            </tr>
-            <tr>
-                <td>团队成员6姓名:</td>
-                <td><input type="text" name="teammateName6"></td>
-            </tr>
-            <tr>
-                <td>团队成员6学号:</td>
-                <td><input type="text" name="teammateStuNumber6"></td>
-            </tr>
-            <tr>
-                <td>团队成员7姓名:</td>
-                <td><input type="text" name="teammateName7"></td>
-            </tr>
-            <tr>
-                <td>团队成员7学号:</td>
-                <td><input type="text" name="teammateStuNumber7"></td>
-            </tr>
-            <tr>
-                <td>团队成员8姓名:</td>
-                <td><input type="text" name="teammateName8"></td>
-            </tr>
-            <tr>
-                <td>团队成员8学号:</td>
-                <td><input type="text" name="teammateStuNumber8"></td>
-            </tr>
-            <tr>
-                <td>项目名:</td>
-                <td><input type="text" name="projectName"></td>
-            </tr>
-            <tr>
-                <td>比赛等级:</td>
-                <td>
-                    <select name="matchLevel">
-                        <option value="-1">---请选择---</option>
-                        <option value="1">校级</option>
-                        <option value="2">市级</option>
-                        <option value="3">省级</option>
-                        <option value="4">多省级</option>
-                        <option value="5">国家级</option>
-                        <option value="6">亚洲级</option>
-                        <option value="7">国际级</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>获奖等级:</td>
-                <td>
-                    <select name="prizeLevel">
-                        <option value="-1">---请选择---</option>
-                        <option value="1">一等奖(金奖)</option>
-                        <option value="2">二等奖(银奖)</option>
-                        <option value="3">三等奖(铜奖)</option>
-                        <option value="4">成功参赛奖(优胜奖)</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>获奖时间:</td>
-                <td><input type="date" name="prizeTime"></td>
-            </tr>
-            <tr>
-                <td>指导教师:</td>
-                <td>
-                    <input type="text" name="teacherName">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="提交"></td>
-            </tr>
+                                    </div>
+                                    <!--第五行-->
+                                    <input type="button" value="提交" id="sort_comp" />
 
-        </table>
-    </form>
-
+                                </form>
+                                <form action="/import/challengeCup" enctype="multipart/form-data" method="post">
+                                    <input type="file" name="file">
+                                    <input type="submit" value="导入excel">
+                                </form>
+                                <h1>${message}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/competition.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/addmember.js"></script>
 </body>
+
 </html>

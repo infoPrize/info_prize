@@ -145,7 +145,7 @@ a cite{font-style: normal; *cursor:pointer;}
 .tab-nav-content a i{color:#ccc;font-size:12px;vertical-align:top;}
 .tab-nav-content a i:hover{color:#FF5722;}
 .tab-nav-content a.active i:hover{color: #FF5722;}
-.tab-nav-content .content-tab{transition: all .3s ease-out 0s;-webkit-transition: all .3s ease-out 0s;}
+.tab-nav-content .content-tab{transition: all .3s ease-out 0s;-webkit-transition: all .3s ease-out 0s;cursor: pointer;}
 
 
 

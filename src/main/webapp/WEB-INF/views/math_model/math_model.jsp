@@ -132,6 +132,7 @@
 											<th class="text-center hidecol">学号</th>
 											<th class="text-center hidecol">专业</th>
 											<th class="text-center">指导老师</th>
+											<th class="text-center">详细信息</th>
 											<th class="text-center">操作</th>
 										</tr>
 										</thead>
@@ -169,8 +170,10 @@
 											</td>
 											<td>${mathModelPrizeDto.teacherName}</td>
 											<td class="aparent">
-												<a href="${website}mathModel/falseDeleteById/${mathModelPrizeDto.id}">删除</a><br>
 												<a href="${website}mathModel/toDetail/${mathModelPrizeDto.id}">去往详情页</a>
+											</td>
+											<td>
+												<a href="${website}mathModel/falseDeleteById/${mathModelPrizeDto.id}">删除</a>
 											</td>
 										</tr>
 										</c:forEach>
@@ -205,7 +208,7 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){
                 $("#showcolumn").click(function(){

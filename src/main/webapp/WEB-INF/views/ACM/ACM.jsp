@@ -15,7 +15,6 @@
             .hidecol{
                 display: none;
             }
-
         </style>
 	</head>
 	<body>
@@ -136,6 +135,7 @@
 												<th class="text-center hidecol">学号</th>
 												<th class="text-center hidecol">专业</th>
 												<th class="text-center">指导老师</th>
+												<th class="text-center">详情信息</th>
 												<th class="text-center">操作</th>
 											</tr>
 										</thead>
@@ -173,8 +173,10 @@
 												</td>
 												<td>${acmPrizeDto.teacherName}</td>
 												<td class="aparent">
-													<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a><br>
 													<a href="${website}acm/toDetail/${acmPrizeDto.id}">去往详情页</a>
+												</td>
+												<td>
+													<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a>
 												</td>
 											</tr>
 											</c:forEach>
