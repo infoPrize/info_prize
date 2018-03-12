@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>信息录入</title>
+    <title>论文信息录入</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
@@ -113,6 +113,7 @@
                             <input type="file" id="file" name="file">
                         </a>
                         <input type="submit" class="input" value="确定"/>
+                        <a href="${staticWebsite}resources/thesis.xls" id="download_model">下载excel模板</a>
                     </form>
                 </div>
             </div>
@@ -125,22 +126,7 @@
 <script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/addmember.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $("#file").change(function(){  // 当 id 为 file 的对象发生变化时
-            var fileSize = this.files[0].size;
-            var size = fileSize / 1024 / 1024;
-            if (size > 5) {
-                alert("附件不能大于5M,请将文件压缩后重新上传！");
-                this.value="";
-                return false;
-            }else{
-                $("#file_name").val($("#file").val());  //将 #file 的值赋给 #file_name
-            }
-        })
-    });
 
-</script>
 </body>
 
 </html>

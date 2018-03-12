@@ -42,12 +42,13 @@
 										<input type="text" name="journalName" class="form-control" id="journalName"/>
 									</div>
 									<div class="form-group col-sm-4">
+										<label class="tab-label control-label text-right" for="thesisTitle">论文标题：</label>
+										<input type="text" id="thesisTitle" class="form-control" name="thesisTitle"/>
+									</div>
+									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right" for="authorName">作者姓名：</label>
 										<input type="text" id="authorName" class="form-control" name="authorName"/>
 									</div>
-								</div>
-								<!--第二行-->
-								<div class="tab-row">
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right" for="authorStuNumber">作者学号：</label>
 										<input type="text" id="authorStuNumber" class="form-control" name="authorStuNumber"/>
@@ -65,31 +66,31 @@
 											<option value="52">信息资源管理</option>
 										</select>
 									</div>
+
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right" for="authorGrade">作者年级：</label>
 										<input type="text" id="authorGrade" class="form-control" name="authorGrade"/>
 									</div>
-								</div>
-								<!-- 第三行 -->
-								<div class="tab-row">
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right">起始发表时间：</label>
 										<input type="text" name="beginTime" id="beginTime" class="form-control" onClick="laydate()"/>
 									</div>
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right">截止发表时间：</label>
-										<input type="text" name="endTime" id="endTime" class="form-control" id="end"/>
+										<input type="text" name="endTime" id="endTime" class="form-control end"/>
 									</div>
-									<div class="form-group col-sm-4">
+								</div>
+								<!--第四行-->
+								<div class="tab-row">
+									<div class="form-group col-sm-8">
 										<label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
 										<input type="text" id="teacherName" class="form-control" name="teacherName"/>
 									</div>
+									<div class="form-group col-sm-4">
+										<input type="button" class="inlibut" value="选择" type="submit" onclick="initdataThesis()"/>
+										<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
+									</div>
 								</div>
-
-								<!--第四行-->
-								<input type="button" id="sort" value="选择" type="submit" onclick="initdataThesis()"/>
-								<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
-
 							</form>
 						</div>
 						<div class="x_title title2">
@@ -115,6 +116,7 @@
 								</thead>
 
 								<tbody class="grid-body">
+
 								</tbody>
 							</table>
 						</div>
@@ -138,7 +140,7 @@
 <script>
     !function(){
         laydate({
-            elem: '#end'
+            elem: '.end'
         })
     }();
 

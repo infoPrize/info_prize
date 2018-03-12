@@ -224,58 +224,12 @@
 					}
 				});
 
-				var errorCount = 0;
+                form.on('submit(login)', function(data) {
+                    window.location.href = "..common/page/index.jsp";
+                });
 
-				form.on('submit(login)', function(data) {
-					window.location.href = "..common/page/index.jsp";
-					/*if (errorCount > 5) {
-					    layer.open({
-					        title: '<img src="' + location.origin + '/Plugins/layui/images/face/7.gif" alt="[害羞]">输入验证码',
-					        type: 1,
-					        content: document.getElementById('code-temp').innerHTML,
-					        btn: ['确定'],
-					        yes: function (index, layero) {
-					            var $code = $('#code');
-					            if ($code.val() === '') {
-					                layer.msg('输入验证码啦，让我知道你是人类。');
-					                isCheck = false;
-					            } else {
-					                $('input[name=verifyCode]').val();
-					                var params = data.field;
-					                params.verifyCode = $code.val();
-					                submit($,params);
-					                layer.close(index);
-					            }
-					        },
-					        area: ['250px', '150px']
-					    });
-					    $('#valiCode').off('click').on('click', function () {
-					        this.src = '/manage/validatecode?v=' + new Date().getTime();
-					    });
-					}else{
-					    submit($,data.field);
-					}
+            });
 
-					return false;*/
-				});
-
-			});
-
-			/*function submit($,params){
-			    $.post('/manage/login',params , function (res) {
-			        if (!res.success) {
-			            if (res.data !== undefined)
-			                errorCount = res.data.errorCount
-			            layer.msg(res.message,{icon:2});
-			        }else
-			        {
-			            layer.msg(res.message,{icon:1},function(index){
-			                layer.close(index);
-			                location.href='/manage';
-			            });
-			        }
-			    }, 'json');
-			}*/
 		</script>
 	</body>
 

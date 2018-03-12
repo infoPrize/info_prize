@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>信息录入</title>
+    <title>其他比赛信息录入</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
@@ -21,7 +21,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h3>挑站杯信息录入</h3>
+                        <h3>其他比赛信息录入</h3>
                         <hr/>
                     </div>
                     <div class="x_content">
@@ -100,8 +100,8 @@
                             <input type="file" id="file" name="file">
                         </a>
                         <input type="submit" class="input" value="确定"/>
+                        <a href="#" id="download_model">下载excel模板</a>
                     </form>
-                    <%--<h1>${message}</h1>--%>
                 </div>
             </div>
         </div>

@@ -641,17 +641,19 @@ $(function() {
 				"order": "1",
 				"isHeader": "0",
 				"childMenus": ""
-			},
-			{
-				"id": "25",
-				"name": "奖项录入",
-				"parentId": "4",
-				"url": site.website + "infoAdd",
-				"icon": "&#xe606;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": ""
-			}]
+			}
+			// ,
+			// {
+			// 	"id": "25",
+			// 	"name": "奖项录入",
+			// 	"parentId": "4",
+			// 	"url": site.website + "infoAdd",
+			// 	"icon": "&#xe606;",
+			// 	"order": "1",
+			// 	"isHeader": "0",
+			// 	"childMenus": ""
+			// }
+			]
 		}
 	];
 	initMenu(menu, $(".side-menu"));

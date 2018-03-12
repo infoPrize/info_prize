@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>信息录入</title>
+    <title>专利信息录入</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
@@ -78,15 +78,20 @@
                                     <input type="submit" value="提交" id="sortpatent" />
                                     <input type="button" value="添加申请人" id="addpatent">
                                 </form>
-                                <form action="/import/patent" enctype="multipart/form-data" method="post">
-                                    <input type="file" name ="file">
-                                    <input type="submit" value ="导入excel">
-                                </form>
-                                <h1>${message}</h1>
                             </div>
-
                         </div>
                     </div>
+                    <hr/>
+                    <form action="/import/patent" enctype="multipart/form-data" method="post" class="dinline">
+                        <label class="tab-label control-label text-right">导入excel：</label>
+                        <input type="text" id="file_name" readonly="readonly" value=""/>
+                        <a href="javascript:void(0);" class="input top">
+                            浏览
+                            <input type="file" id="file" name="file">
+                        </a>
+                        <input type="submit" class="input" value="确定"/>
+                        <a href="#" id="download_model">下载excel模板</a>
+                    </form>
                 </div>
             </div>
         </div>

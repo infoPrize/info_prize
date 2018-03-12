@@ -285,18 +285,19 @@ public class ThesisController {
     @RequestMapping(value = "listByCondition")
     @ResponseBody
     public JSONObject listByCondition(@RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
-                                @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
-                                @RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
-                                @RequestParam(value = "authorStuNumber", required = false, defaultValue = "") String authorStuNumber,
-                                @RequestParam(value = "authorMajor", required = false, defaultValue = "-1") Integer authorMajor,
-                                @RequestParam(value = "authorGrade", required = false, defaultValue = "") String authorGrade,
-                                @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                @RequestParam(value = "endTime", required = false) Date endTime,
-                                @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+                                      @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
+                                      @RequestParam(value = "journalName", required = false, defaultValue = "") String journalName,
+                                      @RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
+                                      @RequestParam(value = "authorStuNumber", required = false, defaultValue = "") String authorStuNumber,
+                                      @RequestParam(value = "authorMajor", required = false, defaultValue = "-1") Integer authorMajor,
+                                      @RequestParam(value = "authorGrade", required = false, defaultValue = "") String authorGrade,
+                                      @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                      @RequestParam(value = "endTime", required = false) Date endTime,
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
         JSONObject jsonObject = new JSONObject();
         Map<String, Object> params = null;
         try {
-            params = thesisService.getParams(journalLevel, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
+            params = thesisService.getParams(journalLevel, journalName, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
                                             beginTime, endTime, teacherName);
         } catch (Exception e) {
             e.printStackTrace();

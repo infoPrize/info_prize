@@ -43,4 +43,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * 可能通过刷新进入这个页面
+     */
+    @RequestMapping(value = "checkLogin", method = RequestMethod.GET)
+    public String checkLogin() {
+        return "index";
+    }
+
 }

@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>信息录入</title>
+    <title>挑战杯信息录入</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
@@ -99,11 +99,6 @@
                                     <input type="button" value="提交" id="sort_comp" />
 
                                 </form>
-                                <form action="/import/challengeCup" enctype="multipart/form-data" method="post">
-                                    <input type="file" name="file">
-                                    <input type="submit" value="导入excel">
-                                </form>
-                                <h1>${message}</h1>
                             </div>
                         </div>
                     </div>
@@ -116,8 +111,8 @@
                             <input type="file" id="file" name="file">
                         </a>
                         <input type="submit" class="input" value="确定"/>
+                        <a href="#" id="download_model">下载excel模板</a>
                     </form>
-                    <%--<h1>${message}</h1>--%>
                 </div>
             </div>
         </div>

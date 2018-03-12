@@ -22,7 +22,7 @@ public interface ThesisService {
     /**
      * 将传递过来的参数加工为去数据库传递的参数
      */
-    public Map<String, Object> getParams(Integer journalLevel, String journalName, String authorName, String authorStuNumber,
+    public Map<String, Object> getParams(Integer journalLevel, String journalName, String thesisTitle, String authorName, String authorStuNumber,
                                          Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception;
 
     /**

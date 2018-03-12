@@ -113,7 +113,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/scientificProject/listByConditions/1";
+        return "redirect:/scientificProject/toList";
     }
 
     @RequestMapping(value = "ACMPrize",method = RequestMethod.POST)

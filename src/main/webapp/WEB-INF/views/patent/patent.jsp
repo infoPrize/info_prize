@@ -44,7 +44,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">截止申请时间：</label>
-												<input type="text" name="endTime" class="form-control" id="endTime"/>
+												<input type="text" name="endTime" class="form-control end" id="endTime"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right" for="majorCode">学生专业：</label>
@@ -130,7 +130,7 @@
 		<script>
             !function(){
                 laydate({
-                    elem: '#end'
+                    elem: '.end'
                 })
             }();
 

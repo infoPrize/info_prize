@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right">结束时间：</label>
-                                        <input type="text" id="endTime" class="form-control" name="endTime"/>
+                                        <input type="text" id="endTime" class="form-control end" name="endTime"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="teamName">团队名称：</label>
@@ -158,7 +158,7 @@
     <script type="text/javascript">
         !function(){
             laydate({
-                elem: '#end'
+                elem: '.end'
             })
         }();
     </script>

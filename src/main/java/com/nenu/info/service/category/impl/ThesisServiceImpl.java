@@ -49,7 +49,7 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public Map<String, Object> getParams(Integer journalLevel, String journalName, String authorName, String authorStuNumber, Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception {
+    public Map<String, Object> getParams(Integer journalLevel, String journalName, String thesisTitle, String authorName, String authorStuNumber, Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception {
         List<Student> studentList = null;
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
@@ -78,6 +78,7 @@ public class ThesisServiceImpl implements ThesisService {
         params.put("teacherId", teacherId);
         params.put("journalLevel", journalLevel);
         params.put("journalName", journalName);
+        params.put("thesisTitle", thesisTitle);
         params.put("beginTime", beginTime);
         params.put("endTime", endTime);
 

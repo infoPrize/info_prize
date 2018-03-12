@@ -39,14 +39,13 @@
                                             <option value="2">女</option>
                                         </select>
                                     </div>
-
                                 </div>
                                 <!--第二行-->
-                                <div class="form-group col-sm-4">
-                                    <label class="tab-label control-label text-right" for="grade">年级：</label>
-                                    <input type="text" id="grade" class="form-control" name="grade"/>
-                                </div>
                                 <div class="tab-row">
+                                    <div class="form-group col-sm-4">
+                                        <label class="tab-label control-label text-right" for="grade">年级：</label>
+                                        <input type="text" id="grade" class="form-control" name="grade"/>
+                                    </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="profession">专业：</label>
                                         <select id="profession" class="form-control" name="majorCode">
@@ -65,19 +64,24 @@
                                         <label class="tab-label control-label text-right" for="phone" >电话号码：</label>
                                         <input type="text" id="phone" class="form-control" name="phone"/>
                                     </div>
-
                                 </div>
-                                <input type="submit" value="提交">
+                                <div class="clearfix"></div>
+                                <input type="submit" value="提交" id="sort_student">
+                                <br><br>
                             </form>
-                            <form action="${website}/import/student" enctype="multipart/form-data" method="post">
-                                <input type="file" name="file">
-                                <input type="submit" value="导入excel">
-                            </form>
-
                         </div>
-
-
                     </div>
+                    <hr/>
+                    <form action="${website}/import/student" enctype="multipart/form-data" method="post" class="dinline">
+                        <label class="tab-label control-label text-right">导入excel：</label>
+                        <input type="text" id="file_name" readonly="readonly" value=""/>
+                        <a href="javascript:void(0);" class="input top">
+                            浏览
+                            <input type="file" id="file" name="file">
+                        </a>
+                        <input type="submit" class="input" value="确定"/>
+                        <a href="${staticWebsite}resources/student.xls" id="download_model">下载excel模板</a>
+                    </form>
                 </div>
             </div>
 

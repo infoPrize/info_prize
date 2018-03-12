@@ -121,11 +121,16 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/ChallengeCup/upload/${challengeCupDto.id}/${challengeCupDto.projectName}" enctype="multipart/form-data" method="post">
-                                <input type="file" name="file">
-                                <input type="submit" value="上传材料" id="upload">
+                            <form action="/ChallengeCup/upload/${challengeCupDto.id}/${challengeCupDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
+                                <label class="tab-label control-label text-right">导入excel：</label>
+                                <input type="text" id="file_name" readonly="readonly" value=""/>
+                                <a href="javascript:void(0);" class="input top">
+                                    浏览
+                                    <input type="file" id="file" name="file">
+                                </a>
+                                <input type="submit" class="input" value="确定"/>
+
                             </form>
-                            <br>
                             <a href="/ChallengeCup/down/${challengeCupDto.projectName}" id="download">下载</a>
                             ${message}
                         </div>
@@ -134,5 +139,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
+
 </body>
 </html>

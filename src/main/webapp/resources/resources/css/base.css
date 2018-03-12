@@ -44,7 +44,7 @@ table th, table td{
 	border: 1px solid #33aecc;
 	color: #fff;
 }
-#sort_scient, #sort_ACM, #sort_comp, #sort_math, #sort_patent, #sort_thesis, #sortpatent, #addthesis, #addpatent, #addscientific_project{
+#sort_scient, #sort_ACM, #sort_comp, #sort_math, #sort_patent, #sort_thesis, #sortpatent, #addthesis, #addpatent, #addscientific_project,#sort_student{
 	position: relative;
 	right: 80px;
 	float: right;
@@ -70,7 +70,7 @@ table th, table td{
 	color: #fff;
 }
 .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     padding: 10px;
     vertical-align: middle;
 }
@@ -78,7 +78,8 @@ table th, table td{
 	display:block;
 	width:100%;
 }
-.sub > tbody > tr {
+.sub > tbody > tr > td > span{
+	margin: 0 2px;
 	text-align: center;
 	border-bottom: 1px solid #ddd;
 }
@@ -160,7 +161,7 @@ a{
     max-width: 600px;
     max-height: 300px;
 }
-#upload,#download{
+#upload{
     position: relative;
     left: 1000px;
     width: 80px;
@@ -170,4 +171,26 @@ a{
     background-color: #33aecc;
     border: 1px solid #33aecc;
     color: #fff;
+}
+#download{
+	position: relative;
+	left: 350px;
+	width: 90px;
+	margin: 5px 5px 0 5px;
+	padding: 7px 27px;
+	border-radius: 7px;
+	background-color: #33aecc;
+	border: 1px solid #33aecc;
+	color: #fff;
+}
+#download_model{
+	position: relative;
+	left: 210px;
+	width: 90px;
+	margin: 5px 5px 0 5px;
+	padding: 7px 27px;
+	border-radius: 7px;
+	background-color: #33aecc;
+	border: 1px solid #33aecc;
+	color: #fff;
 }

@@ -61,7 +61,7 @@
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">结束时间：</label>
-												<input type="text" id="endTime" name="endTime" class="form-control" id="end"/>
+												<input type="text" id="endTime" name="endTime" class="form-control end"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">获奖等级：</label>
@@ -173,7 +173,7 @@
             })
             !function(){
                 laydate({
-                    elem: '#end'
+                    elem: '.end'
                 })
             }();
 		</script>

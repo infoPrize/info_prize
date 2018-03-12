@@ -239,9 +239,9 @@ public class ExportController {
     }
 
     @RequestMapping(value = "thesis")
-    public String ExportThesis(@RequestParam(value = "curPage", required = false, defaultValue = "-500") Integer curPage,
-                               @RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
+    public String ExportThesis(@RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
                                @RequestParam(value = "journalName", required = false, defaultValue = "") String journalName,
+                               @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
                                @RequestParam(value = "authorName", required = false, defaultValue = "") String authorName,
                                @RequestParam(value = "authorStuNumber", required = false, defaultValue = "") String authorStuNumber,
                                @RequestParam(value = "authorMajor", required = false, defaultValue = "-1") Integer authorMajor,
@@ -253,7 +253,7 @@ public class ExportController {
                                Model model){
         Map<String, Object> params = null;
         try {
-            params = thesisService.getParams(journalLevel, journalName, authorName, authorStuNumber, authorMajor, authorGrade,
+            params = thesisService.getParams(journalLevel, journalName, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
                     beginTime, endTime, teacherName);
         } catch (Exception e) {
             e.printStackTrace();
