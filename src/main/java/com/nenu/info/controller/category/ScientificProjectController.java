@@ -272,15 +272,18 @@ public class ScientificProjectController {
 
     }
 
-    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
-        Integer code = materialService.falseDeleteById(id);
+    @RequestMapping(value = "delete/material",method = RequestMethod.GET)
+    public String delete(Material material,Model model,HttpServletRequest request) throws Exception{
+
+        String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
+        FileUtil.delete(path);
+        Integer code = materialService.DelById(material.getId());
         if(code == 1){
             model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
         }else {
             model.addAttribute("message", MessageInfo.DELETE_FAIL);
         }
-        return "redirect:/scientificProject/toDetail/"+materialId;
+        return "redirect:/scientificProject/toDetail/"+material.getMatchId();
     }
 
 }

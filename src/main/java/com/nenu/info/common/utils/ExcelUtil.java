@@ -175,15 +175,15 @@ public final class ExcelUtil {
      */
     public static void writeExcel(List list, String sheetName, String path, HttpServletResponse response){
         Field[] fields = list.get(0).getClass().getDeclaredFields();
-        DataType[] dataTypes = new DataType[fields.length];
-        DataType[] heads = new DataType[fields.length];
-        for (int j = 0; j < fields.length; j++) {
+        DataType[] dataTypes = new DataType[fields.length-1];
+        DataType[] heads = new DataType[fields.length-1];
+        for (int j = 1; j < fields.length; j++) {
             if(!fields[j].isAccessible()){
                 fields[j].setAccessible(true);
             }
-            DataType dataType = new DataType(fields[j].getName(),j);
-            dataTypes[j] = dataType;
-            heads[j] = new DataType(exportFieldDesc.get(fields[j].getName()),j);
+            DataType dataType = new DataType(fields[j].getName(),j-1);
+            dataTypes[j-1] = dataType;
+            heads[j-1] = new DataType(exportFieldDesc.get(fields[j].getName()),j-1);
         }
         response.setContentType("application/vnd.ms-excel");
 

@@ -22,12 +22,12 @@ public interface MaterialService {
 
 
     /**
-     * 材料假删
+     * 删除
      * @param id
      * @return
      * @throws Exception
      */
-    public Integer falseDeleteById(Integer id) throws Exception;
+    public Integer DelById(Integer id) throws Exception;
 
     /**
      * 添加材料信息

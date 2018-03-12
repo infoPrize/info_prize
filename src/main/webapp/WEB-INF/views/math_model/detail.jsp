@@ -88,7 +88,7 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="4"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/mathModel/delete/material/${list.id}/${mathModelPrizeDto.id}">删除</a></td>
+                                        <td><a href="/mathModel/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -114,17 +114,17 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/thesis/delete/material/${list.id}/${otherMatchDto.id}">删除</a></td>
+                                        <td><a href="/otherMatch/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/thesis/upload/${otherMatchDto.id}" enctype="multipart/form-data" method="post">
+                            <form action="/otherMatch/upload/${otherMatchDto.id}/${otherMatchDto.projectName}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="上传材料" id="upload">
                             </form>
                             <br>
-                            <a href="/thesis/down/${otherMatchDto.id}" id="download">下载</a>
+                            <a href="/otherMatch/down/${otherMatchDto.projectName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

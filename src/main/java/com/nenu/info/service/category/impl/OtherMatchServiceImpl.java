@@ -7,7 +7,10 @@ import com.nenu.info.common.dto.category.OtherMatchDto;
 import com.nenu.info.common.entities.category.OtherMatch;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.enums.MatchLevelEnum;
+import com.nenu.info.common.enums.PrizeLevelEnum;
 import com.nenu.info.service.category.OtherMatchService;
+import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,9 @@ public class OtherMatchServiceImpl implements OtherMatchService {
 
     @Autowired
     private StudentDao studentDao;
+    
+    @Autowired
+    private StudentService studentService;
 
     @Override
     public void add(OtherMatch otherMatch) {
@@ -159,5 +165,45 @@ public class OtherMatchServiceImpl implements OtherMatchService {
             return -1;
         }
         return 1;
+    }
+
+    public OtherMatch convertDtoToEntity(OtherMatchDto otherMatchDto) throws Exception{
+        OtherMatch otherMatch = new OtherMatch();
+        otherMatch.setProjectName(otherMatchDto.getProjectName());
+
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber1(),otherMatchDto.getStuName1())){
+            otherMatch.setTeammateId1(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber1()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber2(),otherMatchDto.getStuName2())){
+            otherMatch.setTeammateId2(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber2()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber3(),otherMatchDto.getStuName3())){
+            otherMatch.setTeammateId3(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber3()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber4(),otherMatchDto.getStuName4())){
+            otherMatch.setTeammateId4(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber4()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber5(),otherMatchDto.getStuName5())){
+            otherMatch.setTeammateId5(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber5()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber6(),otherMatchDto.getStuName6())){
+            otherMatch.setTeammateId6(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber6()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber7(),otherMatchDto.getStuName7())){
+            otherMatch.setTeammateId7(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber7()).getId());
+        }
+        if(studentService.nameEqualOrNot(otherMatchDto.getStuNumber8(),otherMatchDto.getStuName8())){
+            otherMatch.setTeammateId8(studentDao.selectStudentByStuNumber(otherMatchDto.getStuNumber8()).getId());
+        }
+        otherMatch.setMatchName(otherMatchDto.getMatchName());
+        otherMatch.setMatchLevel(MatchLevelEnum.getIdByValue(otherMatchDto.getMatchLevel()));
+        otherMatch.setPrizeLevel(PrizeLevelEnum.getIdByValue(otherMatchDto.getPrizeLevel()));
+        otherMatch.setPrizeTime(otherMatchDto.getPrizeTime());
+        otherMatch.setHostUnit(otherMatchDto.getHostUnit());
+        if(teacherDao.selectTeacherByName(otherMatchDto.getTeacherName()) != null)
+        {
+            otherMatch.setTeacherId(teacherDao.selectTeacherByName(otherMatchDto.getTeacherName()).getId());
+        }
+        return otherMatch;
     }
 }

@@ -103,7 +103,7 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="4"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/patent/delete/material/${list.id}/${patentDto.id}">删除</a></td>
+                                        <td><a href="/patent/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

@@ -20,7 +20,7 @@ public class Material {
     @Id
     private Integer id;
 
-    //比赛类别：1-论文，2-专利，3-国创科研，4-acm，5-数学建模，6-挑战杯，7-互联网＋
+    //比赛类别：1-论文，2-专利，3-国创科研，4-acm，5-数学建模，6-挑战杯，7-互联网＋,8-其他比赛
     @Column(name = "match_type")
     private Integer matchType;
 

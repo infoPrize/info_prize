@@ -22,12 +22,12 @@ public interface MaterialDao {
     public List<Material> listByTypeAndId(@Param("matchId") Integer matchId , @Param("matchType") Integer matchType)  throws Exception;
 
     /**
-     * 材料假删
+     * 删除
      * @param id
      * @return
      * @throws Exception
      */
-    public Integer falseDeleteById(@Param("id") Integer id) throws Exception;
+    public Integer DelById(@Param("id") Integer id) throws Exception;
 
     /**
      * 添加材料信息

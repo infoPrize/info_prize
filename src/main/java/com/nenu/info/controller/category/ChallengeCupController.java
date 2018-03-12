@@ -5,10 +5,7 @@ import com.nenu.info.common.entities.category.ChallengeCup;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
-import com.nenu.info.common.utils.MessageInfo;
-import com.nenu.info.common.utils.URLConstants;
-import com.nenu.info.common.utils.WebConstants;
-import com.nenu.info.common.utils.ZipUtil;
+import com.nenu.info.common.utils.*;
 import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
@@ -304,15 +301,17 @@ public class ChallengeCupController {
 
     }
 
-    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
-        Integer code = materialService.falseDeleteById(id);
+    @RequestMapping(value = "delete/material",method = RequestMethod.GET)
+    public String delete(Material material,Model model,HttpServletRequest request) throws Exception{
+        String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
+        FileUtil.delete(path);
+        Integer code = materialService.DelById(material.getId());
         if(code == 1){
             model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
         }else {
             model.addAttribute("message", MessageInfo.DELETE_FAIL);
         }
-        return "redirect:/ChallengeCup/toDetail/"+materialId;
+        return "redirect:/ChallengeCup/toDetail/"+material.getMatchId();
     }
 
 }

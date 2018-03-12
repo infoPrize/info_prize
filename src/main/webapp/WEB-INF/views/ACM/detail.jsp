@@ -88,12 +88,14 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="4"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/acm/delete/material/${list.id}/${acmPrizeDto.id}">删除</a></td>
+                                        <td><a href="/acm/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/acm/upload/${acmPrizeDto.id}/${acmPrizeDto.id}" enctype="multipart/form-data" method="post">
+
+
+                            <form action="/acm/upload/${acmPrizeDto.id}/${acmPrizeDto.teamName}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="上传材料" id="upload">
                             </form>

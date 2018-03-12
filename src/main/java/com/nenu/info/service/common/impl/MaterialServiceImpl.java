@@ -26,9 +26,9 @@ public class MaterialServiceImpl implements MaterialService{
         return list;
     }
 
-    public Integer falseDeleteById(Integer id) throws Exception{
+    public Integer DelById(Integer id) throws Exception{
         try {
-            materialDao.falseDeleteById(id);
+            materialDao.DelById(id);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;

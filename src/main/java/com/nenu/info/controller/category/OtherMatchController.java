@@ -2,10 +2,15 @@ package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.OtherMatchDto;
 import com.nenu.info.common.entities.category.OtherMatch;
+import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.utils.FileUtil;
+import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
+import com.nenu.info.common.utils.ZipUtil;
 import com.nenu.info.service.category.OtherMatchService;
+import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
 import net.sf.json.JSONObject;
@@ -13,10 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +48,9 @@ public class OtherMatchController {
 
     @Autowired
     private OtherMatchService otherMatchService;
+
+    @Autowired
+    private MaterialService materialService;
 
     /**
      * 去往其他比赛添加页面
@@ -243,12 +254,17 @@ public class OtherMatchController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "toDetail/{id}")
-    public String toDetail(@PathVariable("id") Integer id, Model model) {
+    @RequestMapping(value = "toDetail/{materialId}")
+    public String toDetail(@PathVariable("materialId") Integer materialId, Model model) throws Exception {
         OtherMatchDto otherMatchDto = null;
-        otherMatchDto = otherMatchService.selectById(id);
+        List<Material> materialList = null;
+
+        otherMatchDto = otherMatchService.selectById(materialId);
+        materialList = materialService.listByTypeAndId(materialId,8);
 
         model.addAttribute("otherMatchDto", otherMatchDto);
+        model.addAttribute("list", materialList);
+        
         return "other_match/detail";
     }
 
@@ -267,5 +283,50 @@ public class OtherMatchController {
         code = otherMatchService.deleteById(id);
         return code;
     }
+
+    @RequestMapping(value="/upload/{materialId}/{projectName}",method = RequestMethod.POST)
+    public String upload(@PathVariable("materialId") Integer materialId, MultipartFile file,
+                         HttpServletRequest request , @PathVariable("projectName") String projectName) throws Exception {
+
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/otherMatch/"+projectName);
+        String fileName = file.getOriginalFilename();
+        Material material = new Material();
+        material.setMatchType(8);
+        material.setMatchId(materialId);
+        material.setMaterialName(fileName);
+        material.setMaterialUrl("resources/upload/otherMatch/"+projectName+"/"+fileName);
+        materialService.add(material);
+        File dir = new File(path,fileName);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        file.transferTo(dir);
+        return "redirect:/otherMatch/toDetail/"+materialId;
+    }
+
+    @RequestMapping("/down/{projectName}")
+    public void down(HttpServletRequest request,HttpServletResponse response,
+                     @PathVariable("projectName") String projectName) throws Exception{
+
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        String path = request.getSession().getServletContext().getRealPath("resources/upload/otherMatch/"+projectName);
+        ZipUtil.toZip(path,out,true);
+
+    }
+
+    @RequestMapping(value = "delete/material",method = RequestMethod.GET)
+    public String delete(Material material,Model model,HttpServletRequest request) throws Exception{
+
+        String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
+        FileUtil.delete(path);
+        Integer code = materialService.DelById(material.getId());
+        if(code == 1){
+            model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
+        }else {
+            model.addAttribute("message", MessageInfo.DELETE_FAIL);
+        }
+        return "redirect:/otherMatch/toDetail/"+material.getMatchId();
+    }
+
 
 }

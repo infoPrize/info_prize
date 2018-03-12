@@ -18,11 +18,10 @@
         AND `is_deleted` = 0
     </select>
 
-    <update id="falseDeleteById">
-        UPDATE `t_material`
-        SET `is_deleted` = 1
+    <delete id="DelById">
+        DELETE FROM `t_material`
         WHERE `id` = #{id}
-    </update>
+    </delete>
 
     <insert id="add">
         INSERT INTO `t_material`

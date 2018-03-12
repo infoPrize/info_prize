@@ -5,6 +5,7 @@ import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.common.utils.FileUtil;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.ZipUtil;
@@ -304,15 +305,17 @@ public class InternetPlusController {
 
     }
 
-    @RequestMapping(value = "delete/material/{id}/{materialId}",method = RequestMethod.GET)
-    public String delete(@PathVariable("id") Integer id,@PathVariable("materialId") Integer materialId, Model model) throws Exception{
-        Integer code = materialService.falseDeleteById(id);
+    @RequestMapping(value = "delete/material",method = RequestMethod.GET)
+    public String delete(Material material,Model model,HttpServletRequest request) throws Exception{
+        String path = request.getSession().getServletContext().getRealPath(material.getMaterialUrl());
+        FileUtil.delete(path);
+        Integer code = materialService.DelById(material.getId());
         if(code == 1){
             model.addAttribute("message", MessageInfo.DELETE_SUCCESS);
         }else {
             model.addAttribute("message", MessageInfo.DELETE_FAIL);
         }
-        return "redirect:/InternetPlus/toDetail/"+materialId;
+        return "redirect:/InternetPlus/toDetail/"+material.getMatchId();
     }
 
 }

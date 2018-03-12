@@ -69,7 +69,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/thesis/listByCondition/1";
+        return "redirect:/thesis/toList";
 
     }
 
@@ -91,7 +91,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/patent/listByCondition/1";
+        return "redirect:/patent/toList";
 
     }
 
@@ -134,7 +134,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/acm/listACMByCondition/1";
+        return "redirect:/acm/toList";
     }
 
     @RequestMapping(value = "math",method = RequestMethod.POST)
@@ -155,7 +155,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/mathModel/listByCondition/1";
+        return "redirect:/mathModel/toList";
     }
 
     @RequestMapping(value = "internetPlus",method = RequestMethod.POST)
@@ -176,7 +176,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/InternetPlus/listByCondition/1";
+        return "redirect:/InternetPlus/toList";
     }
 
     @RequestMapping(value = "challengeCup",method = RequestMethod.POST)
@@ -197,7 +197,29 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/ChallengeCup/listByCondition/1";
+        return "redirect:/ChallengeCup/toList";
+    }
+
+    @RequestMapping(value = "otherMatch",method = RequestMethod.POST)
+    public String importOtherMatch(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+        try{
+//           File excel = new File(file.getOriginalFilename());//服务器端
+            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            file.transferTo(excel);
+
+            if(importService.checkOtherMatch(excel)){
+                importService.importOtherMatch(excel);
+                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                excel.delete();
+            }else {
+                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+        }
+        return "redirect:/otherMatch/toList";
     }
 
 }

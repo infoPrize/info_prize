@@ -152,4 +152,20 @@ public interface ImportService {
 
     public void importChallengeCup(File challengeCupExcel ) throws Exception;
 
+
+    /**
+     * 检查传入 - 其他比赛 -的Excel是否符合要求
+     * @param otherMatchExcel
+     * @return
+     * @throws Exception
+     */
+    public boolean checkOtherMatch(File otherMatchExcel ) throws Exception;
+
+    /**
+     * 导入- 其他比赛 -Excel
+     * @param otherMatchExcel
+     * @throws Exception
+     */
+    public void importOtherMatch(File otherMatchExcel ) throws Exception;
+
 }

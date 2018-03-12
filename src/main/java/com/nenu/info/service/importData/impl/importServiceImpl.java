@@ -60,6 +60,9 @@ public class importServiceImpl implements ImportService {
     private ChallengeCupDao challengeCupDao;
 
     @Autowired
+    private OtherMatchDao otherMatchDao;
+
+    @Autowired
     private StudentService studentService;
 
     @Autowired
@@ -82,6 +85,11 @@ public class importServiceImpl implements ImportService {
 
     @Autowired
     private ChallengeCupService challengeCupService;
+
+    @Autowired
+    private OtherMatchService otherMatchService;
+
+
 
     //学生
 
@@ -239,6 +247,30 @@ public class importServiceImpl implements ImportService {
             new DataType("stuName8",18), new DataType("stuNumber8",19),
             new DataType("prizeLevel",20), new DataType("prizeTime",21),
             new DataType("hostUnit",22), new DataType("teacherName",23),
+    };
+
+    //其他比赛
+
+    String[] OtherMatchExcelFormat = {
+            "比赛名称","比赛级别","主办单位",
+            "获奖人员1","获奖人员1学号","获奖人员2","获奖人员2学号","获奖人员3","获奖人员3学号", "获奖人员4","获奖人员4学号",
+            "获奖人员5","获奖人员5学号","获奖人员6","获奖人员6学号","获奖人员7","获奖人员7学号", "获奖人员8","获奖人员8学号",
+            "项目名称","获奖时间","获奖等级","指导老师"
+
+    };
+
+    DataType[] OtherMatchExcelType = {
+            new DataType("matchName", 0),new DataType("matchLevel", 1), new DataType("hostUnit", 2),
+            new DataType("stuName1",3), new DataType("stuNumber1",4),
+            new DataType("stuName2",5), new DataType("stuNumber2",6),
+            new DataType("stuName3",7), new DataType("stuNumber3",8),
+            new DataType("stuName4",9), new DataType("stuNumber4",10),
+            new DataType("stuName5",11), new DataType("stuNumber5",12),
+            new DataType("stuName6",13), new DataType("stuNumber6",14),
+            new DataType("stuName7",15), new DataType("stuNumber7",16),
+            new DataType("stuName8",17), new DataType("stuNumber8",18),
+            new DataType("projectName",19), new DataType("prizeTime",20),
+            new DataType("prizeLevel",21), new DataType("teacherName",22),
     };
 
 
@@ -434,6 +466,29 @@ public class importServiceImpl implements ImportService {
                 }
                 ChallengeCup challengeCup = challengeCupService.convertDtoToEntity(challengeCupDto);
                 challengeCupDao.add(challengeCup);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("导入数据存在空行或数据不完整");
+        }
+    }
+
+    //其他比赛
+    public boolean checkOtherMatch(File otherMatchExcel ) throws Exception{
+        return this.checkFormat(otherMatchExcel,OtherMatchExcelFormat);
+    }
+
+    public void importOtherMatch(File otherMatchExcel ) throws Exception{
+
+        try{
+            List<OtherMatchDto> otherMatchDtoList = (List<OtherMatchDto>) ExcelReader2003.readExcel(OtherMatchDto.class,otherMatchExcel,1,OtherMatchExcelType);
+            for(int i = 0; i < otherMatchDtoList.size(); i++){
+                OtherMatchDto otherMatchDto= otherMatchDtoList.get(i);
+                if(otherMatchDto.getMatchLevel() == null){
+                    break;
+                }
+                OtherMatch otherMatch = otherMatchService.convertDtoToEntity(otherMatchDto);
+                otherMatchDao.add(otherMatch);
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -49,4 +49,9 @@ public interface OtherMatchService {
      * 根据id删除获奖信息
      */
     public Integer deleteById(Integer id);
+
+    /**
+     * 将dto转换为实体
+     */
+    public OtherMatch convertDtoToEntity(OtherMatchDto otherMatchDto) throws Exception;
 }
