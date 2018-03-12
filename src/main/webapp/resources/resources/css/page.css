@@ -1,6 +1,9 @@
+.wrap{
+	text-align: center;
+}
 .page {
 	list-style: none;
-	width: 535px;
+	display: inline-block;
 	height: 43px;
 	margin: 0 auto 20px auto;
 	color: #5A738E;

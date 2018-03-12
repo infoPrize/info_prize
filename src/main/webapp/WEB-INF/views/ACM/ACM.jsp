@@ -18,7 +18,7 @@
             }
         </style>
 	</head>
-	<body>
+	<body onload="initdataAcm()">
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -142,17 +142,6 @@
 										</thead>
 	
 										<tbody class="grid-body">
-											<!--第一行-->
-											<%--<c:forEach items="${acmPrizeDtoList}" var="acmPrizeDto">--%>
-											<%--<tr>--%>
-												<%--<td class="aparent">--%>
-													<%--<a href="${website}acm/toDetail/${acmPrizeDto.id}">去往详情页</a>--%>
-												<%--</td>--%>
-												<%--<td>--%>
-													<%--<a href="${website}acm/falseDeleteById/${acmPrizeDto.id}" class="delete" onclick="return false">删除</a>--%>
-												<%--</td>--%>
-											<%--</tr>--%>
-											<%--</c:forEach>--%>
 										</tbody>
 									</table>
 								</div>
@@ -160,7 +149,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 wrap">
 							<!--分页-->
 							<div class="page" id="page"></div>
 						</div>
@@ -181,17 +170,6 @@
                 $("#hidecolumn").click(function(){
                     $(".hidecol").css("display","none");
                 });
-
-                $(".delete").click(function () {
-//                    e.preventDefault();
-					alert("删除成功！");
-//					return false;
-					<%--if(${website}acm/falseDeleteById/${acmPrizeDto.id}==1)--%>
-						<%--alert("删除成功！");--%>
-					<%--else--%>
-					    <%--alert("删除失败！");--%>
-
-                })
             })
             !function(){
                 laydate({
@@ -199,6 +177,5 @@
                 })
             }();
 		</script>
-
 	</body>
 </html>

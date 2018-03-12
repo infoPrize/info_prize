@@ -6,9 +6,10 @@
 		<meta charset="utf-8" />
 		<title>专利</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+		<link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 	</head>
-	<body>
+	<body onload="initdataPatent()">
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -21,12 +22,12 @@
 									<hr/>
 								</div>
 								<div class="x_content">
-									<form class="condition_form form-inline" action="${website}patent/listByCondition/1" method="get">
+									<form class="condition_form form-inline">
 										<!--第一行-->
 										<div class="tab-row">
 					    					<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="type">专利类别：</label>
-												<select id="type" class="form-control" name="patentType">
+												<label class="tab-label control-label text-right" for="patentType">专利类别：</label>
+												<select id="patentType" class="form-control" name="patentType">
 													<option value="-1">---请选择专利类别---</option>
 													<option value="1">发明专利</option>
 													<option value="2">实用新型专利</option>
@@ -34,20 +35,20 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">专利名称：</label>
-												<input type="text" class="form-control" name="patentName"/>
+												<label class="tab-label control-label text-right" for="patentName">专利名称：</label>
+												<input type="text" class="form-control" name="patentName" id="patentName"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">起始申请时间：</label>
-												<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
+												<input type="text" id="beginTime" name="beginTime" class="form-control" onClick="laydate()"/>
 											</div>
 											<div class="form-group col-sm-4">
 												<label class="tab-label control-label text-right">截止申请时间：</label>
-												<input type="text" name="endTime" class="form-control" id="end"/>
+												<input type="text" name="endTime" class="form-control" id="endTime"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control" name="majorCode">
+												<label class="tab-label control-label text-right" for="majorCode">学生专业：</label>
+												<select id="majorCode" class="form-control" name="majorCode">
 													<option value="-1">---请选择学生专业---</option>
 													<option value="1">软件工程</option>
 													<option value="2">计算机科学与技术</option>
@@ -59,27 +60,27 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">学生年级：</label>
-												<input type="text" class="form-control" name="grade" />
+												<label class="tab-label control-label text-right" for="grade">学生年级：</label>
+												<input type="text" class="form-control" name="grade" id="grade"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">学生学号：</label>
-												<input type="text" class="form-control" name="stuNumber"/>
+												<label class="tab-label control-label text-right" for="stuNumber">学生学号：</label>
+												<input type="text" class="form-control" name="stuNumber" id="stuNumber"/>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">学生姓名：</label>
-												<input type="text" class="form-control" name="stuName"/>
+												<label class="tab-label control-label text-right" for="stuName">学生姓名：</label>
+												<input type="text" class="form-control" name="stuName" id="stuName"/>
 											</div>
 										</div>
 										<!--第二行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" id="tutor" class="form-control" name="teacherName"/>
+												<label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+												<input type="text" id="teacherName" class="form-control" name="teacherName"/>
 											</div>
 										</div>
 										<!--第三行-->
-										<input type="button" id="sort" value="选择" type="submit" onclick="form.action='${website}patent/listByCondition/1';form.submit();"/>
+										<input type="button" id="sort" value="选择" type="submit" onclick="initdataPatent()"/>
 										<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/patent';form.submit();"/>
 
 										
@@ -105,77 +106,7 @@
 											</tr>
 										</thead>
 	
-										<tbody>
-											<!--第一行-->
-											<c:forEach items="${patentDtoList}" var="patentDto">
-											<tr>
-												<td>${patentDto.patentType}</td>
-												<td>${patentDto.patentName}</td>
-												<td>${patentDto.applyTimeStr}</td>
-												<td class="td_table">
-													<table class="sub">
-														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
-															<tr><td>${patentDto.applierName1}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
-															<tr><td>${patentDto.applierName2}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
-															<tr><td>${patentDto.applierName3}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
-															<tr><td>${patentDto.applierName4}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
-															<tr><td>${patentDto.applierName5}</td></tr>
-														</c:if>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
-															<tr><td>${patentDto.applierMajor1}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
-															<tr><td>${patentDto.applierMajor2}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
-															<tr><td>${patentDto.applierMajor3}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
-															<tr><td>${patentDto.applierMajor4}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
-															<tr><td>${patentDto.applierMajor5}</td></tr>
-														</c:if>
-													</table>
-												</td>
-												<td class="td_table">
-													<table class="sub">
-														<c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
-															<tr><td>${patentDto.applierStuNumber1}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
-															<tr><td>${patentDto.applierStuNumber2}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
-															<tr><td>${patentDto.applierStuNumber3}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
-															<tr><td>${patentDto.applierStuNumber4}</td></tr>
-														</c:if>
-														<c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
-															<tr><td>${patentDto.applierStuNumber5}</td></tr>
-														</c:if>
-													</table>
-												</td>
-												<td >${patentDto.teacherName}</td>
-												<td ><a href="${website}patent/toDetail/${patentDto.id}">去往详情页</a></td>
-												<td class="aparent">
-													<a href="${website}patent/falseDeleteById/${patentDto.id}">删除</a>
-												</td>
-											</tr>
-											</c:forEach>
+										<tbody class="grid-body">
 										</tbody>
 									</table>
 								</div>
@@ -183,23 +114,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<nav aria-label="Page navigation">
-								<ul class="pagination pull-right">
-									<li>
-										<a href="${website}patent/toPrevious">上一页</a>
-									</li>
-									<li>
-										<a href="${website}patent/toNext">下一页</a>
-									</li>
-									<li class="total">
-										共${totalPage}页
-									</li>
-									<li class="total">
-										第${curPage}页
-									</li>
-								</ul>
-							</nav>
+						<div class="col-md-12 col-sm-12 col-xs-12 wrap">
+							<!--分页-->
+							<div class="page" id="page"></div>
 						</div>
 					</div>
 				</div>
@@ -208,6 +125,8 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script>
             !function(){
                 laydate({

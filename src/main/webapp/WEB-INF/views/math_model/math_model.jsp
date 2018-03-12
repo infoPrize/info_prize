@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 		<title>数学建模</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+		<link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 		<style>
 			.hidecol{
@@ -13,7 +14,7 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body onload="initdataMath();">
 	<h1>${message}</h1>
 		<div class="wrapper">
 			<div class="container">
@@ -137,46 +138,7 @@
 										</tr>
 										</thead>
 
-										<tbody>
-										<!--第一行-->
-										<c:forEach items="${mathModelPrizeDtoList}" var="mathModelPrizeDto">
-										<tr>
-											<td>${mathModelPrizeDto.matchLevel}</td>
-											<td>${mathModelPrizeDto.matchName}</td>
-											<td>${mathModelPrizeDto.hostUnit}</td>
-											<td>${mathModelPrizeDto.prizeTimeStr}</td>
-											<td>${mathModelPrizeDto.prizeLevel}</td>
-											<td>${mathModelPrizeDto.teamName}</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>${mathModelPrizeDto.teammateName1}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateName2}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateName3}</td></tr>
-												</table>
-											</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>${mathModelPrizeDto.teammateStuNumber1}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateStuNumber2}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateStuNumber3}</td></tr>
-												</table>
-											</td>
-											<td class="td_table hidecol">
-												<table class="sub">
-													<tr><td>${mathModelPrizeDto.teammateMajor1}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateMajor2}</td></tr>
-													<tr><td>${mathModelPrizeDto.teammateMajor3}</td></tr>
-												</table>
-											</td>
-											<td>${mathModelPrizeDto.teacherName}</td>
-											<td class="aparent">
-												<a href="${website}mathModel/toDetail/${mathModelPrizeDto.id}">去往详情页</a>
-											</td>
-											<td>
-												<a href="${website}mathModel/falseDeleteById/${mathModelPrizeDto.id}">删除</a>
-											</td>
-										</tr>
-										</c:forEach>
+										<tbody class="grid-body">
 										</tbody>
 									</table>
 								</div>
@@ -184,23 +146,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<nav aria-label="Page navigation">
-								<ul class="pagination pull-right">
-									<li>
-										<a href="${website}mathModel/toPrevious">上一页</a>
-									</li>
-									<li>
-										<a href="${website}mathModel/toNext">下一页</a>
-									</li>
-									<li class="total">
-										共${totalPage}页
-									</li>
-									<li class="total">
-										第${curPage}页
-									</li>
-								</ul>
-							</nav>
+						<div class="col-md-12 col-sm-12 col-xs-12 wrap">
+							<!--分页-->
+							<div class="page" id="page"></div>
 						</div>
 					</div>
 				</div>
@@ -209,6 +157,8 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){
                 $("#showcolumn").click(function(){

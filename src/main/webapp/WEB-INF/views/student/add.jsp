@@ -69,7 +69,10 @@
                                 </div>
                                 <input type="submit" value="提交">
                             </form>
-
+                            <form action="${website}/import/student" enctype="multipart/form-data" method="post">
+                                <input type="file" name="file">
+                                <input type="submit" value="导入excel">
+                            </form>
 
                         </div>
 
@@ -83,6 +86,17 @@
 </div>
 <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
-
+<script>
+    $=function(id){
+        return document.getElementById(id);
+    }
+    function mc(){
+        var i=$("upload");
+        i.click();
+    }
+    function mm(){
+        $("puf").innerHTML=(document.f1.uf.value);
+    }
+</script>
 </body>
 </html>

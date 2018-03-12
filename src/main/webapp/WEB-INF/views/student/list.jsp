@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>学生信息</title>
-    <link rel="stylesheet" href="${staticWebsite}resources/css/sccl.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+    <link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
-<body>
+<body onload="initdataStudent()">
 <div class="wrapper">
     <div class="container">
         <div class="">
@@ -21,12 +21,12 @@
                             <hr/>
                         </div>
                         <div class="x_content">
-                            <form class="condition_form form-inline" action="${website}student/query/by/condition/1" method="get"  name="f1">
+                            <form class="condition_form form-inline" name="f1">
                                 <!--第一行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="number">学号：</label>
-                                        <input type="text" id="number" class="form-control" name="stuNumber"/>
+                                        <label class="tab-label control-label text-right" for="stuNumber">学号：</label>
+                                        <input type="text" id="stuNumber" class="form-control" name="stuNumber"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="name">姓名：</label>
@@ -49,8 +49,8 @@
                                         <input type="text" id="grade" class="form-control" name="grade"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="profession">专业：</label>
-                                        <select id="profession" class="form-control" name="majorCode">
+                                        <label class="tab-label control-label text-right" for="majorCode">专业：</label>
+                                        <select id="majorCode" class="form-control" name="majorCode">
                                             <option value="0">---请选择专业---</option>
                                             <option value="1">软件工程</option>
                                             <option value="2">计算机科学与技术</option>
@@ -68,12 +68,9 @@
                                     </div>
 
                                 </div>
-                                <input type="submit" value="查询">
+                                <input type="button" value="查询" onclick="initdataStudent()">
                             </form>
-                            <form action="${website}/import/student" enctype="multipart/form-data" method="post">
-                                <input type="file" name="file">
-                                <input type="submit" value="导入excel">
-                            </form>
+
 
                         </div>
                         <div class="x_title title2">
@@ -94,21 +91,7 @@
                                 </tr>
                                 </thead>
 
-                                <tbody>
-                                <c:forEach items="${studentDtoList}" var="studentDto">
-                                <tr>
-                                    <td >${studentDto.stuNumber}</td>
-                                    <td >${studentDto.name}</td>
-                                    <td >${studentDto.sex}</td>
-                                    <td >${studentDto.grade}</td>
-                                    <td >${studentDto.major}</td>
-                                    <td >${studentDto.phone}</td>
-                                    <td class="aparent">
-                                        <a href="${website}/student/delete/by/stuNumber/${studentDto.stuNumber}" >删除</a>
-                                    </td>
-                                </tr>
-                                </c:forEach>
-
+                                <tbody class="grid-body">
                                 </tbody>
                             </table>
                         </div>
@@ -116,33 +99,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li>
-                                第${curPage}页
-                            </li>
-                            <li>
-                                共${totalPage}页
-                            </li>
-                            <li>
-                                <a href="${website}student/toPrevious">上一页</a>
-                            </li>
-                            <li>
-                                <a href="${website}student/toNext">下一页</a>
-                            </li>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="col-md-12 col-sm-12 col-xs-12 wrap">
+                    <!--分页-->
+                    <div class="page" id="page"></div>
                 </div>
             </div>
         </div>
@@ -150,18 +109,8 @@
 </div>
 <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
-<script>
-    $=function(id){
-        return document.getElementById(id);
-    }
-    function mc(){
-        var i=$("upload");
-        i.click();
-    }
-    function mm(){
-        $("puf").innerHTML=(document.f1.uf.value);
-    }
-</script>
+<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 </body>
 </html>
 

@@ -6,9 +6,10 @@
 	<meta charset="utf-8" />
 	<title>论文</title>
 	<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+	<link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
 	<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
-<body>
+<body onload="initdataThesis()">
 <div class="wrapper">
 	<div class="container">
 		<div class="">
@@ -25,8 +26,8 @@
 								<!--第一行-->
 								<div class="tab-row">
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="type">期刊级别：</label>
-										<select id="type" class="form-control" name="journalLevel">
+										<label class="tab-label control-label text-right" for="journalLevel">期刊级别：</label>
+										<select id="journalLevel" class="form-control" name="journalLevel">
 											<option value="-1">---请选择论文级别---</option>
 											<option value="1">E类</option>
 											<option value="2">D类</option>
@@ -38,22 +39,22 @@
 									</div>
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right">期刊名称：</label>
-										<input type="text" name="journalName" class="form-control" />
+										<input type="text" name="journalName" class="form-control" id="journalName"/>
 									</div>
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="author">作者姓名：</label>
-										<input type="text" id="author" class="form-control" name="authorName"/>
+										<label class="tab-label control-label text-right" for="authorName">作者姓名：</label>
+										<input type="text" id="authorName" class="form-control" name="authorName"/>
 									</div>
 								</div>
 								<!--第二行-->
 								<div class="tab-row">
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="unit">作者学号：</label>
-										<input type="text" id="unit" class="form-control" name="authorStuNumber"/>
+										<label class="tab-label control-label text-right" for="authorStuNumber">作者学号：</label>
+										<input type="text" id="authorStuNumber" class="form-control" name="authorStuNumber"/>
 									</div>
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="profession">作者专业：</label>
-										<select id="profession" class="form-control" name="authorMajor">
+										<label class="tab-label control-label text-right" for="authorMajor">作者专业：</label>
+										<select id="authorMajor" class="form-control" name="authorMajor">
 											<option value="-1">---请选择学生专业---</option>
 											<option value="1">软件工程</option>
 											<option value="2">计算机科学与技术</option>
@@ -65,28 +66,28 @@
 										</select>
 									</div>
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="journal">作者年级：</label>
-										<input type="text" id="journal" class="form-control" name="authorGrade"/>
+										<label class="tab-label control-label text-right" for="authorGrade">作者年级：</label>
+										<input type="text" id="authorGrade" class="form-control" name="authorGrade"/>
 									</div>
 								</div>
 								<!-- 第三行 -->
 								<div class="tab-row">
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right">起始发表时间：</label>
-										<input type="text" name="beginTime" class="form-control" onClick="laydate()"/>
+										<input type="text" name="beginTime" id="beginTime" class="form-control" onClick="laydate()"/>
 									</div>
 									<div class="form-group col-sm-4">
 										<label class="tab-label control-label text-right">截止发表时间：</label>
-										<input type="text" name="endTime" class="form-control" id="end"/>
+										<input type="text" name="endTime" id="endTime" class="form-control" id="end"/>
 									</div>
 									<div class="form-group col-sm-4">
-										<label class="tab-label control-label text-right" for="journal">指导老师：</label>
-										<input type="text" id="journal" class="form-control" name="teacherName"/>
+										<label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+										<input type="text" id="teacherName" class="form-control" name="teacherName"/>
 									</div>
 								</div>
 
 								<!--第四行-->
-								<input type="button" id="sort" value="选择" type="submit" onclick="form.action='${website}thesis/listByCondition/1';form.submit();"/>
+								<input type="button" id="sort" value="选择" type="submit" onclick="initdataThesis()"/>
 								<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/thesis';form.submit();"/>
 
 							</form>
@@ -113,99 +114,7 @@
 									</tr>
 								</thead>
 
-								<tbody>
-									<c:forEach items="${thesisDtoList}" var="thesisDto">
-									<tr>
-										<td>${thesisDto.journalLevel}</td>
-										<td>${thesisDto.journalName}</td>
-										<td>${thesisDto.thesisTitle}</td>
-										<td>${thesisDto.publishTimeStr}</td>
-										<td class="td_table">
-											<table class="sub">
-												<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
-													<tr><td>${thesisDto.authorName1}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
-													<tr><td>${thesisDto.authorName2}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
-													<tr><td>${thesisDto.authorName3}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
-													<tr><td>${thesisDto.authorName4}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
-													<tr><td>${thesisDto.authorName5}</td></tr>
-												</c:if>
-											</table>
-										</td>
-										<td class="td_table">
-											<table class="sub">
-												<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
-													<tr><td>第${thesisDto.authorLevel1}作者</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
-													<tr><td>第${thesisDto.authorLevel2}作者</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
-													<tr><td>第${thesisDto.authorLevel3}作者</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
-													<tr><td>第${thesisDto.authorLevel4}作者</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
-													<tr><td>第${thesisDto.authorLevel5}作者</td></tr>
-												</c:if>
-											</table>
-										</td>
-										<td class="td_table">
-											<table class="sub">
-												<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
-													<tr><td>${thesisDto.authorStuNumber1}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
-													<tr><td>${thesisDto.authorStuNumber2}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
-													<tr><td>${thesisDto.authorStuNumber3}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
-													<tr><td>${thesisDto.authorStuNumber4}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
-													<tr><td>${thesisDto.authorStuNumber5}</td></tr>
-												</c:if>
-											</table>
-										</td>
-										<td class="td_table">
-											<table class="sub">
-												<c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
-													<tr><td>${thesisDto.authorMajor1}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
-													<tr><td>${thesisDto.authorMajor2}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
-													<tr><td>${thesisDto.authorMajor3}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
-													<tr><td>${thesisDto.authorMajor4}</td></tr>
-												</c:if>
-												<c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
-													<tr><td>${thesisDto.authorMajor5}</td></tr>
-												</c:if>
-											</table>
-										</td>
-										<td >${thesisDto.teacherName}</td>
-										<td ><a href="${website}thesis/toDetail/${thesisDto.id}">去往详情页</a></td>
-										<td class="aparent">
-											<form action="${website}thesis/falseDeleteById/${thesisDto.id}">
-												<input type="button" value="删除" id="delete_thesis" />
-											</form>
-											<%--<a href="${website}thesis/falseDeleteById/${thesisDto.id}">删除</a>--%>
-										</td>
-									</tr>
-									</c:forEach>
+								<tbody class="grid-body">
 								</tbody>
 							</table>
 						</div>
@@ -213,23 +122,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<nav aria-label="Page navigation">
-						<ul class="pagination pull-right">
-							<li>
-								<a href="${website}thesis/toPrevious" aria-label="Previous">上一页</a>
-							</li>
-							<li>
-								<a href="${website}thesis/toNext" aria-label="Next">下一页</a>
-							</li>
-							<li class="total">
-								共${totalPage}页
-							</li>
-							<li class="total">
-								第${curPage}页
-							</li>
-						</ul>
-					</nav>
+				<div class="col-md-12 col-sm-12 col-xs-12 wrap">
+					<!--分页-->
+					<div class="page" id="page"></div>
 				</div>
 			</div>
 		</div>
@@ -238,6 +133,8 @@
 <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 <script>
     !function(){
         laydate({

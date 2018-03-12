@@ -10,6 +10,7 @@
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
 		<title>权限管理</title>
 		<link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+		<link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
 		<link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 		<style>
 			.hidecol{
@@ -18,7 +19,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body onload="initdataScience()">
 		<div class="wrapper">
 			<div class="container">
 				<div class="">
@@ -36,8 +37,8 @@
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="type">项目类别：</label>
-												<select id="type" class="form-control" name="projectType">
+												<label class="tab-label control-label text-right" for="projectType">项目类别：</label>
+												<select id="projectType" class="form-control" name="projectType">
 													<option value="-1">---请选择项目类别---</option>
 													<option value="1">一般培育项目</option>
 													<option value="2">专项计划项目</option>
@@ -47,8 +48,8 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right">立项时间：</label>
-												<select id="time" class="form-control" name="setYear">
+												<label class="tab-label control-label text-right" for="setYear">立项时间：</label>
+												<select id="setYear" class="form-control" name="setYear">
 													<option value="">---请选择立项年份---</option>
 													<option value="${year}">${year}</option>
 													<option value="${year-1}">${year-1}</option>
@@ -58,8 +59,30 @@
 												</select>
 											</div>
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="profession">学生专业：</label>
-												<select id="profession" class="form-control" name="majorCode">
+												<label class="tab-label control-label text-right">项目名称：</label>
+												<input type="text" name="projectName" id="projectName" class="form-control" />
+											</div>
+										</div>
+										<!--第二行-->
+										<div class="tab-row">
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+												<input type="text" name="teacherName" id="teacherName" class="form-control" />
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="stuName">学生姓名：</label>
+												<input type="text" name="stuName" id="stuName" class="form-control" />
+											</div>
+											<div class="form-group col-sm-4">
+												<label class="tab-label control-label text-right" for="stuNumber">学生学号：</label>
+												<input type="text" name="stuNumber" id="stuNumber" class="form-control" />
+											</div>
+										</div>
+										<!--第三行-->
+										<div class="tab-row">
+											<div class="form-group col-sm-8">
+												<label class="tab-label control-label text-right" for="majorCode">学生专业：</label>
+												<select id="majorCode" class="form-control" name="majorCode">
 													<option value="-1">---请选择学生专业---</option>
 													<option value="1">软件工程</option>
 													<option value="2">计算机科学与技术</option>
@@ -70,30 +93,8 @@
 													<option value="52">信息资源管理</option>
 												</select>
 											</div>
-										</div>
-										<!--第二行-->
-										<div class="tab-row">
 											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-												<input type="text" name="teacherName" id="tutor" class="form-control" />
-											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-												<input type="text" name="stuName" id="student_name" class="form-control" />
-											</div>
-											<div class="form-group col-sm-4">
-												<label class="tab-label control-label text-right" for="student_number">学生学号：</label>
-												<input type="text" name="stuNumber" id="student_number" class="form-control" />
-											</div>
-										</div>
-										<!--第三行-->
-										<div class="tab-row">
-											<div class="form-group col-sm-8">
-												<label class="tab-label control-label text-right">项目名称：</label>
-												<input type="text" name="projectName" id="project_name" class="form-control" />
-											</div>
-											<div class="form-group col-sm-4">
-												<input type="button" class="inlibut" value="选择" type="submit" onclick="form.action='${website}scientificProject/listByConditions/1';form.submit();"/>
+												<input type="button" class="inlibut" value="选择" type="submit" onclick="initdataScience()"/>
 												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/scientificProject';form.submit();"/>
 
 											</div>
@@ -129,59 +130,7 @@
 											</tr>
 										</thead>
 
-										<tbody id="tbody-result">
-										<c:forEach items="${scientificProjectDtoList}" var="scientificProject">
-											<tr>
-												<td>${scientificProject.projectType}</td>
-												<td>${scientificProject.projectName}</td>
-												<td>${scientificProject.setYear}</td>
-												<td>${scientificProject.projectManName}</td>
-												<td>${scientificProject.projectManSex}</td>
-												<td>${scientificProject.projectManStuNumber}</td>
-												<td>${scientificProject.projectManPhone}</td>
-												<td>${scientificProject.projectManMajor}</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr>
-															<td>${scientificProject.projectMemberName1}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberName2}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberName3}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberName4}</td>
-														</tr>
-													</table>
-												</td>
-												<td class="td_table hidecol">
-													<table class="sub">
-														<tr>
-															<td>${scientificProject.projectMemberStuNumber1}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberStuNumber2}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberStuNumber3}</td>
-														</tr>
-														<tr>
-															<td>${scientificProject.projectMemberStuNumber4}</td>
-														</tr>
-													</table>
-												</td>
-												<td>${scientificProject.teacherName}</td>
-												<td>${scientificProject.fundsLimit}</td>
-												<td>
-													<a href="${website}scientificProject/toDetail/${scientificProject.id}">去往详情页</a>
-												</td>
-												<td class="aparent">
-													<a href="${website}scientificProject/falseDeleteById/${scientificProject.id}">删除</a>
-												</td>
-											</tr>
-										</c:forEach>
+										<tbody class="grid-body">
 										</tbody>
 									</table>
 								</div>
@@ -189,23 +138,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<nav aria-label="Page navigation">
-								<ul class="pagination pull-right">
-									<li>
-										<a href="${website}scientificProject/toPrevious">上一页</a>
-									</li>
-									<li>
-										<a href="${website}scientificProject/toNext">下一页</a>
-									</li>
-									<li class="total">
-										共${totalPage}页
-									</li>
-									<li class="total">
-										第${curPage}页
-									</li>
-								</ul>
-							</nav>
+						<div class="col-md-12 col-sm-12 col-xs-12 wrap">
+							<!--分页-->
+							<div class="page" id="page"></div>
 						</div>
 					</div>
 				</div>
@@ -213,6 +148,8 @@
 		</div>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript">
             $(document).ready(function(){

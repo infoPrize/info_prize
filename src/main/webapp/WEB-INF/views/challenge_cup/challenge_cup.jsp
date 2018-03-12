@@ -6,9 +6,10 @@
     <meta charset="utf-8" />
     <title>挑战杯</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+    <link rel="stylesheet" href="${staticWebsite}resources/css/page.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css" />
 </head>
-<body>
+<body onload="initdataCup()">
 <div class="wrapper">
     <div class="container">
         <div class="">
@@ -21,16 +22,16 @@
                             <hr/>
                         </div>
                         <div class="x_content">
-                            <form class="condition_form form-inline" action="${website}ChallengeCup/listByCondition/1" method="get">
+                            <form class="condition_form form-inline">
                                 <!--第一行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="competition">比赛名称：</label>
-                                        <input type="text" id="competition" class="form-control" name="matchName"/>
+                                        <label class="tab-label control-label text-right" for="matchName">比赛名称：</label>
+                                        <input type="text" id="matchName" class="form-control" name="matchName"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="type">比赛等级：</label>
-                                        <select id="type" class="form-control" name="matchLevel">
+                                        <label class="tab-label control-label text-right" for="matchLevel">比赛等级：</label>
+                                        <select id="matchLevel" class="form-control" name="matchLevel">
                                             <option value="-1">---请选择比赛等级---</option>
                                             <option value="1">校级</option>
                                             <option value="2">市级</option>
@@ -42,8 +43,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="prize">获奖等级：</label>
-                                        <select id="prize" class="form-control" name="prizeLevel">
+                                        <label class="tab-label control-label text-right" for="prizeLevel">获奖等级：</label>
+                                        <select id="prizeLevel" class="form-control" name="prizeLevel">
                                             <option value="-1">---请选择---</option>
                                             <option value="1">一等奖(金奖)</option>
                                             <option value="2">二等奖(银奖)</option>
@@ -56,12 +57,12 @@
                                 <!--第二行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="starttime">起始时间：</label>
-                                        <input type="text" id="starttime" class="form-control" name="startTime" onClick="laydate()"/>
+                                        <label class="tab-label control-label text-right" for="startTime">起始时间：</label>
+                                        <input type="text" id="startTime" class="form-control" name="startTime" onClick="laydate()"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right">结束时间：</label>
-                                        <input type="text" id="end" class="form-control" name="endTime"/>
+                                        <input type="text" id="endTime" class="form-control" name="endTime"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="teamName">团队名称：</label>
@@ -71,12 +72,12 @@
                                 <!--第三行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="student_name">学生姓名：</label>
-                                        <input type="text" id="student_name" class="form-control" name="stuName"/>
+                                        <label class="tab-label control-label text-right" for="stuName">学生姓名：</label>
+                                        <input type="text" id="stuName" class="form-control" name="stuName"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="profession">学生专业：</label>
-                                        <select id="profession" class="form-control" name="majorCode">
+                                        <label class="tab-label control-label text-right" for="majorCode">学生专业：</label>
+                                        <select id="majorCode" class="form-control" name="majorCode">
                                             <option value="-1">---请选择学生专业---</option>
                                             <option value="1">软件工程</option>
                                             <option value="2">计算机科学与技术</option>
@@ -88,22 +89,22 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="projectname">项目名称：</label>
-                                        <input type="text" id="projectname" class="form-control" name="projectName"/>
+                                        <label class="tab-label control-label text-right" for="projectName">项目名称：</label>
+                                        <input type="text" id="projectName" class="form-control" name="projectName"/>
                                     </div>
                                 </div>
                                 <!--第四行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="unit">主办单位：</label>
-                                        <input type="text" id="unit" class="form-control" name="hostUnit"/>
+                                        <label class="tab-label control-label text-right" for="hostUnit">主办单位：</label>
+                                        <input type="text" id="hostUnit" class="form-control" name="hostUnit"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-                                        <input type="text" id="tutor" class="form-control" name="teacherName"/>
+                                        <label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+                                        <input type="text" id="teacherName" class="form-control" name="teacherName"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <input type="button" class="inlibut" value="选择" type="submit"/>
+                                        <input type="button" class="inlibut" value="选择" type="submit" onclick="initdataCup()"/>
                                         <input type="button" class="inlibut" value="导出Excel" type="submit"/>
                                     </div>
                                 </div>
@@ -134,49 +135,7 @@
 
                                 </thead>
 
-                                <tbody>
-                                <!--第一行-->
-                                <c:forEach items="${challengeCupDtoList}" var="challengeCupDto">
-                                    <tr>
-                                        <td>${challengeCupDto.matchLevel}</td>
-                                        <td>${challengeCupDto.matchName}</td>
-                                        <td>${challengeCupDto.projectName}</td>
-                                        <td>${challengeCupDto.teamName}</td>
-                                        <td class="td_table">
-                                            <table class="sub">
-                                                <tr><td>${challengeCupDto.stuName1}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName2}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName3}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName4}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName5}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName6}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName7}</td></tr>
-                                                <tr><td>${challengeCupDto.stuName8}</td></tr>
-                                            </table>
-                                        </td>
-                                        <td class="td_table">
-                                            <table class="sub">
-                                                <tr><td>${challengeCupDto.stuNumber1}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber2}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber3}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber4}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber5}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber6}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber7}</td></tr>
-                                                <tr><td>${challengeCupDto.stuNumber8}</td></tr>
-                                            </table>
-                                        </td>
-                                        <td>${challengeCupDto.prizeLevel}</td>
-                                        <td>${challengeCupDto.prizeTimeStr}</td>
-                                        <td>${challengeCupDto.hostUnit}</td>
-                                        <td>${challengeCupDto.teacherName}</td>
-                                        <td ><a href="${website}ChallengeCup/toDetail/${challengeCupDto.id}">详情</a></td>
-                                        <td class="aparent">
-                                            <a href="${website}ChallengeCup/falseDeleteById/${challengeCupDto.id}" data-toggle="modal" data-target="#delete">删除</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
+                                <tbody class="grid-body">
                                 </tbody>
                             </table>
                         </div>
@@ -184,23 +143,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination pull-right">
-                            <li>
-                                <a href="${website}ChallengeCup/toPrevious">上一页</a>
-                            </li>
-                            <li>
-                                <a href="${website}ChallengeCup/toNext">下一页</a>
-                            </li>
-                            <li class="total">
-                                共${totalPage}页
-                            </li>
-                            <li class="total">
-                                第${curPage}页
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="col-md-12 col-sm-12 col-xs-12 wrap">
+                    <!--分页-->
+                    <div class="page" id="page"></div>
                 </div>
             </div>
         </div>
@@ -208,6 +153,8 @@
     <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js" ></script>
     <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
     <script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
+    <script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
+    <script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
     <script type="text/javascript">
         !function(){
             laydate({
