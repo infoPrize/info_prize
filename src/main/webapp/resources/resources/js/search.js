@@ -1,11 +1,9 @@
 /*Created by liujing on 2018/3/10.*/
-//跨域地址
-// var website = "http://125.222.219.220/";
 
 //本地地址
 var website = "http://infoprize.nenu.edu.cn/";
 //服务器地址
-//var website = "http://120.78.154.246/";
+// var website = "http://120.78.154.246/info_prize/";
 
 
 var max = 5;

@@ -32,7 +32,7 @@ public class ImportController {
     @RequestMapping(value = "student",method = RequestMethod.POST)
     public String importStudent(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request , Model model){
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
+//            File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkStudent(excel)){
