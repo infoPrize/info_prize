@@ -33,7 +33,7 @@
 								</div>
 								<div class="x_content">
 									<div class="clearfix"></div>
-									<form class="condition_form form-inline" action="${website}scientificProject/listByConditions/1" method="get">
+									<form class="condition_form form-inline" action="${website}scientificProject/listByCondition" method="get">
 										<!--第一行-->
 										<div class="tab-row">
 											<div class="form-group col-sm-4">

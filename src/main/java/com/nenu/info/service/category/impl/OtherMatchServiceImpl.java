@@ -128,6 +128,14 @@ public class OtherMatchServiceImpl implements OtherMatchService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //对日期进行处理
+        if(otherMatchDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date prizeTime = otherMatchDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+            otherMatchDto.setPrizeTimeStr(prizeTimeStr);
+        }
         return otherMatchDto;
     }
 

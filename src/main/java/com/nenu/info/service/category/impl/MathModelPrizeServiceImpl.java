@@ -140,6 +140,13 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if(mathModelPrizeDto != null) {
+            Date prizeTime = mathModelPrizeDto.getPrizeTime();
+            String prizeTimeStr = sf.format(prizeTime);
+            mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         return mathModelPrizeDto;
     }
 

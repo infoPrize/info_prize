@@ -22,7 +22,7 @@
 							<hr/>
 						</div>
 						<div class="x_content">
-							<form class="condition_form form-inline" action="${website}thesis/listByCondition/1" method="post">
+							<form class="condition_form form-inline" action="${website}thesis/listByCondition" method="post">
 								<!--第一行-->
 								<div class="tab-row">
 									<div class="form-group col-sm-4">

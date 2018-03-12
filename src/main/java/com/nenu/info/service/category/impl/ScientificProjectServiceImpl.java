@@ -14,10 +14,7 @@ import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: software-liuwang
@@ -106,30 +103,8 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
     }
 
     @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int pageSize = WebConstants.pageSize;
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-        params.put("pageSize", WebConstants.pageSize);
-        params.put("startNum", startNum);
-
-        return params;
-    }
-
-    @Override
     public List<ScientificProjectDto> listScientificProjectByConditions(Map<String, Object> params) {
         List<ScientificProjectDto> scientificProjectDtoList = null;
-
-        int startNum = ((int)params.get("curPage") - 1) * WebConstants.pageSize;
-        params.put("startNum", startNum);
 
         try {
             scientificProjectDtoList = scientificProjectDao.listScientificProjectByCondition(params);

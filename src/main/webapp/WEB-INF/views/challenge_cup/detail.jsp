@@ -26,68 +26,84 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">比赛级别</th>
-                                    <td >多省级</td>
+                                    <td >${challengeCupDto.matchLevel}</td>
                                     <th class="text-center">比赛名称</th>
-                                    <td >第十五届挑战杯</td>
+                                    <td >${challengeCupDto.matchName}</td>
                                     <th class="text-center">项目名称</th>
-                                    <td >Test</td>
+                                    <td >${challengeCupDto.projectName}</td>
                                     <th class="text-center">团队名称</th>
-                                    <td >HelloWorld</td>
+                                    <td >${challengeCupDto.teamName}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
-                                    <th class="text-center">参赛成员1</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员1学号</th>
-                                    <td >2015011969</td>
-                                    <th class="text-center">参赛成员2</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员2学号</th>
-                                    <td >2015011969</td>
+                                    <c:if test="${!empty challengeCupDto.stuName1 and challengeCupDto.stuName1 ne ''}">
+                                        <th class="text-center">参赛成员1</th>
+                                        <td >${challengeCupDto.stuName1}</td>
+                                        <th class="text-center">成员1学号</th>
+                                        <td >${challengeCupDto.stuNumber1}</td>
+                                    </c:if>
+                                    <c:if test="${!empty challengeCupDto.stuName2 and challengeCupDto.stuName2 ne ''}">
+                                        <th class="text-center">参赛成员2</th>
+                                        <td >${challengeCupDto.stuName2}</td>
+                                        <th class="text-center">成员2学号</th>
+                                        <td >${challengeCupDto.stuNumber2}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
-                                    <th class="text-center">参赛成员3</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员3学号</th>
-                                    <td >2015011969</td>
-                                    <th class="text-center">参赛成员4</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员4学号</th>
-                                    <td >2015011969</td>
+                                    <c:if test="${!empty challengeCupDto.stuName3 and challengeCupDto.stuName3 ne ''}">
+                                        <th class="text-center">参赛成员3</th>
+                                        <td >${challengeCupDto.stuName3}</td>
+                                        <th class="text-center">成员3学号</th>
+                                        <td >${challengeCupDto.stuNumber3}</td>
+                                    </c:if>
+                                    <c:if test="${!empty challengeCupDto.stuName4 and challengeCupDto.stuName4 ne ''}">
+                                        <th class="text-center">参赛成员4</th>
+                                        <td >${challengeCupDto.stuName4}</td>
+                                        <th class="text-center">成员4学号</th>
+                                        <td >${challengeCupDto.stuNumber4}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第四行-->
                                 <tr>
-                                    <th class="text-center">参赛成员5</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员5学号</th>
-                                    <td >2015011969</td>
-                                    <th class="text-center">参赛成员6</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员6学号</th>
-                                    <td >2015011969</td>
+                                    <c:if test="${!empty challengeCupDto.stuName5 and challengeCupDto.stuName5 ne ''}">
+                                        <th class="text-center">参赛成员5</th>
+                                        <td >${challengeCupDto.stuName5}</td>
+                                        <th class="text-center">成员5学号</th>
+                                        <td >${challengeCupDto.stuNumber5}</td>
+                                    </c:if>
+                                    <c:if test="${!empty challengeCupDto.stuName6 and challengeCupDto.stuName6 ne ''}">
+                                        <th class="text-center">参赛成员6</th>
+                                        <td >${challengeCupDto.stuName6}</td>
+                                        <th class="text-center">成员6学号</th>
+                                        <td >${challengeCupDto.stuNumber6}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第五行-->
                                 <tr>
-                                    <th class="text-center">参赛成员7</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员7学号</th>
-                                    <td >2015011969</td>
-                                    <th class="text-center">参赛成员8</th>
-                                    <td >刘旺</td>
-                                    <th class="text-center">成员8学号</th>
-                                    <td >2015011969</td>
+                                    <c:if test="${!empty challengeCupDto.stuName7 and challengeCupDto.stuName7 ne ''}">
+                                        <th class="text-center">参赛成员7</th>
+                                        <td >${challengeCupDto.stuName7}</td>
+                                        <th class="text-center">成员7学号</th>
+                                        <td >${challengeCupDto.stuNumber7}</td>
+                                    </c:if>
+                                    <c:if test="${!empty challengeCupDto.stuName8 and challengeCupDto.stuName8 ne ''}">
+                                        <th class="text-center">参赛成员8</th>
+                                        <td >${challengeCupDto.stuName8}</td>
+                                        <th class="text-center">成员8学号</th>
+                                        <td >${challengeCupDto.stuNumber8}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第六行-->
                                 <tr>
                                     <th class="text-center">获奖等级</th>
-                                    <td >二等奖(银奖)</td>
+                                    <td >${challengeCupDto.prizeLevel}</td>
                                     <th class="text-center">比赛时间</th>
-                                    <td >2018-01-17</td>
+                                    <td >${challengeCupDto.prizeTimeStr}</td>
                                     <th class="text-center">主办单位</th>
-                                    <td >黑龙江省教育厅</td>
+                                    <td >${challengeCupDto.hostUnit}</td>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
+                                    <td >${challengeCupDto.teacherName}</td>
                                 </tr>
                                 <!--第七行-->
                                 <tr>

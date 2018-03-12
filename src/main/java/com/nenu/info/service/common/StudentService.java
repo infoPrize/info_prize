@@ -34,16 +34,10 @@ public interface StudentService {
     public Student selectStudentById(Integer id) throws Exception;
 
     /**
-     * 将传递的参数加工为Map(与分页无关)
+     * 将传递的参数加工为Map
      */
     public Map<String, Object> getParams(String name,  Integer sex, String stuNumber,
                                          String grade, Integer majorCode,  String phone);
-
-    /**
-     * 将传递的参数加工为Map(与分页有关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage);
-
 
     /**
      * 条件查询学生列表

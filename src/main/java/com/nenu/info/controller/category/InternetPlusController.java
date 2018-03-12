@@ -12,6 +12,7 @@ import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,6 +58,14 @@ public class InternetPlusController {
     @RequestMapping(value = "toAdd")
     public String toAdd() {
         return "internet_plus/internet_plus_add";
+    }
+
+    /**
+     * 去往互联网+列表页
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return  "internet_plus/internet_plus";
     }
 
     /**
@@ -198,10 +207,9 @@ public class InternetPlusController {
     }
 
 
-    @RequestMapping(value = "listByCondition/{curPage}")
-//    @ResponseBody
-    public String listByCondition(@PathVariable("curPage") Integer curPage,
-                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+    @RequestMapping(value = "listByCondition")
+    @ResponseBody
+    public JSONObject listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                                   @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                                   @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                                   @RequestParam(value = "startTime", required = false) Date startTime,
@@ -211,11 +219,8 @@ public class InternetPlusController {
                                   @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
                                   @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                   @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                  @RequestParam(value = "message", required = false, defaultValue = "") String message,
-                                  HttpServletRequest request,
-                                  Model model) {
-
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+        JSONObject jsonObject = new JSONObject();
         Map<String, Object> params = null;
         try {
             params = internetPlusService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, teamName, stuName, majorCode, projectName, hostUnit, teacherName);
@@ -223,25 +228,7 @@ public class InternetPlusController {
             e.printStackTrace();
         }
 
-        int count = 0;
-        try {
-            count = internetPlusService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-        try {
-            params = internetPlusService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("internetPlusParams", params);
-
         List<InternetPlusDto> internetPlusDtoList = null;
-//        JSONArray jsonArray = new JSONArray();
 
         try {
             internetPlusDtoList = internetPlusService.listByCondition(params);
@@ -249,44 +236,9 @@ public class InternetPlusController {
             e.printStackTrace();
         }
 
-//        if(internetPlusDtoList != null) {
-//            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.put("matchLevel", internetPlusDto.getMatchLevel());
-//                jsonObject.put("matchName", internetPlusDto.getMatchName());
-//                jsonObject.put("projectName", internetPlusDto.getProjectName());
-//                jsonObject.put("teamName", internetPlusDto.getTeamName());
-//                jsonObject.put("stuName1", internetPlusDto.getStuName1());
-//                jsonObject.put("stuNumber1", internetPlusDto.getStuNumber1());
-//                jsonObject.put("stuName2", internetPlusDto.getStuName2());
-//                jsonObject.put("stuNumber2", internetPlusDto.getStuNumber2());
-//                jsonObject.put("stuName3", internetPlusDto.getStuName3());
-//                jsonObject.put("stuNumber3", internetPlusDto.getStuNumber3());
-//                jsonObject.put("stuName4", internetPlusDto.getStuName4());
-//                jsonObject.put("stuNumber4", internetPlusDto.getStuNumber4());
-//                jsonObject.put("stuName5", internetPlusDto.getStuName5());
-//                jsonObject.put("stuNumber5", internetPlusDto.getStuNumber5());
-//                jsonObject.put("stuName6", internetPlusDto.getStuName6());
-//                jsonObject.put("stuNumber6", internetPlusDto.getStuNumber6());
-//                jsonObject.put("stuName7", internetPlusDto.getStuName7());
-//                jsonObject.put("stuNumber7", internetPlusDto.getStuNumber7());
-//                jsonObject.put("stuName8", internetPlusDto.getStuName8());
-//                jsonObject.put("stuNumber8", internetPlusDto.getStuNumber8());
-//                jsonObject.put("prizeLevel", internetPlusDto.getPrizeLevel());
-//                jsonObject.put("prizeTime", internetPlusDto.getPrizeTime());
-//                jsonObject.put("hostUnit", internetPlusDto.getHostUnit());
-//                jsonObject.put("teacherName", internetPlusDto.getTeacherName());
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        }
+        jsonObject.put("internetPlusDtoList", internetPlusDtoList);
 
-        model.addAttribute("internetPlusDtoList", internetPlusDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-        model.addAttribute("message",message);
-
-        return "internet_plus/internet_plus";
+        return jsonObject;
     }
 
     @RequestMapping(value = "toDetail/{materialId}")
@@ -304,86 +256,6 @@ public class InternetPlusController {
         model.addAttribute("internetPlusDto", internetPlusDto);
         model.addAttribute("list", materialList);
         return "internet_plus/detail";
-    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-
-        Map<String, Object> params = (Map)session.getAttribute("internetPlusParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage -= 1;
-
-        try {
-            params = internetPlusService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        List<InternetPlusDto> internetPlusDtoList = null;
-        try {
-            internetPlusDtoList = internetPlusService.listByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(internetPlusDtoList != null) {
-            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-                Date prizeTime = internetPlusDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                internetPlusDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
-        model.addAttribute("internetPlusDtoList", internetPlusDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "internet_plus/internet_plus";
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-
-        Map<String, Object> params = (Map)session.getAttribute("internetPlusParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage += 1;
-
-        try {
-            params = internetPlusService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        List<InternetPlusDto> internetPlusDtoList = null;
-        try {
-            internetPlusDtoList = internetPlusService.listByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(internetPlusDtoList != null) {
-            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-                Date prizeTime = internetPlusDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                internetPlusDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
-        model.addAttribute("internetPlusDtoList", internetPlusDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "internet_plus/internet_plus";
     }
 
     @RequestMapping(value = "falseDeleteById/{id}")

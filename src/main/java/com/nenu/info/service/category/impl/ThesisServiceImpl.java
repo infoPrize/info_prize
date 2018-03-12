@@ -56,7 +56,6 @@ public class ThesisServiceImpl implements ThesisService {
         if((authorName != null && authorName != "") || (authorStuNumber != null && authorStuNumber != "") || (authorMajor != null && authorMajor > 0 ) || (authorGrade != null && authorGrade != "")) {
             Map<String, Object> stuParams = null;
             stuParams = studentService.getParams(authorName, -1, authorStuNumber, authorGrade, authorMajor, "");
-            stuParams = studentService.getParams(stuParams, -500, 0);
 
             studentList = studentDao.queryByCondition(stuParams);
             if(studentList == null) {
@@ -81,24 +80,6 @@ public class ThesisServiceImpl implements ThesisService {
         params.put("journalName", journalName);
         params.put("beginTime", beginTime);
         params.put("endTime", endTime);
-
-        return params;
-    }
-
-    @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-        params.put("pageSize", pageSize);
-        params.put("startNum", startNum);
 
         return params;
     }
@@ -139,6 +120,15 @@ public class ThesisServiceImpl implements ThesisService {
     public ThesisDto selectById(Integer id) throws Exception {
         ThesisDto thesisDto = null;
         thesisDto = thesisDao.selectById(id);
+
+        //对日期进行处理
+        if(thesisDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date publishTime = thesisDto.getPublishTime();
+            String publishTimeStr = sdf.format(publishTime);
+            thesisDto.setPublishTimeStr(publishTimeStr);
+        }
+
         return thesisDto;
     }
 

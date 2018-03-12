@@ -13,6 +13,7 @@ import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,14 @@ public class ChallengeCupController {
     @RequestMapping(value = "toAdd")
     public String toAdd() {
         return "challenge_cup/challenge_cup_add";
+    }
+
+    /**
+     * 去往挑战杯添加页面
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "challenge_cup/challenge_cup";
     }
 
     /**
@@ -198,27 +207,21 @@ public class ChallengeCupController {
         return 10;
     }
 
-
-    @RequestMapping(value = "listByCondition/{curPage}", method = RequestMethod.GET)
-//    @ResponseBody
-    public String listByCondition(@PathVariable("curPage") Integer curPage,
-                                  @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
-                                  @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
-                                  @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
-                                  @RequestParam(value = "startTime", required = false) Date startTime,
-                                  @RequestParam(value = "endTime", required = false) Date endTime,
-                                  @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
-                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                  @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
-                                  @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                  @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                  @RequestParam(value = "message", required = false, defaultValue = "") String message,
-                                  Model model,
-                                  HttpServletRequest request ) {
-
+    @RequestMapping(value = "listByCondition", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject listByCondition(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                      @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                      @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                      @RequestParam(value = "startTime", required = false) Date startTime,
+                                      @RequestParam(value = "endTime", required = false) Date endTime,
+                                      @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
+                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                      @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
+                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
         List<ChallengeCupDto> challengeCupDtoList = null;
-//        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = null;
         try {
@@ -228,83 +231,14 @@ public class ChallengeCupController {
             e.printStackTrace();
         }
 
-        int count = 0;
-
-        try {
-            count = challengeCupService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int pageSize = WebConstants.pageSize;
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        try {
-            params = challengeCupService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("challengeCupParams", params);
-
         try {
             challengeCupDtoList = challengeCupService.listByCondition(params);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
-                Date prizeTime = challengeCupDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                challengeCupDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
-        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-
-//        if(challengeCupDtoList != null) {
-//            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.put("matchLevel", challengeCupDto.getMatchLevel());
-//                jsonObject.put("matchName", challengeCupDto.getMatchName());
-//                jsonObject.put("projectName", challengeCupDto.getProjectName());
-//                jsonObject.put("teamName", challengeCupDto.getTeamName());
-//                jsonObject.put("stuName1", challengeCupDto.getStuName1());
-//                jsonObject.put("stuNumber1", challengeCupDto.getStuNumber1());
-//                jsonObject.put("stuName2", challengeCupDto.getStuName2());
-//                jsonObject.put("stuNumber2", challengeCupDto.getStuNumber2());
-//                jsonObject.put("stuName3", challengeCupDto.getStuName3());
-//                jsonObject.put("stuNumber3", challengeCupDto.getStuNumber3());
-//                jsonObject.put("stuName4", challengeCupDto.getStuName4());
-//                jsonObject.put("stuNumber4", challengeCupDto.getStuNumber4());
-//                jsonObject.put("stuName5", challengeCupDto.getStuName5());
-//                jsonObject.put("stuNumber5", challengeCupDto.getStuNumber5());
-//                jsonObject.put("stuName6", challengeCupDto.getStuName6());
-//                jsonObject.put("stuNumber6", challengeCupDto.getStuNumber6());
-//                jsonObject.put("stuName7", challengeCupDto.getStuName7());
-//                jsonObject.put("stuNumber7", challengeCupDto.getStuNumber7());
-//                jsonObject.put("stuName8", challengeCupDto.getStuName8());
-//                jsonObject.put("stuNumber8", challengeCupDto.getStuNumber8());
-//                jsonObject.put("prizeLevel", challengeCupDto.getPrizeLevel());
-//                jsonObject.put("prizeTime", challengeCupDto.getPrizeTime());
-//                jsonObject.put("hostUnit", challengeCupDto.getHostUnit());
-//                jsonObject.put("teacherName", challengeCupDto.getTeacherName());
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        }
-
-//        return jsonArray;
-        model.addAttribute("message",message);
-
-        return "challenge_cup/challenge_cup";
+        jsonObject.put("challengeCupDtoList", challengeCupDtoList);
+        return jsonObject;
     }
 
     @RequestMapping(value = "toDetail/{materialId}")
@@ -322,86 +256,6 @@ public class ChallengeCupController {
         model.addAttribute("list", materialList);
 
         return "challenge_cup/detail";
-    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-
-        Map<String, Object> params = (Map)session.getAttribute("challengeCupParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage -= 1;
-
-        try {
-            params = challengeCupService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        List<ChallengeCupDto> challengeCupDtoList = null;
-        try {
-            challengeCupDtoList = challengeCupService.listByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
-                Date prizeTime = challengCupDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                challengCupDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
-        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "challenge_cup/challenge_cup";
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-
-        Map<String, Object> params = (Map)session.getAttribute("challengeCupParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage += 1;
-
-        try {
-            params = challengeCupService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        List<ChallengeCupDto> challengeCupDtoList = null;
-        try {
-            challengeCupDtoList = challengeCupService.listByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
-                Date prizeTime = challengCupDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                challengCupDto.setPrizeTimeStr(prizeTimeStr);
-            }
-        }
-
-        model.addAttribute("challengeCupDtoList", challengeCupDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-
-        return "challenge_cup/challenge_cup";
     }
 
     @RequestMapping(value = "falseDeleteById/{id}")

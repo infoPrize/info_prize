@@ -26,69 +26,82 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">比赛级别</th>
-                                    <td >多省级</td>
+                                    <td >${otherMatchDto.matchLevel}</td>
                                     <th class="text-center">比赛名称</th>
-                                    <td >第一届蓝桥杯1</td>
+                                    <td >${otherMatchDto.matchName}</td>
                                     <th class="text-center">项目名称</th>
-                                    <td >基于Web的奖项查询系统</td>
+                                    <td >${otherMatchDto.projectName}</td>
                                     <th class="text-center">主办单位</th>
-                                    <td >吉林省教育厅</td>
+                                    <td >${otherMatchDto.hostUnit}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
+                                    <c:if test="${!empty otherMatchDto.stuName1 and otherMatchDto.stuName1 ne''}">
                                     <th class="text-center">获奖成员1</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName1}</td>
                                     <th class="text-center">成员1学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber1}</td>
+                                    </c:if>
+                                    <c:if test="${!empty otherMatchDto.stuName2 and otherMatchDto.stuName2 ne''}">
                                     <th class="text-center">获奖成员2</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName2}</td>
                                     <th class="text-center">成员2学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber2}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
+                                    <c:if test="${!empty otherMatchDto.stuName3 and otherMatchDto.stuName3 ne''}">
                                     <th class="text-center">获奖成员3</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName3}</td>
                                     <th class="text-center">成员3学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber3}</td>
+                                    </c:if>
+                                    <c:if test="${!empty otherMatchDto.stuName4 and otherMatchDto.stuName4 ne''}">
                                     <th class="text-center">获奖成员4</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName4}</td>
                                     <th class="text-center">成员4学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber4}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第四行-->
                                 <tr>
+                                    <c:if test="${!empty otherMatchDto.stuName5 and otherMatchDto.stuName5 ne''}">
                                     <th class="text-center">获奖成员5</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName5}</td>
                                     <th class="text-center">成员5学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber5}</td>
+                                    </c:if>
+                                    <c:if test="${!empty otherMatchDto.stuName6 and otherMatchDto.stuName6 ne''}">
                                     <th class="text-center">获奖成员6</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName6}</td>
                                     <th class="text-center">成员6学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber6}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第五行-->
                                 <tr>
+                                    <c:if test="${!empty otherMatchDto.stuName7 and otherMatchDto.stuName7 ne''}">
                                     <th class="text-center">获奖成员7</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName7}</td>
                                     <th class="text-center">成员7学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber7}</td>
+                                    </c:if>
+                                    <c:if test="${!empty otherMatchDto.stuName8 and otherMatchDto.stuName8 ne''}">
                                     <th class="text-center">获奖成员8</th>
-                                    <td >刘旺</td>
+                                    <td >${otherMatchDto.stuName8}</td>
                                     <th class="text-center">成员8学号</th>
-                                    <td >2015011969</td>
+                                    <td >${otherMatchDto.stuNumber8}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第六行-->
                                 <tr>
                                     <th class="text-center">获奖等级</th>
-                                    <td >二等奖(银奖)</td>
+                                    <td >${otherMatchDto.prizeLevel}</td>
                                     <th class="text-center">获奖时间</th>
-                                    <td >2018-01-17</td>
+                                    <td >${otherMatchDto.prizeTimeStr}</td>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
-                                    <th class="text-center">项目内容</th>
-                                    <td ><p class="detail_p">项目内容项目内容项目内容项目内容项目内容项目内容项目内容</p></td>
-
+                                    <td >${otherMatchDto.teacherName}</td>
                                 </tr>
                                 <!--第七行-->
                                 <tr>

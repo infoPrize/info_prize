@@ -189,10 +189,7 @@ public class ACMController {
                                                @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                                @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                                @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                               @RequestParam(value = "message", required = false, defaultValue = "") String message,
-                                               HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-
+                                               @RequestParam(value = "message", required = false, defaultValue = "") String message) {
         JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
@@ -233,6 +230,7 @@ public class ACMController {
     @RequestMapping(value = "falseDeleteById/{id}")
     @ResponseBody
     public Integer falseDeleteById(@PathVariable("id") Integer id) {
+
         Integer code = null;
         code = acmService.falseDeleteById(id);
         return code;

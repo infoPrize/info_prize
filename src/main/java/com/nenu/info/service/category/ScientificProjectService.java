@@ -24,16 +24,10 @@ public interface ScientificProjectService {
     public Integer countByCondition(Map<String, Object> params);
 
     /**
-     * 将传递的参数加工为去数据库中查询的参数(与分页有关)
+     * 将传递的参数加工为去数据库中查询的参数
      */
     public Map<String, Object> getParams(String projectName, Integer projectType, String setYear,
                                          Integer majorCode, String teacherName, String stuName, String stuNumber);
-
-    /**
-     * 将传递的参数加工为去数据库中查询的参数(与分页无关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage);
-
 
     /**
      * 根据条件查询国创科研列表

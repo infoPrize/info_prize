@@ -26,77 +26,86 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">期刊级别</th>
-                                    <td >D类</td>
+                                    <td >${thesisDto.journalLevel}</td>
                                     <th class="text-center">发表刊物</th>
-                                    <td >英语考试</td>
+                                    <td >${thesisDto.journalName}</td>
                                     <th class="text-center">论文题目</th>
-                                    <td >CET62</td>
+                                    <td >${thesisDto.thesisTitle}</td>
                                     <th class="text-center">发表时间</th>
-                                    <td >2017-12-06</td>
+                                    <td >${thesisDto.publishTimeStr}</td>
                                 </tr>
                                 <!--第二行-->
+                                <c:if test="${!empty thesisDto.authorName1 and thesisDto.authorName1 ne ''}">
                                 <tr>
                                     <th class="text-center">作者姓名</th>
-                                    <td >刘旺1</td>
+                                    <td >${thesisDto.authorName1}</td>
                                     <th class="text-center">作者排名</th>
-                                    <td >第一作者</td>
+                                    <td >第${thesisDto.authorLevel1}作者</td>
                                     <th class="text-center">作者学号</th>
-                                    <td >2015011969</td>
+                                    <td >${thesisDto.authorStuNumber1}</td>
                                     <th class="text-center">作者专业</th>
-                                    <td>软件工程</td>
+                                    <td>${thesisDto.authorMajor1}</td>
                                 </tr>
+                                </c:if>
                                 <!--第三行-->
+                                <c:if test="${!empty thesisDto.authorName2 and thesisDto.authorName2 ne ''}">
                                 <tr>
                                     <th class="text-center">作者姓名</th>
-                                    <td >刘旺2</td>
+                                    <td >${thesisDto.authorName2}</td>
                                     <th class="text-center">作者排名</th>
-                                    <td >第二作者</td>
+                                    <td >第${thesisDto.authorLevel2}作者</td>
                                     <th class="text-center">作者学号</th>
-                                    <td >2015011969</td>
+                                    <td >${thesisDto.authorStuNumber2}</td>
                                     <th class="text-center">作者专业</th>
-                                    <td>软件工程</td>
+                                    <td>${thesisDto.authorMajor2}</td>
                                 </tr>
+                                </c:if>
                                 <!--第四行-->
+                                <c:if test="${!empty thesisDto.authorName3 and thesisDto.authorName3 ne ''}">
                                 <tr>
                                     <th class="text-center">作者姓名</th>
-                                    <td >刘旺3</td>
+                                    <td >${thesisDto.authorName3}</td>
                                     <th class="text-center">作者排名</th>
-                                    <td >第三作者</td>
+                                    <td >第${thesisDto.authorLevel3}作者</td>
                                     <th class="text-center">作者学号</th>
-                                    <td >2015011969</td>
+                                    <td >${thesisDto.authorStuNumber3}</td>
                                     <th class="text-center">作者专业</th>
-                                    <td>软件工程</td>
+                                    <td>${thesisDto.authorMajor3}</td>
                                 </tr>
+                                </c:if>
                                 <!--第五行-->
+                                <c:if test="${!empty thesisDto.authorName4 and thesisDto.authorName4 ne ''}">
                                 <tr>
                                     <th class="text-center">作者姓名</th>
-                                    <td >刘旺4</td>
+                                    <td >${thesisDto.authorName4}</td>
                                     <th class="text-center">作者排名</th>
-                                    <td >第四作者</td>
+                                    <td >第${thesisDto.authorLevel4}作者</td>
                                     <th class="text-center">作者学号</th>
-                                    <td >2015011969</td>
+                                    <td >${thesisDto.authorStuNumber4}</td>
                                     <th class="text-center">作者专业</th>
-                                    <td>软件工程</td>
+                                    <td>${thesisDto.authorMajor4}</td>
                                 </tr>
+                                </c:if>
                                 <!--第六行-->
+                                <c:if test="${!empty thesisDto.authorName5 and thesisDto.authorName5 ne ''}">
                                 <tr>
                                     <th class="text-center">作者姓名</th>
-                                    <td >刘旺5</td>
+                                    <td >${thesisDto.authorName5}</td>
                                     <th class="text-center">作者排名</th>
-                                    <td >第五作者</td>
+                                    <td >第${thesisDto.authorLevel5}作者</td>
                                     <th class="text-center">作者学号</th>
-                                    <td >2015011969</td>
+                                    <td >${thesisDto.authorStuNumber5}</td>
                                     <th class="text-center">作者专业</th>
-                                    <td>软件工程</td>
+                                    <td>${thesisDto.authorMajor5}</td>
                                 </tr>
+                                </c:if>
                                 <!--第七行-->
                                 <tr>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
+                                    <td >${thesisDto.teacherName}</td>
                                     <th class="text-center">论文摘要</th>
-                                    <td colspan="5"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容
+                                    <td colspan="5"><p class="detail_p">
+                                        ${thesisDto.thesisAbstract}
                                     </p></td>
                                 </tr>
                                 <!--第八行-->

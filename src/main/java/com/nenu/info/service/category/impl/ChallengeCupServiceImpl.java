@@ -18,6 +18,7 @@ import com.nenu.info.service.common.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -78,26 +79,6 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
     }
 
     @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int pageSize = WebConstants.pageSize;
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("pageSize", pageSize);
-        params.put("startNum", startNum);
-        params.put("totalPage", totalPage);
-
-        return params;
-    }
-
-    @Override
     public Integer countByCondition(Map<String, Object> params) throws Exception {
         Integer count = null;
         count = challengeCupDao.countByCondition(params);
@@ -111,6 +92,17 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
 
         challengeCupDtoList = challengeCupDao.listByCondition(params);
 
+        //对日期进行处理
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(challengeCupDtoList != null) {
+            for (ChallengeCupDto challengeCupDto : challengeCupDtoList) {
+                Date prizeTime = challengeCupDto.getPrizeTime();
+                String prizeTimeStr = sdf.format(prizeTime);
+                challengeCupDto.setPrizeTimeStr(prizeTimeStr);
+            }
+        }
+
+
         return challengeCupDtoList;
 
     }
@@ -119,6 +111,15 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
     public ChallengeCupDto selectById(Integer id) throws Exception {
         ChallengeCupDto challengeCupDto = null;
         challengeCupDto = challengeCupDao.selectById(id);
+
+        //对时间进行处理
+        if(challengeCupDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date prizeTime = challengeCupDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+            challengeCupDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         return challengeCupDto;
     }
 

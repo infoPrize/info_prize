@@ -22,8 +22,6 @@ public interface PatentService {
     public Map<String, Object> getParams(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode,
                                          String grade, String stuNumber, String stuName, String teacherName) throws Exception;
 
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
-
     public Integer countByCondition(Map<String, Object> params) throws Exception;
 
     /**

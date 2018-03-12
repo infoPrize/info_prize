@@ -20,16 +20,11 @@ public interface ChallengeCupService {
     public void add(ChallengeCup challengeCup) throws Exception;
 
     /**
-     * 将传过来的参数加工为去数据库中查询的条件(与分页无关)
+     * 将传过来的参数加工为去数据库中查询的条件
      */
     public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime,
                                          Date endTime, String teamName, String stuName, Integer majorCode, String projectName,
                                          String hostUnit, String teacherName) throws Exception;
-
-    /**
-     * 将传过来的参数加工为去数据库中查询的条件(与分页有关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
 
     /**
      * 根据条件查询相应获奖信息的数量

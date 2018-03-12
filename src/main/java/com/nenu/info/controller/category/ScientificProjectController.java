@@ -10,6 +10,7 @@ import com.nenu.info.service.category.ScientificProjectService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,14 @@ public class ScientificProjectController {
     @RequestMapping(value = "toAdd")
     public String toAdd() {
         return "scientific_project/scientific_project_add";
+    }
+
+    /**
+     * 去往国创科研列表页
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "scientific_project/scientific_project";
     }
 
     /**
@@ -182,70 +191,25 @@ public class ScientificProjectController {
      * @param stuNumber   学生学号
      * @return
      */
-    @RequestMapping(value = "listByConditions/{curPage}")
-    public String listScientificProjectByConditions(@PathVariable("curPage") int curPage,
-                                                    @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
-                                                    @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
-                                                    @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
-                                                    @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                                    @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                                    @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                                    @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                                                    @RequestParam(value = "message", required = false, defaultValue = "") String message,
-                                                    Model model,
-                                                    HttpServletRequest request) {
+    @RequestMapping(value = "listByCondition")
+    @ResponseBody
+    public JSONObject listScientificProjectByCondition(@RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                                       @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
+                                                       @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
+                                                       @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                                       @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                                       @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber) {
+        JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
-        int count = scientificProjectService.countByCondition(params);
-        int pageSize = WebConstants.pageSize;
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = scientificProjectService.getParams(params, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("scientificProjectParams", params);
-
-//        JSONArray jsonArray = new JSONArray();
         List<ScientificProjectDto> scientificProjectDtoList = null;
         scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
 
-        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-        model.addAttribute("message", message);
+        jsonObject.put("scientificProjectDtoList", scientificProjectDtoList);
 
-//        if (scientificProjectDtoList != null) {
-//            for (ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.put("projectType", scientificProjectDto.getProjectType());
-//                jsonObject.put("projectName", scientificProjectDto.getProjectName());
-//                jsonObject.put("setYear", scientificProjectDto.getSetYear());
-//
-//                jsonObject.put("projectManName", scientificProjectDto.getProjectManName());
-//                jsonObject.put("projectManSex", scientificProjectDto.getProjectManSex());
-//                jsonObject.put("projectManStuNumber", scientificProjectDto.getProjectManStuNumber());
-//                jsonObject.put("projectManPhone", scientificProjectDto.getProjectManMajor());
-//                jsonObject.put("projectManMajor", scientificProjectDto.getProjectManMajor());
-//                jsonObject.put("projectMemberName1", scientificProjectDto.getProjectMemberName1());
-//                jsonObject.put("projectMemberStuNumber1", scientificProjectDto.getProjectMemberStuNumber1());
-//                jsonObject.put("projectMemberName2", scientificProjectDto.getProjectMemberName2());
-//                jsonObject.put("projectMemberStuNumber2", scientificProjectDto.getProjectMemberStuNumber2());
-//                jsonObject.put("projectMemberName3", scientificProjectDto.getProjectMemberName3());
-//                jsonObject.put("projectMemberStuNumber3", scientificProjectDto.getProjectMemberStuNumber3());
-//                jsonObject.put("projectMemberName4", scientificProjectDto.getProjectMemberName4());
-//                jsonObject.put("projectMemberStuNumber4", scientificProjectDto.getProjectMemberStuNumber4());
-//                jsonObject.put("teacherName", scientificProjectDto.getTeacherName());
-//                jsonObject.put("fundsLimit", scientificProjectDto.getFundsLimit());
-//                jsonObject.put("projectIntroduce", scientificProjectDto.getProjectIntroduce());
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        }
-//        return jsonArray;
-
-
-        return "scientific_project/scientific_project";
+        return jsonObject;
     }
 
     @RequestMapping(value = "toDetail/{materialId}")
@@ -256,66 +220,10 @@ public class ScientificProjectController {
         scientificProjectDto = scientificProjectService.selectById(materialId);
         materialList = materialService.listByTypeAndId(materialId,3);
 
-        model.addAttribute("scientificProject", scientificProjectDto);
+        model.addAttribute("scientificProjectDto", scientificProjectDto);
         model.addAttribute("list", materialList);
 
         return "scientific_project/detail";
-    }
-
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("scientificProjectParams");
-
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage -= 1;
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-        params.put("curPage", curPage);
-
-        List<ScientificProjectDto> scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
-
-        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-
-        return "scientific_project/scientific_project";
-    }
-
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("scientificProjectParams");
-
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage += 1;
-
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-        params.put("curPage", curPage);
-
-        List<ScientificProjectDto> scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
-
-        model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-
-
-        return "scientific_project/scientific_project";
     }
 
     @RequestMapping(value = "falseDeleteById/{id}")

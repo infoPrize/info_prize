@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "")
 public class PathController {
 
-
-
     @RequestMapping(value = "index")
     public String toIndex() {
         return "index";
@@ -26,38 +24,6 @@ public class PathController {
     @RequestMapping(value = "home")
     public String toHome() {
         return "home";
-    }
-
-    @RequestMapping(value = "paper")
-    public String toPaper() {
-        return "thesis/thesis";
-    }
-
-    @RequestMapping(value = "patent")
-    public String toPatent() {
-        return "patent/patent";
-    }
-
-
-
-    @RequestMapping(value = "ACM")
-    public String toACM() {
-        return "ACM/ACM";
-    }
-
-    @RequestMapping(value = "mathModel")
-    public String toMath() {
-        return "math_model/math_model";
-    }
-
-    @RequestMapping(value = "competition")
-    public String toCompetition() {
-        return "competition";
-    }
-
-    @RequestMapping(value = "other")
-    public String toOther() {
-        return "other";
     }
 
     @RequestMapping(value = "manage")

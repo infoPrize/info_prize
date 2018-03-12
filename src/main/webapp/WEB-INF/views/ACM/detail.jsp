@@ -26,57 +26,56 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">比赛类别</th>
-                                    <td >国家级</td>
+                                    <td >${acmPrizeDto.matchLevel}</td>
                                     <th class="text-center">比赛名称</th>
-                                    <td >ACM东北赛</td>
+                                    <td >${acmPrizeDto.matchName}</td>
                                     <th class="text-center">主办单位</th>
-                                    <td >吉林省教育厅</td>
+                                    <td >${acmPrizeDto.hostUnit}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
                                     <th class="text-center">获奖时间</th>
-                                    <td >2017-12-03</td>
+                                    <td >${acmPrizeDto.prizeTimeStr}</td>
                                     <th class="text-center">获奖等级	</th>
-                                    <td >一等奖(金奖)	</td>
+                                    <td >${acmPrizeDto.prizeLevel}</td>
                                     <th class="text-center">团队名称</th>
-                                    <td >嘿嘿</td>
+                                    <td >${acmPrizeDto.teamName}</td>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
                                     <th class="text-center">参赛成员1</th>
-                                    <td >刘旺</td>
+                                    <td >${acmPrizeDto.teammateName1}</td>
                                     <th class="text-center">成员1学号</th>
-                                    <td >2015011969</td>
+                                    <td >${acmPrizeDto.teammateStuNumber1}</td>
                                     <th class="text-center">成员1专业</th>
-                                    <td >软件工程</td>
+                                    <td >${acmPrizeDto.teammateMajor1}</td>
                                 </tr>
                                 <!--第四行-->
+                                <c:if test="${!empty acmPrizeDto.teammateName2 and acmPrizeDto.teammateName2 ne ''}">
                                 <tr>
                                     <th class="text-center">参赛成员2</th>
-                                    <td >刘旺</td>
+                                    <td >${acmPrizeDto.teammateName2}</td>
                                     <th class="text-center">成员2学号</th>
-                                    <td >2015011969</td>
+                                    <td >${acmPrizeDto.teammateStuNumber2}</td>
                                     <th class="text-center">成员2专业</th>
-                                    <td >软件工程</td>
+                                    <td >${acmPrizeDto.teammateMajor2}</td>
                                 </tr>
+                                </c:if>
                                 <!--第五行-->
+                                <c:if test="${!empty acmPrizeDto.teammateName3 and acmPrizeDto.teammateName3 ne ''}">
                                 <tr>
                                     <th class="text-center">参赛成员3</th>
-                                    <td >刘旺</td>
+                                    <td >${acmPrizeDto.teammateName3}</td>
                                     <th class="text-center">成员3学号</th>
-                                    <td >2015011969</td>
+                                    <td >${acmPrizeDto.teammateStuNumber3}</td>
                                     <th class="text-center">成员3专业</th>
-                                    <td >软件工程</td>
+                                    <td >${acmPrizeDto.teammateMajor3}</td>
                                 </tr>
+                                </c:if>
                                 <!--第六行-->
                                 <tr>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
-                                    <th class="text-center">比赛内容</th>
-                                    <td colspan="3"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容
-                                    </p></td>
+                                    <td >${acmPrizeDto.teacherName}</td>
                                 </tr>
                                 <!--第五行-->
                                 <tr>

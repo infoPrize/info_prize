@@ -20,15 +20,10 @@ public interface ThesisService {
     public void add(Thesis thesis) throws Exception;
 
     /**
-     * 将传递过来的参数加工为去数据库传递的参数(与分页无关)
+     * 将传递过来的参数加工为去数据库传递的参数
      */
     public Map<String, Object> getParams(Integer journalLevel, String journalName, String authorName, String authorStuNumber,
                                          Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception;
-
-    /**
-     * 将传递过来的参数加工为去数据库传递的参数(与分页有关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
 
     /**
      * 根据条件查询论文信息的数量

@@ -53,7 +53,6 @@ public class PatentServiceImpl implements PatentService {
         if((stuName != null && !stuName.equals("")) || (stuNumber != null && !stuNumber.equals("")) || ( majorCode != null && majorCode > 0) || (grade != null && !grade.equals(""))) {
             Map<String, Object> stuParams = null;
             stuParams = studentService.getParams(stuName, -1, stuNumber, grade, majorCode, "");
-            stuParams = studentService.getParams(stuParams, -500, 0);
             studentList = studentDao.queryByCondition(stuParams);
             if(studentList == null) {
                 return null;
@@ -80,24 +79,6 @@ public class PatentServiceImpl implements PatentService {
         params.put("patentName", patentName);
         params.put("beginTime", beginTime);
         params.put("endTime", endTime);
-
-        return params;
-    }
-
-    @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-        params.put("startNum", startNum);
-        params.put("pageSize", pageSize);
 
         return params;
     }
@@ -138,6 +119,14 @@ public class PatentServiceImpl implements PatentService {
     public PatentDto selectById(Integer id) throws Exception {
         PatentDto patentDto = null;
         patentDto = patentDao.selectById(id);
+
+        //对日期进行处理
+        if(patentDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date applyTime = patentDto.getApplyTime();
+            String applyTimeStr = sdf.format(applyTime);
+            patentDto.setApplyTimeStr(applyTimeStr);
+        }
         return patentDto;
     }
 

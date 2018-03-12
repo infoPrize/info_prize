@@ -70,9 +70,6 @@
         <where>
             <include refid="queryCondition" />
         </where>
-        <if test="curPage != -500">
-            LIMIT #{startNum}, #{pageSize}
-        </if>
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.PatentDto">
@@ -96,7 +93,8 @@
             (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierName5,
             (SELECT tmc.`major_name` FROM `t_student` ts, `t_major_code` tmc WHERE tp.`owner_id_5` = ts.`id` AND ts.`major_code` = tmc.`major_code`) AS applierMajor5,
             (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tp.`owner_id_5`) AS applierStuNumber5,
-            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tp.`teacher_id`) AS teacherName
+            (SELECT tt.`teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tp.`teacher_id`) AS teacherName,
+        tp.`patent_introduce` AS introduce
         FROM `t_patent` tp
         WHERE tp.`id` = #{id}
     </select>

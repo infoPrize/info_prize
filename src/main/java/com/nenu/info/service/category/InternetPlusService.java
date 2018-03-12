@@ -21,16 +21,11 @@ public interface InternetPlusService {
     public void add(InternetPlus internetPlus) throws Exception;
 
     /**
-     * 将传递来的参数加工为去数据库搜索的参数(与分页无关)
+     * 将传递来的参数加工为去数据库搜索的参数
      */
     public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime,
                                          Date endTime, String teamName, String stuName, Integer majorCode, String projectName,
                                          String hostUnit, String teacherName) throws Exception;
-
-    /**
-     * 将传递来的参数加工为去数据库搜索的参数(与分页有关)
-     */
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception;
 
     /**
      * 根据条件查询获奖信息的数量

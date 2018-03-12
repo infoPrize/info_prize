@@ -55,7 +55,7 @@ public class ExportController {
     private PatentService patentService;
 
     @RequestMapping(value = "acm",method = RequestMethod.GET)
-    public String exportACM( @RequestParam(value = "page", required = false, defaultValue = "-500") Integer curPage,
+    public String exportACM(// @RequestParam(value = "page", required = false, defaultValue = "-500") Integer curPage,
                           @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                           @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                           @RequestParam(value = "beginTime", required = false) Date beginTime,
@@ -73,29 +73,7 @@ public class ExportController {
 
             Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
 
-//            Integer count = acmService.countByCondition(params);
-//
-//            Integer pageSize = WebConstants.pageSize;
-//
-//            Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-//
-//            params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-//
-//            HttpSession session = request.getSession();
-//            session.setAttribute("ACMParams", params);
-//            session.setAttribute("ACMTotalPage", totalPage);
-
             List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
-
-//            if(acmPrizeDtoList != null) {
-//                //对日期进行处理
-//                for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-//                    Date dateStr = acmPrizeDto.getPrizeTime();
-//                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                    String prizeTimeStr = sdf.format(dateStr);
-//                    acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
-//                }
-//            }
 
             String filename = "acm.xls";//设置下载时Excel的名称
 
@@ -104,8 +82,6 @@ public class ExportController {
             ExcelUtil.writeExcel(acmPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
             model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
-//            model.addAttribute("totalPage", totalPage);
-//            model.addAttribute("curPage", params.get("curPage"));
             model.addAttribute("message",message);
 
         } catch (Exception e){
@@ -116,7 +92,7 @@ public class ExportController {
 
 
     @RequestMapping(value = "scientificProject")
-    public String ExportScientificProject(@RequestParam(value = "curPage", required = false, defaultValue = "-500") Integer curPage,
+    public String ExportScientificProject(//@RequestParam(value = "curPage", required = false, defaultValue = "-500") Integer curPage,
                                           @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                           @RequestParam(value = "projectType", required = false, defaultValue = "-1") Integer projectType,
                                           @RequestParam(value = "setYear", required = false, defaultValue = "") String setYear,
@@ -129,16 +105,6 @@ public class ExportController {
 
         Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
-        int count = scientificProjectService.countByCondition(params);
-
-        int pageSize = WebConstants.pageSize;
-
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        params = scientificProjectService.getParams(params, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("scientificProjectParams", params);
 
         List<ScientificProjectDto> scientificProjectDtoList = null;
 
@@ -151,8 +117,6 @@ public class ExportController {
         ExcelUtil.writeExcel(scientificProjectDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "scientific_project/scientific_project";
     }
@@ -171,16 +135,6 @@ public class ExportController {
                              Model model, HttpServletRequest request ,HttpServletResponse response){
 
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-//        int count = 0;
-//        count = mathModelPrizeService.countByConditions(params);
-//
-//        int pageSize = WebConstants.pageSize;
-//        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-//
-//        params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit, curPage, totalPage);
-//
-//        HttpSession session = request.getSession();
-//        session.setAttribute("mathModelParams", params);
 
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
 
@@ -192,8 +146,6 @@ public class ExportController {
         ExcelUtil.writeExcel(mathModelPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
-//        model.addAttribute("totalPage", totalPage);
-//        model.addAttribute("curPage", curPage);
         return "math_model/math_model";
 
     }
@@ -216,7 +168,6 @@ public class ExportController {
                                      HttpServletRequest request , HttpServletResponse response){
 
         List<ChallengeCupDto> challengeCupDtoList = null;
-//        JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = null;
         try {
@@ -226,39 +177,10 @@ public class ExportController {
             e.printStackTrace();
         }
 
-        int count = 0;
-
-        try {
-            count = challengeCupService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int pageSize = WebConstants.pageSize;
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-
-        try {
-            params = challengeCupService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("challengeCupParams", params);
-
         try {
             challengeCupDtoList = challengeCupService.listByCondition(params);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(challengeCupDtoList != null) {
-            for (ChallengeCupDto challengCupDto : challengeCupDtoList) {
-                Date prizeTime = challengCupDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                challengCupDto.setPrizeTimeStr(prizeTimeStr);
-            }
         }
 
         String filename = "challengeCup.xls";//设置下载时Excel的名称
@@ -268,8 +190,6 @@ public class ExportController {
         ExcelUtil.writeExcel(challengeCupDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("challengeCupDtoList", challengeCupDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
 
         model.addAttribute("message",message);
 
@@ -299,41 +219,12 @@ public class ExportController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        int count = 0;
-        try {
-            count = internetPlusService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-        try {
-            params = internetPlusService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("internetPlusParams", params);
-
         List<InternetPlusDto> internetPlusDtoList = null;
-//        JSONArray jsonArray = new JSONArray();
 
         try {
             internetPlusDtoList = internetPlusService.listByCondition(params);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        //对日期进行处理
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        if(internetPlusDtoList != null) {
-            for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
-                Date prizeTime = internetPlusDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
-                internetPlusDto.setPrizeTimeStr(prizeTimeStr);
-            }
         }
 
         String filename = "internetPlus.xls";//设置下载时Excel的名称
@@ -368,23 +259,6 @@ public class ExportController {
             e.printStackTrace();
         }
 
-        int count = 0;
-        try {
-            count = thesisService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-        try {
-            params = thesisService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("thesisParams", params);
-
         List<ThesisDto> thesisDtoList = null;
         try {
             thesisDtoList = thesisService.listByCondition(params);
@@ -399,8 +273,6 @@ public class ExportController {
         ExcelUtil.writeExcel(thesisDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("thesisDtoList", thesisDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
 
         return "thesis/thesis";
 
@@ -427,24 +299,6 @@ public class ExportController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        int count = 0;
-        try {
-            count = patentService.countByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-        try {
-            params = patentService.getParams(params, curPage, totalPage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        HttpSession session = request.getSession();
-        session.setAttribute("patentParams", params);
-
         List<PatentDto> patentDtoList = null;
 
         try {
@@ -460,8 +314,6 @@ public class ExportController {
         ExcelUtil.writeExcel(patentDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
 
         model.addAttribute("patentDtoList", patentDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
 
         return "patent/patent";
 

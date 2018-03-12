@@ -17,7 +17,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3 class="detail_title">这是国创科研信息中id为${scientificProject.id}的信息详情页</h3>
+                            <h3 class="detail_title">这是国创科研信息中id为${scientificProjectDto.id}的信息详情页</h3>
                             <hr/>
                         </div>
                         <div class="x_content">
@@ -26,57 +26,64 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">项目类别</th>
-                                    <td >一般科研立项</td>
+                                    <td >${scientificProjectDto.projectType}</td>
                                     <th class="text-center">项目名称</th>
-                                    <td colspan="5">AR2</td>
+                                    <td colspan="5">${scientificProjectDto.projectName}</td>
                                     <th class="text-center">立项年份</th>
-                                    <td >2017</td>
+                                    <td >${scientificProjectDto.setYear}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
                                     <th class="text-center">项目负责人</th>
-                                    <td >刘旺</td>
+                                    <td >${scientificProjectDto.projectManName}</td>
                                     <th class="text-center">负责人性别</th>
-                                    <td >女</td>
+                                    <td >${scientificProjectDto.projectManSex}</td>
                                     <th class="text-center">负责人学号</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectManStuNumber}</td>
                                     <th class="text-center">负责人联系方式</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectManPhone}</td>
                                     <th class="text-center">负责人专业</th>
-                                    <td >软件工程</td>
+                                    <td >${scientificProjectDto.projectManMajor}</td>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
+                                    <c:if test="${!empty scientificProjectDto.projectMemberName1 and scientificProjectDto.projectMemberName1 ne ''}">
                                     <th class="text-center">项目组成员1</th>
-                                    <td >刘旺</td>
+                                    <td >${scientificProjectDto.projectMemberName1}</td>
                                     <th class="text-center">组员1学号</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectMemberStuNumber1}</td>
+                                    </c:if>
+                                    <c:if test="${!empty scientificProjectDto.projectMemberName2 and scientificProjectDto.projectMemberName2 ne ''}">
                                     <th class="text-center">项目组成员2</th>
-                                    <td >刘旺</td>
+                                    <td >${scientificProjectDto.projectMemberName2}</td>
                                     <th class="text-center">组员2学号</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectMemberStuNumber2}</td>
+                                    </c:if>
                                     <th class="text-center">指导老师</th>
                                     <td >李勍</td>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
+                                    <c:if test="${!empty scientificProjectDto.projectMemberName3 and scientificProjectDto.projectMemberName3 ne ''}">
                                     <th class="text-center">项目组成员3</th>
-                                    <td >刘旺</td>
+                                    <td >${scientificProjectDto.projectMemberName3}</td>
                                     <th class="text-center">组员3学号</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectMemberStuNumber3}</td>
+                                    </c:if>
+                                    <c:if test="${!empty scientificProjectDto.projectMemberName4 and scientificProjectDto.projectMemberName4 ne ''}">
                                     <th class="text-center">项目组成员4</th>
-                                    <td >刘旺</td>
+                                    <td >${scientificProjectDto.projectMemberName4}</td>
                                     <th class="text-center">组员4学号</th>
-                                    <td >2015011969</td>
+                                    <td >${scientificProjectDto.projectMemberStuNumber4}</td>
+                                    </c:if>
                                     <th class="text-center">批复经费</th>
-                                    <td >5000</td>
+                                    <td >${scientificProjectDto.fundsLimit}</td>
                                 </tr>
                                 <!--第四行-->
                                 <tr>
                                     <th class="text-center">项目简介</th>
-                                    <td colspan="9"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容
+                                    <td colspan="9"><p class="detail_p">
+                                        ${scientificProjectDto.projectIntroduce}
                                     </p></td>
                                 </tr>
                                 <!--第五行-->
@@ -90,18 +97,17 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="8"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/scientificProject/delete/material/${list.id}/${scientificProject.id}">删除</a></td>
+                                        <td><a href="/scientificProject/delete/material/${list.id}/${scientificProjectDto.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/scientificProject/upload/${scientificProject.id}/${scientificProject.projectName}" enctype="multipart/form-data" method="post">
+                            <form action="/scientificProject/upload/${scientificProjectDto.id}/${scientificProjectDto.projectName}" enctype="multipart/form-data" method="post">
                                 <input type="file" name="file">
                                 <input type="submit" value="上传材料" id="upload">
                             </form>
                             <br>
-                            <a href="/scientificProject/down/${scientificProject.projectName}" id="download">下载</a>
-                            ${message}
+                            <a href="/scientificProject/down/${scientificProjectDto.projectName}" id="download">下载</a>
                         </div>
                     </div>
                 </div>

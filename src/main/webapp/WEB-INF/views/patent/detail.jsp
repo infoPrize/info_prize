@@ -26,29 +26,70 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">专利类别</th>
-                                    <td >发明专利</td>
+                                    <td >${patentDto.patentType}</td>
                                     <th class="text-center">专利名称</th>
-                                    <td >机器猫1</td>
+                                    <td >${patentDto.patentName}</td>
                                     <th class="text-center">申请成功时间</th>
-                                    <td >2017-12-12</td>
+                                    <td >${patentDto.applyTimeStr}</td>
                                 </tr>
                                 <!--第二行-->
+                                <c:if test="${!empty patentDto.applierName1 and patentDto.applierName1 ne ''}">
                                 <tr>
                                     <th class="text-center">申请人</th>
-                                    <td >刘旺</td>
+                                    <td >${patentDto.applierName1}</td>
                                     <th class="text-center">申请人专业</th>
-                                    <td >软件工程</td>
+                                    <td >${patentDto.applierMajor1}</td>
                                     <th class="text-center">申请人学号</th>
-                                    <td >2015011969</td>
+                                    <td >${patentDto.applierStuNumber1}</td>
                                 </tr>
+                                </c:if>
                                 <!--第三行-->
+                                <c:if test="${!empty patentDto.applierName2 and patentDto.applierName2 ne ''}">
+                                <tr>
+                                    <th class="text-center">申请人</th>
+                                    <td >${patentDto.applierName2}</td>
+                                    <th class="text-center">申请人专业</th>
+                                    <td >${patentDto.applierMajor2}</td>
+                                    <th class="text-center">申请人学号</th>
+                                    <td >${patentDto.applierStuNumber2}</td>
+                                </tr>
+                                </c:if>
+                                <c:if test="${!empty patentDto.applierName3 and patentDto.applierName3 ne ''}">
+                                <tr>
+                                    <th class="text-center">申请人</th>
+                                    <td >${patentDto.applierName3}</td>
+                                    <th class="text-center">申请人专业</th>
+                                    <td >${patentDto.applierMajor3}</td>
+                                    <th class="text-center">申请人学号</th>
+                                    <td >${patentDto.applierStuNumber3}</td>
+                                </tr>
+                                </c:if>
+                                <c:if test="${!empty patentDto.applierName4 and patentDto.applierName4 ne ''}">
+                                <tr>
+                                    <th class="text-center">申请人</th>
+                                    <td >${patentDto.applierName4}</td>
+                                    <th class="text-center">申请人专业</th>
+                                    <td >${patentDto.applierMajor4}</td>
+                                    <th class="text-center">申请人学号</th>
+                                    <td >${patentDto.applierStuNumber4}</td>
+                                </tr>
+                                </c:if>
+                                <c:if test="${!empty patentDto.applierName5 and patentDto.applierName5 ne ''}">
+                                <tr>
+                                    <th class="text-center">申请人</th>
+                                    <td >${patentDto.applierName5}</td>
+                                    <th class="text-center">申请人专业</th>
+                                    <td >${patentDto.applierMajor5}</td>
+                                    <th class="text-center">申请人学号</th>
+                                    <td >${patentDto.applierStuNumber5}</td>
+                                </tr>
+                                </c:if>
                                 <tr>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
+                                    <td >${patentDto.teacherName}</td>
                                     <th class="text-center">专利内容</th>
-                                    <td colspan="3"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容
+                                    <td colspan="3"><p class="detail_p">
+                                        ${patentDto.introduce}
                                     </p></td>
                                 </tr>
                                 <!--第四行-->

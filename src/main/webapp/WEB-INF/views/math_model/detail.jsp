@@ -25,58 +25,57 @@
                                 <tbody>
                                 <!--第一行-->
                                 <tr>
-                                    <th class="text-center">比赛类别</th>
-                                    <td >国家级</td>
+                                    <th class="text-center">比赛等级</th>
+                                    <td >${mathModelPrizeDto.matchLevel}</td>
                                     <th class="text-center">比赛名称</th>
-                                    <td >数学建模省赛1	</td>
+                                    <td >${mathModelPrizeDto.matchName}</td>
                                     <th class="text-center">主办单位</th>
-                                    <td >国家鸟巢体育馆</td>
+                                    <td >${mathModelPrizeDto.hostUnit}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
                                     <th class="text-center">获奖时间</th>
-                                    <td >2017-12-03</td>
+                                    <td >${mathModelPrizeDto.prizeTimeStr}</td>
                                     <th class="text-center">获奖等级	</th>
-                                    <td >一等奖(金奖)	</td>
+                                    <td >${mathModelPrizeDto.prizeLevel}</td>
                                     <th class="text-center">团队名称</th>
-                                    <td >数学建模好</td>
+                                    <td >${mathModelPrizeDto.teamName}</td>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
                                     <th class="text-center">参赛成员1</th>
-                                    <td >刘旺</td>
+                                    <td >${mathModelPrizeDto.teammateName1}</td>
                                     <th class="text-center">成员1学号</th>
-                                    <td >2015011969</td>
+                                    <td >${mathModelPrizeDto.teammateStuNumber1}</td>
                                     <th class="text-center">成员1专业</th>
-                                    <td >软件工程</td>
+                                    <td >${mathModelPrizeDto.teammateMajor1}</td>
                                 </tr>
+                                <c:if test="${!empty mathModelPrizeDto.teammateName2 and mathModelPrizeDto.teammateName2 ne ''}">
                                 <!--第四行-->
                                 <tr>
                                     <th class="text-center">参赛成员2</th>
-                                    <td >刘旺</td>
+                                    <td >${mathModelPrizeDto.teammateName2}</td>
                                     <th class="text-center">成员2学号</th>
-                                    <td >2015011969</td>
+                                    <td >${mathModelPrizeDto.teammateStuNumber2}</td>
                                     <th class="text-center">成员2专业</th>
-                                    <td >软件工程</td>
+                                    <td >${mathModelPrizeDto.teammateMajor2}</td>
                                 </tr>
+                                </c:if>
+                                <c:if test="${!empty mathModelPrizeDto.teammateName3 and mathModelPrizeDto.teammateName3 ne ''}">
                                 <!--第五行-->
                                 <tr>
                                     <th class="text-center">参赛成员3</th>
-                                    <td >刘旺</td>
+                                    <td >${mathModelPrizeDto.teammateName3}</td>
                                     <th class="text-center">成员3学号</th>
-                                    <td >2015011969</td>
+                                    <td >${mathModelPrizeDto.teammateStuNumber3}</td>
                                     <th class="text-center">成员3专业</th>
-                                    <td >软件工程</td>
+                                    <td >${mathModelPrizeDto.teammateMajor3}</td>
                                 </tr>
+                                </c:if>
                                 <!--第六行-->
                                 <tr>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
-                                    <th class="text-center">论文摘要</th>
-                                    <td colspan="3"><p class="detail_p">文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容
-                                        文章内容文章内容文章内容文章内容文章内容
-                                    </p></td>
+                                    <td >${mathModelPrizeDto.teacherName}</td>
                                 </tr>
                                 <!--第五行-->
                                 <tr>

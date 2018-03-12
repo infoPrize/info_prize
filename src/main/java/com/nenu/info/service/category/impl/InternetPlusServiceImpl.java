@@ -77,24 +77,6 @@ public class InternetPlusServiceImpl implements InternetPlusService {
     }
 
     @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) throws Exception {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        int startNum = (curPage - 1) * pageSize;
-
-        params.put("curPage", curPage);
-        params.put("startNum", startNum);
-        params.put("totalPage", totalPage);
-        params.put("pageSize", pageSize);
-
-        return params;
-    }
-
-    @Override
     public Integer countByCondition(Map<String, Object> params) throws Exception {
         Integer count = null;
         count = internetPlusDao.countByCondition(params);
@@ -123,6 +105,13 @@ public class InternetPlusServiceImpl implements InternetPlusService {
     public InternetPlusDto selectById(Integer id) throws Exception {
         InternetPlusDto internetPlusDto = null;
         internetPlusDto = internetPlusDao.selectById(id);
+
+        if(internetPlusDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date prizeTime = internetPlusDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+            internetPlusDto.setPrizeTimeStr(prizeTimeStr);
+        }
         return internetPlusDto;
     }
 

@@ -41,9 +41,20 @@ public class OtherMatchController {
     @Autowired
     private OtherMatchService otherMatchService;
 
+    /**
+     * 去往其他比赛添加页面
+     */
     @RequestMapping(value = "toAdd")
     public String toAdd() {
         return "other_match/other_match_add";
+    }
+
+    /**
+     * 去往其他比赛列表页
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "other_match/other_match";
     }
 
     /**
@@ -217,10 +228,8 @@ public class OtherMatchController {
                                       @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
                                       @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                       @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                      HttpServletResponse response) {
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = null;

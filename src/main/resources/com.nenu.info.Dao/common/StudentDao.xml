@@ -58,9 +58,6 @@
             <include refid="condition" />
         </where>
         ORDER BY `id` DESC
-        <if test="curPage != -500">
-        LIMIT #{startNum}, #{pageSize}
-        </if>
     </select>
 
     <select id="countByCondition" resultType="Integer">

@@ -149,6 +149,13 @@ public class ACMServiceImpl implements ACMService {
             e.printStackTrace();
         }
 
+        if(acmPrizeDto != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date prizeTime = acmPrizeDto.getPrizeTime();
+            String prizeTimeStr = sdf.format(prizeTime);
+            acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+        }
+
         return acmPrizeDto;
     }
 

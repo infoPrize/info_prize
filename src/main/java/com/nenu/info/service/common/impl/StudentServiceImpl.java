@@ -63,23 +63,6 @@ public class StudentServiceImpl implements StudentService {
         return params;
     }
 
-    @Override
-    public Map<String, Object> getParams(Map<String, Object> params, Integer curPage, Integer totalPage) {
-        if(curPage <= 0 && curPage != -500) {
-            curPage = 1;
-        } else if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        Integer startNum = (curPage - 1) * pageSize;
-        params.put("curPage", curPage);
-        params.put("totalPage", totalPage);
-        params.put("startNum", startNum);
-        params.put("pageSize", pageSize);
-
-        return params;
-    }
-
     public List<StudentDto> queryByCondition(Map<String, Object> params) throws Exception{
 
         List<Student> studentList = studentDao.queryByCondition(params);

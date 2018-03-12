@@ -28,13 +28,13 @@ public class LoginController {
     }
 
     /**
-     * 验证登录(暂时写死，用户名admin，密码liqing123)
+     * 验证登录(暂时写死，用户名admin，密码xinke123)
      */
     @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
     public String checkLogin(@RequestParam(value = "username", required = false, defaultValue = "") String username,
                              @RequestParam(value = "password", required = false, defaultValue = "") String password,
                              HttpServletRequest request) {
-        if(username.equals("admin") && password.equals("liqing123")) {
+        if(username.equals("admin") && password.equals("xinke123")) {
             HttpSession session = request.getSession();
             session.setAttribute("username", "admin");
             return "index";

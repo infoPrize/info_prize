@@ -26,68 +26,84 @@
                                 <!--第一行-->
                                 <tr>
                                     <th class="text-center">比赛级别</th>
-                                    <td >多省级</td>
+                                    <td >${internetPlusDto.matchLevel}</td>
                                     <th class="text-center">比赛名称</th>
-                                    <td >第十五届互联网+1</td>
+                                    <td >${internetPlusDto.matchName}</td>
                                     <th class="text-center">项目名称</th>
                                     <td >${internetPlusDto.projectName}</td>
                                     <th class="text-center">团队名称</th>
-                                    <td >HelloWorld</td>
+                                    <td >${internetPlusDto.teamName}</td>
                                 </tr>
                                 <!--第二行-->
                                 <tr>
+                                    <c:if test="${!empty internetPlusDto.stuName1 and internetPlusDto.stuName1 ne ''}">
                                     <th class="text-center">参赛成员1</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName1}</td>
                                     <th class="text-center">成员1学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber1}</td>
+                                    </c:if>
+                                    <c:if test="${!empty internetPlusDto.stuName2 and internetPlusDto.stuName2 ne ''}">
                                     <th class="text-center">参赛成员2</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName2}</td>
                                     <th class="text-center">成员2学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber2}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第三行-->
                                 <tr>
+                                    <c:if test="${!empty internetPlusDto.stuName3 and internetPlusDto.stuName3 ne ''}">
                                     <th class="text-center">参赛成员3</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName3}</td>
                                     <th class="text-center">成员3学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber3}</td>
+                                    </c:if>
+                                    <c:if test="${!empty internetPlusDto.stuName4 and internetPlusDto.stuName4 ne ''}">
                                     <th class="text-center">参赛成员4</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName4}</td>
                                     <th class="text-center">成员4学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber4}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第四行-->
                                 <tr>
+                                    <c:if test="${!empty internetPlusDto.stuName5 and internetPlusDto.stuName5 ne ''}">
                                     <th class="text-center">参赛成员5</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName5}</td>
                                     <th class="text-center">成员5学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber5}</td>
+                                    </c:if>
+                                    <c:if test="${!empty internetPlusDto.stuName6 and internetPlusDto.stuName6 ne ''}">
                                     <th class="text-center">参赛成员6</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName6}</td>
                                     <th class="text-center">成员6学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber6}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第五行-->
                                 <tr>
+                                    <c:if test="${!empty internetPlusDto.stuName7 and internetPlusDto.stuName7 ne ''}">
                                     <th class="text-center">参赛成员7</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName7}</td>
                                     <th class="text-center">成员7学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber7}</td>
+                                    </c:if>
+                                    <c:if test="${!empty internetPlusDto.stuName8 and internetPlusDto.stuName8 ne ''}">
                                     <th class="text-center">参赛成员8</th>
-                                    <td >刘旺</td>
+                                    <td >${internetPlusDto.stuName8}</td>
                                     <th class="text-center">成员8学号</th>
-                                    <td >2015011969</td>
+                                    <td >${internetPlusDto.stuNumber8}</td>
+                                    </c:if>
                                 </tr>
                                 <!--第六行-->
                                 <tr>
                                     <th class="text-center">获奖等级</th>
-                                    <td >二等奖(银奖)</td>
+                                    <td >${internetPlusDto.prizeLevel}</td>
                                     <th class="text-center">比赛时间</th>
-                                    <td >2018-01-17</td>
+                                    <td >${internetPlusDto.prizeTimeStr}</td>
                                     <th class="text-center">主办单位</th>
-                                    <td >黑龙江省教育厅</td>
+                                    <td >${internetPlusDto.hostUnit}</td>
                                     <th class="text-center">指导老师</th>
-                                    <td >李勍</td>
+                                    <td >${internetPlusDto.teacherName}</td>
                                 </tr>
                                 <!--第七行-->
                                 <tr>

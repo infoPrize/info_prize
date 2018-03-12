@@ -61,6 +61,14 @@ public class MathModelPrizeController {
     }
 
     /**
+     * 去往数学建模列表页
+     */
+    @RequestMapping(value = "toList")
+    public String toList() {
+        return "math_model/math_model";
+    }
+
+    /**
      * 添加数学建模获奖信息
      * @param matchLevel 比赛等级
      * @param matchName 比赛名
@@ -167,10 +175,7 @@ public class MathModelPrizeController {
                                       @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
                                       @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                      HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-
+                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
         JSONObject jsonObject = new JSONObject();
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);

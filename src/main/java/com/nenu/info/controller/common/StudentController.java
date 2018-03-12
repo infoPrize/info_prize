@@ -3,15 +3,14 @@ package com.nenu.info.controller.common;
 import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.service.common.StudentService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,22 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+
+    /**
+     * 去往学生添加页面
+     */
+    @RequestMapping(value = "toAdd")
+    public String toAdd() {
+        return "student/add";
+    }
+
+    /**
+     * 去往学生列表页
+     */
+    @RequestMapping(value = "toList")
+    public String  toList() {
+        return "student/list";
+    }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     public String add(@RequestParam("name") String name,
@@ -52,111 +67,28 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/student/list";
+        return "redirect:/student/query/by/condition";
     }
 
-    //查询所有学生
-//    @RequestMapping(value = "list/{curPage}",method = RequestMethod.GET)
-//    public String list(@PathVariable("curPage") Integer curPage,
-//                       Model model) throws Exception {
-//
-//        Map<String, Object> params = null;
-//        params = studentService.getParams(null, -1, null, null, -1, null);
-//        Integer count = 0;
-//        count = studentService.countByCondition(params);
-//
-//        int totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-//
-//
-//        List<StudentDto> studentDtoList = studentService.queryByCondition(null,0,null,null,0,null, curPage, totalPage);
-//        model.addAttribute("studentDtoList",studentDtoList);
-//        model.addAttribute("curPage", curPage);
-//        model.addAttribute("totalPage", totalPage);
-//        return "student/list";
-//
-//    }
-
-
-
     //条件查询
-    @RequestMapping(value = "query/by/condition/{curPage}",method = RequestMethod.GET)
-    public String queryByCondition(@PathVariable("curPage") Integer curPage,
-                                   @RequestParam(value = "name", required = false, defaultValue = "") String name,
-                                   @RequestParam(value = "sex", required = false, defaultValue = "-1") Integer sex,
-                                   @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                                   @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
-                                   @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                   @RequestParam(value = "phone", required = false, defaultValue = "") String phone,
-                                   HttpServletRequest request,
-                                   Model model) throws Exception{
+    @RequestMapping(value = "query/by/condition",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject queryByCondition(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+                                       @RequestParam(value = "sex", required = false, defaultValue = "-1") Integer sex,
+                                       @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                       @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
+                                       @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                       @RequestParam(value = "phone", required = false, defaultValue = "") String phone) throws Exception{
+        JSONObject jsonObject = new JSONObject();
 
         Map<String, Object> params = null;
         params = studentService.getParams(name, sex, stuNumber, grade, majorCode, phone);
 
-        Integer count = studentService.countByCondition(params);
-
-        Integer totalPage = count % pageSize == 0 ? count / pageSize : count / pageSize + 1;
-        params = studentService.getParams(params, curPage, totalPage);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("stuParams", params);
-
         List<StudentDto> studentDtoList = studentService.queryByCondition(params);
-        model.addAttribute("studentDtoList",studentDtoList);
-        model.addAttribute("curPage", curPage);
-        model.addAttribute("totalPage", totalPage);
-        return "student/list";
+        jsonObject.put("studentDtoList", studentDtoList);
 
-    }
+        return jsonObject;
 
-    /**
-     * 去往上一页
-     */
-    @RequestMapping(value = "toPrevious")
-    public String toPrevious(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("stuParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage -= 1;
-        params = studentService.getParams(params, curPage, totalPage);
-
-        List<StudentDto> studentDtoList = null;
-        try {
-            studentDtoList = studentService.queryByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        model.addAttribute("studentDtoList",studentDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-        return "student/list";
-    }
-
-    /**
-     * 去往下一页
-     */
-    @RequestMapping(value = "toNext")
-    public String toNext(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        Map<String, Object> params = (Map)session.getAttribute("stuParams");
-        int curPage = (int)params.get("curPage");
-        int totalPage = (int)params.get("totalPage");
-
-        curPage += 1;
-        params = studentService.getParams(params, curPage, totalPage);
-
-        List<StudentDto> studentDtoList = null;
-        try {
-            studentDtoList = studentService.queryByCondition(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        model.addAttribute("studentDtoList",studentDtoList);
-        model.addAttribute("curPage", params.get("curPage"));
-        model.addAttribute("totalPage", params.get("totalPage"));
-        return "student/list";
     }
 
     //根据学号删除
