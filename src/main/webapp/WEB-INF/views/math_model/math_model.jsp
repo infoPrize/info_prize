@@ -107,7 +107,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<input type="button" class="inlibut" value="选择" type="" onclick="initdataMath()"/>
-												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/math';form.submit();"/>
+												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='${website}export/math';form.submit();"/>
 											</div>
 										</div>
 										<div class="clearfix"></div>

@@ -95,7 +95,7 @@
 											</div>
 											<div class="form-group col-sm-4">
 												<input type="button" class="inlibut" value="选择" type="submit" onclick="initdataScience()"/>
-												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='/export/scientificProject';form.submit();"/>
+												<input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='${website}export/scientificProject';form.submit();"/>
 
 											</div>
 										</div>

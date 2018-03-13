@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <hr/>
-                    <form action="/import/thesis" enctype="multipart/form-data" method="post" class="dinline">
+                    <form action="${website}import/thesis" enctype="multipart/form-data" method="post" class="dinline">
                         <label class="tab-label control-label text-right">导入excel：</label>
                         <input type="text" id="file_name" readonly="readonly" value=""/>
                         <a href="javascript:void(0);" class="input top">

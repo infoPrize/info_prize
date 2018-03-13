@@ -116,12 +116,12 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/InternetPlus/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
+                                        <td><a href="${website}InternetPlus/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/InternetPlus/upload/${internetPlusDto.id}/${internetPlusDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
+                            <form action="${website}InternetPlus/upload/${internetPlusDto.id}/${internetPlusDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
                                 <label class="tab-label control-label text-right">导入excel：</label>
                                 <input type="text" id="file_name" readonly="readonly" value=""/>
                                 <a href="javascript:void(0);" class="input top">
@@ -129,9 +129,8 @@
                                     <input type="file" id="file" name="file">
                                 </a>
                                 <input type="submit" class="input" value="确定"/>
-
                             </form>
-                            <a href="/InternetPlus/down/${internetPlusDto.projectName}" id="download">下载</a>
+                            <a href="${website}InternetPlus/down/${internetPlusDto.projectName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

@@ -88,12 +88,12 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="4"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/mathModel/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
+                                        <td><a href="${website}mathModel/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/mathModel/upload/${mathModelPrizeDto.id}/${mathModelPrizeDto.teamName}" enctype="multipart/form-data" method="post" class="dinline">
+                            <form action="${website}mathModel/upload/${mathModelPrizeDto.id}/${mathModelPrizeDto.teamName}" enctype="multipart/form-data" method="post" class="dinline">
                                 <label class="tab-label control-label text-right">导入excel：</label>
                                 <input type="text" id="file_name" readonly="readonly" value=""/>
                                 <a href="javascript:void(0);" class="input top">
@@ -103,7 +103,7 @@
                                 <input type="submit" class="input" value="确定"/>
 
                             </form>
-                            <a href="/mathModel/down/${mathModelPrizeDto.teamName}" id="download">下载</a>
+                            <a href="${website}mathModel/down/${mathModelPrizeDto.teamName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

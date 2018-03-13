@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <hr/>
-                    <form action="/import/challengeCup" enctype="multipart/form-data" method="post" class="dinline">
+                    <form action="${website}import/challengeCup" enctype="multipart/form-data" method="post" class="dinline">
                         <label class="tab-label control-label text-right">导入excel：</label>
                         <input type="text" id="file_name" readonly="readonly" value=""/>
                         <a href="javascript:void(0);" class="input top">
@@ -111,7 +111,7 @@
                             <input type="file" id="file" name="file">
                         </a>
                         <input type="submit" class="input" value="确定"/>
-                        <a href="#" id="download_model">下载excel模板</a>
+                        <a href="${staticWebsite}resources/ChallengeCup.xls" id="download_model">下载excel模板</a>
                     </form>
                 </div>
             </div>

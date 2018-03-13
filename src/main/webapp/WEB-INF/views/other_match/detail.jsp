@@ -114,12 +114,12 @@
                                     <tr>
                                         <td>${list.materialName}</td>
                                         <td colspan="6"><img src="${website}${list.materialUrl}" class="detail_img"> </td>
-                                        <td><a href="/otherMatch/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
+                                        <td><a href="${website}otherMatch/delete/material?matchId=${list.matchId}&materialUrl=${list.materialUrl}&id=${list.id}">删除</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <form action="/otherMatch/upload/${otherMatchDto.id}/${otherMatchDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
+                            <form action="${website}otherMatch/upload/${otherMatchDto.id}/${otherMatchDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
                                 <label class="tab-label control-label text-right">导入excel：</label>
                                 <input type="text" id="file_name" readonly="readonly" value=""/>
                                 <a href="javascript:void(0);" class="input top">
@@ -129,7 +129,7 @@
                                 <input type="submit" class="input" value="确定"/>
 
                             </form>
-                            <a href="/otherMatch/down/${otherMatchDto.projectName}" id="download">下载</a>
+                            <a href="${website}otherMatch/down/${otherMatchDto.projectName}" id="download">下载</a>
                             ${message}
                         </div>
                     </div>

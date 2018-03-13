@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <input type="button" class="inlibut" value="选择" type="submit" onclick="initdataOther()"/>
-                                        <input type="button" class="inlibut" value="导出Excel" type="submit"/>
+                                        <input type="button" class="inlibut" value="导出Excel" type="submit" onclick="form.action='${website}export/internetPlus';form.submit();"/>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

@@ -81,7 +81,7 @@
 										</div>
 										<!--第三行-->
 										<input type="button" id="sort" value="选择" type="submit" onclick="initdataPatent()"/>
-										<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='/export/patent';form.submit();"/>
+										<input type="button" id="sort" value="导出Excel" type="submit" onclick="form.action='${website}export/patent';form.submit();"/>
 
 										
 									</form>
