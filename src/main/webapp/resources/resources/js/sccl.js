@@ -399,8 +399,8 @@ $(function() {
 		staticWebsite:'http://infoprize.nenu.edu.cn/resources/'
 
 		//服务器开发配置
-		// website:'http://120.78.154.246/info_prize/',
-		// staticWebsite:'http://120.78.154.246/info_prize/resources/'
+		// website:'http://120.78.154.246/',
+		// staticWebsite:'http://120.78.154.246/resources/'
 
 	}
 

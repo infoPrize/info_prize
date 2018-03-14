@@ -6,7 +6,7 @@ $(function(){
     var website = "http://infoprize.nenu.edu.cn/";
 
     //网站地址 - 服务器开发
-    // var website = "http://120.78.154.246/info_prize/";
+    // var website = "http://120.78.154.246/";
 
     // 添加论文信息
     $("#sort_thesis").click(function(){

@@ -3,8 +3,7 @@
 //本地地址
 var website = "http://infoprize.nenu.edu.cn/";
 //服务器地址
-// var website = "http://120.78.154.246/info_prize/";
-
+// var website = "http://120.78.154.246/";
 
 var max = 5;
 var pagelistc = 6;
