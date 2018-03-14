@@ -52,156 +52,156 @@ public class ImportController {
     }
 
     @RequestMapping(value = "thesis",method = RequestMethod.POST)
-    public String importThesis(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request , Model model){
+    public String importThesis(@RequestParam("file")MultipartFile file , Model model, HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkThesis(excel)){
                 importService.importThesis(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/thesis/toList";
+        return "thesis/thesis";
 
     }
 
     @RequestMapping(value = "patent",method = RequestMethod.POST)
-    public String importPatent(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request , Model model){
+    public String importPatent(@RequestParam("file")MultipartFile file ,  HttpServletRequest request , Model model){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkPatent(excel)){
                 importService.importPatent(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/patent/toList";
+        return "patent/patent";
 
     }
 
     @RequestMapping(value = "scientificProject",method = RequestMethod.POST)
-    public String importScientificProject(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importScientificProject(@RequestParam("file")MultipartFile file ,  HttpServletRequest request , Model model){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkScientificProject(excel)){
                 importService.importScientificProject(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/scientificProject/toList";
+        return "scientific_project/scientific_project";
     }
 
     @RequestMapping(value = "ACMPrize",method = RequestMethod.POST)
-    public String importACMPrize(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importACMPrize(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkACMPrize(excel)){
                 importService.importACMPrize(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/acm/toList";
+        return "ACM/ACM";
     }
 
     @RequestMapping(value = "math",method = RequestMethod.POST)
-    public String importMath(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importMath(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkMath(excel)){
                 importService.importMath(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/mathModel/toList";
+        return "math_model/math_model";
     }
 
     @RequestMapping(value = "internetPlus",method = RequestMethod.POST)
-    public String importInternetPlus(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importInternetPlus(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkInternetPlus(excel)){
                 importService.importInternetPlus(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/InternetPlus/toList";
+        return "internet_plus/internet_plus";
     }
 
     @RequestMapping(value = "challengeCup",method = RequestMethod.POST)
-    public String importChallengeCup(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importChallengeCup(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkChallengeCup(excel)){
                 importService.importChallengeCup(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/ChallengeCup/toList";
+        return "challenge_cup/challenge_cup";
     }
 
     @RequestMapping(value = "otherMatch",method = RequestMethod.POST)
-    public String importOtherMatch(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request ){
+    public String importOtherMatch(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
             File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
@@ -209,17 +209,17 @@ public class ImportController {
 
             if(importService.checkOtherMatch(excel)){
                 importService.importOtherMatch(excel);
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
+                model.addAttribute("message", MessageInfo.IMPORT_SUCCESS);
                 excel.delete();
             }else {
-                redirectAttributes.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
+                model.addAttribute("message", MessageInfo.IMPORT_CHECK_FAILED);
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
+            model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/otherMatch/toList";
+        return "other_match/other_match";
     }
 
 }

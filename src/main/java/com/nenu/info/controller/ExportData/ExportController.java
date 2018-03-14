@@ -79,7 +79,11 @@ public class ExportController {
 
             filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-            ExcelUtil.writeExcel(acmPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+            if(acmPrizeDtoList.size() != 0){
+                ExcelUtil.writeExcel(acmPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+            } else {
+                model.addAttribute("message","导出的数据为空");
+            }
 
             model.addAttribute("acmPrizeDtoList", acmPrizeDtoList);
             model.addAttribute("message",message);
@@ -114,7 +118,13 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(scientificProjectDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(scientificProjectDtoList.size() != 0){
+            ExcelUtil.writeExcel(scientificProjectDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
+
+
 
         model.addAttribute("scientificProjectDtoList", scientificProjectDtoList);
 
@@ -143,7 +153,12 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(mathModelPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(mathModelPrizeDtoList.size() != 0){
+            ExcelUtil.writeExcel(mathModelPrizeDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
+
 
         model.addAttribute("mathModelPrizeDtoList", mathModelPrizeDtoList);
         return "math_model/math_model";
@@ -163,7 +178,6 @@ public class ExportController {
                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     @RequestParam(value = "message", required = false, defaultValue = "") String message,
                                      Model model,
                                      HttpServletRequest request , HttpServletResponse response){
 
@@ -187,11 +201,14 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(challengeCupDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(challengeCupDtoList.size() != 0){
+            ExcelUtil.writeExcel(challengeCupDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
 
         model.addAttribute("challengeCupDtoList", challengeCupDtoList);
 
-        model.addAttribute("message",message);
 
         return "challenge_cup/challenge_cup";
     }
@@ -209,7 +226,6 @@ public class ExportController {
                                      @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                     @RequestParam(value = "message", required = false, defaultValue = "") String message,
                                      HttpServletRequest request,HttpServletResponse response,
                                      Model model){
 
@@ -231,7 +247,11 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(internetPlusDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(internetPlusDtoList.size() != 0){
+            ExcelUtil.writeExcel(internetPlusDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
 
         return "internet_plus/internet_plus";
 
@@ -270,7 +290,11 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(thesisDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(thesisDtoList.size() != 0){
+            ExcelUtil.writeExcel(thesisDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
 
         model.addAttribute("thesisDtoList", thesisDtoList);
 
@@ -311,7 +335,11 @@ public class ExportController {
 
         filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
 
-        ExcelUtil.writeExcel(patentDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        if(patentDtoList.size() != 0){
+            ExcelUtil.writeExcel(patentDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
 
         model.addAttribute("patentDtoList", patentDtoList);
 
