@@ -78,7 +78,7 @@ table th, table td{
 	display:block;
 	width:100%;
 }
-.sub > tbody > tr > td > span{
+.sub > tbody > tr > td {
 	margin: 0 2px;
 	text-align: center;
 	border-bottom: 1px solid #ddd;
@@ -193,4 +193,15 @@ a{
 	background-color: #33aecc;
 	border: 1px solid #33aecc;
 	color: #fff;
+}
+
+.back{
+	position: relative;
+	float: left;
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	cursor: pointer;
+	font-size:18px;
+	color: #5A738E;
 }

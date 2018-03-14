@@ -170,7 +170,7 @@
             })
             !function(){
                 laydate({
-                    elem: '.end'
+                    elem: '#endTime'
                 })
             }();
 	</script>

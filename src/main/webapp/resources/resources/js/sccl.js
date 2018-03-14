@@ -420,7 +420,7 @@ $(function() {
 					"id": "5",
 					"name": "论文",
 					"parentId": "1",
-					"url": site.website + "thesis/toList",
+					"url": "",
 					"icon": "&#xe602;",
 					"order": "1",
 					"isHeader": "0",

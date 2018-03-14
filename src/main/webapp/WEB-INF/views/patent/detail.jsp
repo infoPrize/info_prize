@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <title>专利详情页</title>
     <link rel="stylesheet" href="${staticWebsite}resources/css/base.css">
+    <link rel="stylesheet" href="${staticWebsite}resources/iconfont/1.0.1/iconfont.css">
     <link rel="stylesheet" href="${staticWebsite}resources/css/bootstrap.min.css">
 </head>
 <body>
@@ -17,7 +18,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3 class="detail_title">这是专利信息中id为${patentDto.id}的详情页</h3>
+                            <span type="button" class="icon-uniE60D back" onclick="javascript:history.back();">返回</span>
+                            <h3 class="detail_title">这是专利信息中id为${patentDto.id}的详情页 </h3>
                             <hr/>
                         </div>
                         <div class="x_content">
@@ -127,7 +129,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 
 </body>
 </html>

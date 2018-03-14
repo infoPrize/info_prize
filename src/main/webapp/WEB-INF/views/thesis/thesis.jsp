@@ -141,7 +141,7 @@
 <script>
     !function(){
         laydate({
-            elem: '.end'
+            elem: '#endTime'
         })
     }();
 

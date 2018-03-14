@@ -13,6 +13,7 @@ import com.nenu.info.service.category.PatentService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.nenu.info.common.utils.WebConstants.pageSize;
 
@@ -217,6 +216,45 @@ public class PatentController {
             e.printStackTrace();
         }
 
+//        前端要求，将申请人姓名、学号、专业作为三个数组传过去
+//        List<List> nameArrList = new ArrayList<>();
+//        List<List> stuNumberArrList = new ArrayList<>();
+//        List<List> majorArrList = new ArrayList<>();
+
+//        JSONArray nameArrList = new JSONArray();
+//        JSONArray stuNumberArrList = new JSONArray();
+//
+//        if(patentDtoList != null) {
+//            for (PatentDto patentDto : patentDtoList) {
+////                List<String> nameArr = new ArrayList<>();
+//                JSONArray nameArr = new JSONArray();
+//                String name1 = patentDto.getApplierName1();         nameArr.add(name1);
+//                String name2 = patentDto.getApplierName2();         nameArr.add(name2);
+//                String name3 = patentDto.getApplierName3();         nameArr.add(name3);
+//                String name4 = patentDto.getApplierName4();         nameArr.add(name4);
+//                String name5 = patentDto.getApplierName5();         nameArr.add(name5);
+//                nameArrList.add(nameArr);
+//
+////                List<String> stuNumArr = new ArrayList<>();
+//                JSONArray stuNumArr = new JSONArray();
+//                String stuNum1 = patentDto.getApplierStuNumber1();      stuNumArr.add(stuNum1);
+//                String stuNum2 = patentDto.getApplierStuNumber2();      stuNumArr.add(stuNum2);
+//                String stuNum3 = patentDto.getApplierStuNumber3();      stuNumArr.add(stuNum3);
+//                String stuNum4 = patentDto.getApplierStuNumber4();      stuNumArr.add(stuNum4);
+//                String stuNum5 = patentDto.getApplierStuNumber5();      stuNumArr.add(stuNum5);
+//                stuNumberArrList.add(stuNumArr);
+//
+////                String stuMajor[] = new String[10];
+////                stuMajor[0] = patentDto.getApplierMajor1();        stuMajor[1] = patentDto.getApplierMajor2();
+////                stuMajor[2] = patentDto.getApplierMajor3();        stuMajor[3] = patentDto.getApplierMajor4();
+////                stuMajor[4] = patentDto.getApplierMajor5();
+////                majorArrList.add(stuMajor);
+//            }
+//        }
+//
+//        jsonObject.put("nameArrList", nameArrList);
+//        jsonObject.put("stuNumberArrList", stuNumberArrList);
+//        jsonObject.put("majorArrList", majorArrList);
         jsonObject.put("patentDtoList", patentDtoList);
         return jsonObject;
     }

@@ -52,38 +52,12 @@ function initdataThesis() {
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "thesis/toDetail/" + result[i].id;
-                    //     cHtml += "<tr><td>" + result[i].journalLevel + "</td><td>" + result[i].journalName + "</td><td>"
-                    //         + result[i].thesisTitle + "</td><td>" + result[i].publishTimeStr + "</td><td class='td_table'><table class='sub'><tr><td><span>"
-                    //         + result[i].authorName1 + "</span></td></tr><tr><td><span>" + result[i].authorName2 + "</span></td></tr><tr><td><span>" + result[i].authorName3 + "</span></td></tr><tr><td><span>"
-                    //         + result[i].authorName4 + "</span></td></tr><tr><td><span>" + result[i].authorName5 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                    //         + result[i].authorLevel1 + "</span></td></tr><tr><td><span>" + result[i].authorLevel2 + "</span></td></tr><tr><td><span>" + result[i].authorLevel3 + "</span></td></tr><tr><td><span>"
-                    //         + result[i].authorLevel4 + "</span></td></tr><tr><td><span>" + result[i].authorLevel5 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                    //         + result[i].authorStuNumber1 + "</span></td></tr><tr><td><span>" + result[i].authorStuNumber2 + "</span></td></tr><tr><td><span>" + result[i].authorStuNumber3 + "</span></td></tr><tr><td><span>"
-                    //         + result[i].authorStuNumber4 + "</span></td></tr><tr><td><span>" + result[i].authorStuNumber5 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                    //         + result[i].authorMajor1 + "</span></td></tr><tr><td><span>" + result[i].authorMajor2 + "</span></td></tr><tr><td><span>" + result[i].authorMajor3 + "</span></td></tr><tr><td><span>"
-                    //         + result[i].authorMajor4 + "</span></td></tr><tr><td>" + result[i].authorMajor5 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                    //         + acmt + "' >去往详情页</a></td><td><a class='delete_thesis' id='" + result[i].id + "'>删除</a></td><tr>";
-                    // }
                         cHtml += "<tr><td>" + result[i].journalLevel + "</td><td>" + result[i].journalName + "</td><td>"
                             + result[i].thesisTitle + "</td><td>" + result[i].publishTimeStr + "</td><td class='td_table'><table class='sub'><tr><td>"
                             + result[i].authorName1 + "</td></tr><tr><td>" + result[i].authorName2 + "</td></tr><tr><td>" + result[i].authorName3 + "</td></tr><tr><td>"
-                            + result[i].authorName4 + "</td></tr><tr><td>" + result[i].authorName5 + "</td></tr></table></td><td class='td_table'><table class='sub'>";
-                        if(result[i].authorLevel1 !== 0) {
-                            cHtml += "<tr><td>第" + result[i].authorLevel1 + "作者</td></tr>";
-                        }
-                        if(result[i].authorLevel2 !== 0) {
-                            cHtml += "<tr><td>第" + result[i].authorLevel2 + "作者</td></tr>";
-                        }
-                        if(result[i].authorLevel3 !== 0) {
-                            cHtml += "<tr><td>第" + result[i].authorLevel3 + "作者</td></tr>";
-                        }
-                        if(result[i].authorLevel4 !== 0) {
-                            cHtml += "<tr><td>第" + result[i].authorLevel4 + "作者</td></tr>";
-                        }
-                        if(result[i].authorLevel5 !== 0) {
-                            cHtml += "<tr><td>第" + result[i].authorLevel5 + "作者</td></tr>";
-                        }
-                        cHtml += "</table></td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].authorName4 + "</td></tr><tr><td>" + result[i].authorName5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].authorLevel1 + "</td></tr><tr><td>" + result[i].authorLevel2 + "</td></tr><tr><td>" + result[i].authorLevel3 + "</td></tr><tr><td>"
+                            + result[i].authorLevel4 + "</td></tr><tr><td>" + result[i].authorLevel5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
                             + result[i].authorStuNumber1 + "</td></tr><tr><td>" + result[i].authorStuNumber2 + "</td></tr><tr><td>" + result[i].authorStuNumber3 + "</td></tr><tr><td>"
                             + result[i].authorStuNumber4 + "</td></tr><tr><td>" + result[i].authorStuNumber5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
                             + result[i].authorMajor1 + "</td></tr><tr><td>" + result[i].authorMajor2 + "</td></tr><tr><td>" + result[i].authorMajor3 + "</td></tr><tr><td>"
@@ -104,6 +78,7 @@ function initdataThesis() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataThesis();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -165,24 +140,21 @@ function initdataPatent() {
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "patent/toDetail/" + result[i].id;
-                        // cHtml += "<tr><td>" + result[i].patentType + "</td><td>" + result[i].patentName + "</td><td>"
-                        //     + result[i].applyTimeStr + "</td><td class='td_table'><table class='sub'><tr><td><span>"
-                        //     + result[i].applierName1 + "</span></td></tr><tr><td><span>" + result[i].applierName2 + "</span></td></tr><tr><td><span>" + result[i].applierName3 + "</span></td></tr><tr><td><span>"
-                        //     + result[i].applierName4 + "</span></td></tr><tr><td><span>" + result[i].applierName5 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                        //     + result[i].applierMajor1 + "</span></td></tr><tr><td><span>" + result[i].applierMajor2 + "</span></td></tr><tr><td><span>" + result[i].applierMajor3 + "</span></td></tr><tr><td><span>"
-                        //     + result[i].applierMajor4 + "</span></td></tr><tr><td><span>" + result[i].applierMajor5 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                        //     + result[i].applierStuNumber1 + "</span></td></tr><tr><td><span>" + result[i].applierStuNumber2 + "</span></td></tr><tr><td><span>" + result[i].applierStuNumber3 + "</span></td></tr><tr><td><span>"
-                        //     + result[i].applierStuNumber4 + "</span></td></tr><tr><td><span>" + result[i].applierStuNumber5 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                        //     + acmt + "' >去往详情页</a></td><td><a class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
                         cHtml += "<tr><td>" + result[i].patentType + "</td><td>" + result[i].patentName + "</td><td>"
-                            + result[i].applyTimeStr + "</td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].applierName1 + "</td></tr><tr><td>" + result[i].applierName2 + "</td></tr><tr><td>" + result[i].applierName3 + "</td></tr><tr><td>"
-                            + result[i].applierName4 + "</td></tr><tr><td>" + result[i].applierName5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].applierMajor1 + "</td></tr><tr><td>" + result[i].applierMajor2 + "</td></tr><tr><td>" + result[i].applierMajor3 + "</td></tr><tr><td>"
-                            + result[i].applierMajor4 + "</td></tr><tr><td>" + result[i].applierMajor5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].applierStuNumber1 + "</td></tr><tr><td>" + result[i].applierStuNumber2 + "</td></tr><tr><td>" + result[i].applierStuNumber3 + "</td></tr><tr><td>"
-                            + result[i].applierStuNumber4 + "</td></tr><tr><td>" + result[i].applierStuNumber5 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + result[i].applyTimeStr + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=4; j++){
+                            console.log(result[i].applierNameArr[j]);
+                            if(result[i].applierNameArr[j] != "" && j < 4){
+                                ca += "<tr><td>"+ result[i].applierNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].applierStuMajor[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].applierStuNumber[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='" + acmt + "' >去往详情页</a></td><td><a class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -198,6 +170,7 @@ function initdataPatent() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataPatent();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -258,11 +231,11 @@ function initdataScience() {
                         cHtml += "<tr><td>" + result[i].projectType + "</td><td>" + result[i].projectName + "</td><td>"
                             + result[i].setYear + "</td><td>" + result[i].projectManName + "</td><td>" + result[i].projectManSex +
                             "</td><td>" + result[i].projectManStuNumber + "</td><td>" + result[i].projectManPhone + "</td><td>"
-                            + result[i].projectManMajor + "</td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].projectMemberName1 + "</span></td></tr><tr><td><span>" + result[i].projectMemberName2 + "</span></td></tr><tr><td>"
-                            + result[i].projectMemberName3 + "</span></td></tr><tr><td><span>" + result[i].projectMemberName4 + "</span></td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].projectMemberStuNumber1 + "</span></td></tr><tr><td><span>" + result[i].projectMemberStuNumber2 + "</span></td></tr><tr><td><span>" + result[i].projectMemberStuNumber3 + "</span></td></tr><tr><td><span>"
-                            + result[i].projectMemberStuNumber4 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td>" + result[i].fundsLimit + "</td><td><a href='"
+                            + result[i].projectManMajor + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].projectMemberName1 + "</td></tr><tr><td>" + result[i].projectMemberName2 + "</td></tr><tr><td>"
+                            + result[i].projectMemberName3 + "</td></tr><tr><td>" + result[i].projectMemberName4 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].projectMemberStuNumber1 + "</td></tr><tr><td>" + result[i].projectMemberStuNumber2 + "</td></tr><tr><td>" + result[i].projectMemberStuNumber3 + "</td></tr><tr><td>"
+                            + result[i].projectMemberStuNumber4 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td>" + result[i].fundsLimit + "</td><td><a href='"
                             + acmt + "' >去往详情页</a></td><td><a class='delete delete_science' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
@@ -279,6 +252,7 @@ function initdataScience() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataScience();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -344,13 +318,13 @@ function initdataAcm() {
                         var acmt = website + "acm/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
                             + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateName1 + "</span></td></tr><tr><td><span>" + result[i].teammateName2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateName3 + "</span></td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateStuNumber1 + "</span></td></tr><tr><td><span>" + result[i].teammateStuNumber2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateStuNumber3 + "</span></td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateMajor1 + "</span></td></tr><tr><td><span>" + result[i].teammateMajor2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateMajor3 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateName1 + "</td></tr><tr><td>" + result[i].teammateName2 + "</td></tr><tr><td>"
+                            + result[i].teammateName3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateStuNumber1 + "</td></tr><tr><td>" + result[i].teammateStuNumber2 + "</td></tr><tr><td>"
+                            + result[i].teammateStuNumber3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateMajor1 + "</td></tr><tr><td>" + result[i].teammateMajor2 + "</td></tr><tr><td>"
+                            + result[i].teammateMajor3 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
                             + acmt + "' >去往详情页</a></td><td><a class='delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
@@ -367,6 +341,7 @@ function initdataAcm() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataAcm();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -434,13 +409,13 @@ function initdataMath() {
                         var mathd = website + "mathModel/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
                             + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateName1 + "</span></td></tr><tr><td><span>" + result[i].teammateName2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateName3 + "</span></td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateStuNumber1 + "</span></td></tr><tr><td><span>" + result[i].teammateStuNumber2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateStuNumber3 + "</span></td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td><span>"
-                            + result[i].teammateMajor1 + "</span></td></tr><tr><td><span>" + result[i].teammateMajor2 + "</span></td></tr><tr><td><span>"
-                            + result[i].teammateMajor3 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateName1 + "</td></tr><tr><td>" + result[i].teammateName2 + "</td></tr><tr><td>"
+                            + result[i].teammateName3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateStuNumber1 + "</td></tr><tr><td>" + result[i].teammateStuNumber2 + "</td></tr><tr><td>"
+                            + result[i].teammateStuNumber3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
+                            + result[i].teammateMajor1 + "</td></tr><tr><td>" + result[i].teammateMajor2 + "</td></tr><tr><td>"
+                            + result[i].teammateMajor3 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
                             + mathd + "' >去往详情页</a></td><td><a class='delete_math' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
@@ -457,6 +432,7 @@ function initdataMath() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataMath();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -523,13 +499,13 @@ function initdataCup() {
                     for(var i in result) {
                         var acmt = website + "ChallengeCup/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuName1 + "</span></td></tr><tr><td><span>" + result[i].stuName2 + "</span></td></tr><tr><td><span>" + result[i].stuName3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName4 + "</span></td></tr><tr><td><span>" + result[i].stuName5 + "</span></td></tr><tr><td><span>" + result[i].stuName6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName7 + "</span></td></tr><tr><td><span>" + result[i].stuName8 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuNumber1 + "</span></td></tr><tr><td><span>" + result[i].stuNumber2 + "</span></td></tr><tr><td><span>" + result[i].stuNumber3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber4 + "</span></td></tr><tr><td><span>" + result[i].stuNumber5 + "</span></td></tr><tr><td><span>" + result[i].stuNumber6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber7 + "</span></td></tr><tr><td><span>" + result[i].stuNumber8 + "</span></td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
+                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
+                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
+                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
+                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
+                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
                             + result[i].prizeTimeStr + "</td><td>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
                             + acmt + "' >去往详情页</a></td><td><a class='delete_cup' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
@@ -547,6 +523,7 @@ function initdataCup() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataCup();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -612,13 +589,14 @@ function initdataInternet() {
                     for(var i in result) {
                         var acmt = website + "InternetPlus/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuName1 + "</span></td></tr><tr><td><span>" + result[i].stuName2 + "</span></td></tr><tr><td><span>" + result[i].stuName3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName4 + "</span></td></tr><tr><td><span>" + result[i].stuName5 + "</span></td></tr><tr><td><span>" + result[i].stuName6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName7 + "</span></td></tr><tr><td><span>" + result[i].stuName8 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuNumber1 + "</span></td></tr><tr><td><span>" + result[i].stuNumber2 + "</span></td></tr><tr><td><span>" + result[i].stuNumber3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber4 + "</span></td></tr><tr><td><span>" + result[i].stuNumber5 + "</span></td></tr><tr><td><span>" + result[i].stuNumber6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber7 + "</span></td></tr><tr><td><span>" + result[i].stuNumber8 + "</span></td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
+                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
+                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
+                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td>"
+                            + "<td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
+                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
+                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
                             + result[i].prizeTimeStr + "</td><td>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
                             + acmt + "' >去往详情页</a></td><td><a class='delete_Internet' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
@@ -636,6 +614,7 @@ function initdataInternet() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataInternet();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -703,13 +682,13 @@ function initdataOther() {
                         var mathd = website + "otherMatch/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
                             + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].projectName + "</td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuName1 + "</span></td></tr><tr><td><span>" + result[i].stuName2 + "</span></td></tr><tr><td><span>" + result[i].stuName3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName4 + "</span></td></tr><tr><td><span>" + result[i].stuName5 + "</span></td></tr><tr><td><span>" + result[i].stuName6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuName7 + "</span></td></tr><tr><td><span>" + result[i].stuName8 + "</span></td></tr></table></td><td class='td_table'><table class='sub'><tr><td><span>"
-                            + result[i].stuNumber1 + "</span></td></tr><tr><td><span>" + result[i].stuNumber2 + "</span></td></tr><tr><td><span>" + result[i].stuNumber3 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber4 + "</span></td></tr><tr><td><span>" + result[i].stuNumber5 + "</span></td></tr><tr><td><span>" + result[i].stuNumber6 + "</span></td></tr><tr><td><span>"
-                            + result[i].stuNumber7 + "</span></td></tr><tr><td><span>" + result[i].stuNumber8 + "</span></td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            "</td><td>" + result[i].projectName + "</td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
+                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
+                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
+                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
+                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
+                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
                             + mathd + "' >去往详情页</a></td><td><a class='delete_other' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
@@ -726,6 +705,7 @@ function initdataOther() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataOther();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -800,6 +780,7 @@ function initdataStudent() {
                                 if (msg == 1) {
                                     alert("删除成功!");
                                     $("#" + id).parent().parent().remove();
+                                    initdataStudent();
                                 }
                                 else if (msg == -1) {
                                     alert("删除失败!");
@@ -822,4 +803,3 @@ function initdataStudent() {
         }
     });
 }
-

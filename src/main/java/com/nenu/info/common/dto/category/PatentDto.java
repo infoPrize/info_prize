@@ -56,6 +56,12 @@ public class PatentDto {
 
     private String applierStuNumber5;
 
+    private String[] applierNameArr;
+
+    private String[] applierStuNumber;
+
+    private String[] applierStuMajor;
+
     private String teacherName;
 
     private String introduce;
@@ -218,6 +224,30 @@ public class PatentDto {
 
     public void setApplierMajor5(String applierMajor5) {
         this.applierMajor5 = applierMajor5;
+    }
+
+    public String[] getApplierNameArr() {
+        return applierNameArr;
+    }
+
+    public void setApplierNameArr(String[] applierNameArr) {
+        this.applierNameArr = applierNameArr;
+    }
+
+    public String[] getApplierStuNumber() {
+        return applierStuNumber;
+    }
+
+    public void setApplierStuNumber(String[] applierStuNumber) {
+        this.applierStuNumber = applierStuNumber;
+    }
+
+    public String[] getApplierStuMajor() {
+        return applierStuMajor;
+    }
+
+    public void setApplierStuMajor(String[] applierStuMajor) {
+        this.applierStuMajor = applierStuMajor;
     }
 
     public String getApplierStuNumber5() {
