@@ -131,11 +131,15 @@ public class StudentServiceImpl implements StudentService {
 
     public Boolean nameEqualOrNot(String stuNumber, String name) throws Exception{
         Boolean flag = false;
-        if(studentDao.selectStudentByStuNumber(stuNumber) != null){
+        if(stuNumber != null || studentDao.selectStudentByStuNumber(stuNumber) != null){
             String name1 = studentDao.selectStudentByStuNumber(stuNumber).getName();
-            if(name1.equals(name)){
-                flag = true;
-            }
+
+                if(name1.equals(name)){
+                    flag = true;
+                }else {
+                    throw new Exception("学号与姓名不匹配");
+                }
+
         }
         return flag;
     }
