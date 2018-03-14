@@ -8,6 +8,9 @@ $(function(){
     //网站地址 - 服务器开发
     // var website = "http://120.78.154.246/";
 
+    //网站地址 - 服务器开发(带项目名)
+    // var website = "http://120.78.154.246/resources/";
+
     // 添加论文信息
     $("#sort_thesis").click(function(){
         var journameName = $('#journameName').val();

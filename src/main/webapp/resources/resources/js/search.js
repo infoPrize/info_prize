@@ -4,6 +4,8 @@
 var website = "http://infoprize.nenu.edu.cn/";
 //服务器地址
 // var website = "http://120.78.154.246/";
+//服务器地址(带项目名)
+// var website = "http://120.78.154.246/info_prize/";
 
 var max = 5;
 var pagelistc = 6;
