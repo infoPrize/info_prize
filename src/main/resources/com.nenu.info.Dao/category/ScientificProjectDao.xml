@@ -52,6 +52,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        ORDER BY `id` DESC
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.ScientificProjectDto">
@@ -78,6 +79,7 @@
             tsp.`project_introduce` AS projectIntroduce
         FROM `t_scientific_project` tsp
         WHERE tsp.`id` = #{id}
+          AND tsp.`is_deleted` = 0
     </select>
 
     <sql id="queryCondition">
@@ -91,7 +93,7 @@
         <if test="setYear != '' and setYear != null">
             AND tsp.`set_year` = #{setYear}
         </if>
-        <if test="teacherId != null and teacherId > 0 ">
+        <if test="teacherId != null">
             AND tsp.`teacher_id` = #{teacherId}
         </if>
         <if test="stuId != null and stuId > 0">

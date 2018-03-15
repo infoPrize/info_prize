@@ -149,6 +149,9 @@ public class ScientificProjectController extends AbstractController{
         } else {
             scientificProject.setProjectType(0);
         }
+        if(setYear != null && !setYear.equals("")) {
+            setYear = setYear.substring(0, 4);
+        }
         scientificProject.setSetYear(setYear);
         scientificProject.setProjectManId(projectMan.getId());
         scientificProject.setProjectMemberId1(projectMember1.getId());
@@ -250,6 +253,11 @@ public class ScientificProjectController extends AbstractController{
         List<Material> materialList = null;
         scientificProjectDto = scientificProjectService.selectById(materialId);
         materialList = materialService.listByTypeAndId(materialId,3);
+
+        if(scientificProjectDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
 
         model.addAttribute("scientificProjectDto", scientificProjectDto);
         model.addAttribute("list", materialList);

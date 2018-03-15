@@ -59,9 +59,13 @@ public class ThesisServiceImpl implements ThesisService {
 
             studentList = studentDao.queryByCondition(stuParams);
             if(studentList == null) {
-                return null;
+                studentIdList = null;
+            } else if(studentList.size() == 0) {
+                //由于studentList.size为零，说明没有学生符合查询标准，所以应该返回空的patentList
+                //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
+                teacherId = -1;
             } else {
-                for (Student student : studentList) {
+                for(Student student : studentList) {
                     studentIdList.add(student.getId());
                 }
             }
@@ -72,6 +76,8 @@ public class ThesisServiceImpl implements ThesisService {
             Teacher teacher = teacherDao.selectTeacherByName(teacherName);
             if(teacher != null) {
                 teacherId = teacher.getId();
+            } else {
+                teacherId = -1;
             }
         }
         params.put("studentIdList", studentIdList);

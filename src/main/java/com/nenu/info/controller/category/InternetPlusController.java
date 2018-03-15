@@ -295,6 +295,11 @@ public class InternetPlusController extends AbstractController {
             e.printStackTrace();
         }
 
+        if(internetPlusDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
+
         model.addAttribute("internetPlusDto", internetPlusDto);
         model.addAttribute("list", materialList);
         return "internet_plus/detail";

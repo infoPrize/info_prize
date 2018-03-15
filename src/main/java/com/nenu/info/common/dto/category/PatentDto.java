@@ -265,4 +265,5 @@ public class PatentDto {
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
+
 }

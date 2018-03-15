@@ -59,6 +59,7 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         List<Student> studentList = null;
         Integer stuId = null;
         Student student = null;
+        Integer teacherId = null;
         List<Integer> idList = new ArrayList<>();
 
         try {
@@ -71,23 +72,28 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
         if(student != null) {
             stuId = student.getId();
         }
-        if(studentList != null) {
-            for (Student student1 : studentList) {
-                Integer id = student1.getId();
-                idList.add(id);
+        if(studentList == null) {
+            idList = null;
+        } else if(studentList.size() == 0) {
+            //由于studentList.size为零，说明没有学生符合查询标准，所以应该返回空的patentList
+            //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
+            teacherId = -1;
+        } else {
+            for(Student s : studentList) {
+                idList.add(s.getId());
             }
         }
-
-        Teacher teacher = null;
         try {
-            teacher = teacherDao.selectTeacherByName(teacherName);
+            if(!teacherName.equals("")) {
+                Teacher teacher = teacherDao.selectTeacherByName(teacherName);
+                if(teacher != null) {
+                    teacherId = teacher.getId();
+                } else {
+                    teacherId = -1;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        Integer teacherId = null;
-        if(teacher != null) {
-            teacherId = teacher.getId();
         }
 
         Map<String, Object> params = new HashMap<>();

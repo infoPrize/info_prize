@@ -32,11 +32,11 @@
                                     <!--第一行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="journal">刊物名称：</label>
-                                            <input type="text" id="journal" class="form-control" name="journalName" />
+                                            <label class="tab-label control-label text-right" for="journalName">刊物名称：</label>
+                                            <input type="text" id="journalName" class="form-control" name="journalName" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="type">刊物等级：</label>
+                                            <label class="tab-label control-label text-right">刊物等级：</label>
                                             <select class="form-control" id="journalLevel">
                                                 <option value="-1">---请选择刊物等级---</option>
                                                 <option value="1">E类</option>
@@ -81,7 +81,7 @@
                                     <!--第三行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="time">发表时间：</label>
+                                            <label class="tab-label control-label text-right" for="publishTime">发表时间：</label>
                                             <input type="text" class="form-control" onClick="laydate()" id="publishTime"/>
                                         </div>
                                         <div class="form-group col-sm-8">

@@ -1,9 +1,9 @@
 /*Created by liujing on 2018/3/10.*/
 
 //本地地址
-//var website = "http://infoprize.nenu.edu.cn/";
+var website = "http://infoprize.nenu.edu.cn/";
 
-var website = "http://192.168.199.171/";
+// var website = "http://192.168.199.171/";
 //服务器地址
 // var website = "http://120.78.154.246/";
 //服务器地址(带项目名)
@@ -63,7 +63,7 @@ function initdataThesis() {
                         for(var j=0; j<=4; j++){
                             if(result[i].authorNameArr[j] != ""){
                                 ca += "<tr><td>"+ result[i].authorNameArr[j] + "</td></tr>";
-                                cb += "<tr><td>"+ result[i].authorLevelArr[j] + "</td></tr>";
+                                cb += "<tr><td>第"+ result[i].authorLevelArr[j] + "作者</td></tr>";
                                 cd += "<tr><td>"+ result[i].authorStuNumberArr[j] + "</td></tr>";
                                 ce += "<tr><td>"+ result[i].authorMajorArr[j] + "</td></tr>";
                             }

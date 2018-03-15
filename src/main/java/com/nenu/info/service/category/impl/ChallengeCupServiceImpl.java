@@ -54,13 +54,24 @@ public class ChallengeCupServiceImpl implements ChallengeCupService {
 
         if(!teacherName.equals("")) {
             Teacher teacher = teacherDao.selectTeacherByName(teacherName);
-            teacherId = teacher.getId();
+            if(teacher != null) {
+                teacherId = teacher.getId();
+            } else {
+                teacherId = -1;
+            }
         }
         studentList = studentDao.listStudentByStuNameAndMajor(stuName, majorCode);
 
-        for(Student student : studentList) {
-            Integer id = student.getId();
-            idList.add(id);
+        if(studentList == null) {
+            idList = null;
+        } else if(studentList.size() == 0) {
+            //由于studentList.size为零，说明没有学生符合查询标准，所以应该返回空的patentList
+            //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
+            teacherId = -1;
+        } else {
+            for(Student student : studentList) {
+                idList.add(student.getId());
+            }
         }
 
         Map<String, Object> params = new HashMap<>();

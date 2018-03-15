@@ -11,7 +11,6 @@ public enum MajorEnum {
     CST(2, "计算机科学与技术"),
     CSTCooperation(3, "计算机科学与技术（中美合作）"),
     EducationalTechnology(4, "教育技术学"),
-    EducationalTeacher(41,"教育技术学（公费师范）"),
     LibraryAndWord(5, "图书情报与档案管理类"),
     Library(51, "图书馆学"),
     InformationResources(52, "信息资源管理");

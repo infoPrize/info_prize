@@ -123,6 +123,7 @@ public class ACMServiceImpl implements ACMService {
                                          Date endTime, Integer prizeLevel, Integer major, String stuName,
                                          String teacherName, String hostUnit) {
         List<Student> studentList = null;
+        Integer teacherId = null;
 
         try {
             studentList = studentDao.listStudentByStuNameAndMajor(stuName, major);
@@ -130,23 +131,29 @@ public class ACMServiceImpl implements ACMService {
             e.printStackTrace();
         }
 
-        Teacher teacher = new Teacher();
         try {
-            teacher = teacherDao.selectTeacherByName(teacherName);
+            if(!teacherName.equals("")) {
+                Teacher teacher = teacherDao.selectTeacherByName(teacherName);
+                if(teacher != null) {
+                    teacherId = teacher.getId();
+                } else {
+                    teacherId = -1;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Integer teacherId = null;
-        if(teacher != null) {
-            teacherId = teacher.getId();
-        }
-
         List<Integer> idList = new ArrayList<>();
-        if(studentList != null) {
-            for (Student student : studentList) {
-                Integer id = student.getId();
-                idList.add(id);
+        if(studentList == null) {
+            idList = null;
+        } else if(studentList.size() == 0) {
+            //由于studentList.size为零，说明没有学生符合查询标准，所以应该返回空的patentList
+            //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
+            teacherId = -1;
+        } else {
+            for(Student student : studentList) {
+                idList.add(student.getId());
             }
         }
 

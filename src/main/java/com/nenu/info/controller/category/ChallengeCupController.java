@@ -290,6 +290,10 @@ public class ChallengeCupController extends AbstractController{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if(challengeCupDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
 
         model.addAttribute("challengeCupDto", challengeCupDto);
         model.addAttribute("list", materialList);

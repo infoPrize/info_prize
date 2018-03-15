@@ -226,6 +226,11 @@ public class MathModelPrizeController extends AbstractController {
         mathModelPrizeDto = mathModelPrizeService.selectById(materialId);
         materialList = materialService.listByTypeAndId(materialId,5);
 
+        if(mathModelPrizeDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
+
         model.addAttribute("mathModelPrizeDto", mathModelPrizeDto);
         model.addAttribute("list", materialList);
         return "math_model/detail";

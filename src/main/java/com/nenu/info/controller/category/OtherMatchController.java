@@ -297,6 +297,11 @@ public class OtherMatchController extends AbstractController {
         otherMatchDto = otherMatchService.selectById(materialId);
         materialList = materialService.listByTypeAndId(materialId,8);
 
+        if(otherMatchDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
+
         model.addAttribute("otherMatchDto", otherMatchDto);
         model.addAttribute("list", materialList);
         

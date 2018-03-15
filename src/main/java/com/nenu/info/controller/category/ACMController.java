@@ -242,7 +242,10 @@ public class ACMController extends AbstractController{
 
         acmPrizeDto = acmService.selectById(materialId);
         materialList = materialService.listByTypeAndId(materialId,4);
-
+        if(acmPrizeDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
 
         model.addAttribute("acmPrizeDto", acmPrizeDto);
         model.addAttribute("list", materialList);

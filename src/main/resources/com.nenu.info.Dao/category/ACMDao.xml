@@ -42,6 +42,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        ORDER BY `id` DESC
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.ACMPrizeDto">
@@ -66,6 +67,7 @@
         FROM `t_acm_prize` tap
         WHERE
             tap.`id` = #{id}
+            AND tap.`is_deleted` = 0
     </select>
 
     <sql id="queryCondition">
@@ -76,8 +78,11 @@
         <if test="matchName != null and matchName != ''">
             AND `match_name` LIKE CONCAT('%', #{matchName}, '%')
         </if>
-        <if test="beginTime != null and endTime != null">
-            AND `prize_time` BETWEEN CONCAT(#{beginTime}, '00:00:00') AND CONCAT(#{endTime}, '23:59:59')
+        <if test="beginTime != null">
+            AND `prize_time` &gt; #{beginTime}
+        </if>
+        <if test="endTime != null">
+            AND `prize_time` &lt; #{endTime}
         </if>
         <if test="prizeLevel > 0">
             AND `prize_level` = #{prizeLevel}

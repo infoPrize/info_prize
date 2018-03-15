@@ -254,6 +254,11 @@ public class PatentController extends AbstractController{
             e.printStackTrace();
         }
 
+        if(patentDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
+        }
+
         model.addAttribute("patentDto", patentDto);
         model.addAttribute("list", materialList);
         return "patent/detail";

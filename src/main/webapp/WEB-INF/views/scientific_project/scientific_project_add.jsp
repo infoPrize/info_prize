@@ -88,7 +88,7 @@
 
                                         <div class="tab-row">
                                             <div class="col-sm-12">
-                                                <label class="tab-label control-label text-right" for="student_number">项目详情：</label>
+                                                <label class="tab-label control-label text-right" for="projectIntroduce">项目详情：</label>
                                                 <textarea id="projectIntroduce" class="detailtext form-control" rows="3" style="width: 850px"></textarea>
                                             </div>
                                         </div>

@@ -66,6 +66,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        ORDER BY `id` DESC
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.ChallengeCupDto">
@@ -97,6 +98,7 @@
             (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tcc.`teacher_id`) AS teacherName
         FROM `t_challenge_cup` tcc
         WHERE tcc.`id` = #{id}
+          AND tcc.`is_deleted` = 0
     </select>
 
     <sql id="queryCondition">

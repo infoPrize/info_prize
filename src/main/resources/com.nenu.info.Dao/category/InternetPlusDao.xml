@@ -66,6 +66,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        ORDER BY `id` DESC
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.InternetPlusDto">
@@ -97,6 +98,7 @@
             (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tip.`teacher_id`) AS teacherName
         FROM `t_internet_plus` tip
         WHERE tip.`id` = #{id}
+          AND tip.`is_deleted` = 0
     </select>
 
     <sql id="queryCondition">

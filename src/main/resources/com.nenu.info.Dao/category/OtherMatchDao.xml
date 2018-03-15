@@ -61,6 +61,7 @@
         <where>
             <include refid="queryCondition" />
         </where>
+        ORDER BY `id` DESC
     </select>
 
     <select id="selectById" resultType="com.nenu.info.common.dto.category.OtherMatchDto">
@@ -91,6 +92,7 @@
             (SELECT `teacher_name` FROM `t_teacher` tt WHERE tt.`id` = tom.`teacher_id`) AS teacherName
         FROM `t_other_match` tom
         WHERE tom.`id` = #{id}
+            AND tom.`is_deleted` = 0
     </select>
 
     <sql id="queryCondition">
@@ -104,8 +106,11 @@
         <if test="prizeLevel > 0">
             AND `prize_level` = #{prizeLevel}
         </if>
-        <if test="startTime != null and endTime != null">
-            AND `prize_time` BETWEEN CONCAT(#{startTime}, '00:00:00') AND CONCAT(#{endTime}, '23:59:59')
+        <if test="startTime != null ">
+            AND `prize_time` &gt; #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND `prize_time` &lt; #{endTime}
         </if>
         <if test="projectName != ''">
             AND `project_name` = #{projectName}
@@ -131,8 +136,7 @@
             )
         </if>
         <if test="teacherId != null">
-            AND
-            `teacher_id` = #{teacherId}
+            AND `teacher_id` = #{teacherId}
         </if>
     </sql>
 

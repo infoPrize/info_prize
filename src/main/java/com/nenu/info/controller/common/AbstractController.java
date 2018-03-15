@@ -52,6 +52,8 @@ public class AbstractController {
     @Autowired
     protected ImportService importService;
 
+    public static final String NO_SUCH_PAGE_ERROR = "对不起，您访问的页面不存在";
+
     /**
      * 发送JSON数组对象
      * @param jsonArray

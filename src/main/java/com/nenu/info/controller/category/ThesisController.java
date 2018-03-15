@@ -89,7 +89,7 @@ public class ThesisController extends AbstractController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Integer add(@RequestParam(value = "thesisTitle", required = false, defaultValue = "") String journameName,
+    public Integer add(@RequestParam(value = "journalName", required = false, defaultValue = "") String journalName,
                        @RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
                        @RequestParam(value = "thesisTitle", required = false, defaultValue = "") String thesisTitle,
                        @RequestParam(value = "publishTime", required = false) Date publishTime,
@@ -241,7 +241,7 @@ public class ThesisController extends AbstractController {
         if(journalLevel > 0) {
             thesis.setJournalLevel(journalLevel);
         }
-        thesis.setJournalName(journameName);
+        thesis.setJournalName(journalName);
         thesis.setThesisAbstract(thesisAbstract);
         thesis.setTeacherId(teacherId);
 
@@ -334,6 +334,10 @@ public class ThesisController extends AbstractController {
             materialList = materialService.listByTypeAndId(materialId,1);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(thesisDto == null) {
+            model.addAttribute("message", NO_SUCH_PAGE_ERROR);
+            return "common/error";
         }
 
         model.addAttribute("thesisDto", thesisDto);
