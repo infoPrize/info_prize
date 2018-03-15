@@ -1,7 +1,9 @@
 /*Created by liujing on 2018/3/10.*/
 
 //本地地址
-var website = "http://infoprize.nenu.edu.cn/";
+//var website = "http://infoprize.nenu.edu.cn/";
+
+var website = "http://192.168.199.171/";
 //服务器地址
 // var website = "http://120.78.154.246/";
 //服务器地址(带项目名)
@@ -42,7 +44,7 @@ function initdataThesis() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.thesisDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
@@ -53,16 +55,22 @@ function initdataThesis() {
                     for(var i in result) {
                         var acmt = website + "thesis/toDetail/" + result[i].id;
                         cHtml += "<tr><td>" + result[i].journalLevel + "</td><td>" + result[i].journalName + "</td><td>"
-                            + result[i].thesisTitle + "</td><td>" + result[i].publishTimeStr + "</td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].authorName1 + "</td></tr><tr><td>" + result[i].authorName2 + "</td></tr><tr><td>" + result[i].authorName3 + "</td></tr><tr><td>"
-                            + result[i].authorName4 + "</td></tr><tr><td>" + result[i].authorName5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].authorLevel1 + "</td></tr><tr><td>" + result[i].authorLevel2 + "</td></tr><tr><td>" + result[i].authorLevel3 + "</td></tr><tr><td>"
-                            + result[i].authorLevel4 + "</td></tr><tr><td>" + result[i].authorLevel5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].authorStuNumber1 + "</td></tr><tr><td>" + result[i].authorStuNumber2 + "</td></tr><tr><td>" + result[i].authorStuNumber3 + "</td></tr><tr><td>"
-                            + result[i].authorStuNumber4 + "</td></tr><tr><td>" + result[i].authorStuNumber5 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].authorMajor1 + "</td></tr><tr><td>" + result[i].authorMajor2 + "</td></tr><tr><td>" + result[i].authorMajor3 + "</td></tr><tr><td>"
-                            + result[i].authorMajor4 + "</td></tr><tr><td>" + result[i].authorMajor5 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete_thesis' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + result[i].thesisTitle + "</td><td>" + result[i].publishTime + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        var ce = "";
+                        for(var j=0; j<=4; j++){
+                            if(result[i].authorNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].authorNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].authorLevelArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].authorStuNumberArr[j] + "</td></tr>";
+                                ce += "<tr><td>"+ result[i].authorMajorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td class='td_table'><table class='sub'>" + ce +"</table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            + acmt + "' >查看详情</a></td><td><a class='delete_thesis' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -130,7 +138,7 @@ function initdataPatent() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.patentDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
@@ -140,21 +148,20 @@ function initdataPatent() {
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "patent/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].patentType + "</td><td>" + result[i].patentName + "</td><td>"
-                            + result[i].applyTimeStr + "</td><td class='td_table'><table class='sub'>";
+                        cHtml += "<tr><td>" + result[i].patentType + "</td><td class='turn'>" + result[i].patentName + "</td><td>"
+                            + result[i].applyTime + "</td><td class='td_table'><table class='sub'>";
                         var ca = "";
                         var cb = "";
                         var cd = "";
                         for(var j=0; j<=4; j++){
-                            console.log(result[i].applierNameArr[j]);
-                            if(result[i].applierNameArr[j] != "" && j < 4){
-                                ca += "<tr><td>"+ result[i].applierNameArr[j] + "</td></tr>";
-                                cb += "<tr><td>"+ result[i].applierStuMajor[j] + "</td></tr>";
-                                cd += "<tr><td>"+ result[i].applierStuNumber[j] + "</td></tr>";
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuMajorArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
                             }
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
-                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='" + acmt + "' >去往详情页</a></td><td><a class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='" + acmt + "' >查看详情</a></td><td><a href='' class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -218,25 +225,33 @@ function initdataScience() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.scientificProjectDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
                 "maxshowpageitem": max, //最多显示的页码个数
                 "pagelistcount": pagelistc, //每页显示数据个数
                 "callBack": function(result) {
+                    console.log(result);
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "scientificProject/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].projectType + "</td><td>" + result[i].projectName + "</td><td>"
-                            + result[i].setYear + "</td><td>" + result[i].projectManName + "</td><td>" + result[i].projectManSex +
-                            "</td><td>" + result[i].projectManStuNumber + "</td><td>" + result[i].projectManPhone + "</td><td>"
-                            + result[i].projectManMajor + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].projectMemberName1 + "</td></tr><tr><td>" + result[i].projectMemberName2 + "</td></tr><tr><td>"
-                            + result[i].projectMemberName3 + "</td></tr><tr><td>" + result[i].projectMemberName4 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].projectMemberStuNumber1 + "</td></tr><tr><td>" + result[i].projectMemberStuNumber2 + "</td></tr><tr><td>" + result[i].projectMemberStuNumber3 + "</td></tr><tr><td>"
-                            + result[i].projectMemberStuNumber4 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td>" + result[i].fundsLimit + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete delete_science' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td class='turn'>" + result[i].projectType + "</td><td class='turn'>" + result[i].projectName + "</td><td>"
+                            + result[i].setYear + "</td><td>" + result[i].stuNameArr[0] + "</td><td>" + result[i].stuNumberArr[0] + "</td><td>"
+                            + result[i].projectManPhone + "</td><td>" + result[i].stuMajorArr[0] + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=1; j<=4; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuMajorArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td>" + result[i].fundsLimit + "</td><td><a href='"
+                            + acmt + "' >查看详情</a></td><td><a class='delete delete_science' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -306,26 +321,33 @@ function initdataAcm() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.acmPrizeDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
                 "maxshowpageitem": max, //最多显示的页码个数
                 "pagelistcount": pagelistc, //每页显示数据个数
                 "callBack": function(result) {
+                    console.log(result);
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "acm/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateName1 + "</td></tr><tr><td>" + result[i].teammateName2 + "</td></tr><tr><td>"
-                            + result[i].teammateName3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateStuNumber1 + "</td></tr><tr><td>" + result[i].teammateStuNumber2 + "</td></tr><tr><td>"
-                            + result[i].teammateStuNumber3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateMajor1 + "</td></tr><tr><td>" + result[i].teammateMajor2 + "</td></tr><tr><td>"
-                            + result[i].teammateMajor3 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td class='turn'>" + result[i].matchName + "</td><td class='turn'>"
+                            + result[i].hostUnit + "</td><td>" + result[i].prizeTime + "</td><td>" + result[i].prizeLevel +
+                            "</td><td class='turn'>" + result[i].teamName + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=2; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].majorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>"+ result[i].teacherName + "</td><td><a href='"
+                            + acmt + "' >查看详情</a></td><td><a class='delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -396,7 +418,7 @@ function initdataMath() {
         dataType:"json",
         success: function(data, textStatus) {
             console.log(data);
-            var datas = data.mathModelPrizeDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
@@ -407,16 +429,22 @@ function initdataMath() {
                     var cHtml = "";
                     for(var i in result) {
                         var mathd = website + "mathModel/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].teamName + "</td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateName1 + "</td></tr><tr><td>" + result[i].teammateName2 + "</td></tr><tr><td>"
-                            + result[i].teammateName3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateStuNumber1 + "</td></tr><tr><td>" + result[i].teammateStuNumber2 + "</td></tr><tr><td>"
-                            + result[i].teammateStuNumber3 + "</td></tr></table></td><td class='td_table hidecol'><table class='sub'><tr><td>"
-                            + result[i].teammateMajor1 + "</td></tr><tr><td>" + result[i].teammateMajor2 + "</td></tr><tr><td>"
-                            + result[i].teammateMajor3 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + mathd + "' >去往详情页</a></td><td><a class='delete_math' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td class='turn'>" + result[i].matchName + "</td><td class='turn'>"
+                            + result[i].hostUnit + "</td><td>" + result[i].prizeTime + "</td><td>" + result[i].prizeLevel +
+                            "</td><td class='turn'>" + result[i].teamName + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=2; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].majorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            + mathd + "' >查看详情</a></td><td><a class='delete_math' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -488,26 +516,33 @@ function initdataCup() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.challengeCupDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
                 "maxshowpageitem": max, //最多显示的页码个数
                 "pagelistcount": pagelistc, //每页显示数据个数authorMajor
                 "callBack": function(result) {
+                    console.log(result);
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "ChallengeCup/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
-                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
-                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
-                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
-                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
-                            + result[i].prizeTimeStr + "</td><td>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete_cup' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td class='turn'>" + result[i].matchName + "</td><td class='turn'>"
+                            + result[i].projectName + "</td><td class='turn'>" + result[i].teamName + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=7; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].stuMajorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].prizeLevel + "</td><td>"
+                            + result[i].prizeTime + "</td><td class='turn'>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
+                            + acmt + "' >查看详情</a></td><td><a class='delete_cup' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -578,7 +613,7 @@ function initdataInternet() {
         },
         dataType:"json",
         success: function(data, textStatus) {
-            var datas = data.internetPlusDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
@@ -588,17 +623,22 @@ function initdataInternet() {
                     var cHtml = "";
                     for(var i in result) {
                         var acmt = website + "InternetPlus/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].projectName + "</td><td>" + result[i].teamName + "</td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
-                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
-                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td>"
-                            + "<td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
-                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
-                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].prizeLevel + "</td><td>"
-                            + result[i].prizeTimeStr + "</td><td>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >去往详情页</a></td><td><a class='delete_Internet' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td class='turn'>" + result[i].matchName + "</td><td class='turn'>"
+                            + result[i].projectName + "</td><td class='turn'>" + result[i].teamName + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=7; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].stuMajorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].prizeLevel + "</td><td>"
+                            + result[i].prizeTime + "</td><td class='turn'>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
+                            + acmt + "' >查看详情</a></td><td><a class='delete_Internet' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -669,7 +709,7 @@ function initdataOther() {
         dataType:"json",
         success: function(data, textStatus) {
             console.log(data);
-            var datas = data.otherMatchDtoList;
+            var datas = data.data;
             options = {
                 "id": "page", //显示页码的元素
                 "data": datas, //显示数据
@@ -680,16 +720,22 @@ function initdataOther() {
                     var cHtml = "";
                     for(var i in result) {
                         var mathd = website + "otherMatch/toDetail/" + result[i].id;
-                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td>" + result[i].matchName + "</td><td>"
-                            + result[i].hostUnit + "</td><td>" + result[i].prizeTimeStr + "</td><td>" + result[i].prizeLevel +
-                            "</td><td>" + result[i].projectName + "</td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuName1 + "</td></tr><tr><td>" + result[i].stuName2 + "</td></tr><tr><td>" + result[i].stuName3 + "</td></tr><tr><td>"
-                            + result[i].stuName4 + "</td></tr><tr><td>" + result[i].stuName5 + "</td></tr><tr><td>" + result[i].stuName6 + "</td></tr><tr><td>"
-                            + result[i].stuName7 + "</td></tr><tr><td>" + result[i].stuName8 + "</td></tr></table></td><td class='td_table'><table class='sub'><tr><td>"
-                            + result[i].stuNumber1 + "</td></tr><tr><td>" + result[i].stuNumber2 + "</td></tr><tr><td>" + result[i].stuNumber3 + "</td></tr><tr><td>"
-                            + result[i].stuNumber4 + "</td></tr><tr><td>" + result[i].stuNumber5 + "</td></tr><tr><td>" + result[i].stuNumber6 + "</td></tr><tr><td>"
-                            + result[i].stuNumber7 + "</td></tr><tr><td>" + result[i].stuNumber8 + "</td></tr></table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + mathd + "' >去往详情页</a></td><td><a class='delete_other' id='" + result[i].id + "'>删除</a></td><tr>";
+                        cHtml += "<tr><td>" + result[i].matchLevel + "</td><td class='turn'>" + result[i].matchName + "</td><td class='turn'>"
+                            + result[i].hostUnit + "</td><td>" + result[i].prizeTime + "</td><td>" + result[i].prizeLevel +
+                            "</td><td class='turn'>" + result[i].projectName + "</td><td class='td_table'><table class='sub'>";
+                        var ca = "";
+                        var cb = "";
+                        var cd = "";
+                        for(var j=0; j<=7; j++){
+                            if(result[i].stuNameArr[j] != ""){
+                                ca += "<tr><td>"+ result[i].stuNameArr[j] + "</td></tr>";
+                                cb += "<tr><td>"+ result[i].stuNumberArr[j] + "</td></tr>";
+                                cd += "<tr><td>"+ result[i].stuMajorArr[j] + "</td></tr>";
+                            }
+                        }
+                        cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='"
+                            + mathd + "' >查看详情</a></td><td><a class='delete_other' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 

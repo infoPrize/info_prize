@@ -124,7 +124,8 @@
                                     <th class="text-center">项目名称</th>
                                     <th class="text-center">团队名称</th>
                                     <th class="text-center">参赛成员</th>
-                                    <th class="text-center">参赛成员学号</th>
+                                    <th class="text-center">成员学号</th>
+                                    <th class="text-center">成员专业</th>
                                     <th class="text-center">获奖等级</th>
                                     <th class="text-center">比赛时间</th>
                                     <th class="text-center">主办单位</th>

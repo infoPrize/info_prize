@@ -105,8 +105,6 @@
 
 								<div class="x_title title2">
 									<h3 class="dinline">查询结果</h3>
-									<button id="showcolumn">显示所有栏目</button>
-									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
@@ -117,12 +115,12 @@
 												<th class="text-center">项目名称</th>
 												<th class="text-center">立项年份</th>
 												<th class="text-center">项目负责人</th>
-												<th class="text-center">负责人性别</th>
 												<th class="text-center">负责人学号</th>
 												<th class="text-center">负责人联系方式</th>
 												<th class="text-center">负责人专业</th>
-												<th class="text-center hidecol">项目组成员</th>
-												<th class="text-center hidecol">组员学号</th>
+												<th class="text-center">组员姓名</th>
+												<th class="text-center">组员专业</th>
+												<th class="text-center">组员学号</th>
 												<th class="text-center">指导老师</th>
 												<th class="text-center">批复经费</th>
 												<th class="text-center">详情信息</th>
@@ -151,15 +149,5 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
-		<script type="text/javascript">
-            $(document).ready(function(){
-                $("#showcolumn").click(function(){
-                    $(".hidecol").css("display","table-cell");
-                });
-                $("#hidecolumn").click(function(){
-                    $(".hidecol").css("display","none");
-                });
-            })
-		</script>
 	</body>
 </html>

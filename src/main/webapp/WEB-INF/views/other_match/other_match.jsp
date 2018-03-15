@@ -130,6 +130,7 @@
                                     <th class="text-center">项目名称</th>
                                     <th class="text-center">获奖人员</th>
                                     <th class="text-center">获奖人员学号</th>
+                                    <th class="text-center">成员专业</th>
                                     <th class="text-center">指导老师</th>
                                     <th class="text-center">详情信息</th>
                                     <th class="text-center">操作</th>

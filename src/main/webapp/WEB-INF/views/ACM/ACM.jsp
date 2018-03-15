@@ -118,8 +118,6 @@
 								</div>
 								<div class="x_title">
 									<h3 class="dinline">查询结果</h3>
-									<button id="showcolumn">显示所有栏目</button>
-									<button id="hidecolumn">显示部分栏目</button>
 									<hr/>
 								</div>
 								<div class="x_content">
@@ -132,9 +130,9 @@
 												<th class="text-center">获奖时间</th>
 												<th class="text-center">获奖等级</th>
 												<th class="text-center">团队名称</th>
-												<th class="text-center hidecol">参赛人员</th>
-												<th class="text-center hidecol">学号</th>
-												<th class="text-center hidecol">专业</th>
+												<th class="text-center">参赛人员</th>
+												<th class="text-center">学号</th>
+												<th class="text-center">专业</th>
 												<th class="text-center">指导老师</th>
 												<th class="text-center">详情信息</th>
 												<th class="text-center">操作</th>
@@ -163,14 +161,6 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript">
-            $(document).ready(function(){
-                $("#showcolumn").click(function(){
-                    $(".hidecol").css("display","table-cell");
-                });
-                $("#hidecolumn").click(function(){
-                    $(".hidecol").css("display","none");
-                });
-            })
             !function(){
                 laydate({
                     elem: '#endTime'
