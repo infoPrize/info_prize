@@ -42,4 +42,9 @@ public interface TeacherService {
      */
     public boolean checkTeacherExist(String teacherName) throws Exception;
 
+    /**
+     * 根据id删除教师信息
+     */
+    public void deleteById(Integer id) throws Exception;
+
 }

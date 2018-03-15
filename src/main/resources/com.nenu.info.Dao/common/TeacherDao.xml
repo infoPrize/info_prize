@@ -27,9 +27,17 @@
 
     <select id="listAll" resultType="com.nenu.info.common.dto.common.TeacherDto">
         SELECT
+            tt.`id` AS id,
             tt.`teacher_name` AS teacherName,
             (SELECT ttl.`level` FROM `t_teacher_level` ttl WHERE tt.`teacher_level` = ttl.`id`) AS teacherLevel,
             tt.`phone` AS phone
         FROM `t_teacher` tt
+        ORDER BY `id` DESC
     </select>
+
+    <delete id="deleteById">
+        DELETE
+          FROM `t_teacher`
+          WHERE `id` = #{id}
+    </delete>
 </mapper>

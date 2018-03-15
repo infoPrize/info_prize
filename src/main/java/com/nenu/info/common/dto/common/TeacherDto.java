@@ -7,6 +7,8 @@ package com.nenu.info.common.dto.common;
  */
 public class TeacherDto {
 
+    private Integer id;
+
     //教师姓名
     private String teacherName;
 
@@ -15,6 +17,14 @@ public class TeacherDto {
 
     //电话号码
     private String phone;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTeacherName() {
         return teacherName;

@@ -74,4 +74,9 @@ public class TeacherServiceImpl implements TeacherService {
             return true;            //可以查出来，该教师存在
         }
     }
+
+    @Override
+    public void deleteById(Integer id) throws Exception {
+        teacherDao.deleteById(id);
+    }
 }

@@ -70,7 +70,7 @@
                                         <td >${teacher.teacherLevel}</td>
                                         <td >${teacher.phone}</td>
                                         <td class="aparent">
-                                            <a href="" data-toggle="modal" data-target="#delete">删除</a>
+                                            <a href="${website}teacher/deleteById/${teacher.id}">删除</a>
                                         </td>
                                     </tr>
                                     </c:forEach>

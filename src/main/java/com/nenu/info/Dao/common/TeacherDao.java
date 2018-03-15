@@ -51,4 +51,9 @@ public interface TeacherDao {
      */
     public List<TeacherDto> listAll() throws Exception;
 
+    /**
+     * 根据id删除教师信息
+     */
+    public void deleteById(@Param("id") Integer id) throws Exception;
+
 }

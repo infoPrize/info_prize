@@ -6,6 +6,7 @@ import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -87,6 +88,19 @@ public class TeacherController {
         }
 
         return 1;
+    }
+
+    /**
+     * 根据id删除教师信息
+     */
+    @RequestMapping(value = "deleteById/{id}")
+    public String deleteById(@PathVariable("id") Integer id) {
+        try {
+            teacherService.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/teacher/toTeacher";
     }
 
 }
