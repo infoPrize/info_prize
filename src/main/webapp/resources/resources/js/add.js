@@ -365,7 +365,339 @@ $(function(){
         });
     });
 
+    //添加挑战杯信息
+    $("#sort_comp").click(function(){
+        var matchName = $('#matchName').val();
+        var hostUnit = $('#hostUnit').val();
+        var matchLevel = $('#matchLevel').val();
+        var prizeLevel = $('#prizeLevel').val();
+        var prizeTime = $('#prizeTime').val();
+        var projectName = $('#projectName').val();
+        var teamName = $('#teamName').val();
+        var teammateName1 = $('#teammateName1').val();
+        var teammateStuNumber1 = $('#teammateStuNumber1').val();
+        var teammateName2 = $('#teammateName2').val();
+        var teammateStuNumber2 = $('#teammateStuNumber2').val();
+        var teammateName3 = $('#teammateName3').val();
+        var teammateStuNumber3 = $('#teammateStuNumber3').val();
+        var teammateName4 = $('#teammateName4').val();
+        var teammateStuNumber4 = $('#teammateStuNumber4').val();
+        var teammateName5 = $('#teammateName5').val();
+        var teammateStuNumber5 = $('#teammateStuNumber5').val();
+        var teammateName6 = $('#teammateName6').val();
+        var teammateStuNumber6 = $('#teammateStuNumber6').val();
+        var teammateName7 = $('#teammateName7').val();
+        var teammateStuNumber7 = $('#teammateStuNumber7').val();
+        var teammateName8 = $('#teammateName8').val();
+        var teammateStuNumber8 = $('#teammateStuNumber8').val();
+        var teacherName = $('#teacherName').val();
+        $.ajax({
+            type: 'post',
+            url: website + "ChallengeCup/add",
+            dataType: "text",
+            data:{
+                matchName: matchName,
+                hostUnit: hostUnit,
+                matchLevel: matchLevel,
+                prizeLevel: prizeLevel,
+                prizeTime: prizeTime,
+                projectName: projectName,
+                teamName: teamName,
+                teammateName1: teammateName1,
+                teammateStuNumber1: teammateStuNumber1,
+                teammateName2: teammateName2,
+                teammateStuNumber2: teammateStuNumber2,
+                teammateName3: teammateName3,
+                teammateStuNumber3: teammateStuNumber3,
+                teacherName4: teacherName4,
+                teammateStuNumber4: teammateStuNumber4,
+                teacherName5: teacherName5,
+                teammateStuNumber5: teammateStuNumber5,
+                teacherName6: teacherName6,
+                teammateStuNumber6: teammateStuNumber6,
+                teacherName7: teacherName7,
+                teammateStuNumber7: teammateStuNumber7,
+                teacherName8: teacherName8,
+                teammateStuNumber8: teammateStuNumber8
+            },
+            success: function (msg) {
+                msg = parseInt(msg);
+                if (msg == 10) {
+                    alert("插入成功!");
+                }
+                else if (msg == -1) {
+                    alert("输入错误!");
+                }
+                else if (msg == 1){
+                    alert("队员1的姓名学号不匹配!");
+                }
+                else if (msg == 2){
+                    alert("队员2的姓名学号不匹配!");
+                }
+                else if (msg == 3){
+                    alert("队员3的姓名学号不匹配!");
+                }
+                else if (msg == 4){
+                    alert("队员4的姓名学号不匹配!");
+                }
+                else if (msg == 5){
+                    alert("队员5的姓名学号不匹配!");
+                }
+                else if (msg == 6){
+                    alert("队员6的姓名学号不匹配!");
+                }
+                else if (msg == 7){
+                    alert("队员7的姓名学号不匹配!");
+                }
+                else if (msg == 8){
+                    alert("队员8的姓名学号不匹配!");
+                }
+                else if (msg == 9){
+                    alert("该教师不存在!");
+                }
+            },
+            error: function (msg) {
+                alert("error!");
+            } ,
+            traditional: true
+        });
+    });
+
+    //添加互联网+信息
+    $("#sort_int").click(function(){
+        var matchName = $('#matchName').val();
+        var hostUnit = $('#hostUnit').val();
+        var matchLevel = $('#matchLevel').val();
+        var prizeLevel = $('#prizeLevel').val();
+        var prizeTime = $('#prizeTime').val();
+        var projectName = $('#projectName').val();
+        var teamName = $('#teamName').val();
+        var teammateName1 = $('#teammateName1').val();
+        var teammateStuNumber1 = $('#teammateStuNumber1').val();
+        var teammateName2 = $('#teammateName2').val();
+        var teammateStuNumber2 = $('#teammateStuNumber2').val();
+        var teammateName3 = $('#teammateName3').val();
+        var teammateStuNumber3 = $('#teammateStuNumber3').val();
+        var teammateName4 = $('#teammateName4').val();
+        var teammateStuNumber4 = $('#teammateStuNumber4').val();
+        var teammateName5 = $('#teammateName5').val();
+        var teammateStuNumber5 = $('#teammateStuNumber5').val();
+        var teammateName6 = $('#teammateName6').val();
+        var teammateStuNumber6 = $('#teammateStuNumber6').val();
+        var teammateName7 = $('#teammateName7').val();
+        var teammateStuNumber7 = $('#teammateStuNumber7').val();
+        var teammateName8 = $('#teammateName8').val();
+        var teammateStuNumber8 = $('#teammateStuNumber8').val();
+        var teacherName = $('#teacherName').val();
+        $.ajax({
+            type: 'post',
+            url: website + "InternetPlus/add",
+            dataType: "text",
+            data:{
+                matchName: matchName,
+                hostUnit: hostUnit,
+                matchLevel: matchLevel,
+                prizeLevel: prizeLevel,
+                prizeTime: prizeTime,
+                projectName: projectName,
+                teamName: teamName,
+                teammateName1: teammateName1,
+                teammateStuNumber1: teammateStuNumber1,
+                teammateName2: teammateName2,
+                teammateStuNumber2: teammateStuNumber2,
+                teammateName3: teammateName3,
+                teammateStuNumber3: teammateStuNumber3,
+                teacherName4: teacherName4,
+                teammateStuNumber4: teammateStuNumber4,
+                teacherName5: teacherName5,
+                teammateStuNumber5: teammateStuNumber5,
+                teacherName6: teacherName6,
+                teammateStuNumber6: teammateStuNumber6,
+                teacherName7: teacherName7,
+                teammateStuNumber7: teammateStuNumber7,
+                teacherName8: teacherName8,
+                teammateStuNumber8: teammateStuNumber8
+            },
+            success: function (msg) {
+                msg = parseInt(msg);
+                if (msg == 10) {
+                    alert("插入成功!");
+                }
+                else if (msg == -1) {
+                    alert("输入错误!");
+                }
+                else if (msg == 1){
+                    alert("队员1的姓名学号不匹配!");
+                }
+                else if (msg == 2){
+                    alert("队员2的姓名学号不匹配!");
+                }
+                else if (msg == 3){
+                    alert("队员3的姓名学号不匹配!");
+                }
+                else if (msg == 4){
+                    alert("队员4的姓名学号不匹配!");
+                }
+                else if (msg == 5){
+                    alert("队员5的姓名学号不匹配!");
+                }
+                else if (msg == 6){
+                    alert("队员6的姓名学号不匹配!");
+                }
+                else if (msg == 7){
+                    alert("队员7的姓名学号不匹配!");
+                }
+                else if (msg == 8){
+                    alert("队员8的姓名学号不匹配!");
+                }
+                else if (msg == 9){
+                    alert("该教师不存在!");
+                }
+            },
+            error: function (msg) {
+                alert("error!");
+            } ,
+            traditional: true
+        });
+    });
+
     // 添加其他比赛信息
+    $("#sort_other").click(function(){
+        var matchName = $('#matchName').val();
+        var hostUnit = $('#hostUnit').val();
+        var matchLevel = $('#matchLevel').val();
+        var prizeLevel = $('#prizeLevel').val();
+        var prizeTime = $('#prizeTime').val();
+        var projectName = $('#projectName').val();
+        var teamName = $('#teamName').val();
+        var teammateName1 = $('#teammateName1').val();
+        var teammateStuNumber1 = $('#teammateStuNumber1').val();
+        var teammateName2 = $('#teammateName2').val();
+        var teammateStuNumber2 = $('#teammateStuNumber2').val();
+        var teammateName3 = $('#teammateName3').val();
+        var teammateStuNumber3 = $('#teammateStuNumber3').val();
+        var teammateName4 = $('#teammateName4').val();
+        var teammateStuNumber4 = $('#teammateStuNumber4').val();
+        var teammateName5 = $('#teammateName5').val();
+        var teammateStuNumber5 = $('#teammateStuNumber5').val();
+        var teammateName6 = $('#teammateName6').val();
+        var teammateStuNumber6 = $('#teammateStuNumber6').val();
+        var teammateName7 = $('#teammateName7').val();
+        var teammateStuNumber7 = $('#teammateStuNumber7').val();
+        var teammateName8 = $('#teammateName8').val();
+        var teammateStuNumber8 = $('#teammateStuNumber8').val();
+        var teacherName = $('#teacherName').val();
+        $.ajax({
+            type: 'post',
+            url: website + "otherMatch/add",
+            dataType: "text",
+            data:{
+                matchName: matchName,
+                hostUnit: hostUnit,
+                matchLevel: matchLevel,
+                prizeLevel: prizeLevel,
+                prizeTime: prizeTime,
+                projectName: projectName,
+                teamName: teamName,
+                teammateName1: teammateName1,
+                teammateStuNumber1: teammateStuNumber1,
+                teammateName2: teammateName2,
+                teammateStuNumber2: teammateStuNumber2,
+                teammateName3: teammateName3,
+                teammateStuNumber3: teammateStuNumber3,
+                teacherName4: teacherName4,
+                teammateStuNumber4: teammateStuNumber4,
+                teacherName5: teacherName5,
+                teammateStuNumber5: teammateStuNumber5,
+                teacherName6: teacherName6,
+                teammateStuNumber6: teammateStuNumber6,
+                teacherName7: teacherName7,
+                teammateStuNumber7: teammateStuNumber7,
+                teacherName8: teacherName8,
+                teammateStuNumber8: teammateStuNumber8
+            },
+            success: function (msg) {
+                msg = parseInt(msg);
+                if (msg == 10) {
+                    alert("插入成功!");
+                }
+                else if (msg == -1) {
+                    alert("输入错误!");
+                }
+                else if (msg == 1){
+                    alert("队员1的姓名学号不匹配!");
+                }
+                else if (msg == 2){
+                    alert("队员2的姓名学号不匹配!");
+                }
+                else if (msg == 3){
+                    alert("队员3的姓名学号不匹配!");
+                }
+                else if (msg == 4){
+                    alert("队员4的姓名学号不匹配!");
+                }
+                else if (msg == 5){
+                    alert("队员5的姓名学号不匹配!");
+                }
+                else if (msg == 6){
+                    alert("队员6的姓名学号不匹配!");
+                }
+                else if (msg == 7){
+                    alert("队员7的姓名学号不匹配!");
+                }
+                else if (msg == 8){
+                    alert("队员8的姓名学号不匹配!");
+                }
+                else if (msg == 9){
+                    alert("该教师不存在!");
+                }
+            },
+            error: function (msg) {
+                alert("error!");
+            } ,
+            traditional: true
+        });
+    });
+
+    // 添加学生信息
+//  $("#sort_student").click(function(){
+//      var stuNumber = $('#stuNumber').val();
+//      var name = $('#name').val();
+//      var sex = $('#sex').val();
+//      var grade = $('#grade').val();
+//      var profession = $('#profession').val();
+//      var phone = $('#phone').val();
+//      $.ajax({
+//          type: 'post',
+//          url: website + "mathModel/add",
+//          dataType: "text",
+//          data:{
+//              stuNumber:stuNumber,
+//              name:name,
+//              sex:sex,
+//              grade:grade,
+//              profession:profession,
+//              phone:phone
+//          },
+//          success: function (msg) {
+//              msg = parseInt(msg);
+//              if (msg == 5) {
+//                  alert("插入成功!");
+//              }
+//              else if (msg == -1) {
+//                  alert("输入错误!");
+//              }
+//              else if (msg == 1){
+//                  alert("学号已存在!");
+//              }
+//
+//          },
+//          error: function (msg) {
+//              alert("error!");
+//          } ,
+//          traditional: true
+//      });
+//  });
 
     //添加教师
     $("#sort_teacher").click(function(){
@@ -414,6 +746,11 @@ $(function(){
     });
     $("#define").click(function (e) {
         if($("#file_name").val()==null||$("#file_name").val()==""){
+            e.preventDefault();
+        }
+    });
+    $("#sort_student").click(function (e) {
+        if($("#stuNumber").val()==null||$("#stuNumber").val()==""){
             e.preventDefault();
         }
     });

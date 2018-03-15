@@ -31,16 +31,16 @@
                                     <!--第一行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">比赛名称：</label>
-                                            <input type="text" name="matchName" class="form-control" />
+                                            <label class="tab-label control-label text-right" for="matchName">比赛名称：</label>
+                                            <input type="text" name="matchName" class="form-control" id="matchName"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">主办单位：</label>
-                                            <input type="text" name="hostUnit" class="form-control" />
+                                            <label class="tab-label control-label text-right" for="hostUnit">主办单位：</label>
+                                            <input type="text" name="hostUnit" class="form-control" id="hostUnit"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">比赛等级：</label>
-                                            <select class="form-control" name="matchLevel">
+                                            <label class="tab-label control-label text-right" for="matchLevel">比赛等级：</label>
+                                            <select class="form-control" name="matchLevel" id="matchLevel">
                                                 <option class="level_option" value="-1">---请选择比赛等级---</option>
                                                 <option value="1">校级</option>
                                                 <option value="2">市级</option>
@@ -52,10 +52,11 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <!--第二行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">获奖等级：</label>
-                                            <select class="form-control" name="prizeLevel">
+                                            <label class="tab-label control-label text-right" for="prizeLevel">获奖等级：</label>
+                                            <select class="form-control" name="prizeLevel" id="prizeLevel">
                                                 <option class="level_option" value="-1">---请选择获奖等级---</option>
                                                 <option value="1">一等奖(金奖)</option>
                                                 <option value="2">二等奖(银奖)</option>
@@ -68,31 +69,31 @@
                                             <input type="text" id="prizeTime" name="prizeTime" class="form-control" onClick="laydate()"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">项目名：</label>
-                                            <input type="text" name="projectName" class="form-control" />
+                                            <label class="tab-label control-label text-right" for="projectName">项目名：</label>
+                                            <input type="text" name="projectName" class="form-control" id="projectName"/>
                                         </div>
                                     </div>
-                                    <!--第二行-->
+                                    <!--第三行-->
                                     <div class="tab-row" id="challenge_cup">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">团队名：</label>
-                                            <input type="text" name="teamName" class="form-control" />
+                                            <label class="tab-label control-label text-right" for="teamName">团队名：</label>
+                                            <input type="text" name="teamName" class="form-control" id="teamName"/>
                                         </div>
 
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="student_name1">团队成员1姓名：</label>
-                                            <input type="text" id="student_name1" class="form-control" name="teammateName1"/>
+                                            <label class="tab-label control-label text-right" for="teammateName1">团队成员1姓名：</label>
+                                            <input type="text" id="teammateName1" class="form-control" name="teammateName1"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="student_number1">团队成员1学号：</label>
-                                            <input type="text" id="student_number1" class="form-control" name="teammateStuNumber1"/>
+                                            <label class="tab-label control-label text-right" for="teammateStuNumber1">团队成员1学号：</label>
+                                            <input type="text" id="teammateStuNumber1" class="form-control" name="teammateStuNumber1"/>
                                         </div>
                                     </div>
                                     <!--第三行-->
                                     <div class="tab-row" >
                                         <div class="form-group col-sm-12">
-                                            <label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-                                            <input type="text" class="form-control" name="tutor" id="tutor"/>
+                                            <label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+                                            <input type="text" class="form-control" name="tutor" id="teacherName"/>
                                         </div>
                                     </div>
                                     <!--第四行-->

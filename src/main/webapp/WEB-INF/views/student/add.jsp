@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,8 +23,8 @@
                                 <!--第一行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="number">学号：</label>
-                                        <input type="text" id="number" class="form-control" name="stuNumber"/>
+                                        <label class="tab-label control-label text-right" for="stuNumber">学号：</label>
+                                        <input type="text" id="stuNumber" class="form-control" name="stuNumber"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label class="tab-label control-label text-right" for="name">姓名：</label>
@@ -67,6 +66,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <input type="submit" value="提交" id="sort_student" >
+                                <span class="al green">${message}</span>
                                 <span class="al red">${message}</span>
                                 <br><br>
                             </form>
@@ -82,6 +82,7 @@
                         </a>
                         <input type="submit" class="input" value="确定" id="define"/>
                         <a href="${staticWebsite}resources/student.xls" id="download_model">下载excel模板</a>
+                        ${message}
                     </form>
                 </div>
             </div>

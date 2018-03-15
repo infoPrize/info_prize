@@ -44,7 +44,7 @@ table th, table td{
 	border: 1px solid #33aecc;
 	color: #fff;
 }
-#sort_scient, #sort_ACM, #sort_comp, #sort_math, #sort_patent, #sort_thesis, #sortpatent, #addthesis, #addpatent, #addscientific_project,#addchallenge,#addinternet,#addother_match,#sort_student{
+#sort_scient, #sort_ACM, #sort_comp, #sort_math, #sort_patent, #sort_thesis,#sort_int,#sort_other, #sortpatent, #addthesis, #addpatent, #addscientific_project,#addchallenge,#addinternet,#addother_match,#sort_student{
 	position: relative;
 	right: 80px;
 	float: right;
