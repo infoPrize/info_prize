@@ -67,7 +67,6 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <input type="submit" value="提交" id="sort_student" >
-                                <span class="al green">${message}</span>
                                 <span class="al red">${message}</span>
                                 <br><br>
                             </form>
@@ -83,7 +82,6 @@
                         </a>
                         <input type="submit" class="input" value="确定" id="define"/>
                         <a href="${staticWebsite}resources/student.xls" id="download_model">下载excel模板</a>
-                        ${message}
                     </form>
                 </div>
             </div>

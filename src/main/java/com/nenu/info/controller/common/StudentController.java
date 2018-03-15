@@ -47,14 +47,13 @@ public class StudentController {
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
-    public String add(@RequestParam("name") String name,
-                      @RequestParam("sex") Integer sex,
-                      @RequestParam("stuNumber") String stuNumber,
-                      @RequestParam("grade") String grade,
-                      @RequestParam("majorCode") Integer majorCode,
-                      @RequestParam("phone") String phone,
+    public String add(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+                      @RequestParam(value = "sex", required = false, defaultValue = "1") Integer sex,
+                      @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                      @RequestParam(value = "grade",required = false, defaultValue = "") String grade,
+                      @RequestParam(value = "majorCode",required = false, defaultValue = "1") Integer majorCode,
+                      @RequestParam(value = "phone",required = false, defaultValue = "") String phone,
                       Model model) throws Exception {
-
 
         Student student = new Student();
         student.setName(name);
@@ -63,6 +62,10 @@ public class StudentController {
         student.setGrade(grade);
         student.setMajorCode(majorCode);
         student.setPhone(phone);
+        if(name.equals("") || stuNumber.equals("") || grade.equals("")) {
+            model.addAttribute("message", "添加数据不足");
+            return "student/add";
+        }
 
         try {
             if(studentService.selectStudentByStuNumber(stuNumber) == null){
