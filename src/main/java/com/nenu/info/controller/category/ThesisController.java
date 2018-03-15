@@ -62,7 +62,7 @@ public class ThesisController extends AbstractController {
 
     /**
      * 添加论文信息
-     * @param journameName 期刊名
+     * @param journalName 期刊名
      * @param journalLevel 期刊等级
      * @param thesisTitle  论文题目
      * @param publishTime  发布时间
@@ -111,129 +111,74 @@ public class ThesisController extends AbstractController {
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                        @RequestParam(value = "thesisAbstract", required = false, defaultValue = "") String thesisAbstract) {
         Student student1 = null;
-        Integer studentId1 = null;
         Student student2 = null;
-        Integer studentId2 = null;
         Student student3 = null;
-        Integer studentId3 = null;
         Student student4 = null;
-        Integer studentId4 = null;
         Student student5 = null;
-        Integer studentId5 = null;
 
         Teacher teacher = null;
-        Integer teacherId = null;
 
-        if(!authorStuNumber1.equals("")) {
-            try {
-                student1 = studentService.selectStudentByStuNumber(authorStuNumber1);
-                if(!authorName1.equals(student1.getName())) {
-                    return 2;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            //首先检查几个学生是否输入合法
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName1, authorStuNumber1)) {
+                return 1;
             }
-        }
-        if(student1 != null) {
-            studentId1 = student1.getId();
-        }
-
-        if(!authorStuNumber2.equals("")) {
-            try {
-                student2 = studentService.selectStudentByStuNumber(authorStuNumber2);
-                if(!authorName2.equals(student2.getName())) {
-                    return 3;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName2, authorStuNumber2)) {
+                return 2;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName3, authorStuNumber3)) {
+                return 3;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName4, authorStuNumber4)) {
+                return 4;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName5, authorStuNumber5)) {
+                return 5;
             }
 
-        }
-        if(student2 != null) {
-            studentId2 = student2.getId();
+            //检查教师是否存在
+            if(!teacherService.checkTeacherExist(teacherName)) {
+                return 6;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if(!authorStuNumber3.equals("")) {
-            try {
-                student3 = studentService.selectStudentByStuNumber(authorStuNumber3);
-                if(!authorName3.equals(student3.getName())) {
-                    return 4;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        if(student3 != null) {
-            studentId3 = student3.getId();
-        }
-
-        if(!authorStuNumber4.equals("")) {
-            try {
-                student4 = studentService.selectStudentByStuNumber(authorStuNumber4);
-                if(!authorName4.equals(student4.getName())) {
-                    return 5;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if(student4 != null) {
-            studentId4 = student4.getId();
-        }
-
-        if(!authorStuNumber5.equals("")) {
-            try {
-                student5 = studentService.selectStudentByStuNumber(authorStuNumber5);
-                if(!authorName5.equals(student5.getName())) {
-                    return 6;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if(student5 != null) {
-            studentId5 = student5.getId();
-        }
-
-        if(!teacherName.equals("")) {
-            try {
-                teacher = teacherService.selectTeacherByName(teacherName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (teacher == null) {
-                return 7;
-            }
-        }
-        if(teacher != null) {
-            teacherId = teacher.getId();
+        try {
+            student1 = studentService.selectStudentByStuNumber(authorStuNumber1);
+            student2 = studentService.selectStudentByStuNumber(authorStuNumber2);
+            student3 = studentService.selectStudentByStuNumber(authorStuNumber3);
+            student4 = studentService.selectStudentByStuNumber(authorStuNumber4);
+            student5 = studentService.selectStudentByStuNumber(authorStuNumber5);
+            teacher = teacherService.selectTeacherByName(teacherName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         Thesis thesis = new Thesis();
         thesis.setThesisTitle(thesisTitle);
-        if(studentId1 != null) {
-            thesis.setAuthorId1(studentId1);
+        if(student1 != null) {
+            thesis.setAuthorId1(student1.getId());
             thesis.setAuthorLevel1(authorLevel1);
         }
 
         if(student2 != null) {
-            thesis.setAuthorId2(studentId2);
+            thesis.setAuthorId2(student2.getId());
             thesis.setAuthorLevel2(authorLevel2);
         }
 
         if(student3 != null) {
-            thesis.setAuthorId3(studentId3);
+            thesis.setAuthorId3(student3.getId());
             thesis.setAuthorLevel3(authorLevel3);
         }
 
         if(student4 != null) {
-            thesis.setAuthorId4(studentId4);
+            thesis.setAuthorId4(student4.getId());
             thesis.setAuthorLevel4(authorLevel4);
         }
 
         if(student5 != null) {
-            thesis.setAuthorId5(studentId5);
+            thesis.setAuthorId5(student5.getId());
             thesis.setAuthorLevel5(authorLevel5);
         }
 
@@ -243,7 +188,9 @@ public class ThesisController extends AbstractController {
         }
         thesis.setJournalName(journalName);
         thesis.setThesisAbstract(thesisAbstract);
-        thesis.setTeacherId(teacherId);
+        if(teacher != null) {
+            thesis.setTeacherId(teacher.getId());
+        }
 
         try {
             thesisService.add(thesis);

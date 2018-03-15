@@ -97,33 +97,31 @@ public class MathModelPrizeController extends AbstractController {
         Student teammate3 = null;
         Teacher teacher = null;
 
-        //检查三个队员是否有错
+        try {
+            //检查三位学生输入是否合法
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName1, teammateStuNumber1)) {
+                return 1;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName2, teammateStuNumber2)) {
+                return 2;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName3, teammateStuNumber3)) {
+                return 3;
+            }
+            if(!teacherService.checkTeacherExist(teacherName)) {
+                return 4;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             teammate1 = studentService.selectStudentByStuNumber(teammateStuNumber1);
             teammate2 = studentService.selectStudentByStuNumber(teammateStuNumber2);
             teammate3 = studentService.selectStudentByStuNumber(teammateStuNumber3);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
 
-        //检查三个人是都有人姓名学号不匹配
-        if(teammate1 == null || !teammateName1.equals(teammate1.getName())) {
-            return 1;
-        } else if(teammate2 == null || !teammateName2.equals(teammate2.getName())) {
-            return 2;
-        } else if(teammate3 == null || !teammateName3.equals(teammate3.getName())) {
-            return 3;
-        }
-
-        //检查教师是否存在
-        try {
             teacher = teacherService.selectTeacherByName(teacherName);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if(teacher == null) {
-            return 4;
         }
 
         MathModelPrize mathModelPrize = new MathModelPrize();
@@ -140,10 +138,18 @@ public class MathModelPrizeController extends AbstractController {
         mathModelPrize.setMatchName(matchName);
         mathModelPrize.setHostUnit(hostUnit);
         mathModelPrize.setPrizeTime(prizeTime);
-        mathModelPrize.setTeacherId(teacher.getId());
-        mathModelPrize.setTeammateId1(teammate1.getId());
-        mathModelPrize.setTeammateId2(teammate2.getId());
-        mathModelPrize.setTeammateId3(teammate3.getId());
+        if(teacher != null) {
+            mathModelPrize.setTeacherId(teacher.getId());
+        }
+        if(teammate1 != null) {
+            mathModelPrize.setTeammateId1(teammate1.getId());
+        }
+        if(teammate2 != null) {
+            mathModelPrize.setTeammateId2(teammate2.getId());
+        }
+        if(teammate3 != null) {
+            mathModelPrize.setTeammateId3(teammate3.getId());
+        }
         mathModelPrize.setTeamName(teamName);
 
         mathModelPrizeService.add(mathModelPrize);
