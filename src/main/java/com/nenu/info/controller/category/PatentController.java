@@ -186,7 +186,7 @@ public class PatentController extends AbstractController{
                                       @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                       HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = null;

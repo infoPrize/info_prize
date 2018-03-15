@@ -170,7 +170,7 @@ public class MathModelPrizeController extends AbstractController {
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                       @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                       HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
 
         JSONArray jsonArray = new JSONArray();
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);

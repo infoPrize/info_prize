@@ -212,7 +212,7 @@ public class InternetPlusController extends AbstractController {
                                   @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                   @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                   HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         JSONArray jsonArray = new JSONArray();
         Map<String, Object> params = null;
         try {

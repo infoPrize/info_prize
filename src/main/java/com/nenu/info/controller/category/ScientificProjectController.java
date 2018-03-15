@@ -205,7 +205,7 @@ public class ScientificProjectController extends AbstractController{
                                                        @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                                        @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
                                                        HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);

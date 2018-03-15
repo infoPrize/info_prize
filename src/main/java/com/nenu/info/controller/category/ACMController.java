@@ -187,7 +187,7 @@ public class ACMController extends AbstractController{
                                                @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                                @RequestParam(value = "message", required = false, defaultValue = "") String message,
                                                HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
