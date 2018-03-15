@@ -98,62 +98,46 @@ public class PatentController extends AbstractController{
                        @RequestParam(value = "patentIntroduce", required = false, defaultValue = "") String patentIntroduce) {
 
         Student student1 = null;
-        Integer studentId1 = null;
         Student student2 = null;
-        Integer studentId2 = null;
         Student student3 = null;
-        Integer studentId3 = null;
         Student student4 = null;
-        Integer studentId4 = null;
         Student student5 = null;
-        Integer studentId5 = null;
 
         Teacher teacher = null;
-        Integer teacherId = null;
 
         try {
-            if(!applierName1.equals("")) {
+            //首先检查几个学生是否输入合法
+            if(!studentService.checkMatchingWithNameAndStuNumber(applierName1, applierStuNumber1)) {
+                return 1;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(applierName2, applierStuNumber2)) {
+                return 2;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(applierName3, applierStuNumber3)) {
+                return 3;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(applierName4, applierStuNumber4)) {
+                return 4;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(applierName5, applierStuNumber5)) {
+                return 5;
+            }
+
+            //检查教师是否存在
+            if(!teacherService.checkTeacherExist(teacherName)) {
+                return 6;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
                 student1 = studentService.selectStudentByStuNumber(applierStuNumber1);
-                if(student1 == null || !applierName1.equals(student1.getName())) {
-                    return 1;
-                }
-                studentId1 = student1.getId();
-            }
-            if(!applierName2.equals("")) {
                 student2 = studentService.selectStudentByStuNumber(applierStuNumber2);
-                if(student2 == null || !applierName2.equals(student2.getName())) {
-                    return 2;
-                }
-                studentId2 = student2.getId();
-            }
-            if(!applierName3.equals("")) {
                 student3 = studentService.selectStudentByStuNumber(applierStuNumber3);
-                if(student3 == null || !applierName3.equals(student3.getName())) {
-                    return 3;
-                }
-                studentId3 = student3.getId();
-            }
-            if(!applierName4.equals("")) {
                 student4 = studentService.selectStudentByStuNumber(applierStuNumber4);
-                if(student4 == null || !applierName4.equals(student4.getName())) {
-                    return 4;
-                }
-                studentId4 = student4.getId();
-            }
-            if(!applierName5.equals("")) {
                 student5 = studentService.selectStudentByStuNumber(applierStuNumber5);
-                if(student5 == null || !applierName5.equals(student5.getName())) {
-                    return 5;
-                }
-                studentId5 = student5.getId();
-            }
-            if(!teacherName.equals("")) {
                 teacher = teacherService.selectTeacherByName(teacherName);
-                if(teacher == null) {
-                    return 6;
-                }
-                teacherId = teacher.getId();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,12 +146,24 @@ public class PatentController extends AbstractController{
         patent.setPatentType(patentType);
         patent.setPatentName(patentName);
         patent.setApplyTime(applyTime);
-        patent.setOwnerId1(studentId1);
-        patent.setOwnerId2(studentId2);
-        patent.setOwnerId3(studentId3);
-        patent.setOwnerId4(studentId4);
-        patent.setOwnerId5(studentId5);
-        patent.setTeacherId(teacherId);
+        if(student1 != null) {
+            patent.setOwnerId1(student1.getId());
+        }
+        if(student2 != null) {
+            patent.setOwnerId2(student2.getId());
+        }
+        if(student3 != null) {
+            patent.setOwnerId3(student3.getId());
+        }
+        if(student4 != null) {
+            patent.setOwnerId4(student4.getId());
+        }
+        if(student5 != null) {
+            patent.setOwnerId5(student5.getId());
+        }
+        if(teacher != null) {
+            patent.setTeacherId(teacher.getId());
+        }
         patent.setPatentIntroduce(patentIntroduce);
 
         try {
