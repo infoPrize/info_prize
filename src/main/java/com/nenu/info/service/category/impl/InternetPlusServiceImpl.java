@@ -93,8 +93,54 @@ public class InternetPlusServiceImpl implements InternetPlusService {
         if(internetPlusDtoList != null) {
             for (InternetPlusDto internetPlusDto : internetPlusDtoList) {
                 Date prizeTime = internetPlusDto.getPrizeTime();
-                String prizeTimeStr = sdf.format(prizeTime);
+                String prizeTimeStr = "";
+                if(prizeTime != null) {
+                    prizeTimeStr = sdf.format(prizeTime);
+                }
                 internetPlusDto.setPrizeTimeStr(prizeTimeStr);
+
+                //应前端要求，将姓名、学号、专业转换为数组
+                String[] stuNameArr = new String[8];
+                String stuName1 = internetPlusDto.getStuName1() != null ? internetPlusDto.getStuName1() : "";
+                String stuName2 = internetPlusDto.getStuName2() != null ? internetPlusDto.getStuName2() : "";
+                String stuName3 = internetPlusDto.getStuName3() != null ? internetPlusDto.getStuName3() : "";
+                String stuName4 = internetPlusDto.getStuName4() != null ? internetPlusDto.getStuName4() : "";
+                String stuName5 = internetPlusDto.getStuName5() != null ? internetPlusDto.getStuName5() : "";
+                String stuName6 = internetPlusDto.getStuName6() != null ? internetPlusDto.getStuName6() : "";
+                String stuName7 = internetPlusDto.getStuName7() != null ? internetPlusDto.getStuName7() : "";
+                String stuName8 = internetPlusDto.getStuName8() != null ? internetPlusDto.getStuName8() : "";
+                stuNameArr[0] = stuName1;       stuNameArr[1] = stuName2;       stuNameArr[2] = stuName3;
+                stuNameArr[3] = stuName4;       stuNameArr[4] = stuName5;       stuNameArr[5] = stuName6;
+                stuNameArr[6] = stuName7;       stuNameArr[7] = stuName8;
+                internetPlusDto.setStuNameArr(stuNameArr);
+
+                String[] stuNumberArr = new String[8];
+                String stuNumber1 = internetPlusDto.getStuNumber1() != null ? internetPlusDto.getStuNumber1() : "";
+                String stuNumber2 = internetPlusDto.getStuNumber2() != null ? internetPlusDto.getStuNumber2() : "";
+                String stuNumber3 = internetPlusDto.getStuNumber3() != null ? internetPlusDto.getStuNumber3() : "";
+                String stuNumber4 = internetPlusDto.getStuNumber4() != null ? internetPlusDto.getStuNumber4() : "";
+                String stuNumber5 = internetPlusDto.getStuNumber5() != null ? internetPlusDto.getStuNumber5() : "";
+                String stuNumber6 = internetPlusDto.getStuNumber6() != null ? internetPlusDto.getStuNumber6() : "";
+                String stuNumber7 = internetPlusDto.getStuNumber7() != null ? internetPlusDto.getStuNumber7() : "";
+                String stuNumber8 = internetPlusDto.getStuNumber8() != null ? internetPlusDto.getStuNumber8() : "";
+                stuNumberArr[0] = stuNumber1;       stuNumberArr[1] = stuNumber2;       stuNumberArr[2] = stuNumber3;
+                stuNumberArr[3] = stuNumber4;       stuNumberArr[4] = stuNumber5;       stuNumberArr[5] = stuNumber6;
+                stuNumberArr[6] = stuNumber7;       stuNumberArr[7] = stuNumber8;
+                internetPlusDto.setStuNumberArr(stuNumberArr);
+
+                String[] majorArr = new String[8];
+                String major1 = internetPlusDto.getStuMajor1() != null ? internetPlusDto.getStuMajor1() : "";
+                String major2 = internetPlusDto.getStuMajor2() != null ? internetPlusDto.getStuMajor2() : "";
+                String major3 = internetPlusDto.getStuMajor3() != null ? internetPlusDto.getStuMajor3() : "";
+                String major4 = internetPlusDto.getStuMajor4() != null ? internetPlusDto.getStuMajor4() : "";
+                String major5 = internetPlusDto.getStuMajor5() != null ? internetPlusDto.getStuMajor5() : "";
+                String major6 = internetPlusDto.getStuMajor6() != null ? internetPlusDto.getStuMajor6() : "";
+                String major7 = internetPlusDto.getStuMajor7() != null ? internetPlusDto.getStuMajor7() : "";
+                String major8 = internetPlusDto.getStuMajor8() != null ? internetPlusDto.getStuMajor8() : "";
+                majorArr[0] = major1;       majorArr[1] = major2;       majorArr[2] = major3;
+                majorArr[3] = major4;       majorArr[4] = major5;       majorArr[5] = major6;
+                majorArr[6] = major7;       majorArr[7] = major8;
+                internetPlusDto.setStuMajorArr(majorArr);
             }
         }
 

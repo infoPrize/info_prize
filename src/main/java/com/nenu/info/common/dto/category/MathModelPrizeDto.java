@@ -60,6 +60,12 @@ public class MathModelPrizeDto {
     //参赛人员3专业
     private String teammateMajor3;
 
+    private String[] stuNameArr;
+
+    private String[] stuNumberArr;
+
+    private String[] majorArr;
+
     //指导老师
     private String teacherName;
 
@@ -197,6 +203,30 @@ public class MathModelPrizeDto {
 
     public void setTeammateMajor3(String teammateMajor3) {
         this.teammateMajor3 = teammateMajor3;
+    }
+
+    public String[] getStuNameArr() {
+        return stuNameArr;
+    }
+
+    public void setStuNameArr(String[] stuNameArr) {
+        this.stuNameArr = stuNameArr;
+    }
+
+    public String[] getStuNumberArr() {
+        return stuNumberArr;
+    }
+
+    public void setStuNumberArr(String[] stuNumberArr) {
+        this.stuNumberArr = stuNumberArr;
+    }
+
+    public String[] getMajorArr() {
+        return majorArr;
+    }
+
+    public void setMajorArr(String[] majorArr) {
+        this.majorArr = majorArr;
     }
 
     public String getTeacherName() {

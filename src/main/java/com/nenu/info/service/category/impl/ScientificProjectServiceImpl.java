@@ -112,6 +112,42 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
             e.printStackTrace();
         }
 
+        //应前端要求，将成员姓名、学号、专业转换成数组
+        if(scientificProjectDtoList != null) {
+            for(ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
+                String []stuNameArr = new String[5];
+                String stuName1 = scientificProjectDto.getProjectManName() != null ? scientificProjectDto.getProjectManName() : "";
+                String stuName2 = scientificProjectDto.getProjectMemberName1() != null ? scientificProjectDto.getProjectMemberName1() : "";
+                String stuName3 = scientificProjectDto.getProjectMemberName2() != null ? scientificProjectDto.getProjectMemberName2() : "";
+                String stuName4 = scientificProjectDto.getProjectMemberName3() != null ? scientificProjectDto.getProjectMemberName3() : "";
+                String stuName5 = scientificProjectDto.getProjectMemberName4() != null ? scientificProjectDto.getProjectMemberName4() : "";
+                stuNameArr[0] = stuName1;   stuNameArr[1] = stuName2;   stuNameArr[2] = stuName3;
+                stuNameArr[3] = stuName4;   stuNameArr[4] = stuName5;
+                scientificProjectDto.setStuNameArr(stuNameArr);
+
+                String []stuNumberArr = new String[5];
+                String stuNumber1 = scientificProjectDto.getProjectManStuNumber() != null ? scientificProjectDto.getProjectManStuNumber() : "";
+                String stuNumber2 = scientificProjectDto.getProjectMemberStuNumber1() != null ? scientificProjectDto.getProjectMemberStuNumber1() : "";
+                String stuNumber3 = scientificProjectDto.getProjectMemberStuNumber2() != null ? scientificProjectDto.getProjectMemberStuNumber2() : "";
+                String stuNumber4 = scientificProjectDto.getProjectMemberStuNumber3() != null ? scientificProjectDto.getProjectMemberStuNumber3() : "";
+                String stuNumber5 = scientificProjectDto.getProjectMemberStuNumber4() != null ? scientificProjectDto.getProjectMemberStuNumber4() : "";
+                stuNumberArr[0] = stuNumber1;   stuNumberArr[1] = stuNumber2;       stuNumberArr[2] = stuNumber3;
+                stuNumberArr[3] = stuNumber4;   stuNumberArr[4] = stuNumber5;
+                scientificProjectDto.setStuNumberArr(stuNumberArr);
+
+                String[] stuMajorArr = new String[5];
+                String stuMajor1 = scientificProjectDto.getProjectManMajor() != null ? scientificProjectDto.getProjectManMajor() : "";
+                String stuMajor2 = scientificProjectDto.getProjectMemberMajor1() != null ? scientificProjectDto.getProjectMemberMajor1() : "";
+                String stuMajor3 = scientificProjectDto.getProjectMemberMajor2() != null ? scientificProjectDto.getProjectMemberMajor2() : "";
+                String stuMajor4 = scientificProjectDto.getProjectMemberMajor3() != null ? scientificProjectDto.getProjectMemberMajor3() : "";
+                String stuMajor5 = scientificProjectDto.getProjectMemberMajor4() != null ? scientificProjectDto.getProjectMemberMajor4() : "";
+                stuMajorArr[0] = stuMajor1;     stuMajorArr[1] = stuMajor2;         stuMajorArr[2] = stuMajor3;
+                stuMajorArr[3] = stuMajor4;     stuMajorArr[4] = stuMajor5;
+                scientificProjectDto.setStuMajorArr(stuMajorArr);
+
+            }
+        }
+
         return scientificProjectDtoList;
     }
 

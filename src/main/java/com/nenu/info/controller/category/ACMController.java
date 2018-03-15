@@ -7,10 +7,12 @@ import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 
 import com.nenu.info.common.utils.*;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.ACMService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -36,19 +38,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = URLConstants.ACM_URL)
-public class ACMController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private ACMService acmService;
-
-    @Autowired
-    private MaterialService materialService;
+public class ACMController extends AbstractController{
 
     /**
      * 去往添加ACM信息的页面
@@ -187,19 +177,60 @@ public class ACMController {
                                                @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                                @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                                @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                               @RequestParam(value = "message", required = false, defaultValue = "") String message) {
-        JSONObject jsonObject = new JSONObject();
+                                               @RequestParam(value = "message", required = false, defaultValue = "") String message,
+                                               HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = acmService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
-
-
         List<ACMPrizeDto> acmPrizeDtoList = acmService.listByConditions(params);
+        if(acmPrizeDtoList != null) {
+            for(ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", acmPrizeDto.getId());
+                if(acmPrizeDto.getMatchLevel() != null) {
+                    jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
+                } else {
+                    jsonObject.put("matchLevel", "");
+                }
+                if(acmPrizeDto.getMatchName() != null) {
+                    jsonObject.put("matchName", acmPrizeDto.getMatchName());
+                } else {
+                    jsonObject.put("matchName", "");
+                }
+                if(acmPrizeDto.getHostUnit() != null) {
+                    jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
+                } else {
+                    jsonObject.put("hostUnit", "");
+                }
+                if(acmPrizeDto.getPrizeTimeStr() != null) {
+                    jsonObject.put("prizeTime", acmPrizeDto.getPrizeTimeStr());
+                } else {
+                    jsonObject.put("prizeTime", "");
+                }
+                if(acmPrizeDto.getPrizeLevel() != null) {
+                    jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
+                } else {
+                    jsonObject.put("prizeLevel", "");
+                }
+                if(acmPrizeDto.getTeamName() != null) {
+                    jsonObject.put("teamName", acmPrizeDto.getTeamName());
+                } else {
+                    jsonObject.put("teamName", "");
+                }
+                jsonObject.put("stuNameArr", acmPrizeDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", acmPrizeDto.getStuNumberArr());
+                jsonObject.put("majorArr", acmPrizeDto.getMajorArr());
+                if(acmPrizeDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
 
-        jsonObject.put("acmPrizeDtoList", acmPrizeDtoList);
-
-        jsonObject.put("message", message);
-
-        return jsonObject;
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

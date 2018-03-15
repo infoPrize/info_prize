@@ -109,64 +109,43 @@ public class PatentServiceImpl implements PatentService {
         List<PatentDto> patentDtoList = patentDao.listByCondition(params);
 
         for(PatentDto patentDto : patentDtoList) {
-            patentDto.setApplyTimeStr(sf.format(patentDto.getApplyTime()));
+            //对日期进行处理
+            Date applyTime = patentDto.getApplyTime();
+            String applyTimeStr = "";
+            if(applyTime != null) {
+                applyTimeStr = sf.format(applyTime);
+            }
+            patentDto.setApplyTimeStr(applyTimeStr);
+
             String [] applierNameArr = new String[5];
-            String applierName1 = patentDto.getApplierName1();
-            String applierName2 = patentDto.getApplierName2();
-            String applierName3 = patentDto.getApplierName3();
-            String applierName4 = patentDto.getApplierName4();
-            String applierName5 = patentDto.getApplierName5();
-            if(applierName1 == null) patentDto.setApplierName1("");
-            if(applierName2 == null) patentDto.setApplierName2("");
-            if(applierName3 == null) patentDto.setApplierName3("");
-            if(applierName4 == null) patentDto.setApplierName4("");
-            if(applierName5 == null) patentDto.setApplierName5("");
-            applierNameArr[0] = patentDto.getApplierName1();
-            applierNameArr[1] = patentDto.getApplierName2();
-            applierNameArr[2] = patentDto.getApplierName3();
-            applierNameArr[3] = patentDto.getApplierName4();
-            applierNameArr[4] = patentDto.getApplierName5();
+            String applierName1 = patentDto.getApplierName1() != null ? patentDto.getApplierName1() : "";
+            String applierName2 = patentDto.getApplierName2() != null ? patentDto.getApplierName2() : "";
+            String applierName3 = patentDto.getApplierName3() != null ? patentDto.getApplierName3() : "";
+            String applierName4 = patentDto.getApplierName4() != null ? patentDto.getApplierName4() : "";
+            String applierName5 = patentDto.getApplierName5() != null ? patentDto.getApplierName5() : "";
+            applierNameArr[0] = applierName1;   applierNameArr[1] = applierName2;    applierNameArr[2] = applierName3;
+            applierNameArr[3] = applierName4;   applierNameArr[4] = applierName5;
             patentDto.setApplierNameArr(applierNameArr);
 
             String [] applierStuNumArr = new String[5];
-            String applierStuNum1 = patentDto.getApplierStuNumber1();
-            String applierStuNum2 = patentDto.getApplierStuNumber2();
-            String applierStuNum3 = patentDto.getApplierStuNumber3();
-            String applierStuNum4 = patentDto.getApplierStuNumber4();
-            String applierStuNum5 = patentDto.getApplierStuNumber5();
-            if(applierStuNum1 == null) patentDto.setApplierStuNumber1("");
-            if(applierStuNum2 == null) patentDto.setApplierStuNumber2("");
-            if(applierStuNum3 == null) patentDto.setApplierStuNumber3("");
-            if(applierStuNum4 == null) patentDto.setApplierStuNumber4("");
-            if(applierStuNum5 == null) patentDto.setApplierStuNumber5("");
-            applierStuNumArr[0] = patentDto.getApplierStuNumber1();
-            applierStuNumArr[1] = patentDto.getApplierStuNumber2();
-            applierStuNumArr[2] = patentDto.getApplierStuNumber3();
-            applierStuNumArr[3] = patentDto.getApplierStuNumber4();
-            applierStuNumArr[4] = patentDto.getApplierStuNumber5();
-            patentDto.setApplierStuNumber(applierStuNumArr);
+            String applierStuNum1 = patentDto.getApplierStuNumber1() != null ? patentDto.getApplierStuNumber1() : "";
+            String applierStuNum2 = patentDto.getApplierStuNumber2() != null ? patentDto.getApplierStuNumber2() : "";
+            String applierStuNum3 = patentDto.getApplierStuNumber3() != null ? patentDto.getApplierStuNumber3() : "";
+            String applierStuNum4 = patentDto.getApplierStuNumber4() != null ? patentDto.getApplierStuNumber4() : "";
+            String applierStuNum5 = patentDto.getApplierStuNumber5() != null ? patentDto.getApplierStuNumber5() : "";
+            applierStuNumArr[0] = applierStuNum1;    applierStuNumArr[1] = applierStuNum2;       applierStuNumArr[2] = applierStuNum3;
+            applierStuNumArr[3] = applierStuNum4;    applierStuNumArr[4] = applierStuNum5;
+            patentDto.setApplierStuNumberArr(applierStuNumArr);
 
             String [] applierMajorArr = new String[5];
-            String applierMajor1 = patentDto.getApplierMajor1();
-            String applierMajor2 = patentDto.getApplierMajor2();
-            String applierMajor3 = patentDto.getApplierMajor3();
-            String applierMajor4 = patentDto.getApplierMajor4();
-            String applierMajor5 = patentDto.getApplierMajor5();
-            if(applierMajor1 == null) patentDto.setApplierMajor1("");
-            if(applierMajor2 == null) patentDto.setApplierMajor2("");
-            if(applierMajor3 == null) patentDto.setApplierMajor3("");
-            if(applierMajor4 == null) patentDto.setApplierMajor4("");
-            if(applierMajor5 == null) patentDto.setApplierMajor5("");
-            applierMajorArr[0] = patentDto.getApplierMajor1();
-            applierMajorArr[1] = patentDto.getApplierMajor2();
-            applierMajorArr[2] = patentDto.getApplierMajor3();
-            applierMajorArr[3] = patentDto.getApplierMajor4();
-            applierMajorArr[4] = patentDto.getApplierMajor5();
-            patentDto.setApplierStuMajor(applierMajorArr);
-
-            if(patentDto.getIntroduce() == null) {
-                patentDto.setIntroduce("");
-            }
+            String applierMajor1 = patentDto.getApplierMajor1() != null ? patentDto.getApplierMajor1() : "";
+            String applierMajor2 = patentDto.getApplierMajor2() != null ? patentDto.getApplierMajor2() : "";
+            String applierMajor3 = patentDto.getApplierMajor3() != null ? patentDto.getApplierMajor3() : "";
+            String applierMajor4 = patentDto.getApplierMajor4() != null ? patentDto.getApplierMajor4() : "";
+            String applierMajor5 = patentDto.getApplierMajor5() != null ? patentDto.getApplierMajor5() : "";
+            applierMajorArr[0] = applierMajor1;      applierMajorArr[1] = applierMajor2;         applierMajorArr[2] = applierMajor3;
+            applierMajorArr[3] = applierMajor4;      applierMajorArr[4] = applierMajor5;
+            patentDto.setApplierStuMajorArr(applierMajorArr);
 
         }
 

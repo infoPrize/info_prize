@@ -9,10 +9,12 @@ import com.nenu.info.common.utils.FileUtil;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.ZipUtil;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.OtherMatchService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,19 +40,7 @@ import static com.nenu.info.common.utils.WebConstants.pageSize;
  */
 @Controller
 @RequestMapping(value = URLConstants.OTHER_MATCH_URL)
-public class OtherMatchController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private OtherMatchService otherMatchService;
-
-    @Autowired
-    private MaterialService materialService;
+public class OtherMatchController extends AbstractController {
 
     /**
      * 去往其他比赛添加页面
@@ -239,19 +229,64 @@ public class OtherMatchController {
                                       @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
                                       @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                       @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
-
-        JSONObject jsonObject = new JSONObject();
-
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONArray jsonArray = new JSONArray();
         Map<String, Object> params = null;
         params = otherMatchService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, stuName, majorCode, projectName, hostUnit, teacherName);
 
         List<OtherMatchDto> otherMatchDtoList = null;
         otherMatchDtoList = otherMatchService.listByCondition(params);
 
-        jsonObject.put("otherMatchDtoList", otherMatchDtoList);
+        if(otherMatchDtoList != null) {
+            for(OtherMatchDto otherMatchDto : otherMatchDtoList) {
+                JSONObject jsonObject  = new JSONObject();
+                jsonObject.put("id", otherMatchDto.getId());
+                if(otherMatchDto.getMatchLevel() != null) {
+                    jsonObject.put("matchLevel", otherMatchDto.getMatchLevel());
+                } else {
+                    jsonObject.put("matchLevel", "");
+                }
+                if(otherMatchDto.getMatchName() != null) {
+                    jsonObject.put("matchName", otherMatchDto.getMatchName());
+                } else {
+                    jsonObject.put("matchName", "");
+                }
+                if(otherMatchDto.getHostUnit() != null) {
+                    jsonObject.put("hostUnit", otherMatchDto.getHostUnit());
+                } else {
+                    jsonObject.put("hostUnit", "");
+                }
+                jsonObject.put("stuNameArr", otherMatchDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", otherMatchDto.getStuNumberArr());
+                jsonObject.put("stuMajorArr", otherMatchDto.getStuMajorArr());
+                if(otherMatchDto.getProjectName() != null) {
+                    jsonObject.put("projectName", otherMatchDto.getProjectName());
+                } else {
+                    jsonObject.put("projectName", "");
+                }
+                if(otherMatchDto.getPrizeTimeStr() != null) {
+                    jsonObject.put("prizeTime", otherMatchDto.getPrizeTimeStr());
+                } else {
+                    jsonObject.put("prizeTime", "");
+                }
+                if(otherMatchDto.getPrizeLevel() != null) {
+                    jsonObject.put("prizeLevel", otherMatchDto.getPrizeLevel());
+                } else {
+                    jsonObject.put("prizeLevel", "");
+                }
+                if(otherMatchDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", otherMatchDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
 
-        return jsonObject;
+                jsonArray.add(jsonObject);
+            }
+        }
+
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

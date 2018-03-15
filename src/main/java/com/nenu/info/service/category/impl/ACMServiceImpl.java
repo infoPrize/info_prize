@@ -79,14 +79,38 @@ public class ACMServiceImpl implements ACMService {
         }
 
         if(acmPrizeDtoList != null) {
-            //对日期进行处理
             for (ACMPrizeDto acmPrizeDto : acmPrizeDtoList) {
-                Date dateStr = acmPrizeDto.getPrizeTime();
+                //对日期进行处理
+                Date prizeTime = acmPrizeDto.getPrizeTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-                String prizeTimeStr = sdf.format(dateStr);
-
+                String prizeTimeStr = "";
+                if(prizeTime != null) {
+                    prizeTimeStr = sdf.format(prizeTime);
+                }
                 acmPrizeDto.setPrizeTimeStr(prizeTimeStr);
+
+                //应前端需求，将三位获奖同学的姓名、学号、专业存为数组
+                String stuNameArr[] = new String[3];
+                String stuName1 = acmPrizeDto.getTeammateName1() != null ? acmPrizeDto.getTeammateName1() : "";
+                String stuName2 = acmPrizeDto.getTeammateName2() != null ? acmPrizeDto.getTeammateName2() : "";
+                String stuName3 = acmPrizeDto.getTeammateName3() != null ? acmPrizeDto.getTeammateName3() : "";
+                stuNameArr[0] = stuName1;       stuNameArr[1] = stuName2;       stuNameArr[2] = stuName3;
+                acmPrizeDto.setStuNameArr(stuNameArr);
+
+                String stuNumberArr[] = new String[3];
+                String stuNumber1 = acmPrizeDto.getTeammateStuNumber1() != null ? acmPrizeDto.getTeammateStuNumber1() : "";
+                String stuNumber2 = acmPrizeDto.getTeammateStuNumber2() != null ? acmPrizeDto.getTeammateStuNumber2() : "";
+                String stuNumber3 = acmPrizeDto.getTeammateStuNumber3() != null ? acmPrizeDto.getTeammateStuNumber3() : "";
+                stuNumberArr[0] = stuNumber1;   stuNumberArr[1] = stuNumber2;       stuNumberArr[2] = stuNumber3;
+                acmPrizeDto.setStuNumberArr(stuNumberArr);
+
+                String majorArr[] = new String[3];
+                String stuMajor1 = acmPrizeDto.getTeammateMajor1() != null ? acmPrizeDto.getTeammateMajor1() : "";
+                String stuMajor2 = acmPrizeDto.getTeammateMajor2() != null ? acmPrizeDto.getTeammateMajor2() : "";
+                String stuMajor3 = acmPrizeDto.getTeammateMajor3() != null ? acmPrizeDto.getTeammateMajor3() : "";
+                majorArr[0] = stuMajor1;        majorArr[1] = stuMajor2;        majorArr[2] = stuMajor3;
+                acmPrizeDto.setMajorArr(majorArr);
+
             }
         }
 

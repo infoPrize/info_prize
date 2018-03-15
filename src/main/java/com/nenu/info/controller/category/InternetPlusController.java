@@ -9,10 +9,12 @@ import com.nenu.info.common.utils.FileUtil;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.ZipUtil;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.InternetPlusService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,19 +41,7 @@ import static com.nenu.info.common.utils.WebConstants.pageSize;
  */
 @Controller
 @RequestMapping(value = URLConstants.INTERNET_PLUS_URL)
-public class InternetPlusController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private InternetPlusService internetPlusService;
-
-    @Autowired
-    private MaterialService materialService;
+public class InternetPlusController extends AbstractController {
 
     /**
      * 去往互联网+添加页面
@@ -220,8 +210,10 @@ public class InternetPlusController {
                                   @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
                                   @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                   @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
-        JSONObject jsonObject = new JSONObject();
+                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                  HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONArray jsonArray = new JSONArray();
         Map<String, Object> params = null;
         try {
             params = internetPlusService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, teamName, stuName, majorCode, projectName, hostUnit, teacherName);
@@ -237,9 +229,58 @@ public class InternetPlusController {
             e.printStackTrace();
         }
 
-        jsonObject.put("internetPlusDtoList", internetPlusDtoList);
+        if(internetPlusDtoList != null) {
+            for(InternetPlusDto internetPlusDto : internetPlusDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", internetPlusDto.getId());
+                if(internetPlusDto.getMatchLevel() != null) {
+                    jsonObject.put("matchLevel", internetPlusDto.getMatchLevel());
+                } else {
+                    jsonObject.put("matchLevel", "");
+                }
+                if(internetPlusDto.getMatchName() != null) {
+                    jsonObject.put("matchName", internetPlusDto.getMatchName());
+                } else {
+                    jsonObject.put("matchName", "");
+                }
+                if(internetPlusDto.getProjectName() != null) {
+                    jsonObject.put("projectName", internetPlusDto.getProjectName());
+                } else {
+                    jsonObject.put("projectName", "");
+                }
+                if(internetPlusDto.getTeamName() != null) {
+                    jsonObject.put("teamName", internetPlusDto.getTeamName());
+                } else {
+                    jsonObject.put("teamName", "");
+                }
+                jsonObject.put("stuNameArr", internetPlusDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", internetPlusDto.getStuNumberArr());
+                jsonObject.put("stuMajorArr", internetPlusDto.getStuMajorArr());
+                if(internetPlusDto.getPrizeLevel() != null) {
+                    jsonObject.put("prizeLevel", internetPlusDto.getPrizeLevel());
+                } else {
+                    jsonObject.put("prizeLevel", "");
+                }
+                if(internetPlusDto.getPrizeTimeStr() != null) {
+                    jsonObject.put("prizeTime", internetPlusDto.getPrizeTimeStr());
+                } else {
+                    jsonObject.put("prizeTime", "");
+                }
+                if(internetPlusDto.getHostUnit() != null) {
+                    jsonObject.put("hostUnit", internetPlusDto.getHostUnit());
+                } else {
+                    jsonObject.put("hostUnit", "");
+                }
+                if(internetPlusDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", internetPlusDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
 
-        return jsonObject;
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

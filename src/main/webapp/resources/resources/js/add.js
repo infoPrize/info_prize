@@ -9,7 +9,7 @@ $(function(){
     // var website = "http://120.78.154.246/";
 
     //网站地址 - 服务器开发(带项目名)
-    // var website = "http://120.78.154.246/resources/";
+    // var website = "http://120.78.154.246/info_prize/";
 
     // 添加论文信息
     $("#sort_thesis").click(function(){

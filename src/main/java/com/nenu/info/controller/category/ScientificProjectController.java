@@ -6,10 +6,12 @@ import com.nenu.info.common.utils.*;
 import com.nenu.info.common.entities.category.ScientificProject;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.ScientificProjectService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.util.List;
@@ -32,19 +33,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = URLConstants.SCIENTIFIC_PROJECT_URL)
-public class ScientificProjectController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private ScientificProjectService scientificProjectService;
-
-    @Autowired
-    private MaterialService materialService;
+public class ScientificProjectController extends AbstractController{
 
     /**
      * 去往国创科研添加页面
@@ -199,17 +188,59 @@ public class ScientificProjectController {
                                                        @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
                                                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                                        @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                                       @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber) {
-        JSONObject jsonObject = new JSONObject();
+                                                       @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                                       HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = scientificProjectService.getParams(projectName, projectType, setYear, majorCode, teacherName, stuName, stuNumber);
 
         List<ScientificProjectDto> scientificProjectDtoList = null;
         scientificProjectDtoList = scientificProjectService.listScientificProjectByConditions(params);
 
-        jsonObject.put("scientificProjectDtoList", scientificProjectDtoList);
+        if(scientificProjectDtoList != null) {
+            for(ScientificProjectDto scientificProjectDto : scientificProjectDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", scientificProjectDto.getId());
+                if(scientificProjectDto.getProjectType() != null) {
+                    jsonObject.put("projectType", scientificProjectDto.getProjectType());
+                } else {
+                    jsonObject.put("projectType", "");
+                }
+                if(scientificProjectDto.getProjectName() != null) {
+                    jsonObject.put("projectName", scientificProjectDto.getProjectName());
+                } else {
+                    jsonObject.put("projectName", "");
+                }
+                if(scientificProjectDto.getSetYear() != null) {
+                    jsonObject.put("setYear", scientificProjectDto.getSetYear());
+                } else {
+                    jsonObject.put("setYear", "");
+                }
+                if(scientificProjectDto.getProjectManPhone() != null) {
+                    jsonObject.put("projectManPhone", scientificProjectDto.getProjectManPhone());
+                } else {
+                    jsonObject.put("projectManPhone", "");
+                }
+                jsonObject.put("stuNameArr", scientificProjectDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", scientificProjectDto.getStuNumberArr());
+                jsonObject.put("stuMajorArr", scientificProjectDto.getStuMajorArr());
+                if(scientificProjectDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", scientificProjectDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                if(scientificProjectDto.getFundsLimit() != null) {
+                    jsonObject.put("fundsLimit", scientificProjectDto.getFundsLimit());
+                } else {
+                    jsonObject.put("fundsLimit", "");
+                }
 
-        return jsonObject;
+                jsonArray.add(jsonObject);
+            }
+        }
+
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

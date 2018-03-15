@@ -9,6 +9,7 @@ import com.nenu.info.common.utils.FileUtil;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.ZipUtil;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.PatentService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
@@ -37,19 +38,8 @@ import static com.nenu.info.common.utils.WebConstants.pageSize;
  */
 @Controller
 @RequestMapping(value = URLConstants.PATENT_URL)
-public class PatentController {
+public class PatentController extends AbstractController{
 
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private PatentService patentService;
-
-    @Autowired
-    private MaterialService materialService;
     /**
      * 去往专利添加页面
      */
@@ -191,15 +181,17 @@ public class PatentController {
     @RequestMapping(value = "listByCondition", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject listByCondition(@RequestParam(value = "patentType", required = false, defaultValue = "-1") Integer patentType,
-                                  @RequestParam(value = "patentName", required = false, defaultValue = "") String patentName,
-                                  @RequestParam(value = "beginTime", required = false) Date beginTime,
-                                  @RequestParam(value = "endTime", required = false) Date endTime,
-                                  @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
-                                  @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
-                                  @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
-                                  @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
-                                  @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
-        JSONObject jsonObject = new JSONObject();
+                                      @RequestParam(value = "patentName", required = false, defaultValue = "") String patentName,
+                                      @RequestParam(value = "beginTime", required = false) Date beginTime,
+                                      @RequestParam(value = "endTime", required = false) Date endTime,
+                                      @RequestParam(value = "majorCode", required = false, defaultValue = "-1") Integer majorCode,
+                                      @RequestParam(value = "grade", required = false, defaultValue = "") String grade,
+                                      @RequestParam(value = "stuNumber", required = false, defaultValue = "") String stuNumber,
+                                      @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = null;
         try {
@@ -216,47 +208,38 @@ public class PatentController {
             e.printStackTrace();
         }
 
-//        前端要求，将申请人姓名、学号、专业作为三个数组传过去
-//        List<List> nameArrList = new ArrayList<>();
-//        List<List> stuNumberArrList = new ArrayList<>();
-//        List<List> majorArrList = new ArrayList<>();
+        if(patentDtoList != null) {
+            for(PatentDto patentDto : patentDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", patentDto.getId());
+                if(patentDto.getPatentType() != null) {
+                    jsonObject.put("patentType", patentDto.getPatentType());
+                } else {
+                    jsonObject.put("patentType", "");
+                }
+                if(patentDto.getPatentName() != null) {
+                    jsonObject.put("patentName", patentDto.getPatentName());
+                } else {
+                    jsonObject.put("patentName", "");
+                }
+                if(patentDto.getApplyTimeStr() != null) {
+                    jsonObject.put("applyTime", patentDto.getApplyTimeStr());
+                } else {
+                    jsonObject.put("applyTime", "");
+                }
+                jsonObject.put("stuNameArr", patentDto.getApplierNameArr());
+                jsonObject.put("stuNumberArr", patentDto.getApplierStuNumberArr());
+                jsonObject.put("stuMajorArr", patentDto.getApplierStuMajorArr());
+                if(patentDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", patentDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
 
-//        JSONArray nameArrList = new JSONArray();
-//        JSONArray stuNumberArrList = new JSONArray();
-//
-//        if(patentDtoList != null) {
-//            for (PatentDto patentDto : patentDtoList) {
-////                List<String> nameArr = new ArrayList<>();
-//                JSONArray nameArr = new JSONArray();
-//                String name1 = patentDto.getApplierName1();         nameArr.add(name1);
-//                String name2 = patentDto.getApplierName2();         nameArr.add(name2);
-//                String name3 = patentDto.getApplierName3();         nameArr.add(name3);
-//                String name4 = patentDto.getApplierName4();         nameArr.add(name4);
-//                String name5 = patentDto.getApplierName5();         nameArr.add(name5);
-//                nameArrList.add(nameArr);
-//
-////                List<String> stuNumArr = new ArrayList<>();
-//                JSONArray stuNumArr = new JSONArray();
-//                String stuNum1 = patentDto.getApplierStuNumber1();      stuNumArr.add(stuNum1);
-//                String stuNum2 = patentDto.getApplierStuNumber2();      stuNumArr.add(stuNum2);
-//                String stuNum3 = patentDto.getApplierStuNumber3();      stuNumArr.add(stuNum3);
-//                String stuNum4 = patentDto.getApplierStuNumber4();      stuNumArr.add(stuNum4);
-//                String stuNum5 = patentDto.getApplierStuNumber5();      stuNumArr.add(stuNum5);
-//                stuNumberArrList.add(stuNumArr);
-//
-////                String stuMajor[] = new String[10];
-////                stuMajor[0] = patentDto.getApplierMajor1();        stuMajor[1] = patentDto.getApplierMajor2();
-////                stuMajor[2] = patentDto.getApplierMajor3();        stuMajor[3] = patentDto.getApplierMajor4();
-////                stuMajor[4] = patentDto.getApplierMajor5();
-////                majorArrList.add(stuMajor);
-//            }
-//        }
-//
-//        jsonObject.put("nameArrList", nameArrList);
-//        jsonObject.put("stuNumberArrList", stuNumberArrList);
-//        jsonObject.put("majorArrList", majorArrList);
-        jsonObject.put("patentDtoList", patentDtoList);
-        return jsonObject;
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

@@ -6,10 +6,12 @@ import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.*;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.MathModelPrizeService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,19 +37,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = URLConstants.MATH_MODEL_URL)
-public class MathModelPrizeController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private MathModelPrizeService mathModelPrizeService;
-
-    @Autowired
-    private MaterialService materialService;
+public class MathModelPrizeController extends AbstractController {
 
     /**
      * 去往数学建模添加页面
@@ -172,13 +162,60 @@ public class MathModelPrizeController {
                                       @RequestParam(value = "major", required = false, defaultValue = "-1") Integer major,
                                       @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
-                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit) {
-        JSONObject jsonObject = new JSONObject();
+                                      @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        JSONArray jsonArray = new JSONArray();
         Map<String, Object> params = mathModelPrizeService.getParams(matchLevel, matchName, beginTime, endTime, prizeLevel, major, stuName, teacherName, hostUnit);
         List<MathModelPrizeDto> mathModelPrizeDtoList = mathModelPrizeService.listByConditions(params);
 
-        jsonObject.put("mathModelPrizeDtoList", mathModelPrizeDtoList);
-        return jsonObject;
+        if(mathModelPrizeDtoList != null) {
+            for(MathModelPrizeDto mathModelPrizeDto : mathModelPrizeDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", mathModelPrizeDto.getId());
+                if(mathModelPrizeDto.getMatchLevel() != null) {
+                    jsonObject.put("matchLevel", mathModelPrizeDto.getMatchLevel());
+                } else {
+                    jsonObject.put("matchLevel", "");
+                }
+                if(mathModelPrizeDto.getMatchName() != null) {
+                    jsonObject.put("matchName", mathModelPrizeDto.getMatchName());
+                } else {
+                    jsonObject.put("matchName", "");
+                }
+                if(mathModelPrizeDto.getHostUnit() != null) {
+                    jsonObject.put("hostUnit", mathModelPrizeDto.getHostUnit());
+                } else {
+                    jsonObject.put("hostUnit", "");
+                }
+                if(mathModelPrizeDto.getPrizeTimeStr() != null) {
+                    jsonObject.put("prizeTime", mathModelPrizeDto.getPrizeTimeStr());
+                } else {
+                    jsonObject.put("prizeTime", "");
+                }
+                if(mathModelPrizeDto.getPrizeLevel() != null) {
+                    jsonObject.put("prizeLevel", mathModelPrizeDto.getPrizeLevel());
+                } else {
+                    jsonObject.put("prizeLevel", "");
+                }
+                if(mathModelPrizeDto.getTeamName() != null) {
+                    jsonObject.put("teamName", mathModelPrizeDto.getTeamName());
+                } else {
+                    jsonObject.put("teamName", "");
+                }
+                jsonObject.put("stuNameArr", mathModelPrizeDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", mathModelPrizeDto.getStuNumberArr());
+                jsonObject.put("majorArr", mathModelPrizeDto.getMajorArr());
+                if(mathModelPrizeDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", mathModelPrizeDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

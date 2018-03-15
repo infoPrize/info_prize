@@ -61,6 +61,14 @@ public class ThesisDto {
 
     private String authorMajor5;
 
+    private String[] authorNameArr;
+
+    private String[] authorStuNumberArr;
+
+    private String[] authorMajorArr;
+
+    private Integer[] authorLevelArr;
+
     private String teacherName;
 
     private String thesisAbstract;
@@ -271,6 +279,38 @@ public class ThesisDto {
 
     public void setAuthorMajor5(String authorMajor5) {
         this.authorMajor5 = authorMajor5;
+    }
+
+    public String[] getAuthorNameArr() {
+        return authorNameArr;
+    }
+
+    public void setAuthorNameArr(String[] authorNameArr) {
+        this.authorNameArr = authorNameArr;
+    }
+
+    public String[] getAuthorStuNumberArr() {
+        return authorStuNumberArr;
+    }
+
+    public void setAuthorStuNumberArr(String[] authorStuNumberArr) {
+        this.authorStuNumberArr = authorStuNumberArr;
+    }
+
+    public String[] getAuthorMajorArr() {
+        return authorMajorArr;
+    }
+
+    public void setAuthorMajorArr(String[] authorMajorArr) {
+        this.authorMajorArr = authorMajorArr;
+    }
+
+    public Integer[] getAuthorLevelArr() {
+        return authorLevelArr;
+    }
+
+    public void setAuthorLevelArr(Integer[] authorLevelArr) {
+        this.authorLevelArr = authorLevelArr;
     }
 
     public String getTeacherName() {

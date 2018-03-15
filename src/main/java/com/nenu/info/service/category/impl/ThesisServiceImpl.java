@@ -110,8 +110,70 @@ public class ThesisServiceImpl implements ThesisService {
         List<ThesisDto> thesisDtoList = null;
 
         thesisDtoList =  thesisDao.listByCondition(params);
-        for(ThesisDto thesisDto : thesisDtoList) {
-            thesisDto.setPublishTimeStr(sf.format(thesisDto.getPublishTime()));
+        if(thesisDtoList != null) {
+            for (ThesisDto thesisDto : thesisDtoList) {
+                //thesisDto.setPublishTimeStr(sf.format(thesisDto.getPublishTime()));
+                Date publishTime = thesisDto.getPublishTime();
+                String publishTimeStr = "";
+                if(publishTime != null) {
+                    publishTimeStr = sf.format(publishTime);
+                }
+                thesisDto.setPublishTimeStr(publishTimeStr);
+
+                //将五位作者的姓名、学号、专业、等级转换为数组
+                String[] nameArr = new String[5];
+                String authorName1 = thesisDto.getAuthorName1() != null ? thesisDto.getAuthorName1() : "";
+                nameArr[0] = authorName1;
+                String authorName2 = thesisDto.getAuthorName2() != null ? thesisDto.getAuthorName2() : "";
+                nameArr[1] = authorName2;
+                String authorName3 = thesisDto.getAuthorName3() != null ? thesisDto.getAuthorName3() : "";
+                nameArr[2] = authorName3;
+                String authorName4 = thesisDto.getAuthorName4() != null ? thesisDto.getAuthorName4() : "";
+                nameArr[3] = authorName4;
+                String authorName5 = thesisDto.getAuthorName5() != null ? thesisDto.getAuthorName5() : "";
+                nameArr[4] = authorName5;
+                thesisDto.setAuthorNameArr(nameArr);
+
+                String[] stuNumArr = new String[5];
+                String stuNum1 = thesisDto.getAuthorStuNumber1() != null ? thesisDto.getAuthorStuNumber1() : "";
+                stuNumArr[0] = stuNum1;
+                String stuNum2 = thesisDto.getAuthorStuNumber2() != null ? thesisDto.getAuthorStuNumber2() : "";
+                stuNumArr[1] = stuNum2;
+                String stuNum3 = thesisDto.getAuthorStuNumber3() != null ? thesisDto.getAuthorStuNumber3() : "";
+                stuNumArr[2] = stuNum3;
+                String stuNum4 = thesisDto.getAuthorStuNumber4() != null ? thesisDto.getAuthorStuNumber4() : "";
+                stuNumArr[3] = stuNum4;
+                String stuNum5 = thesisDto.getAuthorStuNumber5() != null ? thesisDto.getAuthorStuNumber5() : "";
+                stuNumArr[4] = stuNum5;
+                thesisDto.setAuthorStuNumberArr(stuNumArr);
+
+                String[] majorArr = new String[5];
+                String authorMajor1 = thesisDto.getAuthorMajor1() != null ? thesisDto.getAuthorMajor1() : "";
+                majorArr[0] = authorMajor1;
+                String authorMajor2 = thesisDto.getAuthorMajor2() != null ? thesisDto.getAuthorMajor2() : "";
+                majorArr[1] = authorMajor2;
+                String authorMajor3 = thesisDto.getAuthorMajor3() != null ? thesisDto.getAuthorMajor3() : "";
+                majorArr[2] = authorMajor3;
+                String authorMajor4 = thesisDto.getAuthorMajor4() != null ? thesisDto.getAuthorMajor4() : "";
+                majorArr[3] = authorMajor4;
+                String authorMajor5 = thesisDto.getAuthorMajor5() != null ? thesisDto.getAuthorMajor5() : "";
+                majorArr[4] = authorMajor5;
+                thesisDto.setAuthorMajorArr(majorArr);
+
+                Integer[] authorLevelArr = new Integer[5];
+                Integer authorLevel1 = thesisDto.getAuthorLevel1() != null ? thesisDto.getAuthorLevel1() : 0;
+                authorLevelArr[0] = authorLevel1;
+                Integer authorLevel2 = thesisDto.getAuthorLevel2() != null ? thesisDto.getAuthorLevel2() : 0;
+                authorLevelArr[1] = authorLevel2;
+                Integer authorLevel3 = thesisDto.getAuthorLevel3() != null ? thesisDto.getAuthorLevel3() : 0;
+                authorLevelArr[2] = authorLevel3;
+                Integer authorLevel4 = thesisDto.getAuthorLevel4() != null ? thesisDto.getAuthorLevel4() : 0;
+                authorLevelArr[3] = authorLevel4;
+                Integer authorLevel5 = thesisDto.getAuthorLevel5() != null ? thesisDto.getAuthorLevel5() : 0;
+                authorLevelArr[4] = authorLevel5;
+                thesisDto.setAuthorLevelArr(authorLevelArr);
+
+            }
         }
 
         return thesisDtoList;

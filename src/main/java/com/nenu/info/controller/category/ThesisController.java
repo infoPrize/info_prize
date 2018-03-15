@@ -9,10 +9,12 @@ import com.nenu.info.common.utils.FileUtil;
 import com.nenu.info.common.utils.MessageInfo;
 import com.nenu.info.common.utils.URLConstants;
 import com.nenu.info.common.utils.ZipUtil;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.ThesisService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,19 +42,7 @@ import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 @Controller
 @RequestMapping(value = URLConstants.THESIS_URL)
-public class ThesisController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private ThesisService thesisService;
-
-    @Autowired
-    private MaterialService materialService;
+public class ThesisController extends AbstractController {
 
     /**
      * 去往论文添加页面
@@ -72,22 +62,22 @@ public class ThesisController {
 
     /**
      * 添加论文信息
-     * @param journameName
-     * @param journalLevel
-     * @param thesisTitle
-     * @param publishTime
-     * @param authorName1
-     * @param authorStuNumber1
-     * @param authorName2
-     * @param authorStuNumber2
-     * @param authorName3
-     * @param authorStuNumber3
-     * @param authorName4
-     * @param authorStuNumber4
-     * @param authorName5
-     * @param authorStuNumber5
-     * @param teacherName
-     * @param thesisAbstract
+     * @param journameName 期刊名
+     * @param journalLevel 期刊等级
+     * @param thesisTitle  论文题目
+     * @param publishTime  发布时间
+     * @param authorName1  作者姓名1
+     * @param authorStuNumber1  作者1学号
+     * @param authorName2   作者2姓名
+     * @param authorStuNumber2  作者2学号
+     * @param authorName3   作者3姓名
+     * @param authorStuNumber3  作者3学号
+     * @param authorName4   作者4姓名
+     * @param authorStuNumber4  作者4学号
+     * @param authorName5   作者5姓名
+     * @param authorStuNumber5  作者5学号
+     * @param teacherName   教师姓名
+     * @param thesisAbstract    论文摘要
      * @return  1 - 插入成功
      *          2 - 第一位学生 学号姓名不匹配
      *          3 - 第二位学生 学号姓名不匹配
@@ -264,24 +254,6 @@ public class ThesisController {
         return 1;
     }
 
-
-    @RequestMapping(value = "toThesis")
-    public String toThesis(Model model, @RequestParam(value = "message", required = false, defaultValue = "") String message) {
-        List<ThesisDto> thesisDtoList = new ArrayList<>();
-
-        try {
-            thesisDtoList = thesisService.listAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        model.addAttribute("message",message);
-        model.addAttribute("thesisDtoList", thesisDtoList);
-
-        return "thesis/thesis";
-
-    }
-
     @RequestMapping(value = "listByCondition")
     @ResponseBody
     public JSONObject listByCondition(@RequestParam(value = "journalLevel", required = false, defaultValue = "-1") Integer journalLevel,
@@ -293,8 +265,9 @@ public class ThesisController {
                                       @RequestParam(value = "authorGrade", required = false, defaultValue = "") String authorGrade,
                                       @RequestParam(value = "beginTime", required = false) Date beginTime,
                                       @RequestParam(value = "endTime", required = false) Date endTime,
-                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
-        JSONObject jsonObject = new JSONObject();
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> params = null;
         try {
             params = thesisService.getParams(journalLevel, journalName, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
@@ -310,8 +283,45 @@ public class ThesisController {
             e.printStackTrace();
         }
 
-        jsonObject.put("thesisDtoList", thesisDtoList);
-        return jsonObject;
+        JSONArray jsonArray = new JSONArray();
+        if(thesisDtoList != null) {
+            for(ThesisDto thesisDto : thesisDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", thesisDto.getId());
+                if(thesisDto.getJournalLevel() != null) {
+                    jsonObject.put("journalLevel", thesisDto.getJournalLevel());
+                } else {
+                    jsonObject.put("journalLevel", "");
+                }
+                if(thesisDto.getJournalName() != null) {
+                    jsonObject.put("journalName", thesisDto.getJournalName());
+                } else {
+                    jsonObject.put("journalName", "");
+                }
+                if(thesisDto.getThesisTitle() != null) {
+                    jsonObject.put("thesisTitle", thesisDto.getThesisTitle());
+                } else {
+                    jsonObject.put("thesisTitle", "");
+                }
+                if(thesisDto.getPublishTimeStr() != null) {
+                    jsonObject.put("publishTime", thesisDto.getPublishTimeStr());
+                } else {
+                    jsonObject.put("publishTime", "");
+                }
+                jsonObject.put("authorNameArr", thesisDto.getAuthorNameArr());
+                jsonObject.put("authorStuNumberArr", thesisDto.getAuthorStuNumberArr());
+                jsonObject.put("authorMajorArr", thesisDto.getAuthorMajorArr());
+                jsonObject.put("authorLevelArr", thesisDto.getAuthorLevelArr());
+                if(thesisDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", thesisDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
+
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

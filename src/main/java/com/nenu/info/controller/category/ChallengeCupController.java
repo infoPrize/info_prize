@@ -6,10 +6,12 @@ import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.utils.*;
+import com.nenu.info.controller.common.AbstractController;
 import com.nenu.info.service.category.ChallengeCupService;
 import com.nenu.info.service.common.MaterialService;
 import com.nenu.info.service.common.StudentService;
 import com.nenu.info.service.common.TeacherService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,19 +36,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = URLConstants.CHALLENGE_CUP_URL)
-public class ChallengeCupController {
-
-    @Autowired
-    private StudentService studentService;
-
-    @Autowired
-    private TeacherService teacherService;
-
-    @Autowired
-    private ChallengeCupService challengeCupService;
-
-    @Autowired
-    private MaterialService materialService;
+public class ChallengeCupController extends AbstractController{
 
     /**
      * 去往挑战杯添加页面
@@ -216,9 +206,11 @@ public class ChallengeCupController {
                                       @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
                                       @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                                       @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
-                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+                                      @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                      HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         List<ChallengeCupDto> challengeCupDtoList = null;
-        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
 
         Map<String, Object> params = null;
         try {
@@ -234,8 +226,58 @@ public class ChallengeCupController {
             e.printStackTrace();
         }
 
-        jsonObject.put("challengeCupDtoList", challengeCupDtoList);
-        return jsonObject;
+        if(challengeCupDtoList != null) {
+            for(ChallengeCupDto challengeCupDto : challengeCupDtoList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", challengeCupDto.getId());
+                if(challengeCupDto.getMatchLevel() != null) {
+                    jsonObject.put("matchLevel", challengeCupDto.getMatchLevel());
+                } else {
+                    jsonObject.put("matchLevel", "");
+                }
+                if(challengeCupDto.getMatchName() != null) {
+                    jsonObject.put("matchName", challengeCupDto.getMatchName());
+                } else {
+                    jsonObject.put("matchName", "");
+                }
+                if(challengeCupDto.getProjectName() != null) {
+                    jsonObject.put("projectName", challengeCupDto.getProjectName());
+                } else {
+                    jsonObject.put("projectName", "");
+                }
+                if(challengeCupDto.getTeamName() != null) {
+                    jsonObject.put("teamName", challengeCupDto.getTeamName());
+                } else {
+                    jsonObject.put("teamName", "");
+                }
+                jsonObject.put("stuNameArr", challengeCupDto.getStuNameArr());
+                jsonObject.put("stuNumberArr", challengeCupDto.getStuNumberArr());
+                jsonObject.put("stuMajorArr", challengeCupDto.getStuMajorArr());
+                if(challengeCupDto.getPrizeLevel() != null) {
+                    jsonObject.put("prizeLevel", challengeCupDto.getPrizeLevel());
+                } else {
+                    jsonObject.put("prizeLevel", "");
+                }
+                if(challengeCupDto.getPrizeTimeStr() != null) {
+                    jsonObject.put("prizeTime", challengeCupDto.getPrizeTimeStr());
+                } else {
+                    jsonObject.put("prizeTime", "");
+                }
+                if(challengeCupDto.getHostUnit() != null) {
+                    jsonObject.put("hostUnit", challengeCupDto.getHostUnit());
+                } else {
+                    jsonObject.put("hostUnit", "");
+                }
+                if(challengeCupDto.getTeacherName() != null) {
+                    jsonObject.put("teacherName", challengeCupDto.getTeacherName());
+                } else {
+                    jsonObject.put("teacherName", "");
+                }
+                jsonArray.add(jsonObject);
+            }
+        }
+
+        return sendJSONArray(jsonArray);
     }
 
     @RequestMapping(value = "toDetail/{materialId}")

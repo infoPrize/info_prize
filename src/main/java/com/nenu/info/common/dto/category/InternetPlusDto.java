@@ -30,11 +30,17 @@ public class InternetPlusDto {
     //项目成员1学号
     private String stuNumber1;
 
+    //项目成员1专业
+    private String stuMajor1;
+
     //项目成员2姓名
     private String stuName2;
 
     //项目成员2学号
     private String stuNumber2;
+
+    //项目成员2专业
+    private String stuMajor2;
 
     //项目成员3姓名
     private String stuName3;
@@ -42,11 +48,17 @@ public class InternetPlusDto {
     //项目成员3学号
     private String stuNumber3;
 
+    //项目成员3专业
+    private String stuMajor3;
+
     //项目成员4姓名
     private String stuName4;
 
     //项目成员4学号
     private String stuNumber4;
+
+    //项目成员4专业
+    private String stuMajor4;
 
     //项目成员5姓名
     private String stuName5;
@@ -54,11 +66,17 @@ public class InternetPlusDto {
     //项目成员5学号
     private String stuNumber5;
 
+    //项目成员5专业
+    private String stuMajor5;
+
     //项目成员6姓名
     private String stuName6;
 
     //项目成员6学号
     private String stuNumber6;
+
+    //项目成员6专业
+    private String stuMajor6;
 
     //项目成员7姓名
     private String stuName7;
@@ -66,11 +84,23 @@ public class InternetPlusDto {
     //项目成员7学号
     private String stuNumber7;
 
+    //项目成员7专业
+    private String stuMajor7;
+
     //项目成员8姓名
     private String stuName8;
 
     //项目成员8学号
     private String stuNumber8;
+
+    //项目成员8专业
+    private String stuMajor8;
+
+    private String[] stuNameArr;
+
+    private String[] stuNumberArr;
+
+    private String[] stuMajorArr;
 
     //获奖等级
     private String prizeLevel;
@@ -253,6 +283,94 @@ public class InternetPlusDto {
 
     public void setStuNumber8(String stuNumber8) {
         this.stuNumber8 = stuNumber8;
+    }
+
+    public String getStuMajor1() {
+        return stuMajor1;
+    }
+
+    public void setStuMajor1(String stuMajor1) {
+        this.stuMajor1 = stuMajor1;
+    }
+
+    public String getStuMajor2() {
+        return stuMajor2;
+    }
+
+    public void setStuMajor2(String stuMajor2) {
+        this.stuMajor2 = stuMajor2;
+    }
+
+    public String getStuMajor3() {
+        return stuMajor3;
+    }
+
+    public void setStuMajor3(String stuMajor3) {
+        this.stuMajor3 = stuMajor3;
+    }
+
+    public String getStuMajor4() {
+        return stuMajor4;
+    }
+
+    public void setStuMajor4(String stuMajor4) {
+        this.stuMajor4 = stuMajor4;
+    }
+
+    public String getStuMajor5() {
+        return stuMajor5;
+    }
+
+    public void setStuMajor5(String stuMajor5) {
+        this.stuMajor5 = stuMajor5;
+    }
+
+    public String getStuMajor6() {
+        return stuMajor6;
+    }
+
+    public void setStuMajor6(String stuMajor6) {
+        this.stuMajor6 = stuMajor6;
+    }
+
+    public String getStuMajor7() {
+        return stuMajor7;
+    }
+
+    public void setStuMajor7(String stuMajor7) {
+        this.stuMajor7 = stuMajor7;
+    }
+
+    public String getStuMajor8() {
+        return stuMajor8;
+    }
+
+    public void setStuMajor8(String stuMajor8) {
+        this.stuMajor8 = stuMajor8;
+    }
+
+    public String[] getStuNameArr() {
+        return stuNameArr;
+    }
+
+    public void setStuNameArr(String[] stuNameArr) {
+        this.stuNameArr = stuNameArr;
+    }
+
+    public String[] getStuNumberArr() {
+        return stuNumberArr;
+    }
+
+    public void setStuNumberArr(String[] stuNumberArr) {
+        this.stuNumberArr = stuNumberArr;
+    }
+
+    public String[] getStuMajorArr() {
+        return stuMajorArr;
+    }
+
+    public void setStuMajorArr(String[] stuMajorArr) {
+        this.stuMajorArr = stuMajorArr;
     }
 
     public String getPrizeLevel() {
