@@ -98,6 +98,31 @@ public class ScientificProjectController extends AbstractController{
                                         @RequestParam(value = "fundsLimit", required = false, defaultValue = "0") Integer fundsLimit,
                                         @RequestParam(value = "projectIntroduce", required = false, defaultValue = "") String projectIntroduce) {
 
+        //先处理五个同学的输入是否合法
+        try {
+            if(!studentService.checkMatchingWithNameAndStuNumber(projectManName, projectManStuNumber)) {
+                return 0;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(projectMemberName1, projectMemberStuNumber1)) {
+                return 1;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(projectMemberName2, projectMemberStuNumber2)) {
+                return 2;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(projectMemberName3, projectMemberStuNumber3)) {
+                return 3;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(projectMemberName4, projectMemberStuNumber4)) {
+                return 4;
+            }
+
+            //处理老师是否存在
+            if(!teacherService.checkTeacherExist(teacherName)) {
+                return 5;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Student projectMan = null;
         Student projectMember1 = null;
@@ -106,7 +131,6 @@ public class ScientificProjectController extends AbstractController{
         Student projectMember4 = null;
         Teacher teacher = null;
 
-        //首先检查五个项目组成员是否有错
         try {
             projectMan = studentService.selectStudentByStuNumber(projectManStuNumber);
             projectMember1 = studentService.selectStudentByStuNumber(projectMemberStuNumber1);
@@ -115,30 +139,6 @@ public class ScientificProjectController extends AbstractController{
             projectMember4 = studentService.selectStudentByStuNumber(projectMemberStuNumber4);
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
-        }
-
-        //检查五个人中是否有人姓名学号不匹配
-        if (projectMan == null || !projectManName.equals(projectMan.getName())) {
-            return 0;
-        } else if (projectMember1 == null || !projectMemberName1.equals(projectMember1.getName())) {
-            return 1;
-        } else if (projectMember2 == null || !projectMemberName2.equals(projectMember2.getName())) {
-            return 2;
-        } else if (projectMember3 == null || !projectMemberName3.equals(projectMember3.getName())) {
-            return 3;
-        } else if (projectMember4 == null || !projectMemberName4.equals(projectMember4.getName())) {
-            return 4;
-        }
-
-        //检查教师是否存在
-        try {
-            teacher = teacherService.selectTeacherByName(teacherName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (teacher == null) {
-            return 5;
         }
 
         ScientificProject scientificProject = new ScientificProject();
@@ -153,13 +153,25 @@ public class ScientificProjectController extends AbstractController{
             setYear = setYear.substring(0, 4);
         }
         scientificProject.setSetYear(setYear);
-        scientificProject.setProjectManId(projectMan.getId());
-        scientificProject.setProjectMemberId1(projectMember1.getId());
-        scientificProject.setProjectMemberId2(projectMember2.getId());
-        scientificProject.setProjectMemberId3(projectMember3.getId());
-        scientificProject.setProjectMemberId4(projectMember4.getId());
+        if(projectMan != null) {
+            scientificProject.setProjectManId(projectMan.getId());
+        }
+        if(projectMember1 != null) {
+            scientificProject.setProjectMemberId1(projectMember1.getId());
+        }
+        if(projectMember2 != null) {
+            scientificProject.setProjectMemberId2(projectMember2.getId());
+        }
+        if(projectMember3 != null) {
+            scientificProject.setProjectMemberId3(projectMember3.getId());
+        }
+        if(projectMember4 != null) {
+            scientificProject.setProjectMemberId4(projectMember4.getId());
+        }
 
-        scientificProject.setTeacherId(teacher.getId());
+        if(teacher != null) {
+            scientificProject.setTeacherId(teacher.getId());
+        }
         if (fundsLimit >= 0) {
             scientificProject.setFundsLimit(fundsLimit);
         } else {

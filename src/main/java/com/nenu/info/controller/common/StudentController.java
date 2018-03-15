@@ -104,7 +104,7 @@ public class StudentController {
     public String deleteByStuNumber(@PathVariable("stuNumber")String stuNumber) throws Exception {
 
         studentService.deleteByStuNumber(stuNumber);
-        return "redirect:/student/list";
+        return "redirect:/student/toList";
 
     }
 

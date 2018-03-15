@@ -47,11 +47,11 @@ $(document).ready(function(){
     /*国创科研*/
     $("#addscientific_project").click(function(){
         var $sci=$('<div class="form-group col-sm-4">'+
-                         '<label class="tab-label control-label text-right">组员'+i+'姓名：</label>'+
+                         '<label class="tab-label control-label text-right">组员姓名：</label>'+
                          ' <input type="text" id="projectMemberName'+i+'" class="form-control" />'+
                 ' </div>'+
                 '<div class="form-group col-sm-4">'+
-                         '<label class="tab-label control-label text-right">组员'+i+'学号：</label>'+
+                         '<label class="tab-label control-label text-right">组员学号：</label>'+
                          '<input type="text" id="projectMemberStuNumber'+i+'" class="form-control" />'+
                  ' </div>');
         i++;

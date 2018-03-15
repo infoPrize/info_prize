@@ -76,11 +76,11 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-sm-4">
-                                                <label class="tab-label control-label text-right">组员1姓名：</label>
+                                                <label class="tab-label control-label text-right">组员姓名：</label>
                                                 <input type="text" id="projectMemberName1" class="form-control" />
                                             </div>
                                             <div class="form-group col-sm-4">
-                                                <label class="tab-label control-label text-right">组员1学号：</label>
+                                                <label class="tab-label control-label text-right">组员学号：</label>
                                                 <input type="text" id="projectMemberStuNumber1" class="form-control" />
                                             </div>
 

@@ -94,6 +94,24 @@ public class ACMController extends AbstractController{
                        @RequestParam(value = "teammateStuNumber3", required = false, defaultValue = "") String teammateStuNumber3,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
 
+        try {
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName1, teammateStuNumber1)) {
+                return 1;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName2, teammateStuNumber2)) {
+                return 2;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(teammateName3, teammateStuNumber3)) {
+                return 3;
+            }
+
+            if(!teacherService.checkTeacherExist(teacherName)) {
+                return 4;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Student teammate1 = null;
         Student teammate2 = null;
         Student teammate3 = null;
@@ -104,28 +122,10 @@ public class ACMController extends AbstractController{
             teammate1 = studentService.selectStudentByStuNumber(teammateStuNumber1);
             teammate2 = studentService.selectStudentByStuNumber(teammateStuNumber2);
             teammate3 = studentService.selectStudentByStuNumber(teammateStuNumber3);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
 
-        //检查三个人是都有人姓名学号不匹配
-        if(teammate1 == null || !teammateName1.equals(teammate1.getName())) {
-            return 1;
-        } else if(teammate2 == null || !teammateName2.equals(teammate2.getName())) {
-            return 2;
-        } else if(teammate3 == null || !teammateName3.equals(teammate3.getName())) {
-            return 3;
-        }
-
-        //检查教师是否存在
-        try {
             teacher = teacherService.selectTeacherByName(teacherName);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if(teacher == null) {
-            return 4;
         }
 
         ACMPrize acmPrize = new ACMPrize();
@@ -142,10 +142,18 @@ public class ACMController extends AbstractController{
         acmPrize.setMatchName(matchName);
         acmPrize.setHostUnit(hostUnit);
         acmPrize.setPrizeTime(prizeTime);
-        acmPrize.setTeacherId(teacher.getId());
-        acmPrize.setTeammateId1(teammate1.getId());
-        acmPrize.setTeammateId2(teammate2.getId());
-        acmPrize.setTeammateId3(teammate3.getId());
+        if(teacher != null) {
+            acmPrize.setTeacherId(teacher.getId());
+        }
+        if(teammate1 != null) {
+            acmPrize.setTeammateId1(teammate1.getId());
+        }
+        if(teammate2 != null) {
+            acmPrize.setTeammateId2(teammate2.getId());
+        }
+        if(teammate3 != null) {
+            acmPrize.setTeammateId3(teammate3.getId());
+        }
         acmPrize.setTeamName(teamName);
 
         acmService.add(acmPrize);
