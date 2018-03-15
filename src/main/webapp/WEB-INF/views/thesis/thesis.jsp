@@ -19,6 +19,7 @@
 					<div class="x_panel">
 						<div class="x_title">
 							<h3>查询条件</h3>
+							<h1>${message}</h1>
 							<hr/>
 						</div>
 						<div class="x_content">

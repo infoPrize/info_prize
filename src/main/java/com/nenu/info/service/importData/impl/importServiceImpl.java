@@ -325,7 +325,6 @@ public class importServiceImpl implements ImportService {
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
-
     }
 
     //专利

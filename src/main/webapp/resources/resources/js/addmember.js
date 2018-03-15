@@ -47,14 +47,56 @@ $(document).ready(function(){
     /*国创科研*/
     $("#addscientific_project").click(function(){
         var $sci=$('<div class="form-group col-sm-4">'+
-                         '<label class="tab-label control-label text-right">组员1姓名：</label>'+
+                         '<label class="tab-label control-label text-right">组员'+i+'姓名：</label>'+
                          ' <input type="text" id="projectMemberName'+i+'" class="form-control" />'+
                 ' </div>'+
                 '<div class="form-group col-sm-4">'+
-                         '<label class="tab-label control-label text-right">组员1学号：</label>'+
+                         '<label class="tab-label control-label text-right">组员'+i+'学号：</label>'+
                          '<input type="text" id="projectMemberStuNumber'+i+'" class="form-control" />'+
                  ' </div>');
         i++;
         $("#scientific_project").append($sci);
+    })
+
+    /*挑战杯*/
+    $("#addchallenge").click(function(){
+        var $cha=$('<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label for="student_name'+i+'">团队成员'+i+'姓名：</label>'+
+            ' <input type="text" id="student_name'+i+'" class="form-control"  name="teammateName'+i+'"/>'+
+            ' </div>'+
+            '<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label text-right" for="student_number'+i+'">团队成员'+i+'学号：</label>'+
+            '<input type="text" id="student_number'+i+'" class="form-control" name="teammateStuNumber'+i+'"/>'+
+            ' </div>');
+        i++;
+        $("#challenge_cup").append($cha);
+    })
+
+    /*互联网+*/
+    $("#addinternet").click(function(){
+        var $int=$('<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label for="student_name'+i+'">团队成员'+i+'姓名：</label>'+
+            ' <input type="text" id="student_name'+i+'" class="form-control"  name="teammateName'+i+'"/>'+
+            ' </div>'+
+            '<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label text-right" for="student_number'+i+'">团队成员'+i+'学号：</label>'+
+            '<input type="text" id="student_number'+i+'" class="form-control" name="teammateStuNumber'+i+'"/>'+
+            ' </div>');
+        i++;
+        $("#internet_plus").append($int);
+    })
+
+    /*其他比赛*/
+    $("#addother_match").click(function(){
+        var $oth=$('<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label for="student_name'+i+'">团队成员姓名：</label>'+
+            ' <input type="text" id="student_name'+i+'" class="form-control"  name="teammateName'+i+'"/>'+
+            ' </div>'+
+            '<div class="form-group col-sm-4">'+
+            '<label class="tab-label control-label text-right" for="student_number">团队成员学号：</label>'+
+            '<input type="text" id="student_number'+i+'" class="form-control" name="teammateStuNumber'+i+'"/>'+
+            ' </div>');
+        i++;
+        $("#other_match").append($oth);
     })
 })

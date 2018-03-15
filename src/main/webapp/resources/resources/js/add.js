@@ -285,7 +285,7 @@ $(function(){
 
     // 添加其他比赛信息
 
-//    导入excel
+    // 导入excel
     $("#file").change(function(){  // 当 id 为 file 的对象发生变化时
         var fileSize = this.files[0].size;
         var size = fileSize / 1024 / 1024;
@@ -297,4 +297,26 @@ $(function(){
             $("#file_name").val($("#file").val());  //将 #file 的值赋给 #file_name
         }
     });
+    $("#define").click(function (e) {
+        if($("#file_name").val()==null||$("#file_name").val()==""){
+            e.preventDefault();
+        }
+    });
+
+    // //弹出框
+    // $("#sort_student").click(function () {
+    //     // console.log($("#al").html());
+    //     if($(".al").text() == "添加成功"){
+    //         // console.log($(".al").val());
+    //         $(".green").removeClass('none');
+    //     }
+    //     else if($(".al").text() == "已存在相同学号的学生"){
+    //         // console.log($(".al").val());
+    //         $(".red").removeClass('none');
+    //     }
+    //     else{
+    //         $("span .al").addClass('red');
+    //     }
+    // })
+
 });
