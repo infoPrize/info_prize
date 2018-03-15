@@ -28,7 +28,7 @@
                         <div class="tab-pane active" id="tab-article">
                             <div class="row feature">
                                 <%--<h1>${message}</h1>--%>
-                                <form class="condition_form form-inline" action="${website}thesis/add" method="post">
+                                <form class="condition_form form-inline">
                                     <!--第一行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
@@ -36,8 +36,8 @@
                                             <input type="text" id="journalName" class="form-control" name="journalName" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">刊物等级：</label>
-                                            <select class="form-control" id="journalLevel">
+                                            <label class="tab-label control-label text-right" for="journalLevel">刊物等级：</label>
+                                            <select class="form-control" id="journalLevel" name="journalLevel">
                                                 <option value="-1">---请选择刊物等级---</option>
                                                 <option value="1">E类</option>
                                                 <option value="2">D类</option>
@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label class="tab-label control-label text-right">作者等级：</label>
-                                            <select id="authorLevel1" class="form-control">
+                                            <select id="authorLevel1" class="form-control" name="authorLevel1">
                                                 <option value="-1">---请选择作者等级---</option>
                                                 <option value="1">第一作者</option>
                                                 <option value="2">第二作者</option>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group col-sm-8">
                                             <label class="tab-label control-label text-right">指导老师：</label>
-                                            <input type="text" class="form-control" id="teacherName" />
+                                            <input type="text" class="form-control" id="teacherName" name="teacherName"/>
                                         </div>
                                     </div>
                                     <!--第四行-->
@@ -100,7 +100,6 @@
                                     <!--第五行-->
                                     <input type="button" value="提交" id="sort_thesis"/>
                                     <input type="button" value="添加作者" id="addthesis">
-                                    ${message}
                                 </form>
                             </div>
                         </div>
@@ -127,7 +126,5 @@
 <script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/addmember.js"></script>
-
 </body>
-
 </html>

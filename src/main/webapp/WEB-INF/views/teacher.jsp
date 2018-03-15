@@ -21,16 +21,16 @@
                             <hr/>
                         </div>
                         <div class="x_content">
-                            <form class="condition_form form-inline" action="${website}teacher/add" method="post" enctype="multipart/form-data" name="f1">
+                            <form class="condition_form form-inline">
                                 <!--第一行-->
                                 <div class="tab-row">
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="name">教师姓名：</label>
-                                        <input type="text" id="name" class="form-control" name="teacherName"/>
+                                        <label class="tab-label control-label text-right" for="teacherName">教师姓名：</label>
+                                        <input type="text" id="teacherName" class="form-control" name="teacherName"/>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label class="tab-label control-label text-right" for="profession">职称：</label>
-                                        <select id="profession" class="form-control" name="teacherLevel">
+                                        <label class="tab-label control-label text-right" for="teacherLevel">职称：</label>
+                                        <select id="teacherLevel" class="form-control" name="teacherLevel">
                                             <option value="-1">---请选择教师职称---</option>
                                             <option value="1">助教</option>
                                             <option value="2">讲师</option>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <!--第二行-->
-                                <input type="submit" value="添加" id="sort">
+                                <input type="button" value="添加" id="sort_teacher">
                             </form>
 
                         </div>
@@ -85,6 +85,7 @@
 </div>
 <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script>
     $=function(id){
         return document.getElementById(id);

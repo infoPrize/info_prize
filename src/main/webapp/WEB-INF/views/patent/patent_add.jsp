@@ -27,12 +27,12 @@
                     <div class="x_content">
                         <div class="tab-pane" id="tab-product">
                             <div class="row feature">
-                                <form class="condition_form form-inline" action="${website}patent/add" method="post">
+                                <form class="condition_form form-inline">
                                     <!--第一行-->
                                     <div class="tab-row">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="type">专利类别：</label>
-                                            <select id="type" class="form-control" name="patentType">
+                                            <label class="tab-label control-label text-right" for="patentType">专利类别：</label>
+                                            <select id="patentType" class="form-control" name="patentType">
                                                 <option value="-1">---请选择专利类别---</option>
                                                 <option value="1">发明专利</option>
                                                 <option value="2">实用新型专利</option>
@@ -41,28 +41,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="name">专利名称：</label>
-                                            <input type="text" id="name" class="form-control" name="patentName"/>
+                                            <label class="tab-label control-label text-right" for="patentName">专利名称：</label>
+                                            <input type="text" id="patentName" class="form-control" name="patentName"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="apply_time">申请成功时间：</label>
-                                            <input type="text" id="apply_time" name="applyTime" class="form-control" onClick="laydate()"/>
+                                            <label class="tab-label control-label text-right" for="applyTime">申请成功时间：</label>
+                                            <input type="text" id="applyTime" name="applyTime" class="form-control" onClick="laydate()"/>
                                         </div>
 
                                     </div>
                                     <!--第二行-->
                                     <div class="tab-row" id="patent">
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="tutor">指导老师：</label>
-                                            <input type="text" id="tutor" class="form-control" name="teacherName" />
+                                            <label class="tab-label control-label text-right" for="teacherName">指导老师：</label>
+                                            <input type="text" id="teacherName" class="form-control" name="teacherName" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="author_name_1">申请人姓名</label>
-                                            <input type="text" class="form-control" id="author_name_1" name="applierName1" />
+                                            <label class="tab-label control-label text-right" for="applierName1">申请人姓名</label>
+                                            <input type="text" class="form-control" id="applierName1" name="applierName1" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="author_stu_number1">申请人学号</label>
-                                            <input type="text" class="form-control" id="author_stu_number1" name="applierStuNumber1" />
+                                            <label class="tab-label control-label text-right" for="applierStuNumber1">申请人学号</label>
+                                            <input type="text" class="form-control" id="applierStuNumber1" name="applierStuNumber1" />
                                         </div>
 
                                     </div>
@@ -70,12 +70,12 @@
                                     <div class="tab-row">
                                         <div class="col-sm-12">
                                             <label class="tab-label control-label text-right">专利介绍：</label>
-                                            <textarea class="detailtext form-control" rows="3" style="width: 850px" name="patentIntroduce"></textarea>
+                                            <textarea class="detailtext form-control" rows="3" style="width: 850px" name="patentIntroduce" id="patentIntroduce"></textarea>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <!--第五行-->
-                                    <input type="submit" value="提交" id="sortpatent" />
+                                    <input type="button" value="提交" id="sortpatent" />
                                     <input type="button" value="添加申请人" id="addpatent">
                                 </form>
                             </div>

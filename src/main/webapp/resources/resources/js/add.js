@@ -13,20 +13,26 @@ $(function(){
 
     // 添加论文信息
     $("#sort_thesis").click(function(){
-        var journameName = $('#journameName').val();
+        var journalName = $('#journalName').val();
         var journalLevel = $('#journalLevel').val();
         var thesisTitle = $('#thesisTitle').val();
         var publishTime = $('#publishTime').val();
         var authorName1 = $('#authorName1').val();
         var authorStuNumber1 = $('#authorStuNumber1').val();
+        var authorLevel1 = $('#authorLevel1').val();
         var authorName2 = $('#authorName2').val();
         var authorStuNumber2 = $('#authorStuNumber2').val();
+        var authorLevel2 = $('#authorLevel2').val();
         var authorName3 = $('#authorName3').val();
         var authorStuNumber3 = $('#authorStuNumber3').val();
+        var authorLevel3 = $('#authorLevel3').val();
         var authorName4 = $('#authorName4').val();
         var authorStuNumber4 = $('#authorStuNumber4').val();
+        var authorLevel4 = $('#authorLevel4').val();
         var authorName5 = $('#authorName5').val();
         var authorStuNumber5 = $('#authorStuNumber5').val();
+        var authorLevel5 = $('#authorLevel5').val();
+        var teacherName = $('#teacherName').val();
         var thesisAbstract = $('#thesisAbstract').val();
         console.log(website);
         $.ajax({
@@ -34,26 +40,34 @@ $(function(){
             url: website + "thesis/add",
             dataType: "text",
             data:{
-                journameName: journameName,
+                journalName: journalName,
                 journalLevel: journalLevel,
                 thesisTitle: thesisTitle,
                 publishTime: publishTime,
                 authorName1: authorName1,
                 authorStuNumber1: authorStuNumber1,
+                authorLevel1: authorLevel1,
                 authorName2: authorName2,
                 authorStuNumber2: authorStuNumber2,
+                authorLevel2: authorLevel2,
                 authorName3: authorName3,
                 authorStuNumber3: authorStuNumber3,
+                authorLevel3: authorLevel3,
                 authorName4: authorName4,
                 authorStuNumber4: authorStuNumber4,
+                authorLevel4: authorLevel4,
                 authorName5: authorName5,
                 authorStuNumber5: authorStuNumber5,
+                authorLevel5: authorLevel5,
+                teacherName: teacherName,
                 thesisAbstract: thesisAbstract
             },
             success: function (msg) {
+                console.log(msg);
                 msg = parseInt(msg);
                 if (msg == 1) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == 2){
                     alert("第一位学生学号姓名不匹配!");
@@ -82,6 +96,76 @@ $(function(){
     });
 
     // 添加专利信息
+    $("#sortpatent").click(function(){
+        var patentType = $('#patentType').val();
+        var patentName = $('#patentName').val();
+        var applyTime = $('#applyTime').val();
+        var applierName1 = $('#applierName1').val();
+        var applierStuNumber1 = $('#applierStuNumber1').val();
+        var applierName2 = $('#applierName2').val();
+        var applierStuNumber2 = $('#applierStuNumber2').val();
+        var applierName3 = $('#applierName3').val();
+        var applierStuNumber3 = $('#applierStuNumber3').val();
+        var applierName4 = $('#applierName4').val();
+        var applierStuNumber4 = $('#applierStuNumber4').val();
+        var applierName5 = $('#applierName5').val();
+        var applierStuNumber5 = $('#applierStuNumber5').val();
+        var teacherName = $('#teacherName').val();
+        var thesisAbstract = $('#thesisAbstract').val();
+        console.log(website);
+        $.ajax({
+            type: 'post',
+            url: website + "patent/add",
+            dataType: "text",
+            data:{
+                patentType: patentType,
+                patentName: patentName,
+                applyTime: applyTime,
+                applierName1: applierName1,
+                applierStuNumber1: applierStuNumber1,
+                applierName2: applierName2,
+                applierStuNumber2: applierStuNumber2,
+                applierName3: applierName3,
+                applierStuNumber3: applierStuNumber3,
+                applierName4: applierName4,
+                applierStuNumber4: applierStuNumber4,
+                applierName5: applierName5,
+                applierStuNumber5: applierStuNumber5,
+                teacherName: teacherName,
+                patentIntroduce: patentIntroduce
+            },
+            success: function (msg) {
+                console.log(msg);
+                msg = parseInt(msg);
+                if (msg == 7) {
+                    alert("插入成功!");
+                    window.location.reload();
+                }
+                else if (msg == 1){
+                    alert("申请者1姓名学号不匹配!");
+                }
+                else if (msg == 2){
+                    alert("申请者2姓名学号不匹配!");
+                }
+                else if (msg == 3){
+                    alert("申请者3姓名学号不匹配!");
+                }
+                else if (msg == 4){
+                    alert("申请者4姓名学号不匹配!");
+                }
+                else if (msg == 5){
+                    alert("申请者5姓名学号不匹配!");
+                }
+                else if (msg == 6){
+                    alert("教师不存在!");
+                }
+            },
+            error: function (msg) {
+                alert("error!");
+            } ,
+            traditional: true
+        });
+    });
 
     // 添加国创科研信息
     $("#sort_scient").click(function(){
@@ -281,10 +365,41 @@ $(function(){
         });
     });
 
-    // 添加专业竞赛信息
-
     // 添加其他比赛信息
 
+    //添加教师
+    $("#sort_teacher").click(function(){
+        var teacherName = $('#teacherName').val();
+        var teacherLevel = $('#teacherLevel').val();
+        var phone = $('#phone').val();
+        $.ajax({
+            type: 'post',
+            url: website + "teacher/add",
+            dataType: "text",
+            data:{
+                teacherName: teacherName,
+                teacherLevel: teacherLevel,
+                phone: phone
+            },
+            success: function (msg) {
+                console.log(msg);
+                msg = parseInt(msg);
+                if (msg == 1) {
+                    alert("插入成功!");
+                }
+                else if (msg == 2) {
+                    alert("请输入教师姓名!");
+                }
+                else if (msg == 3){
+                    alert("请选择教师等级!");
+                }
+            },
+            error: function (msg) {
+                alert("error!");
+            } ,
+            traditional: true
+        });
+    });
     // 导入excel
     $("#file").change(function(){  // 当 id 为 file 的对象发生变化时
         var fileSize = this.files[0].size;
@@ -302,21 +417,5 @@ $(function(){
             e.preventDefault();
         }
     });
-
-    // //弹出框
-    // $("#sort_student").click(function () {
-    //     // console.log($("#al").html());
-    //     if($(".al").text() == "添加成功"){
-    //         // console.log($(".al").val());
-    //         $(".green").removeClass('none');
-    //     }
-    //     else if($(".al").text() == "已存在相同学号的学生"){
-    //         // console.log($(".al").val());
-    //         $(".red").removeClass('none');
-    //     }
-    //     else{
-    //         $("span .al").addClass('red');
-    //     }
-    // })
 
 });

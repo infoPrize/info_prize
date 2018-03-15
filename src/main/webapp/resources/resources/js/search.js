@@ -810,7 +810,7 @@ function initdataStudent() {
                     for(var i in result) {
                         cHtml += "<tr><td>" + result[i].stuNumber + "</td><td>" + result[i].name + "</td><td>"
                             + result[i].sex + "</td><td>" + result[i].grade + "</td><td>" + result[i].major +
-                            "</td><td>" + result[i].phone + "</td><td><a class='delete_student' id='" + result[i].id + "'>删除</a></td><tr>";
+                            "</td><td>" + result[i].phone + "</td><td><a class='delete_student' id='" + result[i].stuNumber + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 

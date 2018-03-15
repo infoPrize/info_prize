@@ -190,7 +190,9 @@ function rightBtnFun() {
         }
     }
 }
-
+function load() {
+    window.location.reload();
+}
 /*选项卡切换方法*/
 function navChange() {
     if(!$(this).hasClass("active")) {
@@ -202,8 +204,13 @@ function navChange() {
             }
         });
         $(this).addClass("active").siblings(".content-tab").removeClass("active");
+        $(this).load();
         addTab(this);
     }
+    $(".content-tab").click(function (e) {
+        var dataid = $(e.target).attr("data-id");
+        $(this).contentWindow.location.reload(true);
+    })
 }
 
 /*选项卡关闭方法*/

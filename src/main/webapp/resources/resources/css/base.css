@@ -33,7 +33,7 @@ table th, table td{
 .form-inline{
 	position: relative;
 }
-#sort{
+#sort, #sort_teacher{
 	position: relative;
 	left: 900px;
 	width: 80px;
