@@ -208,7 +208,7 @@ public class ChallengeCupController extends AbstractController{
                                       @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                       HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         List<ChallengeCupDto> challengeCupDtoList = null;
         JSONArray jsonArray = new JSONArray();
 

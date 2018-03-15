@@ -214,7 +214,7 @@ public class ThesisController extends AbstractController {
                                       @RequestParam(value = "endTime", required = false) Date endTime,
                                       @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                                       HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> params = null;
         try {
             params = thesisService.getParams(journalLevel, journalName, thesisTitle, authorName, authorStuNumber, authorMajor, authorGrade,
