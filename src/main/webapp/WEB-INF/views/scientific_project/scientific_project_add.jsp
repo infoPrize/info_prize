@@ -76,11 +76,11 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-sm-4">
-                                                <label class="tab-label control-label text-right">组员姓名：</label>
+                                                <label class="tab-label control-label text-right">组员1姓名：</label>
                                                 <input type="text" id="projectMemberName1" class="form-control" />
                                             </div>
                                             <div class="form-group col-sm-4">
-                                                <label class="tab-label control-label text-right">组员学号：</label>
+                                                <label class="tab-label control-label text-right">组员1学号：</label>
                                                 <input type="text" id="projectMemberStuNumber1" class="form-control" />
                                             </div>
 
@@ -108,8 +108,9 @@
                             浏览
                             <input type="file" id="file" name="file">
                         </a>
-                        <input type="submit" class="input" value="确定"/>
-                        <a href="${website}resources/ScientificProject.xls" id="download_model">下载excel模板</a>
+                        <input type="submit" class="input" value="确定" id="define"/>
+                        ${message}
+                        <a href="${staticWebsite}resources/ScientificProject.xls" id="download_model">下载excel模板</a>
                     </form>
 
                 </div>

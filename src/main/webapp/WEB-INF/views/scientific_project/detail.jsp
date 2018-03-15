@@ -105,13 +105,13 @@
                                 </tbody>
                             </table>
                             <form action="${website}scientificProject/upload/${scientificProjectDto.id}/${scientificProjectDto.projectName}" enctype="multipart/form-data" method="post" class="dinline">
-                                <label class="tab-label control-label text-right">导入excel：</label>
+                                <label class="tab-label control-label text-right">导入图片：</label>
                                 <input type="text" id="file_name" readonly="readonly" value=""/>
                                 <a href="javascript:void(0);" class="input top">
                                     浏览
                                     <input type="file" id="file" name="file">
                                 </a>
-                                <input type="submit" class="input" value="确定"/>
+                                <input type="submit" class="input" value="确定" id="define"/>
 
                             </form>
                             <a href="${website}scientificProject/down/${scientificProjectDto.projectName}" id="download">下载</a>
@@ -121,6 +121,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 
 </body>

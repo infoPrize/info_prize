@@ -52,7 +52,9 @@ public class StudentController {
                       @RequestParam("stuNumber") String stuNumber,
                       @RequestParam("grade") String grade,
                       @RequestParam("majorCode") Integer majorCode,
-                      @RequestParam("phone") String phone) {
+                      @RequestParam("phone") String phone,
+                      Model model) throws Exception {
+
 
         Student student = new Student();
         student.setName(name);
@@ -63,11 +65,17 @@ public class StudentController {
         student.setPhone(phone);
 
         try {
-            studentService.add(student);
+            if(studentService.selectStudentByStuNumber(stuNumber) == null){
+                studentService.add(student);
+                model.addAttribute("message","添加成功");
+            } else {
+                model.addAttribute("message", "已存在相同学号的学生");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/student/query/by/condition";
+        return "student/add";
     }
 
     //条件查询

@@ -47,7 +47,7 @@ public class ImportController {
             e.printStackTrace();
             redirectAttributes.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "redirect:/student/list";
+        return "student/add";
 
     }
 
@@ -69,7 +69,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "thesis/thesis";
+        return "thesis/thesis_add";
 
     }
 
@@ -91,7 +91,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "patent/patent";
+        return "patent/patent_add";
 
     }
 
@@ -113,7 +113,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "scientific_project/scientific_project";
+        return "scientific_project/scientific_project_add";
     }
 
     @RequestMapping(value = "ACMPrize",method = RequestMethod.POST)
@@ -134,7 +134,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "ACM/ACM";
+        return "ACM/ACM_add";
     }
 
     @RequestMapping(value = "math",method = RequestMethod.POST)
@@ -155,7 +155,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "math_model/math_model";
+        return "math_model/math_model_add";
     }
 
     @RequestMapping(value = "internetPlus",method = RequestMethod.POST)
@@ -176,7 +176,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "internet_plus/internet_plus";
+        return "internet_plus/internet_plus_add";
     }
 
     @RequestMapping(value = "challengeCup",method = RequestMethod.POST)
@@ -197,7 +197,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "challenge_cup/challenge_cup";
+        return "challenge_cup/challenge_cup_add";
     }
 
     @RequestMapping(value = "otherMatch",method = RequestMethod.POST)
@@ -219,7 +219,7 @@ public class ImportController {
             e.printStackTrace();
             model.addAttribute("message", MessageInfo.IMPORT_STUDENT_IMFORMATION);
         }
-        return "other_match/other_match";
+        return "other_match/other_match_add";
     }
 
 }

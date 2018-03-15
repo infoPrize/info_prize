@@ -66,7 +66,9 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <input type="submit" value="提交" id="sort_student">
+                                <input type="submit" value="提交" id="sort_student" >
+                                <span class="al green">${message}</span>
+                                <span class="al red">${message}</span>
                                 <br><br>
                             </form>
                         </div>
@@ -79,8 +81,9 @@
                             浏览
                             <input type="file" id="file" name="file">
                         </a>
-                        <input type="submit" class="input" value="确定"/>
+                        <input type="submit" class="input" value="确定" id="define"/>
                         <a href="${staticWebsite}resources/student.xls" id="download_model">下载excel模板</a>
+                        ${message}
                     </form>
                 </div>
             </div>
@@ -90,10 +93,11 @@
 </div>
 <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script>
-    $=function(id){
-        return document.getElementById(id);
-    }
+//    $=function(id){
+//        return document.getElementById(id);
+//    }
     function mc(){
         var i=$("upload");
         i.click();
@@ -101,6 +105,9 @@
     function mm(){
         $("puf").innerHTML=(document.f1.uf.value);
     }
+
+
+
 </script>
 </body>
 </html>

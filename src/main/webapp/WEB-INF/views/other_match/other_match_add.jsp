@@ -72,21 +72,22 @@
                                             <input type="text" class="form-control" name="prizeTime"/>
                                         </div>
                                     </div>
-                                    <div class="tab-row">
+                                    <div class="tab-row" id="other_match">
                                         <div class="form-group col-sm-4">
                                             <label class="tab-label control-label text-right">项目名：</label>
                                             <input type="text" name="projectName" class="form-control" />
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="student_name">团队成员姓名：</label>
-                                            <input type="text" id="student_name" class="form-control" name="teammateName1"/>
+                                            <label class="tab-label control-label text-right" for="student_name1">团队成员姓名：</label>
+                                            <input type="text" id="student_name1" class="form-control" name="teammateName1"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="student_number">团队成员学号：</label>
-                                            <input type="text" id="student_number" class="form-control" name="teammateStuNumber1"/>
+                                            <label class="tab-label control-label text-right" for="student_number1">团队成员学号：</label>
+                                            <input type="text" id="student_number1" class="form-control" name="teammateStuNumber1"/>
                                         </div>
                                     </div>
-                                    <input type="button" value="提交" id="sort_comp" />
+                                    <input type="button" value="提交" id="sort_comp"/>
+                                    <input type="button" value="添加组员" id="addother_match">
                                 </form>
                             </div>
                         </div>
@@ -99,8 +100,8 @@
                             浏览
                             <input type="file" id="file" name="file">
                         </a>
-                        <input type="submit" class="input" value="确定"/>
-                        <a href="${staticWebsite}otherMatch.xls" id="download_model">下载excel模板</a>
+                        <input type="submit" class="input" value="确定" id="define"/>${message}
+                        <a href="${staticWebsite}resources/otherMatch.xls" id="download_model">下载excel模板</a>
                     </form>
                 </div>
             </div>

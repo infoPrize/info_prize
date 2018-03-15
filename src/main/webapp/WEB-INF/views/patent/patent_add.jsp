@@ -89,7 +89,7 @@
                             浏览
                             <input type="file" id="file" name="file">
                         </a>
-                        <input type="submit" class="input" value="确定"/>
+                        <input type="submit" class="input" value="确定" id="define"/>${message}
                         <a href="${staticWebsite}resources/patent.xls" id="download_model">下载excel模板</a>
                     </form>
                 </div>

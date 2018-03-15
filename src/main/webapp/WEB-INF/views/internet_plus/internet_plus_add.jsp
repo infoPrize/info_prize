@@ -68,33 +68,43 @@
                                             <input type="text" id="prizeTime" name="prizeTime" class="form-control" onClick="laydate()"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">指导老师：</label>
-                                            <input type="text" class="form-control" name="prizeTime"/>
+                                            <label class="tab-label control-label text-right">项目名：</label>
+                                            <input type="text" name="projectName" class="form-control" />
                                         </div>
                                     </div>
-                                    <div class="tab-row">
+                                    <div class="tab-row" id="internet_plus">
                                         <div class="form-group col-sm-4">
                                             <label class="tab-label control-label text-right">团队名：</label>
                                             <input type="text" name="teamName" class="form-control" />
                                         </div>
+
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right">项目名：</label>
-                                            <input type="text" name="projectName" class="form-control" />
+                                            <label class="tab-label control-label text-right" for="student_name1">团队成员1姓名：</label>
+                                            <input type="text" id="student_name1" class="form-control" name="teammateName1"/>
                                         </div>
                                         <div class="form-group col-sm-4">
-                                            <label class="tab-label control-label text-right" for="student_name">团队成员姓名：</label>
-                                            <input type="text" id="student_name" class="form-control" name="teammateName1"/>
+                                            <label class="tab-label control-label text-right" for="student_number1">团队成员1学号：</label>
+                                            <input type="text" id="student_number1" class="form-control" name="teammateStuNumber1"/>
                                         </div>
                                     </div>
                                     <!--第三行-->
                                     <div class="tab-row">
-                                        <div class="form-group col-sm-12">
-                                            <label class="tab-label control-label text-right" for="student_number">团队成员学号：</label>
-                                            <input type="text" id="student_number" class="form-control" name="teammateStuNumber1"/>
+                                        <div class="form-group col-sm-4">
+                                            <label class="tab-label control-label text-right">指导老师：</label>
+                                            <input type="text" class="form-control" name="prizeTime"/>
+                                        </div>
+
+                                    </div>
+                                    <!--第四行-->
+                                    <div class="tab-row">
+                                        <div class="col-sm-12">
+                                            <label class="tab-label control-label text-right" for="projectIntroduce">项目详情：</label>
+                                            <textarea id="projectIntroduce" class="detailtext form-control" rows="3" style="width: 850px"></textarea>
                                         </div>
                                     </div>
                                     <!--第五行-->
-                                    <input type="button" value="提交" id="sort_comp" />
+                                    <input type="button" value="提交" id="sort_comp"/>
+                                    <input type="button" value="添加组员" id="addinternet">
 
                                 </form>
                             </div>
@@ -108,8 +118,8 @@
                             浏览
                             <input type="file" id="file" name="file">
                         </a>
-                        <input type="submit" class="input" value="确定"/>
-                        <a href="${staticWebsite}resources/InternetPlus" id="download_model">下载excel模板</a>
+                        <input type="submit" class="input" value="确定" id="define"/>${message}
+                        <a href="${staticWebsite}resources/InternetPlus.xls" id="download_model">下载excel模板</a>
                     </form>
                 </div>
             </div>
