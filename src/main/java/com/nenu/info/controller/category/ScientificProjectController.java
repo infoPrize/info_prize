@@ -97,6 +97,10 @@ public class ScientificProjectController extends AbstractController{
                                         @RequestParam(value = "projectMemberStuNumber4", required = false, defaultValue = "") String projectMemberStuNumber4,
                                         @RequestParam(value = "fundsLimit", required = false, defaultValue = "0") Integer fundsLimit,
                                         @RequestParam(value = "projectIntroduce", required = false, defaultValue = "") String projectIntroduce) {
+        //如果第一名同学都没有输入，则返回1
+        if(projectManName.equals("") && projectManStuNumber.equals("")) {
+            return 1;
+        }
 
         //先处理五个同学的输入是否合法
         try {

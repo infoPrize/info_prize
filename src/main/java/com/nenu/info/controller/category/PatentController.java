@@ -97,6 +97,11 @@ public class PatentController extends AbstractController{
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                        @RequestParam(value = "patentIntroduce", required = false, defaultValue = "") String patentIntroduce) {
 
+        //如果第一名同学都没有输入，则返回1
+        if(applierName1.equals("") && applierStuNumber1.equals("")) {
+            return 1;
+        }
+
         Student student1 = null;
         Student student2 = null;
         Student student3 = null;

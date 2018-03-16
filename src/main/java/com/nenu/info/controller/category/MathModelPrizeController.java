@@ -92,6 +92,11 @@ public class MathModelPrizeController extends AbstractController {
                        @RequestParam(value = "teammateName3", required = false, defaultValue = "") String teammateName3,
                        @RequestParam(value = "teammateStuNumber3", required = false, defaultValue = "") String teammateStuNumber3,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+        //如果第一名同学都没有输入，则返回1
+        if(teammateName1.equals("") && teammateStuNumber1.equals("")) {
+            return 1;
+        }
+
         Student teammate1 = null;
         Student teammate2 = null;
         Student teammate3 = null;

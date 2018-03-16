@@ -96,7 +96,7 @@ public class OtherMatchController extends AbstractController {
      *         10 - 插入成功
      *
      */
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Integer add(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                        @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
@@ -121,6 +121,11 @@ public class OtherMatchController extends AbstractController {
                        @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                        @RequestParam(value = "prizeTime", required = false) Date prizeTime,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+
+        //如果第一名同学都没有输入，则返回1
+        if(teammateName1.equals("") && teammateStuNumber1.equals("")) {
+            return 1;
+        }
 
         try {
             //先处理八名同学的输入是否合法

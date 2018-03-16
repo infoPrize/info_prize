@@ -118,27 +118,32 @@ public class ThesisController extends AbstractController {
 
         Teacher teacher = null;
 
+        //如果第一个学生都没有输入，则返回2
+        if(authorName1.equals("") && authorStuNumber1.equals("")) {
+            return 2;
+        }
+
         try {
             //首先检查几个学生是否输入合法
             if(!studentService.checkMatchingWithNameAndStuNumber(authorName1, authorStuNumber1)) {
-                return 1;
-            }
-            if(!studentService.checkMatchingWithNameAndStuNumber(authorName2, authorStuNumber2)) {
                 return 2;
             }
-            if(!studentService.checkMatchingWithNameAndStuNumber(authorName3, authorStuNumber3)) {
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName2, authorStuNumber2)) {
                 return 3;
             }
-            if(!studentService.checkMatchingWithNameAndStuNumber(authorName4, authorStuNumber4)) {
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName3, authorStuNumber3)) {
                 return 4;
             }
-            if(!studentService.checkMatchingWithNameAndStuNumber(authorName5, authorStuNumber5)) {
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName4, authorStuNumber4)) {
                 return 5;
+            }
+            if(!studentService.checkMatchingWithNameAndStuNumber(authorName5, authorStuNumber5)) {
+                return 6;
             }
 
             //检查教师是否存在
             if(!teacherService.checkTeacherExist(teacherName)) {
-                return 6;
+                return 7;
             }
         } catch (Exception e) {
             e.printStackTrace();

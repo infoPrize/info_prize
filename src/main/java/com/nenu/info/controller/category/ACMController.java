@@ -94,6 +94,11 @@ public class ACMController extends AbstractController{
                        @RequestParam(value = "teammateStuNumber3", required = false, defaultValue = "") String teammateStuNumber3,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
 
+        //如果第一位同学没有输入，返回1
+        if(teammateName1.equals("") && teammateStuNumber1.equals("")) {
+            return 1;
+        }
+
         try {
             if(!studentService.checkMatchingWithNameAndStuNumber(teammateName1, teammateStuNumber1)) {
                 return 1;

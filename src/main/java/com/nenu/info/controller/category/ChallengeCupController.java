@@ -94,6 +94,11 @@ public class ChallengeCupController extends AbstractController{
                        @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                        @RequestParam(value = "prizeTime", required = false) Date prizeTime,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+        //如果第一位同学没有输入，则返回1
+        if(teammateName1.equals("") && teammateStuNumber1.equals("")) {
+            return 1;
+        }
+
         try {
             //先处理八名同学的输入是否合法
             if(!studentService.checkMatchingWithNameAndStuNumber(teammateName1, teammateStuNumber1)) {

@@ -99,6 +99,10 @@ public class InternetPlusController extends AbstractController {
                        @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
                        @RequestParam(value = "prizeTime", required = false) Date prizeTime,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName) {
+
+        if(teammateName1.equals("") && teammateStuNumber1.equals("")) {
+            return 1;
+        }
         try {
             //先处理八名同学的输入是否合法
             if(!studentService.checkMatchingWithNameAndStuNumber(teammateName1, teammateStuNumber1)) {

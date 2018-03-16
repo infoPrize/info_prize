@@ -409,16 +409,17 @@ $(function(){
                 teammateStuNumber2: teammateStuNumber2,
                 teammateName3: teammateName3,
                 teammateStuNumber3: teammateStuNumber3,
-                teacherName4: teacherName4,
+                teammateName4: teammateName4,
                 teammateStuNumber4: teammateStuNumber4,
-                teacherName5: teacherName5,
+                teammateName5: teammateName5,
                 teammateStuNumber5: teammateStuNumber5,
-                teacherName6: teacherName6,
+                teammateName6: teammateName6,
                 teammateStuNumber6: teammateStuNumber6,
-                teacherName7: teacherName7,
+                teammateName7: teammateName7,
                 teammateStuNumber7: teammateStuNumber7,
-                teacherName8: teacherName8,
-                teammateStuNumber8: teammateStuNumber8
+                teammateName8: teammateName8,
+                teammateStuNumber8: teammateStuNumber8,
+                teacherName: teacherName
             },
             success: function (msg) {
                 msg = parseInt(msg);
@@ -507,16 +508,17 @@ $(function(){
                 teammateStuNumber2: teammateStuNumber2,
                 teammateName3: teammateName3,
                 teammateStuNumber3: teammateStuNumber3,
-                teacherName4: teacherName4,
+                teammateName4: teammateName4,
                 teammateStuNumber4: teammateStuNumber4,
-                teacherName5: teacherName5,
+                teammateName5: teammateName5,
                 teammateStuNumber5: teammateStuNumber5,
-                teacherName6: teacherName6,
+                teammateName6: teammateName6,
                 teammateStuNumber6: teammateStuNumber6,
-                teacherName7: teacherName7,
+                teammateName7: teammateName7,
                 teammateStuNumber7: teammateStuNumber7,
-                teacherName8: teacherName8,
-                teammateStuNumber8: teammateStuNumber8
+                teammateName8: teammateName8,
+                teammateStuNumber8: teammateStuNumber8,
+                teacherName: teacherName
             },
             success: function (msg) {
                 msg = parseInt(msg);
@@ -605,16 +607,17 @@ $(function(){
                 teammateStuNumber2: teammateStuNumber2,
                 teammateName3: teammateName3,
                 teammateStuNumber3: teammateStuNumber3,
-                teacherName4: teacherName4,
+                teammateName4: teammateName4,
                 teammateStuNumber4: teammateStuNumber4,
-                teacherName5: teacherName5,
+                teammateName5: teammateName5,
                 teammateStuNumber5: teammateStuNumber5,
-                teacherName6: teacherName6,
+                teammateName6: teammateName6,
                 teammateStuNumber6: teammateStuNumber6,
-                teacherName7: teacherName7,
+                teammateName7: teammateName7,
                 teammateStuNumber7: teammateStuNumber7,
-                teacherName8: teacherName8,
-                teammateStuNumber8: teammateStuNumber8
+                teammateName8: teammateName8,
+                teammateStuNumber8: teammateStuNumber8,
+                teacherName: teacherName
             },
             success: function (msg) {
                 msg = parseInt(msg);
@@ -747,11 +750,13 @@ $(function(){
     $("#define").click(function (e) {
         if($("#file_name").val()==null||$("#file_name").val()==""){
             e.preventDefault();
+            alert("请先导入文件！");
         }
     });
     $("#sort_student").click(function (e) {
         if($("#stuNumber").val()==null||$("#stuNumber").val()==""){
             e.preventDefault();
+            alert("请填写信息！");
         }
     });
 
