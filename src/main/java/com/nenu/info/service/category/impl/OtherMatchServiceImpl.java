@@ -191,7 +191,10 @@ public class OtherMatchServiceImpl implements OtherMatchService {
         if(otherMatchDto != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date prizeTime = otherMatchDto.getPrizeTime();
-            String prizeTimeStr = sdf.format(prizeTime);
+            String prizeTimeStr = "";
+            if(prizeTime != null) {
+                prizeTimeStr = sdf.format(prizeTime);
+            }
             otherMatchDto.setPrizeTimeStr(prizeTimeStr);
         }
         return otherMatchDto;

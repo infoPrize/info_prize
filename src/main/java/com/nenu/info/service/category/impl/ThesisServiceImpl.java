@@ -192,9 +192,11 @@ public class ThesisServiceImpl implements ThesisService {
 
         //对日期进行处理
         if(thesisDto != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date publishTime = thesisDto.getPublishTime();
-            String publishTimeStr = sdf.format(publishTime);
+            String publishTimeStr = "";
+            if(publishTime != null) {
+                publishTimeStr = sf.format(publishTime);
+            }
             thesisDto.setPublishTimeStr(publishTimeStr);
         }
 

@@ -171,10 +171,13 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
         }
 
         if(mathModelPrizeDto != null) {
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
+            //对日期进行处理
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date prizeTime = mathModelPrizeDto.getPrizeTime();
-            String prizeTimeStr = sf.format(prizeTime);
+            String prizeTimeStr = "";
+            if(prizeTime != null) {
+                prizeTimeStr = sdf.format(prizeTime);
+            }
             mathModelPrizeDto.setPrizeTimeStr(prizeTimeStr);
         }
 

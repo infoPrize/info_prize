@@ -166,7 +166,10 @@ public class InternetPlusServiceImpl implements InternetPlusService {
         if(internetPlusDto != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date prizeTime = internetPlusDto.getPrizeTime();
-            String prizeTimeStr = sdf.format(prizeTime);
+            String prizeTimeStr = "";
+            if(prizeTime != null) {
+                prizeTimeStr = sdf.format(prizeTime);
+            }
             internetPlusDto.setPrizeTimeStr(prizeTimeStr);
         }
         return internetPlusDto;

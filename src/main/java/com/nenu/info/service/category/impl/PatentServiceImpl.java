@@ -163,9 +163,12 @@ public class PatentServiceImpl implements PatentService {
 
         //对日期进行处理
         if(patentDto != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            //对日期进行处理
             Date applyTime = patentDto.getApplyTime();
-            String applyTimeStr = sdf.format(applyTime);
+            String applyTimeStr = "";
+            if(applyTime != null) {
+                applyTimeStr = sf.format(applyTime);
+            }
             patentDto.setApplyTimeStr(applyTimeStr);
         }
         return patentDto;
