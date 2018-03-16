@@ -701,12 +701,11 @@ $(function(){
 //          traditional: true
 //      });
 //  });
-
     //添加教师
     $("#sort_teacher").click(function(){
-        var teacherName = $('#teacherName').val();
-        var teacherLevel = $('#teacherLevel').val();
-        var phone = $('#phone').val();
+        var teacherName = $("#teacherName").val();
+        var teacherLevel = $("#teacherLevel").val();
+        var phone = $("#phone").val();
         $.ajax({
             type: 'post',
             url: website + "teacher/add",
@@ -721,6 +720,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 1) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == 2) {
                     alert("请输入教师姓名!");

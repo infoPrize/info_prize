@@ -816,16 +816,15 @@ function initdataStudent() {
 
                     $(".delete_student").click(function (e) {
                         var id = $(e.target).attr("id");
+                        console.log(id);
                         $.ajax({
                             type: 'post',
                             url:  website + "student/delete/by/stuNumber/" + id,
-                            data: {id: id},
                             dataType: "text",
                             success: function (msg) {
                                 var msg = parseInt(msg);
                                 if (msg == 1) {
                                     alert("删除成功!");
-                                    $("#" + id).parent().parent().remove();
                                     initdataStudent();
                                 }
                                 else if (msg == -1) {

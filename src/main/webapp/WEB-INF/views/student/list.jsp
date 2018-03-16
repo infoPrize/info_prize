@@ -68,7 +68,7 @@
                                     </div>
 
                                 </div>
-                                <input type="button" value="查询" onclick="initdataStudent()" class="inlibut">
+                                <input type="button" value="查询" onclick="initdataStudent()" id="sort">
                             </form>
 
 

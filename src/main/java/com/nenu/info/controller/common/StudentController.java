@@ -103,11 +103,17 @@ public class StudentController {
     }
 
     //根据学号删除
-    @RequestMapping(value = "delete/by/stuNumber/{stuNumber}", method = RequestMethod.GET)
-    public String deleteByStuNumber(@PathVariable("stuNumber")String stuNumber) throws Exception {
+    @RequestMapping(value = "delete/by/stuNumber/{stuNumber}", method = RequestMethod.POST)
+    @ResponseBody
+    public Integer deleteByStuNumber(@PathVariable("stuNumber")String stuNumber) {
 
-        studentService.deleteByStuNumber(stuNumber);
-        return "redirect:/student/toList";
+        try {
+            studentService.deleteByStuNumber(stuNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 1;
 
     }
 

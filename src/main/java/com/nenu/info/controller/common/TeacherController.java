@@ -6,10 +6,7 @@ import com.nenu.info.service.common.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -65,7 +62,7 @@ public class TeacherController {
      *          2 - 请输入教师姓名
      *          3 - 请选择教师等级
      */
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public Integer add(@RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                        @RequestParam(value = "teacherLevel", required = false, defaultValue = "-1") Integer teacherLevel,

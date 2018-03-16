@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -87,9 +86,6 @@
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script>
-    $=function(id){
-        return document.getElementById(id);
-    }
     function mc(){
         var i=$("upload");
         i.click();
