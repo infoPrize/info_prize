@@ -18,9 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,34 +73,51 @@ public final class ExcelUtil {
         exportFieldDesc.put("projectManMajor","负责人专业");
         exportFieldDesc.put("projectMemberName1","项目成员1姓名");
         exportFieldDesc.put("projectMemberStuNumber1", "项目成员1学号");
+        exportFieldDesc.put("projectMemberMajor1", "项目成员1专业");
         exportFieldDesc.put("projectMemberName2","项目成员2姓名");
         exportFieldDesc.put("projectMemberStuNumber2","项目成员2学号");
+        exportFieldDesc.put("projectMemberMajor2","项目成员2专业");
         exportFieldDesc.put("projectMemberName3","项目成员3姓名");
         exportFieldDesc.put("projectMemberStuNumber3","项目成员3学号");
+        exportFieldDesc.put("projectMemberMajor3","项目成员3专业");
         exportFieldDesc.put("projectMemberName4","项目成员4姓名");
         exportFieldDesc.put("projectMemberStuNumber4","项目成员4学号");
+        exportFieldDesc.put("projectMemberMajor4","项目成员4专业");
+
         exportFieldDesc.put("fundsLimit","批复经费");
         exportFieldDesc.put("projectIntroduce","项目介绍");
 
         //挑战杯和互联网加
         exportFieldDesc.put("stuName1","项目成员1姓名");
         exportFieldDesc.put("stuNumber1", "项目成员1学号");
+        exportFieldDesc.put("stuMajor1", "项目成员1专业");
+
         exportFieldDesc.put("stuName2","项目成员2姓名");
         exportFieldDesc.put("stuNumber2", "项目成员2学号");
-        exportFieldDesc.put("stuName2","项目成员2姓名");
-        exportFieldDesc.put("stuNumber2", "项目成员2学号");
+        exportFieldDesc.put("stuMajor2", "项目成员2专业");
+
         exportFieldDesc.put("stuName3","项目成员3姓名");
         exportFieldDesc.put("stuNumber3", "项目成员3学号");
+        exportFieldDesc.put("stuMajor3", "项目成员3专业");
+
         exportFieldDesc.put("stuName4","项目成员4姓名");
         exportFieldDesc.put("stuNumber4", "项目成员4学号");
+        exportFieldDesc.put("stuMajor4", "项目成员4专业");
+
         exportFieldDesc.put("stuName5","项目成员5姓名");
         exportFieldDesc.put("stuNumber5", "项目成员5学号");
+        exportFieldDesc.put("stuMajor5", "项目成员5专业");
+
         exportFieldDesc.put("stuName6","项目成员6姓名");
         exportFieldDesc.put("stuNumber6", "项目成员6学号");
+        exportFieldDesc.put("stuMajor6", "项目成员6专业");
+
         exportFieldDesc.put("stuName7","项目成员7姓名");
         exportFieldDesc.put("stuNumber7", "项目成员7学号");
+        exportFieldDesc.put("stuMajor7", "项目成员7专业");
         exportFieldDesc.put("stuName8","项目成员8姓名");
         exportFieldDesc.put("stuNumber8", "项目成员8学号");
+        exportFieldDesc.put("stuMajor8", "项目成员8专业");
 
         //专利
 
@@ -164,6 +180,27 @@ public final class ExcelUtil {
     }
 
 
+    /**
+     * 判断是否存在不需要显示的列
+     * @param a
+     * @return
+     */
+    static boolean ifExist(String a){
+
+        boolean flag = false;
+
+        String b[] = {"prizeTime","stuNameArr","stuNumberArr","majorArr","stuMajorArr","applyTime",
+                      "authorNameArr","authorStuNumberArr","authorMajorArr","authorLevelArr","publishTime",
+                      "applierNameArr","applierStuNumberArr","applierStuMajorArr"};
+
+        for(int i = 0; i < b.length; i++ ){
+            if(a.equals(b[i])){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
 
     /**
      * 调用core导出Excel
@@ -174,22 +211,59 @@ public final class ExcelUtil {
      * SSException
      */
     public static void writeExcel(List list, String sheetName, String path, HttpServletResponse response){
+
         Field[] fields = list.get(0).getClass().getDeclaredFields();
-        DataType[] dataTypes = new DataType[fields.length-1];
-        DataType[] heads = new DataType[fields.length-1];
-        for (int j = 1; j < fields.length; j++) {
-            if(!fields[j].isAccessible()){
+
+        //构建需要使用的List
+        List<Field> fieldsNeed = new ArrayList<>();
+        for (Field field : fields) {
+            if (!ExcelUtil.ifExist(field.getName())){
+                fieldsNeed.add(field);
+            }
+        }
+
+
+//        DataType[] dataTypes = new DataType[fields.length-1];
+        DataType[] dataTypes = new DataType[fieldsNeed.size()-1];
+
+//        DataType[] heads = new DataType[fields.length-1];
+        DataType[] heads = new DataType[fieldsNeed.size()-1];
+
+//        for (int j = 1; j < fields.length; j++) {
+//
+//            if(!fields[j].isAccessible()&&!ExcelUtil.ifExist(fields[j].getName())){
+//                fields[j].setAccessible(true);
+//            }
+//
+//            if(!ExcelUtil.ifExist(fields[j].getName())){
+//                DataType dataType = new DataType(fields[j].getName(),j-1);
+//                dataTypes[j-1] = dataType;
+//                heads[j-1] = new DataType(exportFieldDesc.get(fields[j].getName()),j-1);
+//           }
+//
+//        }
+
+        for (int j = 1; j < fieldsNeed.size(); j++) {
+
+            if(!fieldsNeed.get(j).isAccessible()&&!ExcelUtil.ifExist(fieldsNeed.get(j).getName())){
                 fields[j].setAccessible(true);
             }
-            DataType dataType = new DataType(fields[j].getName(),j-1);
-            dataTypes[j-1] = dataType;
-            heads[j-1] = new DataType(exportFieldDesc.get(fields[j].getName()),j-1);
+
+            if(!ExcelUtil.ifExist(fieldsNeed.get(j).getName())){
+                DataType dataType = new DataType(fieldsNeed.get(j).getName(),j-1);
+                dataTypes[j-1] = dataType;
+                heads[j-1] = new DataType(exportFieldDesc.get(fieldsNeed.get(j).getName()),j-1);
+            }
+
         }
+
+
         response.setContentType("application/vnd.ms-excel");
 
         response.setHeader("Content-disposition", "attachment;filename=" + path);
 
         OutputStream out = null;
+
         try {
             out = response.getOutputStream();
         } catch (IOException e) {

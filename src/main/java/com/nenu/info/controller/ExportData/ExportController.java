@@ -54,6 +54,9 @@ public class ExportController {
     @Autowired
     private PatentService patentService;
 
+    @Autowired
+    private OtherMatchService otherMatchService;
+
     @RequestMapping(value = "acm",method = RequestMethod.GET)
     public String exportACM(// @RequestParam(value = "page", required = false, defaultValue = "-500") Integer curPage,
                           @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
@@ -214,7 +217,7 @@ public class ExportController {
     }
 
     @RequestMapping(value = "internetPlus")
-    public String ExportInternetPlus(@RequestParam(value = "curPage", required = false, defaultValue = "-500") Integer curPage,
+    public String ExportInternetPlus(
                                      @RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
                                      @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
                                      @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
@@ -301,6 +304,54 @@ public class ExportController {
         return "thesis/thesis";
 
     }
+
+
+    @RequestMapping(value = "otherMatch")
+    public String ExportOtherMatch(@RequestParam(value = "matchName", required = false, defaultValue = "") String matchName,
+                                   @RequestParam(value = "matchLevel", required = false, defaultValue = "-1") Integer matchLevel,
+                                   @RequestParam(value = "prizeLevel", required = false, defaultValue = "-1") Integer prizeLevel,
+                                   @RequestParam(value = "startTime", required = false) Date startTime,
+                                   @RequestParam(value = "endTime", required = false) Date endTime,
+                                   @RequestParam(value = "teamName", required = false, defaultValue = "") String teamName,
+                                   @RequestParam(value = "stuName", required = false, defaultValue = "") String stuName,
+                                   @RequestParam(value = "majorCode", required = false, defaultValue = "") Integer majorCode,
+                                   @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
+                                   @RequestParam(value = "hostUnit", required = false, defaultValue = "") String hostUnit,
+                                   @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
+                                   HttpServletRequest request,HttpServletResponse response,
+                                   Model model){
+
+        Map<String, Object> params = null;
+        try {
+            params = otherMatchService.getParams(matchName, matchLevel, prizeLevel, startTime, endTime, stuName, majorCode, projectName, hostUnit, teacherName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<OtherMatchDto> otherMatchDtoList = null;
+
+
+        try {
+            otherMatchDtoList = otherMatchService.listByCondition(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String filename = "otherMatchDtoList.xls";//设置下载时Excel的名称
+
+        filename = ExcelUtil.encodeFilename(filename, request);//处理中文文件名
+
+        if(otherMatchDtoList.size() != 0){
+            ExcelUtil.writeExcel(otherMatchDtoList, "recruit", filename, response);//调用Excel工具类生成Excel
+        } else {
+            model.addAttribute("message","导出的数据为空");
+        }
+
+        model.addAttribute("otherMatchDtoList", otherMatchDtoList);
+
+        return "patent/patent";
+
+    }
+
 
 
     @RequestMapping(value = "patent")

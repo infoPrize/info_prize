@@ -43,7 +43,7 @@ public class StudentController {
      */
     @RequestMapping(value = "toList")
     public String  toList() {
-        return "student/list";
+        return " ";
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
