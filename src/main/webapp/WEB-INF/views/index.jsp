@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -81,6 +83,16 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/sccl.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/sccl-util.js"></script>
+
+		<c:if test="${sessionScope.stuNumber ne 'admin'}">
+			<script>
+				$(document).ready(function () {
+					$(".side-menu li:gt(9)").remove();
+				});
+			</script>
+		</c:if>
+
+
 	</body>
 
 </html>

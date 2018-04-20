@@ -67,7 +67,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 1) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == 2){
                     alert("第一位学生学号姓名不匹配!");
@@ -139,7 +140,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 7) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == 1){
                     alert("申请者1姓名学号不匹配!");
@@ -232,7 +234,8 @@ $(function(){
                 }
                 else if (msg == 6){
                     alert("添加成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
             },
             error: function (msg) {
@@ -280,7 +283,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 5) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -343,7 +347,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 5) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -428,7 +433,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -528,7 +534,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -628,7 +635,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -668,45 +676,6 @@ $(function(){
         });
     });
 
-    // 添加学生信息
-//  $("#sort_student").click(function(){
-//      var stuNumber = $('#stuNumber').val();
-//      var name = $('#name').val();
-//      var sex = $('#sex').val();
-//      var grade = $('#grade').val();
-//      var profession = $('#profession').val();
-//      var phone = $('#phone').val();
-//      $.ajax({
-//          type: 'post',
-//          url: website + "mathModel/add",
-//          dataType: "text",
-//          data:{
-//              stuNumber:stuNumber,
-//              name:name,
-//              sex:sex,
-//              grade:grade,
-//              profession:profession,
-//              phone:phone
-//          },
-//          success: function (msg) {
-//              msg = parseInt(msg);
-//              if (msg == 5) {
-//                  alert("插入成功!");
-//              }
-//              else if (msg == -1) {
-//                  alert("输入错误!");
-//              }
-//              else if (msg == 1){
-//                  alert("学号已存在!");
-//              }
-//
-//          },
-//          error: function (msg) {
-//              alert("error!");
-//          } ,
-//          traditional: true
-//      });
-//  });
     //添加教师
     $("#sort_teacher").click(function(){
         var teacherName = $("#teacherName").val();
@@ -726,7 +695,8 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 1) {
                     alert("插入成功!");
-                    window.location.reload();
+                    window.location.href=window.location.href;
+                    window.location.reload;
                 }
                 else if (msg == 2) {
                     alert("请输入教师姓名!");

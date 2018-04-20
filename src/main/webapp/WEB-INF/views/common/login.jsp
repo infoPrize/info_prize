@@ -33,9 +33,10 @@
 							<input type="password" name="password" id="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
 						</div>
 						<div class="layui-form-item">
-							<button class="layui-btn layui-btn-primary" id="login">js登录</button>
+							<button class="submit layui-btn layui-btn-primary" id="login">登录</button>
 						</div>
 					</form>
+					<p style="font-size: x-small;text-align: center;">友情提示：登录账号为统一身份认证账号(学号)</p>
 					<%--<a href="${website}register/toRegister">新用户注册</a>--%>
 				</div>
 				<footer>
