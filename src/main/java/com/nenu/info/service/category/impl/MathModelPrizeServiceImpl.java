@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.MathModelPrizeDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.MathModelPrize;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -53,7 +54,7 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
     public Map<String, Object> getParams(Integer matchLevel, String matchName, Date beginTime,
                                          Date endTime, Integer prizeLevel, Integer major, String stuName,
                                          String teacherName, String hostUnit) {
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         Integer teacherId = null;
 
         try {
@@ -83,7 +84,7 @@ public class MathModelPrizeServiceImpl implements MathModelPrizeService {
             //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
             teacherId = -1;
         } else {
-            for(Student student : studentList) {
+            for(StudentDto student : studentList) {
                 idList.add(student.getId());
             }
         }

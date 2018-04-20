@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.InternetPlusDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
@@ -138,10 +139,10 @@ public class InternetPlusController extends AbstractController {
             e.printStackTrace();
         }
 
-        Student student1 = null;        Student student2 = null;
-        Student student3 = null;        Student student4 = null;
-        Student student5 = null;        Student student6 = null;
-        Student student7 = null;        Student student8 = null;
+        StudentDto student1 = null;        StudentDto student2 = null;
+        StudentDto student3 = null;        StudentDto student4 = null;
+        StudentDto student5 = null;        StudentDto student6 = null;
+        StudentDto student7 = null;        StudentDto student8 = null;
         Teacher teacher = null;
         try {
             student1 = studentService.selectStudentByStuNumber(teammateStuNumber1);

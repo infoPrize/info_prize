@@ -232,6 +232,7 @@ $(function(){
                 }
                 else if (msg == 6){
                     alert("添加成功!");
+                    window.location.reload();
                 }
             },
             error: function (msg) {
@@ -279,6 +280,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 5) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -341,6 +343,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 5) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -425,6 +428,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -524,6 +528,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == -1) {
                     alert("输入错误!");
@@ -623,6 +628,7 @@ $(function(){
                 msg = parseInt(msg);
                 if (msg == 10) {
                     alert("插入成功!");
+                    window.location.reload();
                 }
                 else if (msg == -1) {
                     alert("输入错误!");

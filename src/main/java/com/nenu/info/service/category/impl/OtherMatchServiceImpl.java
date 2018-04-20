@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.OtherMatchDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.OtherMatchDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.OtherMatch;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -52,7 +53,7 @@ public class OtherMatchServiceImpl implements OtherMatchService {
     public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) {
         Teacher teacher = null;
         Integer teacherId = null;
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         List<Integer> idList = new ArrayList<>();
 
         if(!teacherName.equals("")) {
@@ -81,7 +82,7 @@ public class OtherMatchServiceImpl implements OtherMatchService {
             //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
             teacherId = -1;
         } else {
-            for(Student student : studentList) {
+            for(StudentDto student : studentList) {
                 idList.add(student.getId());
             }
         }

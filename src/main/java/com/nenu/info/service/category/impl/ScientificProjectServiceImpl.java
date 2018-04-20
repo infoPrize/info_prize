@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.ScientificProjectDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.ScientificProjectDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.ScientificProject;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -56,9 +57,9 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
 
     @Override
     public Map<String, Object> getParams(String projectName, Integer projectType, String setYear, Integer majorCode, String teacherName, String stuName, String stuNumber) {
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         Integer stuId = null;
-        Student student = null;
+        StudentDto student = null;
         Integer teacherId = null;
         List<Integer> idList = new ArrayList<>();
 
@@ -79,7 +80,7 @@ public class ScientificProjectServiceImpl implements ScientificProjectService {
             //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
             teacherId = -1;
         } else {
-            for(Student s : studentList) {
+            for(StudentDto s : studentList) {
                 idList.add(s.getId());
             }
         }

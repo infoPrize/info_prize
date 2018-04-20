@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.ThesisDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.ThesisDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
 import com.nenu.info.common.entities.category.Thesis;
@@ -50,7 +51,7 @@ public class ThesisServiceImpl implements ThesisService {
 
     @Override
     public Map<String, Object> getParams(Integer journalLevel, String journalName, String thesisTitle, String authorName, String authorStuNumber, Integer authorMajor, String authorGrade, Date beginTime, Date endTime, String teacherName) throws Exception {
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
         if((authorName != null && authorName != "") || (authorStuNumber != null && authorStuNumber != "") || (authorMajor != null && authorMajor > 0 ) || (authorGrade != null && authorGrade != "")) {
@@ -65,7 +66,7 @@ public class ThesisServiceImpl implements ThesisService {
                 //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
                 teacherId = -1;
             } else {
-                for(Student student : studentList) {
+                for(StudentDto student : studentList) {
                     studentIdList.add(student.getId());
                 }
             }

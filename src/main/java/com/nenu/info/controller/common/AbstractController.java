@@ -54,6 +54,10 @@ public class AbstractController {
 
     public static final String NO_SUCH_PAGE_ERROR = "对不起，您访问的页面不存在";
 
+    public static final String SYSTEM_ERROR = "对不起，系统抛出异常，请联系系统管理员";
+
+    public static final String INCOMPLETE_DATA_ERROR = "对不起，您填写的数据不全，请完善数据";
+
     /**
      * 发送JSON数组对象
      * @param jsonArray

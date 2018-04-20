@@ -25,10 +25,7 @@ import static com.nenu.info.common.utils.WebConstants.pageSize;
 
 @Controller
 @RequestMapping(value = "/student")
-public class StudentController {
-
-    @Autowired
-    StudentService studentService;
+public class StudentController extends AbstractController{
 
     /**
      * 去往学生添加页面
@@ -43,7 +40,7 @@ public class StudentController {
      */
     @RequestMapping(value = "toList")
     public String  toList() {
-        return " ";
+        return "student/list";
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
@@ -63,22 +60,28 @@ public class StudentController {
         student.setMajorCode(majorCode);
         student.setPhone(phone);
         if(name.equals("") || stuNumber.equals("") || grade.equals("")) {
-            model.addAttribute("message", "添加数据不足");
+            model.addAttribute("add", "ok");
+            model.addAttribute("message", INCOMPLETE_DATA_ERROR);
             return "student/add";
         }
 
         try {
             if(studentService.selectStudentByStuNumber(stuNumber) == null){
                 studentService.add(student);
+                model.addAttribute("add", "ok");
                 model.addAttribute("message","添加成功");
             } else {
+                model.addAttribute("add", "ok");
                 model.addAttribute("message", "已存在相同学号的学生");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            model.addAttribute("add", "ok");
+            model.addAttribute("message", SYSTEM_ERROR);
+        } finally {
+            return "student/add";
         }
-        return "student/add";
     }
 
     //条件查询

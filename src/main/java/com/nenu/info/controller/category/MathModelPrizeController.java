@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.MathModelPrizeDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.MathModelPrize;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
@@ -97,9 +98,9 @@ public class MathModelPrizeController extends AbstractController {
             return 1;
         }
 
-        Student teammate1 = null;
-        Student teammate2 = null;
-        Student teammate3 = null;
+        StudentDto teammate1 = null;
+        StudentDto teammate2 = null;
+        StudentDto teammate3 = null;
         Teacher teacher = null;
 
         try {

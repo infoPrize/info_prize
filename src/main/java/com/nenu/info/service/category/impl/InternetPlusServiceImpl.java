@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.InternetPlusDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.InternetPlusDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.InternetPlus;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -47,7 +48,7 @@ public class InternetPlusServiceImpl implements InternetPlusService {
     @Override
     public Map<String, Object> getParams(String matchName, Integer matchLevel, Integer prizeLevel, Date startTime, Date endTime, String teamName, String stuName, Integer majorCode, String projectName, String hostUnit, String teacherName) throws Exception {
         Integer teacherId = null;
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         List<Integer> idList = new ArrayList<>();
 
         if(!teacherName.equals("")) {
@@ -67,7 +68,7 @@ public class InternetPlusServiceImpl implements InternetPlusService {
             //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
             teacherId = -1;
         } else {
-            for(Student student : studentList) {
+            for(StudentDto student : studentList) {
                 idList.add(student.getId());
             }
         }

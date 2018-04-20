@@ -53,7 +53,6 @@
                                             <option value="2">计算机科学与技术</option>
                                             <option value="3">计算机科学与技术（中美合作）</option>
                                             <option value="4">教育技术学</option>
-                                            <option value="41">教育技术学（公费师范）</option>
                                             <option value="5">图书情报与档案管理类</option>
                                             <option value="51">图书馆学</option>
                                             <option value="52">信息资源管理</option>
@@ -65,8 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <input type="submit" value="提交" id="sort_student" >
-                                <span class="al red">${message}</span>
+                                <input type="submit" value="提交" id="submit" >
                                 <br><br>
                             </form>
                         </div>
@@ -92,7 +90,20 @@
 <script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js" ></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script>
-
+    //导入excel的弹窗
+    var define = document.getElementById('define');
+    if("${importOK}" != null && "${importOK}" == "ok") {
+        if("${dataRepeat}" != null && "${dataRepeat}" !="") {
+            alert("${dataRepeat}, 导入了${importNum}条数据");
+        } else {
+            alert("${message}, 导入了${importNum}条数据");
+        }
+    }
+    //添加一条数据的弹窗
+    var add = document.getElementById('submit');
+    if("${add}" != null && "${add}" == "ok") {
+        alert("${message}");
+    }
     function mc(){
         var i=$("upload");
         i.click();
@@ -100,9 +111,6 @@
     function mm(){
         $("puf").innerHTML=(document.f1.uf.value);
     }
-
-
-
 </script>
 </body>
 </html>

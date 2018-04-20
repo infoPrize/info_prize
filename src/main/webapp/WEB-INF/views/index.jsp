@@ -24,19 +24,13 @@
 				<a class="header-menu-btn" href="javascript:;"><i class="icon-font">&#xe600;</i></a>
 				<ul class="header-bar">
 					<li class="header-bar-role">
-						<a href="javascript:;">超级管理员</a>
+						<a href="javascript:;"><%=session.getAttribute("username")%></a>
 					</li>
 					<li class="header-bar-nav">
-						<a href="javascript:;">admin<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
+						<a href="javascript:;"><%=session.getAttribute("stuNumber")%><i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
 						<ul class="header-dropdown-menu">
 							<li>
-								<a href="javascript:;">个人信息</a>
-							</li>
-							<li>
-								<a href="javascript:;">切换账户</a>
-							</li>
-							<li>
-								<a href="login.html">退出</a>
+								<a href="${website}login/logout">退出登录</a>
 							</li>
 						</ul>
 					</li>

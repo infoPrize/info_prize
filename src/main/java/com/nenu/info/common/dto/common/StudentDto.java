@@ -9,6 +9,9 @@ package com.nenu.info.common.dto.common;
  */
 public class StudentDto {
 
+    //id
+    private Integer id;
+
     //学生姓名
     private String name;
 
@@ -27,7 +30,16 @@ public class StudentDto {
     //电话号码
     private String phone;
 
+    //密码
+    private String password;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -75,5 +87,13 @@ public class StudentDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

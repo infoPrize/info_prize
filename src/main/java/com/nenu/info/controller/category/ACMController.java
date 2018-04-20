@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ACMPrizeDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.ACMPrize;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
@@ -117,9 +118,9 @@ public class ACMController extends AbstractController{
             e.printStackTrace();
         }
 
-        Student teammate1 = null;
-        Student teammate2 = null;
-        Student teammate3 = null;
+        StudentDto teammate1 = null;
+        StudentDto teammate2 = null;
+        StudentDto teammate3 = null;
         Teacher teacher = null;
 
         //检查三个队员是否有错

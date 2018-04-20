@@ -25,31 +25,28 @@
 					<h1>信息科学与技术学院奖项查询系统</h1>
 				</header>
 				<div class="login-main">
-					<form action="${website}login/checkLogin" class="layui-form" method="post">
-						<input name="__RequestVerificationToken" type="hidden" value="">
+					<form class="layui-form" id="loginForm">
 						<div class="layui-form-item">
-							<input type="text" name="username" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+							<input type="text" name="username" id="username" autocomplete="off" placeholder="请输入用户名" class="layui-input">
 						</div>
 						<div class="layui-form-item">
-							<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+							<input type="password" name="password" id="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
 						</div>
 						<div class="layui-form-item">
-							<button class="submit layui-btn layui-btn-primary" lay-submit="" lay-filter="login"> 登录</button>
+							<button class="layui-btn layui-btn-primary" id="login">js登录</button>
 						</div>
 					</form>
+					<%--<a href="${website}register/toRegister">新用户注册</a>--%>
 				</div>
 				<footer>
 					<p>东北师范大学@信息科学与技术学院</p>
 				</footer>
 			</div>
 		</div>
-		<script type="text/html" id="code-temp">
-			<div class="login-code-box">
-				<input type="text" class="layui-input" id="code" />
-				<img id="valiCode" src="/manage/validatecode?v=636150612041789540" alt="验证码" />
-			</div>
-		</script>
-		<script src="${staticWebsite}resources/layui/layui.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/layui/layui.js"></script>
+		<script type="text/javascript" src="${staticWebsite}resources/js/sccl.js"></script>
+
 	</body>
 
 </html>

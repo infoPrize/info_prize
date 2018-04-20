@@ -47,4 +47,7 @@ public final class URLConstants {
     //登录
     public static final String LOGIN_URL = "login";
 
+    //注册
+    public static final String REGISTER_URL = "register";
+
 }

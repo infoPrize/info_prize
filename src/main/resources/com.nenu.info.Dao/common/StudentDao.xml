@@ -11,22 +11,31 @@
                 #{student.grade}, #{student.majorCode}, #{student.phone})
     </insert>
 
-    <select id="selectStudentByStuNumber" resultType="com.nenu.info.common.entities.common.Student">
-        SELECT * FROM `t_student`
+    <select id="selectStudentByStuNumber" resultType="com.nenu.info.common.dto.common.StudentDto">
+        SELECT
+         `id`,
+         `name`,
+         `sex`,
+         `stu_number` AS stuNumber,
+         `grade`,
+         (SELECT `major_name` FROM `t_major_code`tmc  WHERE tmc.`major_code` = ts.`major_code`) AS major,
+         `phone`,
+         `password`
+        FROM `t_student` ts
         WHERE `stu_number` = #{stuNumber}
     </select>
 
-    <select id="listStudentByMajor" resultType="com.nenu.info.common.entities.common.Student">
+    <select id="listStudentByMajor" resultType="com.nenu.info.common.dto.common.StudentDto">
         SELECT * FROM `t_student`
         WHERE `major_code` = #{majorCode}
     </select>
 
-    <select id="listStudentByStuName" resultType="com.nenu.info.common.entities.common.Student">
+    <select id="listStudentByStuName" resultType="com.nenu.info.common.dto.common.StudentDto">
         SELECT * FROM `t_student`
         WHERE `name` LIKE CONCAT('%', #{stuName}, '%')
     </select>
 
-    <select id="listStudentByStuNameAndMajor" resultType="com.nenu.info.common.entities.common.Student">
+    <select id="listStudentByStuNameAndMajor" resultType="com.nenu.info.common.dto.common.StudentDto">
         SELECT * FROM `t_student`
         <where>
             <if test="stuName != '' and stuName != null">
@@ -38,22 +47,22 @@
         </where>
     </select>
 
-    <select id="selectStudentById" resultType="com.nenu.info.common.entities.common.Student">
+    <select id="selectStudentById" resultType="com.nenu.info.common.dto.common.StudentDto">
         SELECT * FROM `t_student`
         WHERE `id` = #{id}
     </select>
 
     <!--条件查询-->
-    <select id="queryByCondition" resultType="com.nenu.info.common.entities.common.Student">
+    <select id="queryByCondition" resultType="com.nenu.info.common.dto.common.StudentDto">
         SELECT
         `id`,
         `name` AS name,
-        `sex` AS sex,
+        (SELECT CASE WHEN ts.`sex` = 1 THEN '男' WHEN ts.`sex` = 2 THEN '女' WHEN ts.`sex` = 0 THEN '未知' END) AS sex,
         `stu_number` AS stuNumber,
         `grade` AS grade,
-        `major_code` AS majorCode,
+        (SELECT tmc.`major_name` FROM `t_major_code` tmc WHERE tmc.`id` = ts.`major_code`) AS major,
         `phone` AS phone
-        FROM `t_student`
+        FROM `t_student` ts
         <where>
             <include refid="condition" />
         </where>
@@ -93,4 +102,10 @@
     <delete id="deleteByStuNumber">
         DELETE FROM `t_student` WHERE `stu_number` = #{stuNumber}
     </delete>
+
+    <update id="addPasswordById">
+        UPDATE `t_student`
+        SET `password` = #{password}
+        WHERE `id` = #{id}
+    </update>
 </mapper>

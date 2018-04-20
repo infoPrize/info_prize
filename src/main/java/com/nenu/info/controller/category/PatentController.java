@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.PatentDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.Patent;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
@@ -102,11 +103,11 @@ public class PatentController extends AbstractController{
             return 1;
         }
 
-        Student student1 = null;
-        Student student2 = null;
-        Student student3 = null;
-        Student student4 = null;
-        Student student5 = null;
+        StudentDto student1 = null;
+        StudentDto student2 = null;
+        StudentDto student3 = null;
+        StudentDto student4 = null;
+        StudentDto student5 = null;
 
         Teacher teacher = null;
 

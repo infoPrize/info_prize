@@ -33,20 +33,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student selectStudentByStuNumber(String stuNumber) throws Exception {
-        Student student = studentDao.selectStudentByStuNumber(stuNumber);
+    public StudentDto selectStudentByStuNumber(String stuNumber) throws Exception {
+        StudentDto student = studentDao.selectStudentByStuNumber(stuNumber);
         return student;
     }
 
     @Override
-    public List<Student> listStudentByMajor(Integer majorCode) throws Exception {
-        List<Student> studentList = studentDao.listStudentByMajor(majorCode);
+    public List<StudentDto> listStudentByMajor(Integer majorCode) throws Exception {
+        List<StudentDto> studentList = studentDao.listStudentByMajor(majorCode);
         return studentList;
     }
 
     @Override
-    public Student selectStudentById(Integer id) throws Exception {
-        Student student = studentDao.selectStudentById(id);
+    public StudentDto selectStudentById(Integer id) throws Exception {
+        StudentDto student = studentDao.selectStudentById(id);
         return student;
     }
 
@@ -65,9 +65,8 @@ public class StudentServiceImpl implements StudentService {
 
     public List<StudentDto> queryByCondition(Map<String, Object> params) throws Exception{
 
-        List<Student> studentList = studentDao.queryByCondition(params);
-        List<StudentDto> studentDtoList = convertEntityListToDto(studentList);
-        return studentDtoList;
+        List<StudentDto> studentList = studentDao.queryByCondition(params);
+        return studentList;
 
     }
 
@@ -116,7 +115,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean checkMatchingWithNameAndStuNumber(String name, String stuNumber) throws Exception {
-        Student student = null;
+        StudentDto student = null;
         if(!name.equals("") || !stuNumber.equals("")) {
             student = selectStudentByStuNumber(stuNumber);
             if(student == null) {
@@ -142,5 +141,10 @@ public class StudentServiceImpl implements StudentService {
 
         }
         return flag;
+    }
+
+    @Override
+    public void addPasswordById(String password, Integer id) throws Exception {
+        studentDao.addPasswordById(password, id);
     }
 }

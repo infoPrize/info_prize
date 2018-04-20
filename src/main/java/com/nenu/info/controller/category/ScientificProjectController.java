@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ScientificProjectDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.utils.*;
 import com.nenu.info.common.entities.category.ScientificProject;
@@ -128,11 +129,11 @@ public class ScientificProjectController extends AbstractController{
             e.printStackTrace();
         }
 
-        Student projectMan = null;
-        Student projectMember1 = null;
-        Student projectMember2 = null;
-        Student projectMember3 = null;
-        Student projectMember4 = null;
+        StudentDto projectMan = null;
+        StudentDto projectMember1 = null;
+        StudentDto projectMember2 = null;
+        StudentDto projectMember3 = null;
+        StudentDto projectMember4 = null;
         Teacher teacher = null;
 
         try {

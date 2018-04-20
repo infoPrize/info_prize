@@ -29,7 +29,7 @@
             tsp.project_name AS projectName,
             tsp.`set_year` AS setYear,
             (SELECT ts.`name` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManName,
-            (SELECT CASE WHEN ts.`sex` = 1 THEN '男' WHEN ts.`sex` = 2 THEN '女' END FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManSex,
+            (SELECT CASE WHEN ts.`sex` = 1 THEN '男' WHEN ts.`sex` = 2 THEN '女' WHEN ts.`sex` = 0 THEN '未知' END FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManSex,
             (SELECT ts.`stu_number` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManStuNumber,
             (SELECT ts.`phone` FROM `t_student` ts WHERE ts.`id` = tsp.`project_man_id`) AS projectManPhone,
             (SELECT tmc.`major_name` FROM `t_major_code` tmc, `t_student` ts WHERE tmc.`major_code` = ts.`major_code` AND ts.`id` = tsp.`project_man_id`) AS projectManMajor,

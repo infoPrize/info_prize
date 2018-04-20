@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -281,23 +282,31 @@ public class importServiceImpl implements ImportService {
 
     }
 
-    public void importStudent(File studentExcel) throws Exception{
+    public int importStudent(File studentExcel, Model model) throws Exception{
 
+       int importNum = 0;
        try{
            List<StudentDto> studentDtoList = (List<StudentDto>) ExcelReader2003.readExcel(StudentDto.class,studentExcel,1,studentExcelType);
            for(int i = 0; i < studentDtoList.size(); i++){
                StudentDto studentDto = studentDtoList.get(i);
+               //检查终止行
                if(studentDto.getStuNumber() == null ){
+                   break;
+               }
+               if(studentService.selectStudentByStuNumber(studentDto.getStuNumber()) != null) {
+                   model.addAttribute("dataRepeat", "第" + (importNum + 1) + "条数据学号重复");
                    break;
                }
                Student student = studentService.convertDtoToEntity(studentDto);
                studentDao.add(student);
+               importNum++;
            }
-       }catch (Exception e){
+       } catch (Exception e){
            e.printStackTrace();
            throw new Exception("导入数据存在空行或数据不完整");
+       } finally {
+           return importNum;
        }
-
     }
 
 
@@ -309,8 +318,8 @@ public class importServiceImpl implements ImportService {
 
     }
 
-    public void importThesis(File thesisExcel) throws Exception{
-
+    public int importThesis(File thesisExcel) throws Exception{
+        int importNum = 0;
         try{
             List<ThesisDto> thesisDtoList = (List<ThesisDto>) ExcelReader2003.readExcel(ThesisDto.class,thesisExcel,1,thesisExcelType);
             for(int i = 0; i < thesisDtoList.size(); i++){
@@ -320,11 +329,13 @@ public class importServiceImpl implements ImportService {
                 }
                 Thesis thesis = thesisService.convertDtoToEntity(thesisDto);
                 thesisDao.add(thesis);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //专利
@@ -334,8 +345,9 @@ public class importServiceImpl implements ImportService {
 
     }
 
-    public void importPatent(File patentExcel) throws Exception{
+    public int importPatent(File patentExcel) throws Exception{
 
+        int importNum = 0;
         try{
             List<PatentDto> patentDtoList = (List<PatentDto>) ExcelReader2003.readExcel(PatentDto.class,patentExcel,1,patentExcelType);
             for(int i = 0; i < patentDtoList.size(); i++){
@@ -345,12 +357,13 @@ public class importServiceImpl implements ImportService {
                 }
                 Patent patent = patentService.convertDtoToEntity(patentDto);
                 patentDao.add(patent);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
-
+        return importNum;
     }
 
     //国创科研
@@ -359,8 +372,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(scientificProjectExcel,scientificProjectExcelFormat);
     }
 
-    public void importScientificProject(File scientificProjectExcel ) throws Exception{
-
+    public int importScientificProject(File scientificProjectExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<ScientificProjectDto> scientificProjectDtoList = (List<ScientificProjectDto>) ExcelReader2003.readExcel(ScientificProjectDto.class,scientificProjectExcel,1,scientificProjectExcelType);
             for(int i = 0; i < scientificProjectDtoList.size(); i++){
@@ -370,11 +383,13 @@ public class importServiceImpl implements ImportService {
                 }
                 ScientificProject scientificProject = scientificProjectService.convertDtoToEntity(scientificProjectDto);
                 scientificProjectDao.addScientificProject(scientificProject);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //ACM
@@ -383,8 +398,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(ACMPrizeExcel,ACMPrizeExcelFormat);
     }
 
-    public void importACMPrize(File ACMPrizeExcel ) throws Exception{
-
+    public int importACMPrize(File ACMPrizeExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<ACMPrizeDto> acmPrizeDtoList = (List<ACMPrizeDto>) ExcelReader2003.readExcel(ACMPrizeDto.class,ACMPrizeExcel,1,ACMPrizeExcelType);
             for(int i = 0; i < acmPrizeDtoList.size(); i++){
@@ -394,11 +409,13 @@ public class importServiceImpl implements ImportService {
                 }
                 ACMPrize acmPrize = acmService.convertDtoToEntity(acmPrizeDto);
                 acmService.add(acmPrize);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //数学建模
@@ -406,8 +423,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(mathExcel,MathExcelFormat);
     }
 
-    public void importMath(File MathExcel ) throws Exception{
-
+    public int importMath(File MathExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<MathModelPrizeDto> mathModelPrizeDtoList = (List<MathModelPrizeDto>) ExcelReader2003.readExcel(MathModelPrizeDto.class,MathExcel,1,MathExcelType);
             for(int i = 0; i < mathModelPrizeDtoList.size(); i++){
@@ -417,11 +434,13 @@ public class importServiceImpl implements ImportService {
                 }
                 MathModelPrize mathModelPrize = mathModelPrizeService.convertDtoToEntity(mathModelPrizeDto);
                 mathModelPrizeDao.add(mathModelPrize);
+                importNum ++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //互联网加
@@ -430,8 +449,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(internetPlusExcel,InternetPlusExcelFormat);
     }
 
-    public void importInternetPlus(File internetPlusExcel ) throws Exception{
-
+    public int importInternetPlus(File internetPlusExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<InternetPlusDto> internetPlusDtoList = (List<InternetPlusDto>) ExcelReader2003.readExcel(InternetPlusDto.class,internetPlusExcel,1,InternetPlusExcelType);
             for(int i = 0; i < internetPlusDtoList.size(); i++){
@@ -441,11 +460,13 @@ public class importServiceImpl implements ImportService {
                 }
                 InternetPlus internetPlus = internetPlusService.convertDtoToEntity(internetPlusDto);
                 internetPlusDao.add(internetPlus);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //挑战杯
@@ -454,8 +475,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(challengeCupExcel,ChallengeCupExcelFormat);
     }
 
-    public void importChallengeCup(File challengeCupExcel ) throws Exception{
-
+    public int importChallengeCup(File challengeCupExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<ChallengeCupDto> challengeCupDtoList = (List<ChallengeCupDto>) ExcelReader2003.readExcel(ChallengeCupDto.class,challengeCupExcel,1,ChallengeCupExcelType);
             for(int i = 0; i < challengeCupDtoList.size(); i++){
@@ -465,11 +486,13 @@ public class importServiceImpl implements ImportService {
                 }
                 ChallengeCup challengeCup = challengeCupService.convertDtoToEntity(challengeCupDto);
                 challengeCupDao.add(challengeCup);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     //其他比赛
@@ -477,8 +500,8 @@ public class importServiceImpl implements ImportService {
         return this.checkFormat(otherMatchExcel,OtherMatchExcelFormat);
     }
 
-    public void importOtherMatch(File otherMatchExcel ) throws Exception{
-
+    public int importOtherMatch(File otherMatchExcel ) throws Exception{
+        int importNum = 0;
         try{
             List<OtherMatchDto> otherMatchDtoList = (List<OtherMatchDto>) ExcelReader2003.readExcel(OtherMatchDto.class,otherMatchExcel,1,OtherMatchExcelType);
             for(int i = 0; i < otherMatchDtoList.size(); i++){
@@ -488,11 +511,13 @@ public class importServiceImpl implements ImportService {
                 }
                 OtherMatch otherMatch = otherMatchService.convertDtoToEntity(otherMatchDto);
                 otherMatchDao.add(otherMatch);
+                importNum++;
             }
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导入数据存在空行或数据不完整");
         }
+        return importNum;
     }
 
     /**

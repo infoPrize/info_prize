@@ -126,5 +126,12 @@
 <script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
 <script type="text/javascript" src="${staticWebsite}resources/js/addmember.js"></script>
+<script>
+    //导入Excel的弹窗
+    if("${importOK}" != null && "${importOK}" == "ok") {
+        alert("${message}, 导入了${importNum}条数据");
+    }
+
+</script>
 </body>
 </html>

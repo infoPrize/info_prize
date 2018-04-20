@@ -4,6 +4,7 @@ import com.nenu.info.Dao.category.PatentDao;
 import com.nenu.info.Dao.common.StudentDao;
 import com.nenu.info.Dao.common.TeacherDao;
 import com.nenu.info.common.dto.category.PatentDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.category.Patent;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -47,7 +48,7 @@ public class PatentServiceImpl implements PatentService {
 
     @Override
     public Map<String, Object> getParams(Integer patentType, String patentName, Date beginTime, Date endTime, Integer majorCode, String grade, String stuNumber, String stuName, String teacherName) throws Exception {
-        List<Student> studentList = null;
+        List<StudentDto> studentList = null;
         List<Integer> studentIdList = new ArrayList<>();
         Integer teacherId = null;
         if((stuName != null && !stuName.equals("")) || (stuNumber != null && !stuNumber.equals("")) || ( majorCode != null && majorCode > 0) || (grade != null && !grade.equals(""))) {
@@ -61,7 +62,7 @@ public class PatentServiceImpl implements PatentService {
                 //但是我没有找到办法通过studentIdList使得查询结果为空的办法，所以只能从teacherId身上找。。
                 teacherId = -1;
             } else {
-                for(Student student : studentList) {
+                for(StudentDto student : studentList) {
                     studentIdList.add(student.getId());
                 }
             }

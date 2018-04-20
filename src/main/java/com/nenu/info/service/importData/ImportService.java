@@ -1,5 +1,7 @@
 package com.nenu.info.service.importData;
 
+import org.springframework.ui.Model;
+
 import java.io.File;
 
 /**
@@ -24,7 +26,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importStudent(File studentExcel) throws Exception;
+    public int importStudent(File studentExcel, Model model) throws Exception;
 
 
 
@@ -43,7 +45,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importThesis(File thesisExcel) throws Exception;
+    public int importThesis(File thesisExcel) throws Exception;
 
 
 
@@ -62,7 +64,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importPatent(File patentExcel) throws Exception;
+    public int importPatent(File patentExcel) throws Exception;
 
 
 
@@ -80,7 +82,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importScientificProject(File scientificExcel) throws Exception;
+    public int importScientificProject(File scientificExcel) throws Exception;
 
 
 
@@ -98,7 +100,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importACMPrize(File ACMPrizeExcel) throws Exception;
+    public int importACMPrize(File ACMPrizeExcel) throws Exception;
 
 
     /**
@@ -115,7 +117,7 @@ public interface ImportService {
      * @return
      * @throws Exception
      */
-    public void importMath(File mathExcel) throws Exception;
+    public int importMath(File mathExcel) throws Exception;
 
 
 
@@ -133,7 +135,7 @@ public interface ImportService {
      * @throws Exception
      */
 
-    public void importInternetPlus(File internetPlusExcel ) throws Exception;
+    public int importInternetPlus(File internetPlusExcel ) throws Exception;
 
 
     /**
@@ -150,7 +152,7 @@ public interface ImportService {
      * @throws Exception
      */
 
-    public void importChallengeCup(File challengeCupExcel ) throws Exception;
+    public int importChallengeCup(File challengeCupExcel ) throws Exception;
 
 
     /**
@@ -166,6 +168,6 @@ public interface ImportService {
      * @param otherMatchExcel
      * @throws Exception
      */
-    public void importOtherMatch(File otherMatchExcel ) throws Exception;
+    public int importOtherMatch(File otherMatchExcel ) throws Exception;
 
 }

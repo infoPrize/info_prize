@@ -1,6 +1,7 @@
 package com.nenu.info.controller.category;
 
 import com.nenu.info.common.dto.category.ThesisDto;
+import com.nenu.info.common.dto.common.StudentDto;
 import com.nenu.info.common.entities.common.Material;
 import com.nenu.info.common.entities.common.Student;
 import com.nenu.info.common.entities.common.Teacher;
@@ -110,11 +111,11 @@ public class ThesisController extends AbstractController {
                        @RequestParam(value = "authorLevel5", required = false, defaultValue = "-1") Integer authorLevel5,
                        @RequestParam(value = "teacherName", required = false, defaultValue = "") String teacherName,
                        @RequestParam(value = "thesisAbstract", required = false, defaultValue = "") String thesisAbstract) {
-        Student student1 = null;
-        Student student2 = null;
-        Student student3 = null;
-        Student student4 = null;
-        Student student5 = null;
+        StudentDto student1 = null;
+        StudentDto student2 = null;
+        StudentDto student3 = null;
+        StudentDto student4 = null;
+        StudentDto student5 = null;
 
         Teacher teacher = null;
 

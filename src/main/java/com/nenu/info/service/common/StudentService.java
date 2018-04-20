@@ -21,17 +21,17 @@ public interface StudentService {
     /**
      * 根据学号查询学生信息
      */
-    public Student selectStudentByStuNumber(String stuNumber) throws Exception;
+    public StudentDto selectStudentByStuNumber(String stuNumber) throws Exception;
 
     /**
      * 根据专业查找学生列表
      */
-    public List<Student> listStudentByMajor(Integer majorCode) throws Exception;
+    public List<StudentDto> listStudentByMajor(Integer majorCode) throws Exception;
 
     /**
      * 根据id获取学生
      */
-    public Student selectStudentById(Integer id) throws Exception;
+    public StudentDto selectStudentById(Integer id) throws Exception;
 
     /**
      * 将传递的参数加工为Map
@@ -68,5 +68,10 @@ public interface StudentService {
      * 根据学号查询学生姓名和获取到的姓名是否相同
      */
     public Boolean nameEqualOrNot(String stuNumber,String name) throws Exception;
+
+    /**
+     * 根据id添加学生的密码属性
+     */
+    public void addPasswordById(String password, Integer id) throws Exception;
 
 }

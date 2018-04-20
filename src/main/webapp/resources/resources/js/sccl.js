@@ -415,257 +415,284 @@ $(function() {
 	}
 
 	/*菜单json*/
-	var menu = [{
-			"id": "1",
-			"name": "查询奖项",
-			"parentId": "0",
-			"url": "",
-			"icon": "&#xe602;",
-			"order": "1",
-			"isHeader": "0",
-			"childMenus": [{
-					"id": "5",
-					"name": "论文",
-					"parentId": "1",
-					"url": "",
-					"icon": "&#xe602;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "6",
-					"name": "专利",
-					"parentId": "1",
-					"url": site.website + "patent/toList",
-					"icon": "&#xea99;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "7",
-					"name": "国创科研",
-					"parentId": "1",
-					"url": site.website + "scientificProject/toList",
-					"icon": "&#xe91f;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "8",
-					"name": "ACM",
-					"parentId": "1",
-					"url": site.website + "acm/toList",
-					"icon": "&#xe906;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "9",
-					"name": "数学建模",
-					"parentId": "1",
-					"url": site.website + "mathModel/toList",
-					"icon": "&#xe964;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "10",
-					"name": "挑战杯",
-					"parentId": "1",
-					"url": site.website + "ChallengeCup/toList",
-					"icon": "&#xe91f;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
+    var commonMenu = [{
+        "id": "1",
+        "name": "查询奖项",
+        "parentId": "0",
+        "url": "",
+        "icon": "&#xe602;",
+        "order": "1",
+        "isHeader": "0",
+        "childMenus": [{
+            "id": "5",
+            "name": "论文",
+            "parentId": "1",
+            "url": "",
+            "icon": "&#xe602;",
+            "order": "1",
+            "isHeader": "0",
+            "childMenus": ""
+        },
+            {
+                "id": "6",
+                "name": "专利",
+                "parentId": "1",
+                "url": site.website + "patent/toList",
+                "icon": "&#xea99;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "7",
+                "name": "国创科研",
+                "parentId": "1",
+                "url": site.website + "scientificProject/toList",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "8",
+                "name": "ACM",
+                "parentId": "1",
+                "url": site.website + "acm/toList",
+                "icon": "&#xe906;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "9",
+                "name": "数学建模",
+                "parentId": "1",
+                "url": site.website + "mathModel/toList",
+                "icon": "&#xe964;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "10",
+                "name": "挑战杯",
+                "parentId": "1",
+                "url": site.website + "ChallengeCup/toList",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "11",
+                "name": "互联网+",
+                "parentId": "1",
+                "url": site.website + "InternetPlus/toList",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "12",
+                "name": "其他比赛",
+                "parentId": "1",
+                "url": site.website + "otherMatch/toList",
+                "icon": "&#xe927;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            }
+        ]
+    }
+    ];
+
+    var manage = [{
+        "id": "2",
+        "name": "奖项添加",
+        "parentId": "0",
+        "url": "",
+        "icon": "&#xe602;",
+        "order": "1",
+        "isHeader": "0",
+        "childMenus": [{
+            "id": "13",
+            "name": "论文添加",
+            "parentId": "2",
+            "url": site.website + "thesis/toAdd",
+            "icon": "&#xe602;",
+            "order": "1",
+            "isHeader": "0",
+            "childMenus": ""
+        },
+            {
+                "id": "14",
+                "name": "专利添加",
+                "parentId": "2",
+                "url": site.website + "patent/toAdd",
+                "icon": "&#xea99;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "15",
+                "name": "国创科研添加",
+                "parentId": "2",
+                "url": site.website + "scientificProject/toAdd",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "16",
+                "name": "ACM添加",
+                "parentId": "2",
+                "url": site.website + "acm/toAdd",
+                "icon": "&#xe906;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "17",
+                "name": "数学建模添加",
+                "parentId": "2",
+                "url": site.website + "mathModel/toAdd",
+                "icon": "&#xe964;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "18",
+                "name": "挑战杯添加",
+                "parentId": "2",
+                "url": site.website + "ChallengeCup/toAdd",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "19",
+                "name": "互联网+添加",
+                "parentId": "2",
+                "url": site.website + "InternetPlus/toAdd",
+                "icon": "&#xe91f;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+            {
+                "id": "20",
+                "name": "其他比赛添加",
+                "parentId": "2",
+                "url": site.website + "otherMatch/toAdd",
+                "icon": "&#xe927;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            }
+        ]
+    },
+        {
+            "id": "3",
+            "name": "管理功能",
+            "parentId": "0",
+            "url": "",
+            "icon": "&#xe604;",
+            "order": "1",
+            "isHeader": "0",
+            "childMenus": [{
+                "id": "21",
+                "name": "权限管理",
+                "parentId": "3",
+                "url": site.website + "manage",
+                "icon": "&#xe605;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
                 {
-                    "id": "11",
-                    "name": "互联网+",
-                    "parentId": "1",
-                    "url": site.website + "InternetPlus/toList",
-                    "icon": "&#xe91f;",
+                    "id": "22",
+                    "name": "学生管理",
+                    "parentId": "3",
+                    "url": site.website + "student/toList",
+                    "icon": "&#xe90e;",
                     "order": "1",
                     "isHeader": "0",
                     "childMenus": ""
-                },
-				{
-					"id": "12",
-					"name": "其他比赛",
-					"parentId": "1",
-					"url": site.website + "otherMatch/toList",
-					"icon": "&#xe927;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				}
-			]
-		},
-		{
-			"id": "2",
-				"name": "奖项添加",
-				"parentId": "0",
-				"url": "",
-				"icon": "&#xe602;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": [{
-					"id": "13",
-					"name": "论文添加",
-					"parentId": "2",
-					"url": site.website + "thesis/toAdd",
-					"icon": "&#xe602;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "14",
-					"name": "专利添加",
-					"parentId": "2",
-					"url": site.website + "patent/toAdd",
-					"icon": "&#xea99;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "15",
-					"name": "国创科研添加",
-					"parentId": "2",
-					"url": site.website + "scientificProject/toAdd",
-					"icon": "&#xe91f;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "16",
-					"name": "ACM添加",
-					"parentId": "2",
-					"url": site.website + "acm/toAdd",
-					"icon": "&#xe906;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "17",
-					"name": "数学建模添加",
-					"parentId": "2",
-					"url": site.website + "mathModel/toAdd",
-					"icon": "&#xe964;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "18",
-					"name": "挑战杯添加",
-					"parentId": "2",
-					"url": site.website + "ChallengeCup/toAdd",
-					"icon": "&#xe91f;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "19",
-					"name": "互联网+添加",
-					"parentId": "2",
-					"url": site.website + "InternetPlus/toAdd",
-					"icon": "&#xe91f;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				},
-				{
-					"id": "20",
-					"name": "其他比赛添加",
-					"parentId": "2",
-					"url": site.website + "otherMatch/toAdd",
-					"icon": "&#xe927;",
-					"order": "1",
-					"isHeader": "0",
-					"childMenus": ""
-				}
-			]
-		},
-		{
-			"id": "3",
-			"name": "管理功能",
-			"parentId": "0",
-			"url": "",
-			"icon": "&#xe604;",
-			"order": "1",
-			"isHeader": "0",
-			"childMenus": [{
-				"id": "21",
-				"name": "权限管理",
-				"parentId": "3",
-				"url": site.website + "manage",
-				"icon": "&#xe605;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": ""
-			},
-			{
-				"id": "22",
-				"name": "学生管理",
-				"parentId": "3",
-				"url": site.website + "student/toList",
-				"icon": "&#xe90e;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": ""
-			}]
-		},
-		{
-			"id": "4",
-			"name": "信息录入",
-			"parentId": "0",
-			"url": "",
-			"icon": "&#xe610",
-			"order": "1",
-			"isHeader": "0",
-			"childMenus": [{
-				"id": "23",
-				"name": "添加教师",
-				"parentId": "4",
-				"url": site.website + "teacher/toTeacher",
-				"icon": "&#xe914;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": ""
-			},
-			{
-				"id": "24",
-				"name": "添加学生",
-				"parentId": "4",
-				"url": site.website + "student/toAdd",
-				"icon": "&#xe609;",
-				"order": "1",
-				"isHeader": "0",
-				"childMenus": ""
-			}
-			// ,
-			// {
-			// 	"id": "25",
-			// 	"name": "奖项录入",
-			// 	"parentId": "4",
-			// 	"url": site.website + "infoAdd",
-			// 	"icon": "&#xe606;",
-			// 	"order": "1",
-			// 	"isHeader": "0",
-			// 	"childMenus": ""
-			// }
-			]
-		}
-	];
+                }]
+        },
+        {
+            "id": "4",
+            "name": "信息录入",
+            "parentId": "0",
+            "url": "",
+            "icon": "&#xe610",
+            "order": "1",
+            "isHeader": "0",
+            "childMenus": [{
+                "id": "23",
+                "name": "添加教师",
+                "parentId": "4",
+                "url": site.website + "teacher/toTeacher",
+                "icon": "&#xe914;",
+                "order": "1",
+                "isHeader": "0",
+                "childMenus": ""
+            },
+                {
+                    "id": "24",
+                    "name": "添加学生",
+                    "parentId": "4",
+                    "url": site.website + "student/toAdd",
+                    "icon": "&#xe609;",
+                    "order": "1",
+                    "isHeader": "0",
+                    "childMenus": ""
+                }]
+        }
+    ];
+
+    var menu = commonMenu.concat(manage);
+
+    $("#login").click(function() {
+        // var username = $('#username').val();
+        // var password = $('#password').val();
+
+        $.ajax({
+            type: 'post',
+            url: site.website + "login/checkLogin",
+            dataType: "json",
+            data: $("#loginForm").serialize(),          // 序列化表单值
+            async: false,
+            success: function (msg) {
+                msg = parseInt(msg);
+                console.log(msg);
+                if (msg == 1) {
+                    //管理员登录
+                    window.location.href = site.website + "index";
+                } else if (msg == 2) {
+                    //普通信科学生登录
+                    window.location.href = site.website + "index";
+                } else if(msg == 3) {
+                    alert("对不起，您不是信科学院的学生或管理员还未将您的信息导入，请及时联系系统管理员");
+                    window.location.reload();
+                } else if (msg == -1) {
+                    alert("用户名或密码错误");
+                    window.location.reload();
+                }
+
+            }, error: function () {
+                alert("系统发生异常，请联系系统管理员");
+            },
+            traditional: true
+        });
+    });
+
 	initMenu(menu, $(".side-menu"));
 	$(".side-menu > li").addClass("menu-item");
 

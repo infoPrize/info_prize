@@ -45,6 +45,10 @@ public class Student {
     @Column(name = "phone")
     private String phone;
 
+    //密码
+    @Column(name = "password")
+    private String password;
+
     //创建时间
     @Column(name = "create_time")
     private Date createTime;
@@ -107,6 +111,14 @@ public class Student {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Date getCreateTime() {
