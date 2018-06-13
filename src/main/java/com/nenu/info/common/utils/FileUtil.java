@@ -1,6 +1,7 @@
 package com.nenu.info.common.utils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * 职责
@@ -9,6 +10,23 @@ import java.io.File;
  * @time: 2018/3/12 8:49.
  */
 public class FileUtil  {
+
+    public static File create(String fileName) throws IOException {
+        File file = new File(fileName);
+        if(!file.getParentFile().exists()){
+            file.getParentFile().mkdirs();
+        }
+        if(file.exists()) {
+            deleteFile(fileName);
+        }
+        if(file.createNewFile()){
+            file.createNewFile();
+            return file;
+        }else {
+            return null;
+        }
+
+    }
 
     /**
      * 删除文件，可以是文件或文件夹
