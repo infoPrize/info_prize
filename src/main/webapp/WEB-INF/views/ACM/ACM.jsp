@@ -156,11 +156,11 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/laydate/laydate.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
-		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript">
 			//截止时间的script
             !function(){
@@ -170,11 +170,18 @@
             }();
 
 			//如果是学生登录，不能出现“操作”列
-            <c:if test="${sessionScope.stuNumber ne 'admin'}">
+			<c:if test="${sessionScope.stuNumber eq 'admin'}">
 				$(document).ready(function () {
-					$(".handle").remove();
+					document.cookie = "admin";
 				});
-            </c:if>
+			</c:if>
+			<c:if test="${sessionScope.stuNumber ne 'admin'}">
+			$(document).ready(function () {
+				$(".handle").remove();
+				document.cookie = "student";
+			});
+			</c:if>
+
 		</script>
 	</body>
 </html>

@@ -103,5 +103,7 @@
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-cache:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.hazelcast:hazelcast:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.nutz:nutz:1.r.65" level="project" />
+    <orderEntry type="library" name="Maven: com.nenu.software:Ice:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.nenu.software:idstar:1.0" level="project" />
   </component>
 </module>

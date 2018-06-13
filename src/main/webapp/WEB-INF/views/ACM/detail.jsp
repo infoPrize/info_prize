@@ -97,19 +97,21 @@
                                 </tbody>
                             </table>
 
+                            <c:if test="${sessionScope.stuNumber eq 'admin'}">
 
-                            <form action="${website}acm/upload/${acmPrizeDto.id}/${acmPrizeDto.teamName}" enctype="multipart/form-data" method="post" class="dinline">
-                                <label class="tab-label control-label text-right">导入图片：</label>
-                                <input type="text" id="file_name" readonly="readonly" value=""/>
-                                <a href="javascript:void(0);" class="input top">
-                                    浏览
-                                    <input type="file" id="file" name="file">
-                                </a>
-                                <input type="submit" class="input" value="确定" id="define"/>
+                                <form action="${website}acm/upload/${acmPrizeDto.id}/${acmPrizeDto.teamName}" enctype="multipart/form-data" method="post" class="dinline">
+                                    <label class="tab-label control-label text-right">导入图片：</label>
+                                    <input type="text" id="file_name" readonly="readonly" value=""/>
+                                    <a href="javascript:void(0);" class="input top">
+                                        浏览
+                                        <input type="file" id="file" name="file">
+                                    </a>
+                                    <input type="submit" class="input" value="确定" id="define"/>
 
-                            </form>
-                            <a href="${website}acm/down/${acmPrizeDto.teamName}" id="download">下载</a>
-                            ${message}
+                                </form>
+                                <a href="${website}acm/down/${acmPrizeDto.teamName}" id="download">下载</a>
+                                ${message}
+                            </c:if>
                         </div>
                     </div>
                 </div>

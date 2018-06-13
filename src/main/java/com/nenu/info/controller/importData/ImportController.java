@@ -146,7 +146,8 @@ public class ImportController extends AbstractController{
     public String importACMPrize(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-            File excel = FileUtil.create(file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = FileUtil.create(request.getSession().getServletContext().getRealPath("resources/upload/acm/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+
             file.transferTo(excel);
             if(importService.checkACMPrize(excel)){
                 importService.importACMPrize(excel);

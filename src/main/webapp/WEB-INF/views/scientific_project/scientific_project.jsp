@@ -124,7 +124,7 @@
 												<th class="text-center">指导老师</th>
 												<th class="text-center">批复经费</th>
 												<th class="text-center">详情信息</th>
-												<th class="text-center">操作</th>
+												<th class="text-center handle">操作</th>
 											</tr>
 										</thead>
 
@@ -149,5 +149,21 @@
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/page.js"></script>
 		<script type="text/javascript" src="${staticWebsite}resources/js/search.js"></script>
+		<script>
+
+            //如果是学生登录，不能出现“操作”列
+            <c:if test="${sessionScope.stuNumber eq 'admin'}">
+            $(document).ready(function () {
+                document.cookie = "admin";
+            });
+            </c:if>
+            <c:if test="${sessionScope.stuNumber ne 'admin'}">
+            $(document).ready(function () {
+                $(".handle").remove();
+                document.cookie = "student";
+            });
+            </c:if>
+
+		</script>
 	</body>
 </html>

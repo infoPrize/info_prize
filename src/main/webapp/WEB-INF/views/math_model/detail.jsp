@@ -96,6 +96,7 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
+                            <c:if test="${sessionScope.stuNumber eq 'admin'}">
                             <form action="${website}mathModel/upload/${mathModelPrizeDto.id}/${mathModelPrizeDto.teamName}" enctype="multipart/form-data" method="post" class="dinline">
                                 <label class="tab-label control-label text-right">导入图片：</label>
                                 <input type="text" id="file_name" readonly="readonly" value=""/>
@@ -108,14 +109,15 @@
                             </form>
                             <a href="${website}mathModel/down/${mathModelPrizeDto.teamName}" id="download">下载</a>
                             ${message}
+                            </c:if>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript" src="${staticWebsite}resources/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="${staticWebsite}resources/js/add.js"></script>
-
 </body>
 </html>

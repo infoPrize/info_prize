@@ -113,7 +113,7 @@
 										<th class="text-center">作者专业</th>
 										<th class="text-center">指导老师</th>
 										<th class="text-center">论文摘要</th>
-										<th class="text-center">操作</th>
+										<th class="text-center handle">操作</th>
 									</tr>
 								</thead>
 
@@ -145,6 +145,19 @@
             elem: '#endTime'
         })
     }();
+
+    //如果是学生登录，不能出现“操作”列
+    <c:if test="${sessionScope.stuNumber eq 'admin'}">
+    $(document).ready(function () {
+        document.cookie = "admin";
+    });
+    </c:if>
+    <c:if test="${sessionScope.stuNumber ne 'admin'}">
+    $(document).ready(function () {
+        $(".handle").remove();
+        document.cookie = "student";
+    });
+    </c:if>
 
 </script>
 </body>

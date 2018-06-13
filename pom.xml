@@ -237,6 +237,18 @@
       <version>1.r.65</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.nenu.software</groupId>
+      <artifactId>Ice</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nenu.software</groupId>
+      <artifactId>idstar</artifactId>
+      <version>1.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>

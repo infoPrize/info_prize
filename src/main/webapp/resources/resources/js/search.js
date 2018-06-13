@@ -72,7 +72,13 @@ function initdataThesis() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td class='td_table'><table class='sub'>" + ce +"</table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='delete_thesis' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td>";
+
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete_thesis' id='" + result[i].id + "'>删除</a></td>";
+                        }
+
+                        cHtml += "</tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -163,7 +169,11 @@ function initdataPatent() {
                             }
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
-                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='" + acmt + "' >查看详情</a></td><td><a href='' class='delete_patent' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='" + acmt + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a href='' class='delete_patent' id='" + result[i].id + "'>删除</a></td>";
+                        }
+                        cHtml += "</tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -253,7 +263,11 @@ function initdataScience() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>" + result[i].teacherName + "</td><td>" + result[i].fundsLimit + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='delete delete_science' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete delete_science' id='" + result[i].id + "'>删除</a></td>";
+                        }
+                        cHtml += "</tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -349,7 +363,11 @@ function initdataAcm() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>"+ result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='handle delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td>"
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='handle delete delete_acm' id='" + result[i].id + "'>删除</a></td>";
+                        }
+                        cHtml += "</tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -446,7 +464,13 @@ function initdataMath() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + mathd + "' >查看详情</a></td><td><a class='delete_math' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + mathd + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete_math' id='" + result[i].id + "'>删除</a></td>";
+                        }
+
+
+                        cHtml += "<tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -544,7 +568,12 @@ function initdataCup() {
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>" + result[i].prizeLevel + "</td><td>"
                             + result[i].prizeTime + "</td><td class='turn'>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='delete_cup' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete_cup' id='" + result[i].id + "'>删除</a></td>";
+                        }
+
+                        cHtml += "<tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -640,7 +669,11 @@ function initdataInternet() {
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>" + result[i].prizeLevel + "</td><td>"
                             + result[i].prizeTime + "</td><td class='turn'>" + result[i].hostUnit + "</td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='delete_Internet' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete_Internet' id='" + result[i].id + "'>删除</a></td>";
+                        }
+                        cHtml += "<tr>";
                     }
                     $(".grid-body").html(cHtml);
 
@@ -737,7 +770,11 @@ function initdataOther() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>" + result[i].teacherName + "</td><td><a href='"
-                            + mathd + "' >查看详情</a></td><td><a class='delete_other' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + mathd + "' >查看详情</a></td>";
+                        if(document.cookie != "student") {
+                            cHtml += "<td><a class='delete_other' id='" + result[i].id + "'>删除</a></td>";
+                        }
+                        cHtml += "<tr>";
                     }
                     $(".grid-body").html(cHtml);
 
