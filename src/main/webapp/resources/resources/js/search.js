@@ -3,11 +3,13 @@
 //本地地址
 var website = "http://infoprize.nenu.edu.cn/";
 
-// var website = "http://192.168.199.171/";
 //服务器地址
 // var website = "http://120.78.154.246/";
 //服务器地址(带项目名)
 // var website = "http://120.78.154.246/info_prize/";
+
+//Join服务器地址
+// var website = "http://202.198.133.181/info_prize/"
 
 var max = 5;
 var pagelistc = 6;
@@ -347,7 +349,7 @@ function initdataAcm() {
                         }
                         cHtml += ca +"</table></td><td class='td_table'><table class='sub'>" + cb +"</table></td><td class='td_table'><table class='sub'>"
                             + cd + "</table></td><td>"+ result[i].teacherName + "</td><td><a href='"
-                            + acmt + "' >查看详情</a></td><td><a class='delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
+                            + acmt + "' >查看详情</a></td><td><a class='handle delete delete_acm' id='" + result[i].id + "'>删除</a></td><tr>";
                     }
                     $(".grid-body").html(cHtml);
 

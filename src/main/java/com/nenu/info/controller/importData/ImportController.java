@@ -30,8 +30,8 @@ public class ImportController extends AbstractController{
     @RequestMapping(value = "student",method = RequestMethod.POST)
     public String importStudent(@RequestParam("file")MultipartFile file , RedirectAttributes redirectAttributes , HttpServletRequest request , Model model){
         try{
-//            File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/student/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             int importNum = 0;
             file.transferTo(excel);
             if(importService.checkStudent(excel)){
@@ -59,8 +59,7 @@ public class ImportController extends AbstractController{
     @RequestMapping(value = "thesis",method = RequestMethod.POST)
     public String importThesis(@RequestParam("file")MultipartFile file , Model model, HttpServletRequest request ){
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/thesis/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             int importNum = 0;
             file.transferTo(excel);
             if(importService.checkThesis(excel)){
@@ -90,7 +89,7 @@ public class ImportController extends AbstractController{
         int importNum = 0;
         try{
 //           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/patent/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkPatent(excel)){
                 importNum = importService.importPatent(excel);
@@ -118,8 +117,8 @@ public class ImportController extends AbstractController{
     public String importScientificProject(@RequestParam("file")MultipartFile file ,  HttpServletRequest request , Model model){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/scientificProject/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+
             file.transferTo(excel);
             if(importService.checkScientificProject(excel)){
                 importNum = importService.importScientificProject(excel);
@@ -146,8 +145,7 @@ public class ImportController extends AbstractController{
     public String importACMPrize(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkACMPrize(excel)){
                 importService.importACMPrize(excel);
@@ -174,8 +172,7 @@ public class ImportController extends AbstractController{
     public String importMath(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/math/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkMath(excel)){
                 importService.importMath(excel);
@@ -202,8 +199,7 @@ public class ImportController extends AbstractController{
     public String importInternetPlus(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/internetPlus/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkInternetPlus(excel)){
                 importNum = importService.importInternetPlus(excel);
@@ -230,8 +226,7 @@ public class ImportController extends AbstractController{
     public String importChallengeCup(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/challengeCup/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
             if(importService.checkChallengeCup(excel)){
                 importNum = importService.importChallengeCup(excel);
@@ -258,8 +253,7 @@ public class ImportController extends AbstractController{
     public String importOtherMatch(@RequestParam("file")MultipartFile file , Model model , HttpServletRequest request ){
         int importNum = 0;
         try{
-//           File excel = new File(file.getOriginalFilename());//服务器端
-            File excel = new File(request.getSession().getServletContext().getRealPath("/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
+            File excel = new File(request.getSession().getServletContext().getRealPath("resources/upload/otherMatch/")+file.getOriginalFilename());//本地调试，必须制定特定的存在目录，否则找不到存储文件的位置
             file.transferTo(excel);
 
             if(importService.checkOtherMatch(excel)){

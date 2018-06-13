@@ -55,42 +55,58 @@ public class LoginController extends AbstractController {
     public Integer checkLogin(@RequestParam(value = "username", required = false, defaultValue = "") String username,
                               @RequestParam(value = "password", required = false, defaultValue = "") String password,
                               HttpServletRequest request) {
+
+        System.out.println("--------------------------checkingLogin-------------------");
+
         HttpSession session = request.getSession();
+        System.out.println("getSession");
         StudentDto student = null;
+        System.out.println("初始化student");
 
         boolean isNum = username.matches("[0-9]+");
+        System.out.println("计算isNum");
 
         if(isNum) {
+            System.out.println("isNumber");
 
             //学生登录
             try {
+                System.out.println("try");
+                boolean flag = LoginUtil.isUserExist(username);
+                System.out.println("LoginUtil.isUserExist");
 //                UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 //                System.out.println("这里其实执行了");
 //                Subject subject = SecurityUtils.getSubject();
 //
 //                subject.login(token);
-                if (LoginUtil.isUserExist(username)) {
+                if (flag) {
+                    System.out.println("isUserExist");
                     if (!LoginUtil.checkPassword(username, password)){
                         throw new Exception("用户名或密码错误");
                     }
 
                     try {
                         student = studentService.selectStudentByStuNumber(username);
+                        System.out.println("selectStudentByStudentNumber");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     if(student == null) {
+                        System.out.println("333333333333333333333");
                         return 3;
                     } else {
                         session.setAttribute("username", student.getName());
                         session.setAttribute("stuNumber", username);
+                        System.out.println("222222222222222222");
                         return 2;
                     }
                 } else {
+                    System.out.println("--------111111111111111");
                     return -1;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                System.out.println("------------Exception---------------------");
                 return -1;
             }
         } else {

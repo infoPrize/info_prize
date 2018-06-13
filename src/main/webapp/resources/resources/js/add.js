@@ -11,6 +11,9 @@ $(function(){
     //网站地址 - 服务器开发(带项目名)
     // var website = "http://120.78.154.246/info_prize/";
 
+    //Join
+    // var website = "http://202.198.133.181/info_prize/";
+
     // 添加论文信息
     $("#sort_thesis").click(function(){
         var journalName = $('#journalName').val();

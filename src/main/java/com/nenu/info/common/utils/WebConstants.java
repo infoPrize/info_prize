@@ -20,6 +20,10 @@ public final class WebConstants {
 //    public final static String website = "http://120.78.154.246/info_prize/";                       //网站地址
 //    public final static String staticWebSite = "http://120.78.154.246/info_prize/resources/";       //静态资源站点
 
+    //Join服务器
+//    public final static String website = "http://202.198.133.181/info_prize/";                       //网站地址
+//    public final static String staticWebSite = "http://202.198.133.181/info_prize/resources/";       //静态资源站点
+
     //分页，每页显示多少条数据
     public final static Integer pageSize = 3;
 

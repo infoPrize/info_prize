@@ -42,6 +42,7 @@ public class LoginUtil {
     }
 
     public static boolean isUserExist(String username) throws Exception{
+        System.out.println("LoginUtil.isUserExist");
         return manager.isUserExist(username);
     }
 

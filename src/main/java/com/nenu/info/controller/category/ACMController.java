@@ -205,32 +205,32 @@ public class ACMController extends AbstractController{
                 if(acmPrizeDto.getMatchLevel() != null) {
                     jsonObject.put("matchLevel", acmPrizeDto.getMatchLevel());
                 } else {
-                    jsonObject.put("matchLevel", "");
+                    jsonObject.put("matchLevel", "未知");
                 }
                 if(acmPrizeDto.getMatchName() != null) {
                     jsonObject.put("matchName", acmPrizeDto.getMatchName());
                 } else {
-                    jsonObject.put("matchName", "");
+                    jsonObject.put("matchName", "未知");
                 }
                 if(acmPrizeDto.getHostUnit() != null) {
                     jsonObject.put("hostUnit", acmPrizeDto.getHostUnit());
                 } else {
-                    jsonObject.put("hostUnit", "");
+                    jsonObject.put("hostUnit", "未知");
                 }
                 if(acmPrizeDto.getPrizeTimeStr() != null) {
                     jsonObject.put("prizeTime", acmPrizeDto.getPrizeTimeStr());
                 } else {
-                    jsonObject.put("prizeTime", "");
+                    jsonObject.put("prizeTime", "未知");
                 }
                 if(acmPrizeDto.getPrizeLevel() != null) {
                     jsonObject.put("prizeLevel", acmPrizeDto.getPrizeLevel());
                 } else {
-                    jsonObject.put("prizeLevel", "");
+                    jsonObject.put("prizeLevel", "未知");
                 }
                 if(acmPrizeDto.getTeamName() != null) {
                     jsonObject.put("teamName", acmPrizeDto.getTeamName());
                 } else {
-                    jsonObject.put("teamName", "");
+                    jsonObject.put("teamName", "未知");
                 }
                 jsonObject.put("stuNameArr", acmPrizeDto.getStuNameArr());
                 jsonObject.put("stuNumberArr", acmPrizeDto.getStuNumberArr());
@@ -238,7 +238,7 @@ public class ACMController extends AbstractController{
                 if(acmPrizeDto.getTeacherName() != null) {
                     jsonObject.put("teacherName", acmPrizeDto.getTeacherName());
                 } else {
-                    jsonObject.put("teacherName", "");
+                    jsonObject.put("teacherName", "未知");
                 }
                 jsonArray.add(jsonObject);
             }

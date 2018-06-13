@@ -411,8 +411,13 @@ $(function() {
 
         //服务器开发配置
         // website:'http://120.78.154.246/info_prize/',
-        // staticWebsite:'http:120.78.154.246/info_prize/resources/'
-	}
+        // staticWebsite:'http://120.78.154.246/info_prize/resources/'
+
+        //Join
+        // website:'http://202.198.133.181/info_prize/',
+        // staticWebsite:'http://202.198.133.181/info_prize/resources/'
+
+    }
 
 	/*菜单json*/
     var menu = [{
