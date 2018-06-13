@@ -9,8 +9,8 @@ public final class WebConstants {
 
 
 //    本地开发配置
-//    public final static String website = "http://infoprize.nenu.edu.cn/";                       //网站地址
-//    public final static String staticWebSite = "http://infoprize.nenu.edu.cn/resources/";       //静态资源站点
+    public final static String website = "http://infoprize.nenu.edu.cn/";                       //网站地址
+    public final static String staticWebSite = "http://infoprize.nenu.edu.cn/resources/";       //静态资源站点
 
 //    服务器开发配置
 //    public final static String website = "http://120.78.154.246/";                       //网站地址
