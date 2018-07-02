@@ -19,8 +19,7 @@
          `stu_number` AS stuNumber,
          `grade`,
          (SELECT `major_name` FROM `t_major_code`tmc  WHERE tmc.`major_code` = ts.`major_code`) AS major,
-         `phone`,
-         `password`
+         `phone`
         FROM `t_student` ts
         WHERE `stu_number` = #{stuNumber}
     </select>

@@ -131,13 +131,18 @@ public class StudentServiceImpl implements StudentService {
     public Boolean nameEqualOrNot(String stuNumber, String name) throws Exception{
         Boolean flag = false;
         if(stuNumber != null || studentDao.selectStudentByStuNumber(stuNumber) != null){
-            String name1 = studentDao.selectStudentByStuNumber(stuNumber).getName();
+            StudentDto student = null;
+            student = studentDao.selectStudentByStuNumber(stuNumber);
+            String name1 = "";
+            if(student != null) {
+                name1 = student.getName();
+            }
 
-                if(name1.equals(name)){
-                    flag = true;
-                }else {
-                    throw new Exception("学号与姓名不匹配");
-                }
+            if(name1.equals(name)){
+                flag = true;
+            }else {
+                throw new Exception("学号与姓名不匹配");
+            }
 
         }
         return flag;

@@ -30,9 +30,6 @@ public class StudentDto {
     //电话号码
     private String phone;
 
-    //密码
-    private String password;
-
     public Integer getId() {
         return id;
     }
@@ -89,11 +86,4 @@ public class StudentDto {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

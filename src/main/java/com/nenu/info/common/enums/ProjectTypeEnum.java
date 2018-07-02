@@ -8,7 +8,7 @@ package com.nenu.info.common.enums;
 public enum ProjectTypeEnum {
 
     Weizhi(5, "未知"),    SimpleProject(1, "一般科研立项"),    ZhuanxiangProject(2, "专项计划项目"),
-    ImportantProject(3, "重点科研立项"),    Guochuang(4, "国家级大学生创新创业训练计划 ");
+    ImportantProject(3, "重点科研立项"),    Guochuang(4, "国家级大学生创新创业训练计划");
 
 
     private Integer id;
